@@ -5,7 +5,7 @@ const SearchBar = (props) => {
     const search = (
         <View>
             <Text style={styles.text}>{props.name}</Text>
-            <View style={styles.inputContainer}>
+            <View style={{ ...styles.inputContainer, marginTop: 5, marginBottom: props.mb,}}>
                 <Image 
                     source={props.icon}
                     resizeMode="contain"
@@ -18,13 +18,14 @@ const SearchBar = (props) => {
                     placeholderTextColor={'#030402'}
                     value={props.search}
                     onChangeText={props.func}
+                    onSubmitEditing={props.subfunc}
             /> 
             </View>
         </View>
     )   
 
     const search_with_props = (
-        <View style={{marginLeft: 17, marginRight: 17, marginTop: `${props.search == '' ? "5%" : "10%"}` }}>
+        <View style={{marginLeft: 17, marginRight: 17, marginTop: `${props.search == '' ? "2%" : "10%"}` }}>
             <View style={{ ...styles.inputContainer, width: "97%", marginLeft: 7}}>
                 <TouchableOpacity
                     onPress={props.funcTouchableOpacity}
@@ -57,7 +58,8 @@ export default SearchBar
 
 const styles = StyleSheet.create({
     text: {
-        marginLeft: 8
+        marginLeft: 12,
+        fontSize: 15
     },
     inputContainer: {
         flexDirection: "row",
@@ -66,16 +68,16 @@ const styles = StyleSheet.create({
         backgroundColor:"#FFD40D", 
         width: "100%", 
         borderRadius: 25, 
-        marginTop: 7, 
-        marginBottom: 7,
+        marginTop: 5, 
+        marginBottom: 5,
         
         
     },
     inputIcon: {
-        width: 20,
-        height: 20,
-        padding: 14,
-        marginLeft: 8,
+        width: 15,
+        height: 15,
+        padding: 12,
+        marginLeft: 10,
         alignSelf: 'center'
     },
     input: {

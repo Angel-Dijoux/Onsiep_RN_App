@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput, Animated, Dimensions } from 'react-native';
 import { AuthContext } from '../../context/AuthContext';
@@ -7,18 +7,53 @@ const GetContentAPI = (props) => {
 
     const { PostFavoris, userToken,  } = useContext(AuthContext)
 
+    const [data, setData] = useState(null)
+
     const header = () => {
         return (props.header)
     }
 
     const swip = (progress, dragX) => { 
         const scale = dragX.interpolate({
-            inputRange: [0, 150],
+            inputRange: [0, 145],
             outputRange: [0, 1],
         })
         return (
-            <Animated.View style={{ transform: [{rotate: '180deg'}] ,...styles.formation, justifyContent: "center", alignItems:"center"}}> 
-                <Animated.Text style={{ transform: [{scale: scale}] }}>Ajouter aux favoris</Animated.Text>
+            <Animated.View style={{ 
+                transform: [{rotate: '180deg'}], 
+                flexDirection:"column",
+                alignItems: "flex-start",
+                padding: 15,
+                justifyContent: "center",
+                alignItems:"center"}}> 
+                <TouchableOpacity
+                    onPress={() => {
+                        PostFavoris(
+                            data.code_nsf,
+                            data.sigle_type_formation,
+                            data.libelle_type_formation,
+                            data.libelle_formation_principal,
+                            data.sigle_formation,
+                            data.duree,
+                            data.niveau_de_sortie_indicatif,
+                            data.code_rncp,
+                            data.niveau_de_certification,
+                            data.libelle_niveau_de_certification,
+                            data.tutelle, 
+                            data.url_et_id_onisep, 
+                        )
+                    }}
+                > 
+                <Animated.Image 
+                    source={props.icon}
+                    resizeMode="contain"
+                    style={{
+                        width: 55,
+                        height: 55,
+                        transform: [{scale: scale}]
+                    }}
+                />
+                </TouchableOpacity>
             </Animated.View> 
         )
     }
@@ -28,6 +63,7 @@ const GetContentAPI = (props) => {
         data={props.data}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
+            setData(item),
             <View style={{justifyContent:"center",marginTop: props.marginTop, marginBottom: props.marginBottom, paddingLeft: 25, paddingRight: 25}}> 
                 <GestureHandlerRootView>
                 <Swipeable
@@ -36,24 +72,7 @@ const GetContentAPI = (props) => {
                 <View style={{ ...styles.formation }}>
                     <View style={styles.headFormation}>
                         <Text style={styles.starFormation} >{item.sigle_type_formation || "non renseigné"}</Text>
-                        <TouchableOpacity
-                            onPress={() => {
-                                PostFavoris(
-                                    item.code_nsf,
-                                    item.sigle_type_formation,
-                                    item.libelle_type_formation,
-                                    item.libelle_formation_principal,
-                                    item.sigle_formation,
-                                    item.duree,
-                                    item.niveau_de_sortie_indicatif,
-                                    item.code_rncp,
-                                    item.niveau_de_certification,
-                                    item.libelle_niveau_de_certification,
-                                    item.tutelle, 
-                                    item.url_et_id_onisep, 
-                                )
-                            }}
-                        > 
+                        <TouchableOpacity> 
                             <Image 
                                 source={props.icon}
                                 resizeMode='contain'

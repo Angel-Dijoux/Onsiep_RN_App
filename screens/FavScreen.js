@@ -32,7 +32,7 @@ const FavScreen = ({navigation}) => {
                 <VirtualizedView>
                     <GetContentAPI 
                             data={favoris.results}
-                            icon={require("../src/icons/star.png")}
+                            icon={require("../src/icons/trah.png")}
                             width={"90%"}
                             marginTop={"3%"}
                             marginBottom={"5%"}

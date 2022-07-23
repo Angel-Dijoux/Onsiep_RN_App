@@ -149,10 +149,11 @@ const HomeScreen = ({navigation}) => {
     const hi_me = () => {
         if(search == ''){
             return(
-                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between",paddingLeft:"5%", paddingRight: "1%",marginTop: 55,}}>
+                <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between",paddingLeft:"5%", paddingRight: "1%",marginTop: 40,}}>
                 <Text style={{ fontWeight:"900", fontSize: 20}}>Hi{userToken ? `, ${userInfo.username}` : " "}</Text>
                 <FilterButton 
                     icon={require("../src/icons/star.png")}
+                    func={() => { userToken ? navigation.navigate('Fav') : navigation.navigate('Login') }}
                 />
                 </View>
             )

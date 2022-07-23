@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput,  } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
+import RegisterScreen from "../screens/RegisterScreen"
 
 const Tab  = createBottomTabNavigator();
 
@@ -40,6 +41,7 @@ const AuthTabs = () => {
                     </View>
                 ), 
             }}  />
+            <Tab.Screen name="register" component={RegisterScreen}/> 
             <Tab.Screen name="Home" component={HomeScreen}  options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{alignItems: 'center', justifyContent:'center', top: focused ? 0 : 3, }}>
@@ -78,6 +80,7 @@ const AuthTabs = () => {
                     </View>
                 )
             }} />
+
         </Tab.Navigator>
     );
 }

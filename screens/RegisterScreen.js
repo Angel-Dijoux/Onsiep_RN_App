@@ -1,44 +1,67 @@
-import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useState, useContext } from "react";
 
-const RegisterScreen = () => {
+import { Text, View, TextInput, Button, Image,ImageBackground, TouchableOpacity, StyleSheet} from 'react-native'
+import { AuthContext } from "../src/context/AuthContext";
+
+import SearchBar from "../src/components/ui/search";
+
+const RegisterScreen = ({navigation}) => {
 
     const [username, setusername] = useState(null)
-    const [name, setname] = useState(null)
     const [email, setemail] = useState(null)
     const [password, setpassword] = useState(null)
 
     const form = (
-        <View style={styles.container}>
-            <TextInput 
-                placeholder="username"
-                value={username}
-                onChangeText={(text) => setusername(text)}
-            />
-            <TextInput 
-                placeholder="name"
-                value={name}
-                onChangeText={(text) => setname(text)}
-                   
-            />
-            <TextInput 
-                placeholder="email"
-                value={email}
-                onChangeText={(text) => setemail(text)}
+        <View style={{flex: 1, flexDirection: "column",  justifyContent: "flex-end"}}>
+            <ImageBackground
+                source={require("../src/icons/onilogo.png")}
+                resizeMode="cover"
+                style={{width: "100%", height: "85%", position: "relative", marginBottom: "40%"}}
+            >
 
-            />
-            <TextInput 
-                placeholder="password"
-                value={password}
-                onChangeText={(text) => setpassword(text)}
-                secureTextEntry
-
-            />
-            <Button title="Register" />
-            <View>
-                <Text>Vous n'avez pas de compte ?</Text>
-                <Button title="s'enregistrer" />    
-            </View> 
+            </ImageBackground>
+            <View style={{flex: 1,backgroundColor:"#F7F7F7", padding: 18,height: "65%", width: "100%", position:"absolute", borderTopLeftRadius: 25, borderTopRightRadius: 25}}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Home')}
+                    style={{flexDirection:"row" ,alignItems: "center",}}
+                >
+                    <Image 
+                        source={require("../src/icons/back.png")}
+                        resizeMode="contain"
+                        style={{width: 30, height: 30}}
+                    />
+                    <Text style={{marginLeft: 15, fontSize: 20, fontWeight: "900"}}>S'enregsitrer</Text>
+                </TouchableOpacity>
+                <View style={{marginTop: 25}}>
+                    <SearchBar
+                        icon={require("../src/icons/email.png")}
+                        name={"Email"} 
+                        func={(text) => setemail(text)}
+                        mb={15}
+                    />
+                    <SearchBar
+                        icon={require("../src/icons/username.png")}
+                        name={"Pseudo"} 
+                        func={(text) => setusername(text)}
+                        mb={15}
+                    />
+                    <SearchBar
+                        icon={require("../src/icons/password.png")}
+                        name={"Mot de passe"} 
+                        func={(text) => setpassword(text)}
+                        subfunc={() => {register(email, password, username)}}
+                        mb={2}
+                    />
+                    <View style={{flexDirection: "row", alignItems: "center"}}>
+                        <Text style={{marginLeft: 20}}>Tu as un compte ? </Text>
+                        <TouchableOpacity
+                            onPress={() => navigation.navigate('Login')}
+                        >
+                            <Text style={{fontWeight: "700"}}>Connecte toi ici !</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
         </View>
         )
     return form
