@@ -11,17 +11,16 @@ const ModalFilter = (props) => {
             visible={props.visibleModal}
             onRequestClose={props.setvisibleModal}
         >
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
+        <View style={{flex: 1, alignItems:"flex-end",justifyContent: 'flex-end' ,backgroundColor: "rgba(0, 0, 0, 0.5)"}}>
             <View>
-                <View style={{maxWidth:"85%", minWidth: "80%",maxHeight: "80%", minHeight:"55%", backgroundColor:"#F7F7F7", borderRadius: 8}}>
-                    
-                    <View style={{flexDirection:"row", justifyContent: "space-between", alignItems: 'center',backgroundColor:"#1D7C91", padding:15, borderTopLeftRadius: 8, borderTopRightRadius: 8}}> 
-                        <Text style={{color: "#F7F7F7"}}>Trier par type de formations</Text>
+                <View style={{flex: 1, Width: "100%", maxHeight: "80%",backgroundColor:"#F7F7F7", borderTopRightRadius: 25, borderTopLeftRadius: 25}}>
+                    <View style={{paddingTop: 25}}>
+                        <Text style={{paddingTop: 18, marginLeft: 15, fontSize: 20, fontWeight: "800"}}>Trier par type de formations</Text>
                         <Close 
                             func={props.setVisibleModal}
                             padding={16}
                         />
-                    </View> 
+                    </View>
                     {props.flatlist}
                 </View>
              </View>

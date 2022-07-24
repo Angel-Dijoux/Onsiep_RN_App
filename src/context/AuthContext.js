@@ -54,7 +54,6 @@ export const AuthProvider = ({children}) => {
             }).then(res => { return res.json() })
             .then((data) => {
                 resolve(data.access)
-                console.log(data.access, "-- NEW --")
             })
             .catch((e) => { 
                 console.log("Error in REFRESH_TOKEN Function : ", e)
@@ -66,11 +65,13 @@ export const AuthProvider = ({children}) => {
     const GetFavoris = async() => {    
         setFavLoading(true)
         let NewuserToken = await refresh_token(userTokenRefresh)
-        console.log(NewuserToken, "-- GET --")
+        if(NewuserToken == undefined){
+            NewuserToken = userToken
+        }
         setTimeout(() => {
             axios.get(`${BASE_URL}/favoris/`, {
                 headers: { 
-                    'Authorization' : 'Bearer ' + NewuserToken //use authentification with token
+                    'Authorization' : 'Bearer ' + NewuserToken || userToken //use authentification with token
                 },
             })
             .then(res => {
@@ -102,6 +103,9 @@ export const AuthProvider = ({children}) => {
 
     ) => {
         let NewuserToken = await refresh_token(userTokenRefresh)
+        if(NewuserToken == undefined){
+            NewuserToken = userToken
+        }
         const bodyParameters = {
             code_nsf: code_nsf,
             sigle_type_formation: sigle_type_formation, 

@@ -15,7 +15,7 @@ const ResultPage = () => {
     
     if (isloading) {
         return (
-            <View style={{flex: 1, justifyContent: 'center'}}>
+            <View style={{flex: 1, justifyContent: 'center', alignItems:"center"}}>
                 <ActivityIndicator size="small" color="#000000"/>
             </View>
         )

@@ -28,7 +28,7 @@ const GetContentAPI = (props) => {
                 alignItems:"center"}}> 
                 <TouchableOpacity
                     onPress={() => {
-                        PostFavoris(
+                         PostFavoris(
                             data.code_nsf,
                             data.sigle_type_formation,
                             data.libelle_type_formation,
@@ -63,11 +63,11 @@ const GetContentAPI = (props) => {
         data={props.data}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-            setData(item),
             <View style={{justifyContent:"center",marginTop: props.marginTop, marginBottom: props.marginBottom, paddingLeft: 25, paddingRight: 25}}> 
                 <GestureHandlerRootView>
                 <Swipeable
                     renderRightActions={swip}
+                    onActivated={() => setData(item)}
                 >
                 <View style={{ ...styles.formation }}>
                     <View style={styles.headFormation}>

@@ -21,11 +21,11 @@ const FavScreen = ({navigation}) => {
         GetFavoris()
     }, [])
 
-    const tt = () => {
+    const Favoris = () => {
         if(favisloading || favoris == null){
             return (
                 <View style={{flex: 1, justifyContent: 'center', alignItems:"center"}}>
-                    <ActivityIndicator size={"large"}/>
+                    <ActivityIndicator size="small" color="#000000"/>
                 </View>) 
         } else { 
             return (
@@ -45,7 +45,7 @@ const FavScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={{alignContent: 'center', justifyContent: "center", marginTop:"10%", marginBottom: "10%"}}>
-                {tt()}
+                {Favoris()}
             </View>
         </View>
     );
