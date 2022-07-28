@@ -4,7 +4,7 @@ const NbResults = (props) => {
     const result = ( 
         <View style={{ flexDirection:"row", justifyContent: "flex-end", marginRight:20}} >
             <View style={{
-                    backgroundColor: "#C52E25", 
+                    backgroundColor: "#1D7C91", 
                     padding: 12,
                     borderRadius: 25,
                     marginRight: 5, 

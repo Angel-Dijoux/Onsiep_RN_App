@@ -16,7 +16,6 @@ export const OnisepProvider = ({children}) => {
     const [Filter, setFilter] = useState(false)
     const [search, setSearch] = useState('')
 
-    const [test, settest] = useState('')
 
 
     const GetFormation = async() => {
@@ -62,7 +61,6 @@ export const OnisepProvider = ({children}) => {
                 setSearch(text)
             } else { 
                 setcliked(false)
-                setFilterData(data)
                 setSearch(text)
             }
         }
@@ -77,7 +75,6 @@ export const OnisepProvider = ({children}) => {
             })
             setFilterType(newData)
         } else {
-            console.log(1)
             setFilterType(filterData)
         }
     }

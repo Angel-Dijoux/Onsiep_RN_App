@@ -23,7 +23,7 @@ export default FilterButton
 const styles = StyleSheet.create({
     touchableOpacity: {
         backgroundColor: "#C52E25", 
-        padding: 12,
+        padding: 14,
         borderRadius: 25,
         marginLeft: 5,
         marginRight: 12,
