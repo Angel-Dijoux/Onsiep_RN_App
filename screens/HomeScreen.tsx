@@ -5,15 +5,8 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  BackHandler,
-} from "react-native";
+import { View, Text, StyleSheet, BackHandler } from "react-native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 import CheckBox from "expo-checkbox";
 import VirtualizedView from "./scrool";
 import SearchBar from "../src/components/ui/search";
@@ -27,7 +20,6 @@ import { OnisepContext } from "../src/context/OnisepContext";
 
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
-import ItemSeparator from "../src/components/ui/item_seperator";
 
 const HomeScreen = ({ navigation }) => {
   const {
@@ -176,7 +168,7 @@ const HomeScreen = ({ navigation }) => {
   const onPress = useCallback(() => {
     const isActive = ref?.current?.isActive();
     if (isActive) {
-      ref?.current?.scroolTo(0);
+      ref?.current?.scroolTo(30);
     } else {
       ref?.current?.scroolTo(-200);
     }
@@ -262,6 +254,7 @@ const HomeScreen = ({ navigation }) => {
               setSelection([]);
             }
           }}
+          funcSettings={() => navigation.navigate("Settings")}
           isHome={true}
           iscliked={cliked}
         />

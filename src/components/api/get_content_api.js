@@ -19,7 +19,7 @@ import { FavorisContext } from "../../context/FavorisContext";
 
 const GetContentAPI = (props) => {
   const { userToken } = useContext(AuthContext);
-  const { PostFavoris } = useContext(FavorisContext);
+  const { PostFavoris, DeleteFavoris } = useContext(FavorisContext);
 
   const [data, setData] = useState(null);
 
@@ -97,20 +97,24 @@ const GetContentAPI = (props) => {
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  PostFavoris(
-                    item.code_nsf,
-                    item.sigle_type_formation,
-                    item.libelle_type_formation,
-                    item.libelle_formation_principal,
-                    item.sigle_formation,
-                    item.duree,
-                    item.niveau_de_sortie_indicatif,
-                    item.code_rncp,
-                    item.niveau_de_certification,
-                    item.libelle_niveau_de_certification,
-                    item.tutelle,
-                    item.url_et_id_onisep
-                  );
+                  if (props.post) {
+                    PostFavoris(
+                      item.code_nsf,
+                      item.sigle_type_formation,
+                      item.libelle_type_formation,
+                      item.libelle_formation_principal,
+                      item.sigle_formation,
+                      item.duree,
+                      item.niveau_de_sortie_indicatif,
+                      item.code_rncp,
+                      item.niveau_de_certification,
+                      item.libelle_niveau_de_certification,
+                      item.tutelle,
+                      item.url_et_id_onisep
+                    );
+                  } else {
+                    DeleteFavoris(item.id);
+                  }
                 }}
               >
                 <Image
@@ -137,7 +141,7 @@ const GetContentAPI = (props) => {
             <Text style={{ marginBottom: 10, fontSize: 17 }}>
               {item.libelle_type_formation}
             </Text>
-            <Text style={{ marginBottom: 10, fontSize: 17 }}>
+            <Text style={{ marginBottom: 10, fontSize: 17 }} selectable={true}>
               {item.libelle_formation_principal}
             </Text>
           </View>

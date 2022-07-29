@@ -1,20 +1,20 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React from "react";
+import { FlatList } from "react-native";
 
-const VirtualizedView = props => {
+const VirtualizedView = (props) => {
   return (
     <FlatList
       {...props}
       data={[]}
-      keyExtractor={(e, i) => 'dom' + i.toString()}
+      keyExtractor={(e, i) => "dom" + i.toString()}
       ListEmptyComponent={null}
       showsVerticalScrollIndicator={false}
       renderItem={null}
-      ListHeaderComponent={() => (
-        <>{props.children}</>
-      )}
+      ListHeaderComponent={() => <>{props.children}</>}
       style={{
-        backgroundColor: "#F7F7F7"
+        backgroundColor: "#F7F7F7",
+        height: "100%",
+        width: "100%",
       }}
     />
   );

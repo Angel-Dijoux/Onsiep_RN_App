@@ -1,20 +1,14 @@
-import React, { useCallback, useEffect } from "react";
-import { View, Text, Modal, StyleSheet, Dimensions } from "react-native";
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import React, { useCallback } from "react";
+import { StyleSheet, Dimensions } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   Extrapolate,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-  withTiming,
 } from "react-native-reanimated";
 import { useImperativeHandle } from "react/cjs/react.development";
-import Close from "./close";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -30,13 +24,13 @@ export type ModalFilterRefProps = {
 
 const ModalFilter = React.forwardRef<ModalFilterRefProps, ModalFilterProps>(
   ({ children }, ref) => {
-    const translationY = useSharedValue(0);
+    const translationY = useSharedValue(30);
     const active = useSharedValue(false);
 
     const scroolTo = useCallback((destination: number) => {
       "worklet";
 
-      active.value = destination !== 0;
+      active.value = destination !== 30;
 
       translationY.value = withSpring(destination, { damping: 15 });
     }, []);
@@ -50,7 +44,7 @@ const ModalFilter = React.forwardRef<ModalFilterRefProps, ModalFilterProps>(
       isActive,
     ]);
 
-    const context = useSharedValue({ y: 0 });
+    const context = useSharedValue({ y: 30 });
     const gesture = Gesture.Pan()
       .onStart(() => {
         context.value = { y: translationY.value };
@@ -61,7 +55,7 @@ const ModalFilter = React.forwardRef<ModalFilterRefProps, ModalFilterProps>(
       })
       .onEnd(() => {
         if (translationY.value > -SCREEN_HEIGHT / 3) {
-          scroolTo(0);
+          scroolTo(30);
         } else if (translationY.value < -SCREEN_HEIGHT / 1.5) {
           scroolTo(MAX_TRANSLATE_Y);
         }

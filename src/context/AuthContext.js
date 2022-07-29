@@ -91,6 +91,7 @@ export const AuthProvider = ({ children }) => {
     if (TOKEN == undefined) {
       TOKEN = userToken;
     }
+    console.log(JSON.stringify(data));
     await fetch(`${BASE_URL}/auth/me/edit`, {
       method: "POST",
       headers: {
@@ -190,6 +191,7 @@ export const AuthProvider = ({ children }) => {
         refresh_token,
         DeleteUser,
         register,
+        EditUser,
         isloading,
         userToken,
         userTokenRefresh,

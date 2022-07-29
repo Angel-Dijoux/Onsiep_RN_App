@@ -9,10 +9,13 @@ import {
   ImageBackground,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 import { AuthContext } from "../src/context/AuthContext";
 
 import SearchBar from "../src/components/ui/search";
+import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const RegisterScreen = ({ navigation }) => {
   const { register } = useContext(AuthContext);
@@ -21,8 +24,10 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setemail] = useState(null);
   const [password, setpassword] = useState(null);
 
+  const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+
   const form = (
-    <View
+    <SafeAreaView
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
       <ImageBackground
@@ -40,7 +45,7 @@ const RegisterScreen = ({ navigation }) => {
           flex: 1,
           backgroundColor: "#F7F7F7",
           padding: 18,
-          height: "65%",
+          height: SCREEN_HEIGHT / 1.75,
           width: "100%",
           position: "absolute",
           borderTopLeftRadius: 25,
@@ -57,7 +62,7 @@ const RegisterScreen = ({ navigation }) => {
             style={{ width: 30, height: 30 }}
           />
           <Text style={{ marginLeft: 15, fontSize: 20, fontWeight: "900" }}>
-            S'enregsitrer
+            S'enregistrer
           </Text>
         </TouchableOpacity>
         <View style={{ marginTop: 25 }}>
@@ -90,7 +95,7 @@ const RegisterScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
   return form;
 };

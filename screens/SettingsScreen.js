@@ -1,66 +1,59 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
-  FlatList,
   Modal,
-  Button,
+  ScrollView,
+  BackHandler,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Clipboard from "expo-clipboard";
+
 /*local*/
-import LoginScreen from "../screens/LoginScreen";
 import ProfilEdit from "../src/components/ui/button";
 import SearchBar from "../src/components/ui/search";
-import ItemSeparator from "../src/components/ui/item_seperator";
-import VirtualizedView from "./scrool";
+import Message from "../src/components/ui/notif";
+
 import { AuthContext } from "../src/context/AuthContext";
 
 const SettingsScreem = ({ navigation }) => {
-  const { logout, DeleteUser, userInfo, userTokenRefresh, userToken } =
-    useContext(AuthContext);
+  const {
+    logout,
+    DeleteUser,
+    EditUser,
+    userInfo,
+    userTokenRefresh,
+    userToken,
+  } = useContext(AuthContext);
 
-  const [iscliked, setCliked] = useState(false);
   const [isedit, setEdit] = useState(false);
-  const [istitle, setTitle] = useState("");
   const [visiblemodal, setVisibleModal] = useState(false);
+  const [messages, setMessages] = useState([]);
 
-  const renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        onPress={() => {
-          setCliked(true);
-          setTitle(item.title);
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: 2,
-          }}
-        >
-          <Text style={{ padding: 12 }}>{item.title}</Text>
-          <Image
-            source={turnDetailsButton(item)}
-            resizeMode="contain"
-            style={{
-              width: 22,
-              height: 22,
-              alignSelf: "center",
-              marginRight: 15,
-            }}
-          />
-        </View>
-        {showSupportDetails(item)}
-      </TouchableOpacity>
-    );
+  const [email, setemail] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [password, setpassword] = useState(null);
+  const [oldpassword, setOldPassword] = useState(null);
+
+  const handleBackButtonClick = () => {
+    navigation.navigate("Home");
+    return true;
   };
 
-  const activeEditProfil = () => {
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        handleBackButtonClick
+      );
+    };
+  }, []);
+
+  const EditProfil = () => {
     if (isedit == false) {
       return <ProfilEdit text={"Modifier"} func={() => setEdit(!isedit)} />;
     } else {
@@ -69,46 +62,92 @@ const SettingsScreem = ({ navigation }) => {
           <View>
             <SearchBar
               name={"Email"}
-              search={userInfo.email}
+              search={email}
               icon={require("../src/icons/email.png")}
+              func={(text) => setemail(text)}
+              bg={true}
+              color={true}
+              mb={15}
             />
             <SearchBar
               name={"Pseudo"}
               icon={require("../src/icons/username.png")}
+              search={username}
+              func={(text) => {
+                setUsername(text);
+              }}
+              bg={true}
+              color={true}
+              mb={15}
             />
             <SearchBar
               name={"Ancien mot de passe"}
               icon={require("../src/icons/password.png")}
+              func={(text) => setOldPassword(text)}
+              bg={true}
+              color={true}
+              mb={15}
             />
             <SearchBar
               name={"Nouveau mot de passe"}
               icon={require("../src/icons/password.png")}
+              func={(text) => setpassword(text)}
+              bg={true}
+              color={true}
+              mb={15}
             />
           </View>
           <View style={{ alignItems: "flex-end", marginTop: 5 }}>
-            <ProfilEdit text={"Enregistrer"} func={() => setEdit(!isedit)} />
+            <ProfilEdit text={"Enregistrer"} func={() => verif_data_edit()} />
           </View>
         </View>
       );
+
       return editProfilView;
     }
   };
-  const showSupportDetails = (item) => {
-    if (iscliked && item.title == istitle) {
-      const view = (
-        <View style={{ padding: 20, marginLeft: 15, marginRight: 25 }}>
-          <Text style={{ color: "#767474" }}>{item.description}</Text>
-        </View>
-      );
-      return view;
-    }
+
+  const display_message = () => {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          top: 45,
+          left: 0,
+          right: 0,
+        }}
+      >
+        {messages.map((message) => (
+          <Message
+            key={message}
+            message={message}
+            onHide={() => {
+              setMessages((messages) =>
+                messages.filter((currentMessage) => currentMessage !== message)
+              );
+            }}
+          />
+        ))}
+      </View>
+    );
   };
 
-  const turnDetailsButton = (item) => {
-    if (iscliked && item.title == istitle) {
-      return require("../src/icons/more_90.png");
+  const verif_data_edit = () => {
+    if (username !== null && `${username}`.length < 3) {
+      const message = "Le pseudo est trop court.";
+      setMessages([...messages, message]);
     } else {
-      return require("../src/icons/more.png");
+      const data = {
+        username: username || "",
+        name: "",
+        pdp_url: "",
+        email: email || "",
+        password: password || "",
+        old_password: oldpassword || "",
+      };
+      EditUser(data);
+      const message = "Le profil a bien été modifier.";
+      setMessages([...messages, message]);
     }
   };
 
@@ -190,7 +229,7 @@ const SettingsScreem = ({ navigation }) => {
                 </Text>
               </View>
             </View>
-            {activeEditProfil()}
+            {EditProfil()}
           </View>
         </View>
       );
@@ -207,7 +246,7 @@ const SettingsScreem = ({ navigation }) => {
       >
         <View
           style={{
-            backgroundColor: "rgba(52, 52, 52, 0.2)",
+            backgroundColor: "rgba(52, 52, 52, 0.5)",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
@@ -234,7 +273,7 @@ const SettingsScreem = ({ navigation }) => {
             </Text>
             <Text style={{ fontSize: 17 }}>
               Attention ! la suppression du compte est irréversible, toutes les
-              données ne seront supprimé aucun retour en arrière n'est possible.
+              données seront supprimé aucun retour en arrière n'est possible.
             </Text>
             <View
               style={{
@@ -245,10 +284,14 @@ const SettingsScreem = ({ navigation }) => {
                 marginTop: 25,
               }}
             >
-              <ProfilEdit text={"Supprimer"} func={() => DeleteUser()} />
+              <ProfilEdit
+                text={"Supprimer"}
+                func={() => DeleteUser()}
+                width={"40%"}
+              />
               <TouchableOpacity
                 style={{
-                  padding: 8,
+                  padding: 7,
                   width: "40%",
                   borderRadius: 35,
                   borderWidth: 1,
@@ -280,7 +323,6 @@ const SettingsScreem = ({ navigation }) => {
       return (
         <View
           style={{
-            flex: 1,
             flexDirection: "column",
             borderStyle: "solid",
             borderColor: "#C52E25",
@@ -300,21 +342,26 @@ const SettingsScreem = ({ navigation }) => {
           >
             Zone de danger
           </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontWeight: "900", fontSize: 16 }}> Token : </Text>
-            <Text
-              style={{ width: "65%", fontSize: 16 }}
-              multiline={false}
-              numberOfLines={1}
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                Clipboard.setStringAsync(`${userTokenRefresh}`);
+              }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+              }}
             >
-              {userTokenRefresh}
-            </Text>
+              <Text style={{ fontWeight: "900", fontSize: 16 }}> Token : </Text>
+              <Text
+                style={{ width: "65%", fontSize: 16 }}
+                multiline={false}
+                numberOfLines={1}
+              >
+                {userTokenRefresh}
+              </Text>
+            </TouchableOpacity>
           </View>
           <Text
             style={{
@@ -340,6 +387,7 @@ const SettingsScreem = ({ navigation }) => {
             <ProfilEdit
               text={"Supprimer mon compte"}
               func={() => setVisibleModal(!visiblemodal)}
+              width={"55%"}
             />
           </View>
           {warning_delete_modal()}
@@ -349,7 +397,6 @@ const SettingsScreem = ({ navigation }) => {
       return (
         <View
           style={{
-            flex: 1,
             flexDirection: "column",
             borderStyle: "solid",
             borderColor: "#C52E25",
@@ -382,49 +429,38 @@ const SettingsScreem = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <VirtualizedView>
-        <View style={{ padding: 10, marginBottom: 55 }}>
-          {is_log()}
-          <View
-            style={{
-              flexDirection: "column",
-              padding: 5,
-              marginTop: 15,
-              backgroundColor: "#FFD400",
-              borderRadius: 8,
-            }}
-          >
-            <Text
-              style={{
-                paddingLeft: 12,
-                paddingTop: 10,
-                fontSize: 15,
-                color: "#030402",
-                opacity: 0.5,
-              }}
-            >
-              Support
-            </Text>
-            <FlatList
-              data={[
-                { id: 1, title: "Note de mise à jour ", description: "sds" },
-                { id: 2, title: "À propos", description: "dede" },
-                { id: 3, title: "Aide", description: "dede" },
-                { id: 4, title: "Nous contacter", description: "dede" },
-              ]}
-              renderItem={renderItem}
-              ItemSeparatorComponent={() => {
-                return <ItemSeparator />;
-              }}
-              style={{
-                marginBottom: 10,
-                marginTop: 5,
-              }}
-            />
-          </View>
-          {log_out()}
+      {display_message()}
+      <ScrollView>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={{
+            flexDirection: "row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            marginLeft: "6%",
+          }}
+        >
+          <Image
+            source={require("../src/icons/back.png")}
+            resizeMode="contain"
+            style={{ width: 30, height: 30 }}
+          />
+          <Text style={{ marginLeft: 15, fontSize: 20, fontWeight: "900" }}>
+            Paramètres
+          </Text>
+        </TouchableOpacity>
+        <View style={{ marginLeft: 12, marginTop: 15 }}></View>
+        <View
+          style={{
+            padding: 10,
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ marginTop: 15 }}>{is_log()}</View>
+          <View style={{ marginBottom: 55 }}>{log_out()}</View>
         </View>
-      </VirtualizedView>
+      </ScrollView>
     </SafeAreaView>
   );
 };

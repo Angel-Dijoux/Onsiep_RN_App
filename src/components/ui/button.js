@@ -2,7 +2,10 @@ import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 const ProfilEdit = (props) => {
   const button = (
-    <TouchableOpacity style={[styles.button]} onPress={props.func}>
+    <TouchableOpacity
+      style={{ ...styles.button, width: props.width ? props.width : "40%" }}
+      onPress={props.func}
+    >
       <Text style={styles.text}>{props.text}</Text>
     </TouchableOpacity>
   );
