@@ -16,9 +16,10 @@ import { AuthContext } from "../src/context/AuthContext";
 import SearchBar from "../src/components/ui/search";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Message from "../src/components/ui/notif";
 
 const RegisterScreen = ({ navigation }) => {
-  const { register } = useContext(AuthContext);
+  const { register, setMessages, messages } = useContext(AuthContext);
 
   const [username, setusername] = useState(null);
   const [email, setemail] = useState(null);
@@ -26,10 +27,36 @@ const RegisterScreen = ({ navigation }) => {
 
   const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
+  const display_message = () => {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          top: 45,
+          left: 0,
+          right: 0,
+        }}
+      >
+        {messages.map((message) => (
+          <Message
+            key={message}
+            message={message}
+            onHide={() => {
+              setMessages((messages) =>
+                messages.filter((currentMessage) => currentMessage !== message)
+              );
+            }}
+          />
+        ))}
+      </View>
+    );
+  };
+
   const form = (
     <SafeAreaView
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
+      {display_message()}
       <ImageBackground
         source={require("../src/icons/onilogo.png")}
         resizeMode="cover"
@@ -53,7 +80,7 @@ const RegisterScreen = ({ navigation }) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate("Login")}
           style={{ flexDirection: "row", alignItems: "center" }}
         >
           <Image
@@ -70,6 +97,7 @@ const RegisterScreen = ({ navigation }) => {
             icon={require("../src/icons/email.png")}
             name={"Email"}
             func={(text) => setemail(text)}
+            type={"email-address"}
             mb={15}
           />
           <SearchBar
@@ -85,6 +113,7 @@ const RegisterScreen = ({ navigation }) => {
             subfunc={() => {
               register(email, password, username);
             }}
+            password={true}
             mb={2}
           />
           <View style={{ flexDirection: "row", alignItems: "center" }}>

@@ -438,6 +438,7 @@ const SettingsScreem = ({ navigation }) => {
             justifyContent: "flex-start",
             alignItems: "center",
             marginLeft: "6%",
+            marginTop: 16,
           }}
         >
           <Image
@@ -472,5 +473,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#F7F7F7",
+    marginTop: "5%",
   },
 });

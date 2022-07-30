@@ -15,6 +15,8 @@ export const AuthProvider = ({ children }) => {
   const [userTokenRefresh, setUserTokenRefresh] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
+  const [messages, setMessages] = useState([]);
+
   const register = (email, password, username) => {
     data = {
       username: username,
@@ -22,7 +24,6 @@ export const AuthProvider = ({ children }) => {
       email: email,
       password: password,
     };
-
     fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
@@ -32,7 +33,19 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify(data),
     })
       .then((res) => {
-        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        if (data.error) {
+          const message = `${data.error}.`;
+          setMessages([...messages, message]);
+        } else {
+          const message = "Votre compte a été créé.";
+          setUserInfo([...message, message]);
+          setTimeout(() => {
+            login(data.user.email, password);
+          }, 700);
+        }
       })
       .catch((e) => {
         console.log("Error in register Function", e);
@@ -57,7 +70,8 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo.user));
       })
       .catch((e) => {
-        console.log("Axios request login error : ", e);
+        const message = "Identifiants erronés.";
+        setMessages([...messages, message]);
       });
     setLoading(false);
   };
@@ -196,6 +210,8 @@ export const AuthProvider = ({ children }) => {
         userToken,
         userTokenRefresh,
         userInfo,
+        messages,
+        setMessages,
       }}
     >
       {children}

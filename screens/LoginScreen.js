@@ -15,18 +15,45 @@ import { AuthContext } from "../src/context/AuthContext";
 import SearchBar from "../src/components/ui/search";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Message from "../src/components/ui/notif";
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
+  const { login, messages, setMessages } = useContext(AuthContext);
   const [email, setemail] = useState(null);
   const [password, setpassword] = useState(null);
 
   const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
+  const display_message = () => {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          top: 45,
+          left: 0,
+          right: 0,
+        }}
+      >
+        {messages.map((message) => (
+          <Message
+            key={message}
+            message={message}
+            onHide={() => {
+              setMessages((messages) =>
+                messages.filter((currentMessage) => currentMessage !== message)
+              );
+            }}
+          />
+        ))}
+      </View>
+    );
+  };
+
   const login_form = (
     <SafeAreaView
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
+      {display_message()}
       <ImageBackground
         source={require("../src/icons/onilogo.png")}
         resizeMode="cover"
@@ -68,6 +95,7 @@ const LoginScreen = ({ navigation }) => {
               icon={require("../src/icons/email.png")}
               name={"Email"}
               func={(text) => setemail(text)}
+              type={"email-address"}
               mb={30}
             />
             <SearchBar
@@ -77,6 +105,7 @@ const LoginScreen = ({ navigation }) => {
               subfunc={() => {
                 login(email, password);
               }}
+              password={true}
               mb={2}
             />
             <View style={{ flexDirection: "row", alignItems: "center" }}>

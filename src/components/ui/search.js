@@ -33,6 +33,8 @@ const SearchBar = (props) => {
             color: props.color ? "#F7F7F7" : "#030402",
           }}
           editable={props.loading}
+          secureTextEntry={props.password}
+          keyboardType={props.type}
           placeholder={props.name}
           placeholderTextColor={props.color ? "#F7F7F7" : "#030402"}
           value={props.search}

@@ -20,6 +20,7 @@ import { OnisepContext } from "../src/context/OnisepContext";
 
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
+import Message from "../src/components/ui/notif";
 
 const HomeScreen = ({ navigation }) => {
   const {
@@ -36,6 +37,8 @@ const HomeScreen = ({ navigation }) => {
     setSearch,
     setFilterType,
     setFilter,
+    messages,
+    setMessages,
   } = useContext(OnisepContext);
 
   const { userInfo, userToken } = useContext(AuthContext);
