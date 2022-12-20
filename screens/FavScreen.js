@@ -15,34 +15,12 @@ import VirtualizedView from "./scrool";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FavorisContext } from "../src/context/FavorisContext";
 import NoResult from "../src/components/ui/no_result";
+import Header from './../src/components/ui/header';
 
 const FavScreen = ({ navigation }) => {
   const { GetFavoris, favoris, favisloading } = useContext(FavorisContext);
 
   const netInfo = useNetInfo();
-  const header = () => {
-    return (
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Home")}
-        style={{
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          marginLeft: "6%",
-          marginTop: 17,
-        }}
-      >
-        <Image
-          source={require("../src/icons/back.png")}
-          resizeMode="contain"
-          style={{ width: 30, height: 30 }}
-        />
-        <Text style={{ marginLeft: 15, fontSize: 20, fontWeight: "900" }}>
-          Favoris
-        </Text>
-      </TouchableOpacity>
-    );
-  };
 
   useEffect(() => {
     GetFavoris();
@@ -68,12 +46,12 @@ const FavScreen = ({ navigation }) => {
                 width={"90%"}
                 marginTop={"3%"}
                 marginBottom={"5%"}
-                header={header()}
+                header={<Header name='Favoris' nav={() => navigation.navigate("Home")} />}
               />
             </VirtualizedView>
           ) : (
             <View style={{ height: "100%" }}>
-              {header()}
+              <Header name='Favoris' nav={() => navigation.navigate("Home")} />
               <NoResult
                 icon={require("../src/icons/noresult.png")}
                 text={"Aucun favoris"}
@@ -91,8 +69,6 @@ const FavScreen = ({ navigation }) => {
           style={{
             alignContent: "center",
             justifyContent: "center",
-            marginTop: "10%",
-            marginBottom: "10%",
           }}
         >
           {Favoris()}
@@ -106,6 +82,7 @@ export default FavScreen;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: "column",
     backgroundColor: "#F7F7F7",
   },

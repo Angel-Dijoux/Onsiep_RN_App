@@ -21,8 +21,9 @@ import { OnisepContext } from "../src/context/OnisepContext";
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
 import Message from "../src/components/ui/notif";
+import { setPriority } from "os";
 
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation }): JSX.Element => {
   const {
     searchFilter,
     filterFormation,
@@ -67,11 +68,27 @@ const HomeScreen = ({ navigation }) => {
 
   //return formation "sigle" for filter & tag
   const returnSigleFormation = () => {
+
+    interface Dictionary<T> {
+      [id: number]: T;
+    }
+
     type dataType = {
+      code_nsf: number;
+      code_rncp: number;
+      duree: string;
+      libelle_formation_principal: string;
+      libelle_niveau_de_certification: string;
       libelle_type_formation: string;
+      niveau_de_certification: string;
+      niveau_de_sortie_indicatif: string;
+      sigle_formation: string;
+      sigle_type_formation: string;
+      tutelle: string;
+      url_et_id_onisep: string
     };
     const dataa: dataType[] = filterData;
-    const sigle_formation = [];
+    const sigle_formation: string[] = [];
 
     if (filterData != undefined) {
       dataa.forEach((dataa: dataType) => {
@@ -80,8 +97,8 @@ const HomeScreen = ({ navigation }) => {
         }
       });
 
-      let dict_sigle_formation = {};
-      const result = [];
+      let dict_sigle_formation: Dictionary<string> = {};
+      const result: {}[] = [];
       sigle_formation.forEach((element) => {
         dict_sigle_formation = { id: element };
         result.push(dict_sigle_formation);

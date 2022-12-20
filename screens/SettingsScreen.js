@@ -10,6 +10,7 @@ import {
   BackHandler,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as Clipboard from "expo-clipboard";
 
 /*local*/
@@ -18,6 +19,7 @@ import SearchBar from "../src/components/ui/search";
 import Message from "../src/components/ui/notif";
 
 import { AuthContext } from "../src/context/AuthContext";
+import Header from "../src/components/ui/header";
 
 const SettingsScreem = ({ navigation }) => {
   const {
@@ -428,41 +430,24 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
       {display_message()}
-      <ScrollView>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "center",
-            marginLeft: "6%",
-            marginTop: 16,
-          }}
-        >
-          <Image
-            source={require("../src/icons/back.png")}
-            resizeMode="contain"
-            style={{ width: 30, height: 30 }}
-          />
-          <Text style={{ marginLeft: 15, fontSize: 20, fontWeight: "900" }}>
-            Paramètres
-          </Text>
-        </TouchableOpacity>
-        <View style={{ marginLeft: 12, marginTop: 15 }}></View>
+      <ScrollView style={{ flex: 1 }} >
+        <Header name="Paramètres" nav={() => navigation.navigate("Home")} />
         <View
           style={{
-            padding: 10,
+            paddingLeft: 10,
+            paddingRight: 10,
+            paddingBottom: 10,
             flexDirection: "column",
             justifyContent: "space-between",
           }}
         >
-          <View style={{ marginTop: 15 }}>{is_log()}</View>
-          <View style={{ marginBottom: 55 }}>{log_out()}</View>
+          <View >{is_log()}</View>
+          <View >{log_out()}</View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </GestureHandlerRootView>
   );
 };
 
@@ -473,6 +458,5 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#F7F7F7",
-    marginTop: "5%",
   },
 });

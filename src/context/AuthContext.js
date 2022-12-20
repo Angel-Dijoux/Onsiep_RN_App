@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }) => {
       email: email,
       password: password,
     };
+    console.info('request on : ', `${BASE_URL}/auth/register`)
     fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
@@ -54,6 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password) => {
     setLoading(true);
+    console.info('request on : ', `${BASE_URL}/auth/login`)
     axios
       .post(`${BASE_URL}/auth/login`, {
         email,
@@ -79,6 +81,7 @@ export const AuthProvider = ({ children }) => {
   const refresh_token = (TOKEN) => {
     return new Promise((resolve) => {
       setLoading(true);
+      console.info('request on : ', `${BASE_URL}/auth/token/refresh`)
       const API_LINK = `${BASE_URL}/auth/token/refresh`;
 
       fetch(API_LINK, {
@@ -105,7 +108,7 @@ export const AuthProvider = ({ children }) => {
     if (TOKEN == undefined) {
       TOKEN = userToken;
     }
-    console.log(JSON.stringify(data));
+    console.info('request on : ', `${BASE_URL}/auth/me/edit`)
     await fetch(`${BASE_URL}/auth/me/edit`, {
       method: "POST",
       headers: {
@@ -158,6 +161,7 @@ export const AuthProvider = ({ children }) => {
     if (TOKEN == undefined) {
       TOKEN = userToken;
     }
+    console.info('request on : ', `${BASE_URL}/auth/me/remove`)
     axios
       .delete(`${BASE_URL}/auth/me/remove`, {
         headers: {
