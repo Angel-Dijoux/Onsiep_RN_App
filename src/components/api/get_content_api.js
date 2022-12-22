@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Swipeable,
   GestureHandlerRootView,
@@ -18,8 +18,17 @@ import { AuthContext } from "../../context/AuthContext";
 import { FavorisContext } from "../../context/FavorisContext";
 
 const GetContentAPI = (props) => {
-  const { userToken } = useContext(AuthContext);
-  const { PostFavoris, DeleteFavoris } = useContext(FavorisContext);
+  const { userToken, messages, setMessages } = useContext(AuthContext);
+  const { PostFavoris, DeleteFavoris, GetFavoris, favoris, favisloading } = useContext(FavorisContext);
+
+  let islog = false;
+
+  useEffect(() => {
+    if (islog) {
+      GetFavoris();
+      console.log(favoris);
+    }
+  }, [islog]);
 
   const [data, setData] = useState(null);
 
@@ -76,6 +85,7 @@ const GetContentAPI = (props) => {
     <FlatList
       data={props.data}
       showsVerticalScrollIndicator={false}
+      keyExtractor={(item, index) => item.url_et_id_onisep}
       renderItem={({ item }) => (
         <View
           style={{
@@ -93,28 +103,35 @@ const GetContentAPI = (props) => {
           <View style={{ ...styles.formation }}>
             <View style={styles.headFormation}>
               <Text style={styles.starFormation}>
-                {item.sigle_type_formation || "non renseigné"}
+                {item.sigle_type_formation.charAt(0).toUpperCase() + item.sigle_type_formation.slice(1) || "Non Renseigné"}
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  if (props.post) {
-                    PostFavoris(
-                      item.code_nsf,
-                      item.sigle_type_formation,
-                      item.libelle_type_formation,
-                      item.libelle_formation_principal,
-                      item.sigle_formation,
-                      item.duree,
-                      item.niveau_de_sortie_indicatif,
-                      item.code_rncp,
-                      item.niveau_de_certification,
-                      item.libelle_niveau_de_certification,
-                      item.tutelle,
-                      item.url_et_id_onisep
-                    );
+                  if (userToken) {
+                    islog = true;
+                    if (props.post && favoris.size > 0) {
+                      PostFavoris(
+                        item.code_nsf,
+                        item.sigle_type_formation,
+                        item.libelle_type_formation,
+                        item.libelle_formation_principal,
+                        item.sigle_formation,
+                        item.duree,
+                        item.niveau_de_sortie_indicatif,
+                        item.code_rncp,
+                        item.niveau_de_certification,
+                        item.libelle_niveau_de_certification,
+                        item.tutelle,
+                        item.url_et_id_onisep
+                      );
+                    } else {
+                      DeleteFavoris(item.id);
+                    }
                   } else {
-                    DeleteFavoris(item.id);
+                    const message = "Vous n'êtes pas connecter."
+                    setMessages([...messages, message])
                   }
+
                 }}
               >
                 <Image
@@ -124,6 +141,7 @@ const GetContentAPI = (props) => {
                     width: 30,
                     height: 30,
                     alignSelf: "baseline",
+                    shadowColor: "#000000",
                   }}
                 />
               </TouchableOpacity>
@@ -139,10 +157,10 @@ const GetContentAPI = (props) => {
               {item.duree}
             </Text>
             <Text style={{ marginBottom: 10, fontSize: 17 }}>
-              {item.libelle_type_formation}
+              {item.libelle_type_formation.charAt(0).toUpperCase() + item.libelle_type_formation.slice(1)}
             </Text>
             <Text style={{ marginBottom: 10, fontSize: 17 }} selectable={true}>
-              {item.libelle_formation_principal}
+              {item.libelle_formation_principal.charAt(0).toUpperCase() + item.libelle_formation_principal.slice(1)}
             </Text>
           </View>
           {/*  </Swipeable> */}

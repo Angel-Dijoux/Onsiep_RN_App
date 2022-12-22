@@ -4,26 +4,27 @@ import React, {
   useEffect,
   useCallback,
   useRef,
+  useMemo,
 } from "react";
-import { View, Text, StyleSheet, BackHandler } from "react-native";
-import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
+import { View, Text, StyleSheet, BackHandler, Button } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import CheckBox from "expo-checkbox";
-import VirtualizedView from "./scrool";
 import SearchBar from "../src/components/ui/search";
 import FilterButton from "../src/components/ui/filter_button";
 import FilterActive from "../src/components/ui/filter_active";
-import ModalFilter, {
-  ModalFilterRefProps,
-} from "../src/components/ui/modal_filter";
 import NbResults from "../src/components/ui/nb_results";
 import { OnisepContext } from "../src/context/OnisepContext";
-
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
-import Message from "../src/components/ui/notif";
-import { setPriority } from "os";
+import DisplayMessages from './../src/components/ui/Notification/display_messages';
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  BottomSheetBackdrop,
+  BottomSheetView
+} from '@gorhom/bottom-sheet';
 
-const HomeScreen = ({ navigation }): JSX.Element => {
+const HomeScreen = ({ navigation }) => {
   const {
     searchFilter,
     filterFormation,
@@ -42,7 +43,7 @@ const HomeScreen = ({ navigation }): JSX.Element => {
     setMessages,
   } = useContext(OnisepContext);
 
-  const { userInfo, userToken } = useContext(AuthContext);
+  const { userInfo, userToken, } = useContext(AuthContext);
 
   //setup with useState
   const [isSelected, setSelection] = useState([]);
@@ -55,6 +56,7 @@ const HomeScreen = ({ navigation }): JSX.Element => {
     }
     return true;
   };
+
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -113,17 +115,17 @@ const HomeScreen = ({ navigation }): JSX.Element => {
         data={returnSigleFormation()}
         extraData={isSelected}
         renderItem={({ item }) => (
-          <View
+          <BottomSheetView
             style={{
               justifyContent: "center",
               alignItems: "flex-start",
               padding: 10,
               marginBottom: 8,
               marginTop: 8,
-              width: "99%",
+              width: "100%",
             }}
           >
-            <View
+            <BottomSheetView
               style={{
                 flexDirection: "row",
                 alignItems: "center",
@@ -135,7 +137,7 @@ const HomeScreen = ({ navigation }): JSX.Element => {
                 numberOfLines={1}
                 style={{ width: "95%", fontSize: 17, fontWeight: "500" }}
               >
-                {item.id}
+                {item.id.charAt(0).toUpperCase() + item.id.slice(1)}
               </Text>
               <CheckBox
                 onValueChange={() => {
@@ -149,20 +151,20 @@ const HomeScreen = ({ navigation }): JSX.Element => {
                     filterFormation(item.id);
                     setFilter(true);
                     setTimeout(() => {
-                      ref?.current?.scroolTo(0);
-                    }, 500);
+
+                    }, 100);
                   }
                   setSelection(newIds);
                 }}
+                onTouchCancel={handlePresentModalPress}
                 value={isSelected.includes(item.id)}
                 color={isSelected ? "#1D7C91" : undefined}
                 style={{ alignSelf: "center", padding: 10 }}
               />
-            </View>
-          </View>
+            </BottomSheetView>
+          </BottomSheetView>
         )}
         style={{
-          marginBottom: "40%",
           marginTop: 5,
         }}
       />
@@ -183,16 +185,27 @@ const HomeScreen = ({ navigation }): JSX.Element => {
     }
   };
 
-  const ref = useRef<ModalFilterRefProps>(null);
 
-  const onPress = useCallback(() => {
-    const isActive = ref?.current?.isActive();
-    if (isActive) {
-      ref?.current?.scroolTo(30);
-    } else {
-      ref?.current?.scroolTo(-200);
-    }
+  // ref
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ['15%', '65%'], []);
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
+    bottomSheetModalRef.current?.present();
   }, []);
+
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={0}
+        appearsOnIndex={1}
+      />
+    ),
+    []
+  );
 
   //Filter bar with button filter and numbers of results
   const FilterBar = () => {
@@ -218,7 +231,7 @@ const HomeScreen = ({ navigation }): JSX.Element => {
           >
             <FilterButton
               icon={require("../src/icons/sort.png")}
-              func={onPress} //here
+              func={handlePresentModalPress} //here
             />
             {FilterActiveTags()}
           </View>
@@ -237,7 +250,7 @@ const HomeScreen = ({ navigation }): JSX.Element => {
             justifyContent: "space-between",
             paddingLeft: "5%",
             paddingRight: "1%",
-            marginTop: 40,
+            marginTop: '5%',
           }}
         >
           <Text style={{ fontWeight: "900", fontSize: 20 }}>
@@ -257,7 +270,8 @@ const HomeScreen = ({ navigation }): JSX.Element => {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <BottomSheetModalProvider>
+      <DisplayMessages />
       <View style={styles.container}>
         {hi_me()}
         <SearchBar
@@ -278,24 +292,26 @@ const HomeScreen = ({ navigation }): JSX.Element => {
           isHome={true}
           iscliked={cliked}
         />
-        <VirtualizedView>
-          {FilterBar()}
-          <View style={{ marginBottom: "15%" }}>
-            <ResultPage />
-          </View>
-        </VirtualizedView>
+        {FilterBar()}
+        <ResultPage />
         {search != "" ? (
-          <ModalFilter ref={ref}>
-            <View>
+          <BottomSheetModal
+            ref={bottomSheetModalRef}
+            index={0}
+            snapPoints={snapPoints}
+            backdropComponent={renderBackdrop}
+          >
+            <BottomSheetView>
               <Text style={styles.text}>Trie par type de formations</Text>
               <ModalFlatlist />
-            </View>
-          </ModalFilter>
+            </BottomSheetView>
+          </BottomSheetModal>
+
         ) : (
-          <View></View>
+          <></>
         )}
       </View>
-    </GestureHandlerRootView>
+    </BottomSheetModalProvider>
   );
 };
 

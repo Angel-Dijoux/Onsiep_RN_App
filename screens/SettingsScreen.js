@@ -16,10 +16,11 @@ import * as Clipboard from "expo-clipboard";
 /*local*/
 import ProfilEdit from "../src/components/ui/button";
 import SearchBar from "../src/components/ui/search";
-import Message from "../src/components/ui/notif";
+import Message from "../src/components/ui/Notification/notif";
 
 import { AuthContext } from "../src/context/AuthContext";
 import Header from "../src/components/ui/header";
+import DisplayMessages from "../src/components/ui/Notification/display_messages";
 
 const SettingsScreem = ({ navigation }) => {
   const {
@@ -107,31 +108,6 @@ const SettingsScreem = ({ navigation }) => {
 
       return editProfilView;
     }
-  };
-
-  const display_message = () => {
-    return (
-      <View
-        style={{
-          position: "absolute",
-          top: 45,
-          left: 0,
-          right: 0,
-        }}
-      >
-        {messages.map((message) => (
-          <Message
-            key={message}
-            message={message}
-            onHide={() => {
-              setMessages((messages) =>
-                messages.filter((currentMessage) => currentMessage !== message)
-              );
-            }}
-          />
-        ))}
-      </View>
-    );
   };
 
   const verif_data_edit = () => {
@@ -431,7 +407,7 @@ const SettingsScreem = ({ navigation }) => {
 
   return (
     <GestureHandlerRootView style={styles.container}>
-      {display_message()}
+      <DisplayMessages />
       <ScrollView style={{ flex: 1 }} >
         <Header name="Paramètres" nav={() => navigation.navigate("Home")} />
         <View

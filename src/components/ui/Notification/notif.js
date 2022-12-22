@@ -14,13 +14,13 @@ const Message = (props) => {
     Animated.sequence([
       Animated.timing(opacity, {
         toValue: 1,
-        duration: 500,
+        duration: 250,
         useNativeDriver: true,
       }),
       Animated.delay(2000),
       Animated.timing(opacity, {
         toValue: 0,
-        duration: 500,
+        duration: 250,
         useNativeDriver: true,
       }),
     ]).start(() => {
@@ -43,7 +43,7 @@ const Message = (props) => {
         ],
         margin: 8,
         marginBottom: 10,
-        backgroundColor: "#F7F7F7",
+        backgroundColor: "#011000",
         padding: 15,
         borderRadius: 25,
       }}
@@ -56,13 +56,14 @@ const Message = (props) => {
         }}
       >
         <Image
-          source={require("../../icons/notif.png")}
+          source={require("../../../icons/notif.png")}
           resizeMode={"contain"}
           style={{
             width: 20,
             height: 20,
             alignSelf: "center",
             marginLeft: 4,
+            tintColor: '#F7F7F7'
           }}
         />
         <Text
@@ -71,6 +72,7 @@ const Message = (props) => {
             fontWeight: "600",
             marginLeft: 15,
             textAlign: "center",
+            color: '#F7F7F7'
           }}
         >
           {props.message}

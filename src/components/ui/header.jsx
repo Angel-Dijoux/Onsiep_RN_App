@@ -1,5 +1,4 @@
-import { Image, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { Image, Text, TouchableOpacity } from 'react-native'
 
 const Header = (props) => {
     return (
@@ -10,7 +9,7 @@ const Header = (props) => {
                 justifyContent: "flex-start",
                 alignItems: "center",
                 marginLeft: "6%",
-                marginTop: "12%",
+                marginTop: "9%",
                 marginBottom: "2%",
             }}
         >
