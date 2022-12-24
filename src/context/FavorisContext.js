@@ -9,10 +9,10 @@ import { AuthContext } from "./AuthContext";
 export const FavorisContext = createContext();
 
 export const FavorisProvider = ({ children }) => {
-  const { refresh_token, userTokenRefresh, userToken } =
+  const { refresh_token, userTokenRefresh, userToken, setfavoris, favoris } =
     useContext(AuthContext);
 
-  const [favoris, setfavoris] = useState();
+
   const [favisloading, setFavLoading] = useState();
 
   const GetFavoris = async () => {
@@ -30,8 +30,9 @@ export const FavorisProvider = ({ children }) => {
         })
         .then((res) => {
           let userLink = res.data;
-          setfavoris(userLink);
-          AsyncStorage.setItem("favoris", JSON.stringify(res.data));
+          AsyncStorage.setItem("favoris", JSON.stringify(userLink));
+          setfavoris(userLink)
+          console.info('data is get')
           setFavLoading(false);
         })
         .catch((e) => {
@@ -82,6 +83,7 @@ export const FavorisProvider = ({ children }) => {
         },
         body: JSON.stringify(bodyParameters),
       });
+      console.log('Data is post')
     } catch (e) {
       console.log("Error in PostFavoris : ", e);
     }
@@ -98,15 +100,19 @@ export const FavorisProvider = ({ children }) => {
           Authorization: "Bearer " + TOKEN || userToken, //use authentification with token
         },
       })
-      .then(console.log("is delete"))
+      .then(() => {
+        console.info('is delete')
+        GetFavoris();
+      })
       .catch((e) => {
         console.log("Error in Function DeleteFavoris : ", e);
       });
   };
 
+
   return (
     <FavorisContext.Provider
-      value={{ DeleteFavoris, PostFavoris, GetFavoris, favoris, favisloading }}
+      value={{ DeleteFavoris, PostFavoris, GetFavoris, favisloading }}
     >
       {children}
     </FavorisContext.Provider>

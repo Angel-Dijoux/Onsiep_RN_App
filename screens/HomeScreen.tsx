@@ -17,6 +17,8 @@ import { OnisepContext } from "../src/context/OnisepContext";
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
 import DisplayMessages from './../src/components/ui/Notification/display_messages';
+import { FavorisContext } from './../src/context/FavorisContext';
+
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
@@ -43,10 +45,12 @@ const HomeScreen = ({ navigation }) => {
     setMessages,
   } = useContext(OnisepContext);
 
-  const { userInfo, userToken, } = useContext(AuthContext);
+  const { userInfo, userToken } = useContext(AuthContext);
+  const { GetFavoris } = useContext(FavorisContext);
+
 
   //setup with useState
-  const [isSelected, setSelection] = useState([]);
+  const [isSelected, setSelection] = useState<boolean[]>([]);
 
   const handleBackButtonClick = () => {
     setSearch("");
@@ -56,7 +60,6 @@ const HomeScreen = ({ navigation }) => {
     }
     return true;
   };
-
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -68,27 +71,34 @@ const HomeScreen = ({ navigation }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (userToken) {
+      GetFavoris();
+    }
+  }, [])
+
+
+  type dataType = {
+    code_nsf: number;
+    code_rncp: number;
+    duree: string;
+    libelle_formation_principal: string;
+    libelle_niveau_de_certification: string;
+    libelle_type_formation: string;
+    niveau_de_certification: string;
+    niveau_de_sortie_indicatif: string;
+    sigle_formation: string;
+    sigle_type_formation: string;
+    tutelle: string;
+    url_et_id_onisep: string;
+
+    item: any
+  };
+
+
   //return formation "sigle" for filter & tag
   const returnSigleFormation = () => {
 
-    interface Dictionary<T> {
-      [id: number]: T;
-    }
-
-    type dataType = {
-      code_nsf: number;
-      code_rncp: number;
-      duree: string;
-      libelle_formation_principal: string;
-      libelle_niveau_de_certification: string;
-      libelle_type_formation: string;
-      niveau_de_certification: string;
-      niveau_de_sortie_indicatif: string;
-      sigle_formation: string;
-      sigle_type_formation: string;
-      tutelle: string;
-      url_et_id_onisep: string
-    };
     const dataa: dataType[] = filterData;
     const sigle_formation: string[] = [];
 
@@ -99,7 +109,7 @@ const HomeScreen = ({ navigation }) => {
         }
       });
 
-      let dict_sigle_formation: Dictionary<string> = {};
+      let dict_sigle_formation: { id: string };
       const result: {}[] = [];
       sigle_formation.forEach((element) => {
         dict_sigle_formation = { id: element };
@@ -109,12 +119,12 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-  const ModalFlatlist = () => {
+  const ModalFlatlist = (): JSX.Element => {
     const flatlist = (
       <FlatList
         data={returnSigleFormation()}
         extraData={isSelected}
-        renderItem={({ item }) => (
+        renderItem={({ item }: any) => (
           <BottomSheetView
             style={{
               justifyContent: "center",
@@ -141,8 +151,8 @@ const HomeScreen = ({ navigation }) => {
               </Text>
               <CheckBox
                 onValueChange={() => {
-                  const newIds = [...isSelected];
-                  const index = newIds.indexOf(item.id);
+                  const newIds: boolean[] = [...isSelected];
+                  const index: number = newIds.indexOf(item.id);
                   if (index > -1) {
                     newIds.splice(index, 1);
                   } else {
@@ -150,13 +160,9 @@ const HomeScreen = ({ navigation }) => {
                     newIds.push(item.id);
                     filterFormation(item.id);
                     setFilter(true);
-                    setTimeout(() => {
-
-                    }, 100);
                   }
                   setSelection(newIds);
                 }}
-                onTouchCancel={handlePresentModalPress}
                 value={isSelected.includes(item.id)}
                 color={isSelected ? "#1D7C91" : undefined}
                 style={{ alignSelf: "center", padding: 10 }}
@@ -260,7 +266,7 @@ const HomeScreen = ({ navigation }) => {
             icon={require("../src/icons/star.png")}
             func={() => {
               userToken
-                ? navigation.navigate("Fav")
+                ? (navigation.navigate("Fav"))
                 : navigation.navigate("Login");
             }}
           />
@@ -294,22 +300,19 @@ const HomeScreen = ({ navigation }) => {
         />
         {FilterBar()}
         <ResultPage />
-        {search != "" ? (
-          <BottomSheetModal
-            ref={bottomSheetModalRef}
-            index={0}
-            snapPoints={snapPoints}
-            backdropComponent={renderBackdrop}
-          >
-            <BottomSheetView>
-              <Text style={styles.text}>Trie par type de formations</Text>
-              <ModalFlatlist />
-            </BottomSheetView>
-          </BottomSheetModal>
+        <BottomSheetModal
+          ref={bottomSheetModalRef}
+          index={0}
+          snapPoints={snapPoints}
+          backdropComponent={renderBackdrop}
+        >
+          <BottomSheetView>
+            <Text style={styles.text}>Trie par type de formations</Text>
+            <ModalFlatlist />
+          </BottomSheetView>
+        </BottomSheetModal>
 
-        ) : (
-          <></>
-        )}
+
       </View>
     </BottomSheetModalProvider>
   );

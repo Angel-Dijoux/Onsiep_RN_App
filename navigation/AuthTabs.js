@@ -19,16 +19,35 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const AuthTabs = () => {
+
+  const horizontalAnimation = {
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateX: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.width, 1],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
+
   const StackAuth = (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="register" component={RegisterScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreem} />
+      <Stack.Screen name="Home" component={HomeScreen} options={horizontalAnimation} />
+      <Stack.Screen name="Login" component={LoginScreen} options={horizontalAnimation} />
+      <Stack.Screen name="register" component={RegisterScreen} options={horizontalAnimation} />
+      <Stack.Screen name="Settings" component={SettingsScreem} options={horizontalAnimation} />
     </Stack.Navigator>
   );
 

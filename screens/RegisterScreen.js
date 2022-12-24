@@ -16,7 +16,6 @@ import { AuthContext } from "../src/context/AuthContext";
 import SearchBar from "../src/components/ui/search";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
-import Message from "../src/components/ui/Notification/notif";
 import DisplayMessages from "../src/components/ui/Notification/display_messages";
 
 const RegisterScreen = ({ navigation }) => {

@@ -1,7 +1,13 @@
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import React, { useContext } from 'react'
-import { AuthContext } from './../../../context/AuthContext';
+import { AuthContext } from '../../../context/AuthContext';
 import Message from './notif';
+
+const genrateRandomNumber = (min: number, max: number) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const DisplayMessages = () => {
     const { setMessages, messages } = useContext(AuthContext);
@@ -14,13 +20,13 @@ const DisplayMessages = () => {
                 right: 0,
             }}
         >
-            {messages.map((message) => (
+            {messages.map((message: string) => (
                 <Message
-                    key={message}
+                    key={genrateRandomNumber(1, 9000)}
                     message={message}
                     onHide={() => {
-                        setMessages((messages) =>
-                            messages.filter((currentMessage) => currentMessage !== message)
+                        setMessages((messages: string[]) =>
+                            messages.filter((currentMessage: string) => currentMessage !== message),
                         );
                     }}
                 />

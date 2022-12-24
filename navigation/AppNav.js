@@ -6,18 +6,18 @@ import { AuthContext } from '../src/context/AuthContext';
 import AuthTabs from './AuthTabs';
 
 const AppNav = () => {
-    const {isloading, userToken} = useContext(AuthContext)
+    const { isloading, userToken } = useContext(AuthContext)
 
-    if(isloading) {
+    if (isloading) {
         return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems:"center"}}>
-            <ActivityIndicator size={"large"}/>
-        </View>)
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
+                <ActivityIndicator size={"large"} />
+            </View>)
     }
 
     return (
         <NavigationContainer>
-            { userToken !== null ?  <Tabs /> : <AuthTabs />}
+            {userToken !== null ? <Tabs /> : <AuthTabs />}
         </NavigationContainer>
     )
 }

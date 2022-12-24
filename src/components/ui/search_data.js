@@ -50,10 +50,12 @@ const ResultPage = () => {
     }
     if (returnGoodData().length === 0) {
       return (
-        <NoResult
-          text={"Aucun résultats"}
-          icon={require("../../icons/noresult.png")}
-        />
+        <View style={{ alignItems: 'center', justifyContent: "center", height: '65%', }}>
+          <NoResult
+            text={"Aucun résultats"}
+            icon={require("../../icons/noresult.png")}
+          />
+        </View>
       );
     } else {
       return (

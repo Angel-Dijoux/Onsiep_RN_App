@@ -12,21 +12,40 @@ import {
 import HomeScreen from "../screens/HomeScreen";
 import FavScreen from "../screens/FavScreen";
 import SettingsScreem from "../screens/SettingsScreen";
+import DisplayMessages from './../src/components/ui/Notification/display_messages';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
 const Tabs = () => {
+
+  const horizontalAnimation = {
+    cardStyleInterpolator: ({ current, layouts }) => {
+      return {
+        cardStyle: {
+          transform: [
+            {
+              translateX: current.progress.interpolate({
+                inputRange: [0, 1],
+                outputRange: [layouts.screen.width, 1],
+              }),
+            },
+          ],
+        },
+      };
+    },
+  };
+
   const StackTab = (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Fav" component={FavScreen} />
-      <Stack.Screen name="Settings" component={SettingsScreem} />
+      <Stack.Screen name="Home" component={HomeScreen} options={horizontalAnimation} />
+      <Stack.Screen name="Fav" component={FavScreen} options={horizontalAnimation} />
+      <Stack.Screen name="Settings" component={SettingsScreem} options={horizontalAnimation} />
     </Stack.Navigator>
   );
   return StackTab;

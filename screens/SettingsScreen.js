@@ -16,7 +16,6 @@ import * as Clipboard from "expo-clipboard";
 /*local*/
 import ProfilEdit from "../src/components/ui/button";
 import SearchBar from "../src/components/ui/search";
-import Message from "../src/components/ui/Notification/notif";
 
 import { AuthContext } from "../src/context/AuthContext";
 import Header from "../src/components/ui/header";
@@ -406,7 +405,7 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
+    <View style={styles.container}>
       <DisplayMessages />
       <ScrollView style={{ flex: 1 }} >
         <Header name="Paramètres" nav={() => navigation.navigate("Home")} />
@@ -423,7 +422,7 @@ const SettingsScreem = ({ navigation }) => {
           <View >{log_out()}</View>
         </View>
       </ScrollView>
-    </GestureHandlerRootView>
+    </View>
   );
 };
 

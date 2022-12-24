@@ -1,31 +1,39 @@
 import React, { useContext, useEffect } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   ActivityIndicator,
-  TouchableOpacity,
-  Image,
+  BackHandler,
 } from "react-native";
 import { useNetInfo } from "@react-native-community/netinfo";
 import GetContentAPI from "../src/components/api/get_content_api";
 
 import { AuthContext } from "../src/context/AuthContext";
-import VirtualizedView from "./scrool";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { FavorisContext } from "../src/context/FavorisContext";
 import NoResult from "../src/components/ui/no_result";
 import Header from './../src/components/ui/header';
 
 const FavScreen = ({ navigation }) => {
-  const { GetFavoris, favoris, favisloading } = useContext(FavorisContext);
+  const { favisloading } = useContext(FavorisContext);
+  const { favoris } = useContext(AuthContext);
 
-  const netInfo = useNetInfo();
+  const handleBackButtonClick = () => {
+    navigation.navigate("Home");
+    return true;
+  };
 
   useEffect(() => {
-    GetFavoris();
-    console.log(favoris);
+    BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+    return () => {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        handleBackButtonClick
+      );
+    };
   }, []);
+
+
+  const netInfo = useNetInfo();
   const Favoris = () => {
     if (favisloading || favoris == null) {
       return (
@@ -39,42 +47,37 @@ const FavScreen = ({ navigation }) => {
       return (
         <View>
           {favoris.size > 0 ? (
-            <VirtualizedView>
-              <GetContentAPI
-                data={favoris.results}
-                icon={require("../src/icons/trah.png")}
-                width={"90%"}
-                marginTop={"3%"}
-                marginBottom={"5%"}
-                header={<Header name='Favoris' nav={() => navigation.navigate("Home")} />}
-              />
-            </VirtualizedView>
+            <GetContentAPI
+              data={favoris.results}
+              icon={require("../src/icons/trah.png")}
+              width={"100%"}
+              marginTop={"3%"}
+              marginBottom={"5%"}
+              header={<Header name='Favoris' nav={() => navigation.navigate("Home")} />}
+            />
           ) : (
-            <View style={{ height: "100%" }}>
+            <>
               <Header name='Favoris' nav={() => navigation.navigate("Home")} />
-              <NoResult
-                icon={require("../src/icons/noresult.png")}
-                text={"Aucun favoris"}
-              />
-            </View>
-          )}
-        </View>
+              <View style={{ alignItems: 'center', justifyContent: "center", height: '80%', marginTop: '20%' }} >
+                <NoResult
+                  icon={require("../src/icons/noresult.png")}
+                  text={"Aucun favoris"}
+                />
+              </View>
+
+            </>
+          )
+          }
+        </View >
       );
     }
   };
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <View
-          style={{
-            alignContent: "center",
-            justifyContent: "center",
-          }}
-        >
-          {Favoris()}
-        </View>
+    <View style={styles.container}>
+      <View>
+        {Favoris()}
       </View>
-    </GestureHandlerRootView>
+    </View>
   );
 };
 

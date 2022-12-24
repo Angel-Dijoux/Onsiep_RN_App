@@ -8,6 +8,10 @@ import { BASE_URL } from "../config";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+
+
+  const [favoris, setfavoris] = useState([]);
+
   const netInfo = useNetInfo();
 
   const [isloading, setLoading] = useState(false);
@@ -183,13 +187,16 @@ export const AuthProvider = ({ children }) => {
       let userInfo = await AsyncStorage.getItem("userInfo");
       let refreshToken = await AsyncStorage.getItem("refreshToken");
       let userToken = await AsyncStorage.getItem("userToken");
+      let favoris = await AsyncStorage.getItem("favoris");
 
       userInfo = JSON.parse(userInfo);
+      favoris = JSON.parse(favoris);
 
       if (userInfo) {
         setUserTokenRefresh(refreshToken);
         setUserInfo(userInfo);
         setUserToken(userToken);
+        setfavoris(favoris)
       }
       setLoading(false);
     } catch (e) {
@@ -216,6 +223,9 @@ export const AuthProvider = ({ children }) => {
         userInfo,
         messages,
         setMessages,
+
+        setfavoris,
+        favoris
       }}
     >
       {children}
