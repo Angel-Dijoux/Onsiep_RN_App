@@ -1,20 +1,15 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  StyleSheet,
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 
-const Tab = createBottomTabNavigator();
-
 const Stack = createStackNavigator();
 
 const AuthTabs = () => {
-
   const horizontalAnimation = {
     cardStyleInterpolator: ({ current, layouts }) => {
       return {
@@ -36,13 +31,28 @@ const AuthTabs = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} options={horizontalAnimation} />
-      <Stack.Screen name="Login" component={LoginScreen} options={horizontalAnimation} />
-      <Stack.Screen name="register" component={RegisterScreen} options={horizontalAnimation} />
-      <Stack.Screen name="Settings" component={SettingsScreem} options={horizontalAnimation} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="register"
+        component={RegisterScreen}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreem}
+        options={horizontalAnimation}
+      />
     </Stack.Navigator>
   );
 

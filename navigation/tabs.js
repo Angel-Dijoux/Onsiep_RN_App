@@ -1,8 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  StyleSheet,
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 import FavScreen from "../screens/FavScreen";
 import HomeScreen from "../screens/HomeScreen";
@@ -13,7 +11,6 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const Tabs = () => {
-
   const horizontalAnimation = {
     cardStyleInterpolator: ({ current, layouts }) => {
       return {
@@ -37,9 +34,21 @@ const Tabs = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={HomeScreen} options={horizontalAnimation} />
-      <Stack.Screen name="Fav" component={FavScreen} options={horizontalAnimation} />
-      <Stack.Screen name="Settings" component={SettingsScreem} options={horizontalAnimation} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="Fav"
+        component={FavScreen}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreem}
+        options={horizontalAnimation}
+      />
     </Stack.Navigator>
   );
   return StackTab;

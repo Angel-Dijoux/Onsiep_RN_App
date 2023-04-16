@@ -2,8 +2,8 @@ import {
   BottomSheetModal,
   BottomSheetModalProvider,
   BottomSheetBackdrop,
-  BottomSheetView
-} from '@gorhom/bottom-sheet';
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 import CheckBox from "expo-checkbox";
 import React, {
   useState,
@@ -16,8 +16,8 @@ import React, {
 import { View, Text, StyleSheet, BackHandler } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
-import DisplayMessages from './../src/components/ui/Notification/display_messages';
-import { FavorisContext } from './../src/context/FavorisContext';
+import DisplayMessages from "./../src/components/ui/Notification/display_messages";
+import { FavorisContext } from "./../src/context/FavorisContext";
 import FilterActive from "../src/components/ui/filter_active";
 import FilterButton from "../src/components/ui/filter_button";
 import NbResults from "../src/components/ui/nb_results";
@@ -25,7 +25,6 @@ import SearchBar from "../src/components/ui/search";
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
 import { OnisepContext } from "../src/context/OnisepContext";
-
 
 const HomeScreen = ({ navigation }) => {
   const {
@@ -48,7 +47,6 @@ const HomeScreen = ({ navigation }) => {
 
   const { userInfo, userToken } = useContext(AuthContext);
   const { GetFavoris } = useContext(FavorisContext);
-
 
   // setup with useState
   const [isSelected, setSelection] = useState<boolean[]>([]);
@@ -76,8 +74,7 @@ const HomeScreen = ({ navigation }) => {
     if (userToken) {
       GetFavoris();
     }
-  }, [])
-
+  }, []);
 
   type dataType = {
     code_nsf: number;
@@ -93,13 +90,11 @@ const HomeScreen = ({ navigation }) => {
     tutelle: string;
     url_et_id_onisep: string;
 
-    item: any
+    item: any;
   };
-
 
   // return formation "sigle" for filter & tag
   const returnSigleFormation = () => {
-
     const dataa: dataType[] = filterData;
     const sigle_formation: string[] = [];
 
@@ -192,19 +187,18 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-
   // ref
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // variables
-  const snapPoints = useMemo(() => ['15%', '65%'], []);
+  const snapPoints = useMemo(() => ["15%", "65%"], []);
   // callbacks
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
 
   const renderBackdrop = useCallback(
-    props => (
+    (props) => (
       <BottomSheetBackdrop
         {...props}
         disappearsOnIndex={0}
@@ -257,7 +251,7 @@ const HomeScreen = ({ navigation }) => {
             justifyContent: "space-between",
             paddingLeft: "5%",
             paddingRight: "1%",
-            marginTop: '5%',
+            marginTop: "5%",
           }}
         >
           <Text style={{ fontWeight: "900", fontSize: 20 }}>
@@ -267,7 +261,7 @@ const HomeScreen = ({ navigation }) => {
             icon={require("../src/icons/star.png")}
             func={() => {
               userToken
-                ? (navigation.navigate("Fav"))
+                ? navigation.navigate("Fav")
                 : navigation.navigate("Login");
             }}
           />
@@ -312,8 +306,6 @@ const HomeScreen = ({ navigation }) => {
             <ModalFlatlist />
           </BottomSheetView>
         </BottomSheetModal>
-
-
       </View>
     </BottomSheetModalProvider>
   );

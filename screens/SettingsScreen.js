@@ -404,7 +404,7 @@ const SettingsScreem = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <DisplayMessages />
-      <ScrollView style={{ flex: 1 }} >
+      <ScrollView style={{ flex: 1 }}>
         <Header name="Paramètres" nav={() => navigation.navigate("Home")} />
         <View
           style={{
@@ -415,8 +415,8 @@ const SettingsScreem = ({ navigation }) => {
             justifyContent: "space-between",
           }}
         >
-          <View >{is_log()}</View>
-          <View >{log_out()}</View>
+          <View>{is_log()}</View>
+          <View>{log_out()}</View>
         </View>
       </ScrollView>
     </View>

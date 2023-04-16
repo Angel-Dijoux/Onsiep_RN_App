@@ -1,13 +1,8 @@
 import { useNetInfo } from "@react-native-community/netinfo";
 import React, { useContext, useEffect } from "react";
-import {
-  View,
-  StyleSheet,
-  ActivityIndicator,
-  BackHandler,
-} from "react-native";
+import { View, StyleSheet, ActivityIndicator, BackHandler } from "react-native";
 
-import Header from './../src/components/ui/header';
+import Header from "./../src/components/ui/header";
 import GetContentAPI from "../src/components/api/get_content_api";
 import NoResult from "../src/components/ui/no_result";
 import { AuthContext } from "../src/context/AuthContext";
@@ -32,7 +27,6 @@ const FavScreen = ({ navigation }) => {
     };
   }, []);
 
-
   const netInfo = useNetInfo();
   const Favoris = () => {
     if (favisloading || favoris == null) {
@@ -53,30 +47,38 @@ const FavScreen = ({ navigation }) => {
               width="100%"
               marginTop="3%"
               marginBottom="5%"
-              header={<Header name='Favoris' nav={() => navigation.navigate("Home")} />}
+              header={
+                <Header
+                  name="Favoris"
+                  nav={() => navigation.navigate("Home")}
+                />
+              }
             />
           ) : (
             <>
-              <Header name='Favoris' nav={() => navigation.navigate("Home")} />
-              <View style={{ alignItems: 'center', justifyContent: "center", height: '80%', marginTop: '20%' }} >
+              <Header name="Favoris" nav={() => navigation.navigate("Home")} />
+              <View
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "80%",
+                  marginTop: "20%",
+                }}
+              >
                 <NoResult
                   icon={require("../src/icons/noresult.png")}
                   text="Aucun favoris"
                 />
               </View>
-
             </>
-          )
-          }
-        </View >
+          )}
+        </View>
       );
     }
   };
   return (
     <View style={styles.container}>
-      <View>
-        {Favoris()}
-      </View>
+      <View>{Favoris()}</View>
     </View>
   );
 };

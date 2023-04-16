@@ -16,7 +16,6 @@ const GetContentAPI = (props) => {
   const { userToken, messages, setMessages, favoris } = useContext(AuthContext);
   const { PostFavoris, DeleteFavoris, GetFavoris } = useContext(FavorisContext);
 
-
   const header = () => {
     return props.header;
   };
@@ -30,19 +29,22 @@ const GetContentAPI = (props) => {
         while (!isFound && count < FavData.length) {
           if (id == FavData[count].url_et_id_onisep) {
             isFound = false;
-            return true
+            return true;
           } else {
             ++count;
           }
         }
       }
     }
-  }
-
-
+  };
 
   const dataView = (
-    <View style={{ height: Dimensions.get('screen').height, width: Dimensions.get("screen").width }}>
+    <View
+      style={{
+        height: Dimensions.get("screen").height,
+        width: Dimensions.get("screen").width,
+      }}
+    >
       <FlashList
         data={props.data}
         extraData={props.data}
@@ -61,14 +63,15 @@ const GetContentAPI = (props) => {
             <View style={{ ...styles.formation }}>
               <View style={styles.headFormation}>
                 <Text style={styles.starFormation}>
-                  {item.sigle_type_formation.charAt(0).toUpperCase() + item.sigle_type_formation.slice(1) || "Non Renseigné"}
+                  {item.sigle_type_formation.charAt(0).toUpperCase() +
+                    item.sigle_type_formation.slice(1) || "Non Renseigné"}
                 </Text>
                 <TouchableOpacity
                   onPress={() => {
-                    console.log('No conditions')
+                    console.log("No conditions");
                     if (userToken) {
                       if (props.post) {
-                        console.log('post')
+                        console.log("post");
                         if (!GetIfIsInFav(item.url_et_id_onisep)) {
                           PostFavoris(
                             item.code_nsf,
@@ -87,20 +90,23 @@ const GetContentAPI = (props) => {
                           GetFavoris();
                         }
                       } else {
-                        console.log('delete')
+                        console.log("delete");
                         DeleteFavoris(item.id);
                         GetFavoris();
                         // https://stackoverflow.com/questions/74771794/how-to-remove-data-from-flatlist-using-deleted-icon-in-react-native
                       }
                     } else {
-                      const message = "Vous n'êtes pas connecter."
-                      setMessages([...messages, message])
+                      const message = "Vous n'êtes pas connecter.";
+                      setMessages([...messages, message]);
                     }
-
                   }}
                 >
                   <Image
-                    source={!GetIfIsInFav(item.url_et_id_onisep) ? (require("../../icons/star.png")) : (require("../../icons/trah.png"))}
+                    source={
+                      !GetIfIsInFav(item.url_et_id_onisep)
+                        ? require("../../icons/star.png")
+                        : require("../../icons/trah.png")
+                    }
                     resizeMode="contain"
                     style={{
                       width: 30,
@@ -109,8 +115,6 @@ const GetContentAPI = (props) => {
                       shadowColor: "#000000",
                     }}
                   />
-
-
                 </TouchableOpacity>
               </View>
               <Text
@@ -124,13 +128,15 @@ const GetContentAPI = (props) => {
                 {item.duree}
               </Text>
               <Text style={{ marginBottom: 10, fontSize: 17 }}>
-                {item.libelle_type_formation.charAt(0).toUpperCase() + item.libelle_type_formation.slice(1)}
+                {item.libelle_type_formation.charAt(0).toUpperCase() +
+                  item.libelle_type_formation.slice(1)}
               </Text>
               <Text style={{ marginBottom: 10, fontSize: 17 }} selectable>
-                {item.libelle_formation_principal.charAt(0).toUpperCase() + item.libelle_formation_principal.slice(1)}
+                {item.libelle_formation_principal.charAt(0).toUpperCase() +
+                  item.libelle_formation_principal.slice(1)}
               </Text>
             </View>
-          </View >
+          </View>
         )}
         estimatedItemSize={200}
         initialNumToRender={18}

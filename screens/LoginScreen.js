@@ -14,7 +14,6 @@ import DisplayMessages from "../src/components/ui/Notification/display_messages"
 import SearchBar from "../src/components/ui/search";
 import { AuthContext } from "../src/context/AuthContext";
 
-
 const LoginScreen = ({ navigation }) => {
   const { login, messages, setMessages } = useContext(AuthContext);
   const [email, setemail] = useState(null);
