@@ -67,7 +67,7 @@ const SearchBar = (props) => {
           style={styles.input}
           editable={props.loading}
           placeholder={props.name}
-          placeholderTextColor={"#030402"}
+          placeholderTextColor="#030402"
           value={props.search}
           onChangeText={props.func}
         />

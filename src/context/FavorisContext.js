@@ -1,10 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
-import React, { createContext, useState, useEffect, useContext } from "react";
+import React, { createContext, useState, useContext } from "react";
 
-import { BASE_URL } from "../default.config";
 import { AuthContext } from "./AuthContext";
+import { BASE_URL } from "../default.config";
 
 export const FavorisContext = createContext();
 
@@ -24,7 +23,7 @@ export const FavorisProvider = ({ children }) => {
       axios
         .get(`${BASE_URL}/favoris/`, {
           headers: {
-            Authorization: "Bearer " + TOKEN || userToken, //use authentification with token
+            Authorization: "Bearer " + TOKEN || userToken, // use authentification with token
           },
         })
         .then((res) => {
@@ -96,7 +95,7 @@ export const FavorisProvider = ({ children }) => {
     axios
       .delete(`${BASE_URL}/favoris/${id}`, {
         headers: {
-          Authorization: "Bearer " + TOKEN || userToken, //use authentification with token
+          Authorization: "Bearer " + TOKEN || userToken, // use authentification with token
         },
       })
       .then(() => {

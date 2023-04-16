@@ -1,3 +1,4 @@
+import { FlashList } from "@shopify/flash-list";
 import React, { useContext } from "react";
 import {
   View,
@@ -7,9 +8,9 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+
 import { AuthContext } from "../../context/AuthContext";
 import { FavorisContext } from "../../context/FavorisContext";
-import { FlashList } from "@shopify/flash-list";
 
 const GetContentAPI = (props) => {
   const { userToken, messages, setMessages, favoris } = useContext(AuthContext);
@@ -125,7 +126,7 @@ const GetContentAPI = (props) => {
               <Text style={{ marginBottom: 10, fontSize: 17 }}>
                 {item.libelle_type_formation.charAt(0).toUpperCase() + item.libelle_type_formation.slice(1)}
               </Text>
-              <Text style={{ marginBottom: 10, fontSize: 17 }} selectable={true}>
+              <Text style={{ marginBottom: 10, fontSize: 17 }} selectable>
                 {item.libelle_formation_principal.charAt(0).toUpperCase() + item.libelle_formation_principal.slice(1)}
               </Text>
             </View>

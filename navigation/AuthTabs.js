@@ -2,17 +2,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
 } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
-import SettingsScreem from "../screens/SettingsScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
+import SettingsScreem from "../screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +48,7 @@ const AuthTabs = () => {
 
   return StackAuth;
 
-  //For debug
+  // For debug
   /*  return (
     <Tab.Navigator
       screenOptions={{

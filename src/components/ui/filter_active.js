@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { OnisepContext } from '../../context/OnisepContext';
+
 import Close from './close';
+import { OnisepContext } from '../../context/OnisepContext';
 
 const FilterActive = (props) => {
 

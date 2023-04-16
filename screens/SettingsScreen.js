@@ -1,3 +1,4 @@
+import * as Clipboard from "expo-clipboard";
 import React, { useContext, useState, useEffect } from "react";
 import {
   View,
@@ -9,17 +10,13 @@ import {
   ScrollView,
   BackHandler,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import * as Clipboard from "expo-clipboard";
 
-/*local*/
-import ProfilEdit from "../src/components/ui/button";
-import SearchBar from "../src/components/ui/search";
-
-import { AuthContext } from "../src/context/AuthContext";
-import Header from "../src/components/ui/header";
+/* local */
 import DisplayMessages from "../src/components/ui/Notification/display_messages";
+import ProfilEdit from "../src/components/ui/button";
+import Header from "../src/components/ui/header";
+import SearchBar from "../src/components/ui/search";
+import { AuthContext } from "../src/context/AuthContext";
 
 const SettingsScreem = ({ navigation }) => {
   const {
@@ -57,50 +54,50 @@ const SettingsScreem = ({ navigation }) => {
 
   const EditProfil = () => {
     if (isedit == false) {
-      return <ProfilEdit text={"Modifier"} func={() => setEdit(!isedit)} />;
+      return <ProfilEdit text="Modifier" func={() => setEdit(!isedit)} />;
     } else {
       const editProfilView = (
         <View style={{ width: "100%" }}>
           <View>
             <SearchBar
-              name={"Email"}
+              name="Email"
               search={email}
               icon={require("../src/icons/email.png")}
               func={(text) => setemail(text)}
-              bg={true}
-              color={true}
+              bg
+              color
               mb={15}
             />
             <SearchBar
-              name={"Pseudo"}
+              name="Pseudo"
               icon={require("../src/icons/username.png")}
               search={username}
               func={(text) => {
                 setUsername(text);
               }}
-              bg={true}
-              color={true}
+              bg
+              color
               mb={15}
             />
             <SearchBar
-              name={"Ancien mot de passe"}
+              name="Ancien mot de passe"
               icon={require("../src/icons/password.png")}
               func={(text) => setOldPassword(text)}
-              bg={true}
-              color={true}
+              bg
+              color
               mb={15}
             />
             <SearchBar
-              name={"Nouveau mot de passe"}
+              name="Nouveau mot de passe"
               icon={require("../src/icons/password.png")}
               func={(text) => setpassword(text)}
-              bg={true}
-              color={true}
+              bg
+              color
               mb={15}
             />
           </View>
           <View style={{ alignItems: "flex-end", marginTop: 5 }}>
-            <ProfilEdit text={"Enregistrer"} func={() => verif_data_edit()} />
+            <ProfilEdit text="Enregistrer" func={() => verif_data_edit()} />
           </View>
         </View>
       );
@@ -217,7 +214,7 @@ const SettingsScreem = ({ navigation }) => {
     const modal = (
       <Modal
         animationType="fade"
-        transparent={true}
+        transparent
         visible={visiblemodal}
         onRequestClose={() => setVisibleModal(!visiblemodal)}
       >
@@ -262,9 +259,9 @@ const SettingsScreem = ({ navigation }) => {
               }}
             >
               <ProfilEdit
-                text={"Supprimer"}
+                text="Supprimer"
                 func={() => DeleteUser()}
-                width={"40%"}
+                width="40%"
               />
               <TouchableOpacity
                 style={{
@@ -360,11 +357,11 @@ const SettingsScreem = ({ navigation }) => {
               marginTop: 20,
             }}
           >
-            <ProfilEdit text={"Se déconnecter"} func={() => logout()} />
+            <ProfilEdit text="Se déconnecter" func={() => logout()} />
             <ProfilEdit
-              text={"Supprimer mon compte"}
+              text="Supprimer mon compte"
               func={() => setVisibleModal(!visiblemodal)}
-              width={"55%"}
+              width="55%"
             />
           </View>
           {warning_delete_modal()}
@@ -395,7 +392,7 @@ const SettingsScreem = ({ navigation }) => {
           </Text>
           <View style={{ alignItems: "flex-start", marginTop: 15 }}>
             <ProfilEdit
-              text={"Se connecter"}
+              text="Se connecter"
               func={() => navigation.navigate("Login")}
             />
           </View>

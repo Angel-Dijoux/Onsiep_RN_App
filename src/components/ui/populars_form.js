@@ -1,4 +1,5 @@
 import { View, StyleSheet} from 'react-native';
+
 import TopFormation from './top_formation';
 
 const PopularsForm = (props) => {
@@ -8,36 +9,36 @@ const PopularsForm = (props) => {
                 <TopFormation 
                     func={props.form1}
                     icon={require("../../icons/langue.png")}
-                    formation={"Langue"}
+                    formation="Langue"
                 />
                 <TopFormation 
                     func={props.form2}
                     icon={require("../../icons/pc.png")}
-                    formation={"Informatique"}
+                    formation="Informatique"
                 />
             </View>
             <View style={styles.doubleCards}>
                 <TopFormation 
                     func={props.form3}
                     icon={require("../../icons/justice.png")}
-                    formation={"Droit"}
+                    formation="Droit"
                 />
                 <TopFormation 
                     func={props.form4}
                     icon={require("../../icons/ppl.png")}
-                    formation={"Ingénieur"}
+                    formation="Ingénieur"
                 />
             </View>
             <View style={styles.doubleCards}>
                 <TopFormation 
                     func={props.form5}
                     icon={require("../../icons/hearth.png")}
-                    formation={"Santé"}
+                    formation="Santé"
                 />
                 <TopFormation 
                     func={props.form6}
                     icon={require("../../icons/art.png")}
-                    formation={"Arts"}
+                    formation="Arts"
                 />
             </View>                
         </View>

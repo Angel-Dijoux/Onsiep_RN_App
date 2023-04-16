@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
+import React, { useContext } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+
+import AuthTabs from './AuthTabs';
 import Tabs from './tabs';
 import { AuthContext } from '../src/context/AuthContext';
-import AuthTabs from './AuthTabs';
 
 const AppNav = () => {
     const { isloading, userToken } = useContext(AuthContext)
@@ -11,7 +12,7 @@ const AppNav = () => {
     if (isloading) {
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: "center" }}>
-                <ActivityIndicator size={"large"} />
+                <ActivityIndicator size="large" />
             </View>)
     }
 

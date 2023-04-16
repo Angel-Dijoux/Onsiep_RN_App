@@ -1,3 +1,10 @@
+import {
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  BottomSheetBackdrop,
+  BottomSheetView
+} from '@gorhom/bottom-sheet';
+import CheckBox from "expo-checkbox";
 import React, {
   useState,
   useContext,
@@ -6,25 +13,19 @@ import React, {
   useRef,
   useMemo,
 } from "react";
-import { View, Text, StyleSheet, BackHandler, Button } from "react-native";
+import { View, Text, StyleSheet, BackHandler } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import CheckBox from "expo-checkbox";
-import SearchBar from "../src/components/ui/search";
-import FilterButton from "../src/components/ui/filter_button";
-import FilterActive from "../src/components/ui/filter_active";
-import NbResults from "../src/components/ui/nb_results";
-import { OnisepContext } from "../src/context/OnisepContext";
-import ResultPage from "../src/components/ui/search_data";
-import { AuthContext } from "../src/context/AuthContext";
+
 import DisplayMessages from './../src/components/ui/Notification/display_messages';
 import { FavorisContext } from './../src/context/FavorisContext';
+import FilterActive from "../src/components/ui/filter_active";
+import FilterButton from "../src/components/ui/filter_button";
+import NbResults from "../src/components/ui/nb_results";
+import SearchBar from "../src/components/ui/search";
+import ResultPage from "../src/components/ui/search_data";
+import { AuthContext } from "../src/context/AuthContext";
+import { OnisepContext } from "../src/context/OnisepContext";
 
-import {
-  BottomSheetModal,
-  BottomSheetModalProvider,
-  BottomSheetBackdrop,
-  BottomSheetView
-} from '@gorhom/bottom-sheet';
 
 const HomeScreen = ({ navigation }) => {
   const {
@@ -49,7 +50,7 @@ const HomeScreen = ({ navigation }) => {
   const { GetFavoris } = useContext(FavorisContext);
 
 
-  //setup with useState
+  // setup with useState
   const [isSelected, setSelection] = useState<boolean[]>([]);
 
   const handleBackButtonClick = () => {
@@ -96,7 +97,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
 
-  //return formation "sigle" for filter & tag
+  // return formation "sigle" for filter & tag
   const returnSigleFormation = () => {
 
     const dataa: dataType[] = filterData;
@@ -213,7 +214,7 @@ const HomeScreen = ({ navigation }) => {
     []
   );
 
-  //Filter bar with button filter and numbers of results
+  // Filter bar with button filter and numbers of results
   const FilterBar = () => {
     if (search != "") {
       return (
@@ -237,7 +238,7 @@ const HomeScreen = ({ navigation }) => {
           >
             <FilterButton
               icon={require("../src/icons/sort.png")}
-              func={handlePresentModalPress} //here
+              func={handlePresentModalPress} // here
             />
             {FilterActiveTags()}
           </View>
@@ -281,7 +282,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.container}>
         {hi_me()}
         <SearchBar
-          name={"Chercher une formation"}
+          name="Chercher une formation"
           search={search}
           icon={require("../src/icons/search.png")}
           loading={!isloading}
@@ -295,7 +296,7 @@ const HomeScreen = ({ navigation }) => {
             }
           }}
           funcSettings={() => navigation.navigate("Settings")}
-          isHome={true}
+          isHome
           iscliked={cliked}
         />
         {FilterBar()}

@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { View, ActivityIndicator } from "react-native";
 
-import { OnisepContext } from "../../context/OnisepContext";
-import PopularsForm from "./populars_form";
 import NoResult from "./no_result";
+import PopularsForm from "./populars_form";
+import { OnisepContext } from "../../context/OnisepContext";
 import GetContentAPI from "../api/get_content_api";
 
-//return populars formation or home page
+// return populars formation or home page
 const ResultPage = () => {
   const { returnGoodData, isloading, search, searchFilter, setFilterType } =
     useContext(OnisepContext);
@@ -52,7 +52,7 @@ const ResultPage = () => {
       return (
         <View style={{ alignItems: 'center', justifyContent: "center", height: '65%', }}>
           <NoResult
-            text={"Aucun résultats"}
+            text="Aucun résultats"
             icon={require("../../icons/noresult.png")}
           />
         </View>
@@ -62,10 +62,10 @@ const ResultPage = () => {
         <GetContentAPI
           data={returnGoodData()}
           icon={require("../../icons/star.png")}
-          post={true}
-          width={"90%"}
-          marginTop={"4%"}
-          marginBottom={"2%"}
+          post
+          width="90%"
+          marginTop="4%"
+          marginBottom="2%"
         />
       );
     }

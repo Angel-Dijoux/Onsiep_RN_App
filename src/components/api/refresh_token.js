@@ -7,7 +7,7 @@ const REFRESH_TOKEN = (TOKEN) => {
     fetch(API_LINK, {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + TOKEN, //use authentification with token
+        Authorization: "Bearer " + TOKEN, // use authentification with token
       },
     })
       .then((res) => {

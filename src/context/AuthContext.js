@@ -89,7 +89,7 @@ export const AuthProvider = ({ children }) => {
       fetch(API_LINK, {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + TOKEN, //use authentification with token
+          Authorization: "Bearer " + TOKEN, // use authentification with token
         },
       })
         .then((res) => {
@@ -167,7 +167,7 @@ export const AuthProvider = ({ children }) => {
     axios
       .delete(`${BASE_URL}/auth/me/remove`, {
         headers: {
-          Authorization: "Bearer " + TOKEN || userToken, //use authentification with token
+          Authorization: "Bearer " + TOKEN || userToken, // use authentification with token
         },
       })
       .then(() => {

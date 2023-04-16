@@ -2,17 +2,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
   StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
 } from "react-native";
 
-import HomeScreen from "../screens/HomeScreen";
 import FavScreen from "../screens/FavScreen";
+import HomeScreen from "../screens/HomeScreen";
 import SettingsScreem from "../screens/SettingsScreen";
-import DisplayMessages from './../src/components/ui/Notification/display_messages';
 
 const Tab = createBottomTabNavigator();
 

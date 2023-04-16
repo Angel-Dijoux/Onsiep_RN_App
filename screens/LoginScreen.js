@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import {
   Text,
   View,
@@ -8,12 +7,12 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
-import { AuthContext } from "../src/context/AuthContext";
-
-import SearchBar from "../src/components/ui/search";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 import DisplayMessages from "../src/components/ui/Notification/display_messages";
+import SearchBar from "../src/components/ui/search";
+import { AuthContext } from "../src/context/AuthContext";
 
 
 const LoginScreen = ({ navigation }) => {
@@ -67,19 +66,19 @@ const LoginScreen = ({ navigation }) => {
           <ScrollView>
             <SearchBar
               icon={require("../src/icons/email.png")}
-              name={"Email"}
+              name="Email"
               func={(text) => setemail(text)}
-              type={"email-address"}
+              type="email-address"
               mb={30}
             />
             <SearchBar
               icon={require("../src/icons/password.png")}
-              name={"Mot de passe"}
+              name="Mot de passe"
               func={(text) => setpassword(text)}
               subfunc={() => {
                 login(email, password);
               }}
-              password={true}
+              password
               mb={2}
             />
             <View style={{ flexDirection: "row", alignItems: "center" }}>

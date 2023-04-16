@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
+
 import GET_TOKEN from "../components/api/get_token";
 import { ONSIEP_APP_ID } from "../config";
 
@@ -23,8 +24,8 @@ export const OnisepProvider = ({ children }) => {
         "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?size=5000",
         {
           headers: {
-            "Application-ID": ONSIEP_APP_ID, //app ID in ONISEP
-            Authorization: "Bearer " + TOKEN_API, //use authentification with token
+            "Application-ID": ONSIEP_APP_ID, // app ID in ONISEP
+            Authorization: "Bearer " + TOKEN_API, // use authentification with token
           },
         }
       )

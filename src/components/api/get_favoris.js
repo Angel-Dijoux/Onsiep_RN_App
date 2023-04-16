@@ -1,9 +1,8 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
-import React, { useContext, useState } from "react";
-import { BASE_URL } from "../../default.config";
+import { useContext } from "react";
+
 import { AuthContext } from "../../context/AuthContext";
+import { BASE_URL } from "../../default.config";
 
 const get_fav = () => {
   const { userToken } = useContext(AuthContext);
@@ -11,7 +10,7 @@ const get_fav = () => {
   axios
     .get(`${BASE_URL}/favoris/`, {
       headers: {
-        Authorization: "Bearer " + userToken, //use authentification with token
+        Authorization: "Bearer " + userToken, // use authentification with token
       },
     })
     .then((res) => {

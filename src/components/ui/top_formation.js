@@ -8,11 +8,11 @@ import {
 } from "react-native";
 
 const TopFormation = (props) => {
-  //Find screen size
+  // Find screen size
   let width = Dimensions.get("window").width;
   let height = Dimensions.get("window").height;
 
-  //set narin width and height for screen > 500
+  // set narin width and height for screen > 500
   const size_block = () => {
     if (width > 500) {
       return { margin: 20, width: 85, height: 80, screen_width: width };

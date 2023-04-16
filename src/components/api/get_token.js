@@ -3,11 +3,11 @@ import { ONISEP_ID, ONISEP_PS } from "../../config";
 let GET_TOKEN = () => {
   return new Promise((resolve) => {
     const API_TOKEN = "https://api.opendata.onisep.fr/api/1.0/login";
-    //formData for post request
+    // formData for post request
     let formData = new FormData();
-    formData.append("email", ONISEP_ID); //my email
-    formData.append("password", ONISEP_PS); //my password
-    //request
+    formData.append("email", ONISEP_ID); // my email
+    formData.append("password", ONISEP_PS); // my password
+    // request
     fetch(API_TOKEN, {
       method: "POST",
       body: formData,

@@ -51,7 +51,7 @@ const Message = (props: any) => {
             >
                 <Image
                     source={require("../../../icons/notif.png")}
-                    resizeMode={"contain"}
+                    resizeMode="contain"
                     style={{
                         width: 20,
                         height: 20,

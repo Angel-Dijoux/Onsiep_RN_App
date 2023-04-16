@@ -1,7 +1,8 @@
-import { View } from 'react-native'
 import React, { useContext } from 'react'
-import { AuthContext } from '../../../context/AuthContext';
+import { View } from 'react-native'
+
 import Message from './notif';
+import { AuthContext } from '../../../context/AuthContext';
 
 const genrateRandomNumber = (min: number, max: number) => {
     min = Math.ceil(min);

@@ -22,4 +22,4 @@ const VirtualizedView = (props) => {
 
 export default VirtualizedView;
 
-//https://www.npmjs.com/package/recyclerlistview
+// https://www.npmjs.com/package/recyclerlistview
