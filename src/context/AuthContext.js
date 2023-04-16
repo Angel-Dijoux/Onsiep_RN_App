@@ -3,13 +3,11 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
-import { BASE_URL } from "../config";
+import { BASE_URL } from "../default.config";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-
-
   const [favoris, setfavoris] = useState([]);
 
   const netInfo = useNetInfo();
@@ -28,7 +26,7 @@ export const AuthProvider = ({ children }) => {
       email: email,
       password: password,
     };
-    console.info('request on : ', `${BASE_URL}/auth/register`)
+    console.info("request on : ", `${BASE_URL}/auth/register`);
     fetch(`${BASE_URL}/auth/register`, {
       method: "POST",
       headers: {
@@ -59,7 +57,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = (email, password) => {
     setLoading(true);
-    console.info('request on : ', `${BASE_URL}/auth/login`)
+    console.info("request on : ", `${BASE_URL}/auth/login`);
     axios
       .post(`${BASE_URL}/auth/login`, {
         email,
@@ -85,7 +83,7 @@ export const AuthProvider = ({ children }) => {
   const refresh_token = (TOKEN) => {
     return new Promise((resolve) => {
       setLoading(true);
-      console.info('request on : ', `${BASE_URL}/auth/token/refresh`)
+      console.info("request on : ", `${BASE_URL}/auth/token/refresh`);
       const API_LINK = `${BASE_URL}/auth/token/refresh`;
 
       fetch(API_LINK, {
@@ -112,7 +110,7 @@ export const AuthProvider = ({ children }) => {
     if (TOKEN == undefined) {
       TOKEN = userToken;
     }
-    console.info('request on : ', `${BASE_URL}/auth/me/edit`)
+    console.info("request on : ", `${BASE_URL}/auth/me/edit`);
     await fetch(`${BASE_URL}/auth/me/edit`, {
       method: "POST",
       headers: {
@@ -165,7 +163,7 @@ export const AuthProvider = ({ children }) => {
     if (TOKEN == undefined) {
       TOKEN = userToken;
     }
-    console.info('request on : ', `${BASE_URL}/auth/me/remove`)
+    console.info("request on : ", `${BASE_URL}/auth/me/remove`);
     axios
       .delete(`${BASE_URL}/auth/me/remove`, {
         headers: {
@@ -196,7 +194,7 @@ export const AuthProvider = ({ children }) => {
         setUserTokenRefresh(refreshToken);
         setUserInfo(userInfo);
         setUserToken(userToken);
-        setfavoris(favoris)
+        setfavoris(favoris);
       }
       setLoading(false);
     } catch (e) {
@@ -225,7 +223,7 @@ export const AuthProvider = ({ children }) => {
         setMessages,
 
         setfavoris,
-        favoris
+        favoris,
       }}
     >
       {children}

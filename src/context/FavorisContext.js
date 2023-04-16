@@ -3,7 +3,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect, useContext } from "react";
 
-import { BASE_URL } from "../config";
+import { BASE_URL } from "../default.config";
 import { AuthContext } from "./AuthContext";
 
 export const FavorisContext = createContext();
@@ -11,7 +11,6 @@ export const FavorisContext = createContext();
 export const FavorisProvider = ({ children }) => {
   const { refresh_token, userTokenRefresh, userToken, setfavoris, favoris } =
     useContext(AuthContext);
-
 
   const [favisloading, setFavLoading] = useState();
 
@@ -31,8 +30,8 @@ export const FavorisProvider = ({ children }) => {
         .then((res) => {
           let userLink = res.data;
           AsyncStorage.setItem("favoris", JSON.stringify(userLink));
-          setfavoris(userLink)
-          console.info('data is get')
+          setfavoris(userLink);
+          console.info("data is get");
           setFavLoading(false);
         })
         .catch((e) => {
@@ -83,7 +82,7 @@ export const FavorisProvider = ({ children }) => {
         },
         body: JSON.stringify(bodyParameters),
       });
-      console.log('Data is post')
+      console.log("Data is post");
     } catch (e) {
       console.log("Error in PostFavoris : ", e);
     }
@@ -101,14 +100,13 @@ export const FavorisProvider = ({ children }) => {
         },
       })
       .then(() => {
-        console.info('is delete')
+        console.info("is delete");
         GetFavoris();
       })
       .catch((e) => {
         console.log("Error in Function DeleteFavoris : ", e);
       });
   };
-
 
   return (
     <FavorisContext.Provider
