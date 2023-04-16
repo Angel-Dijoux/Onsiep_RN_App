@@ -75,6 +75,6 @@ dist/
 android/
 
 # @end expo-cli
-src/config.tsx
+src/config.js
 
 yarn.lock
