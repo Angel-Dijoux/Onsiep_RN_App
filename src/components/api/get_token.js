@@ -1,4 +1,4 @@
-import { ONISEP_ID, ONISEP_PS } from "../../default.config";
+import { ONISEP_ID, ONISEP_PS } from "../../config";
 
 let GET_TOKEN = () => {
   return new Promise((resolve) => {

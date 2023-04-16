@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import GET_TOKEN from "../components/api/get_token";
-import { ONSIEP_APP_ID } from "../default.config";
+import { ONSIEP_APP_ID } from "../config";
 
 export const OnisepContext = createContext();
 
@@ -17,6 +17,7 @@ export const OnisepProvider = ({ children }) => {
   const GetFormation = async () => {
     setLoading(true);
     let TOKEN_API = await GET_TOKEN();
+    console.log(TOKEN_API);
     axios
       .get(
         "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?size=5000",
