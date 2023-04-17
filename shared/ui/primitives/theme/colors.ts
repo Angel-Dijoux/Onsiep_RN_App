@@ -8,11 +8,11 @@ const GREY = {
 };
 
 const PRIMARY = {
-  PRIMARY_DARK: "#c52e25",
-  PRIMARY_100: "#ce4c43",
-  PRIMARY_80: "#d76860",
-  PRIMARY_50: "#df847d",
-  PRIMARY_40: "#e8a09a",
+  PRIMARY_DARK: "#e10720",
+  PRIMARY_100: "#e42d3f",
+  PRIMARY_80: "#e7505d",
+  PRIMARY_50: "#ea747b",
+  PRIMARY_40: "#ed9898",
   PRIMARY_10: "#f0bcb6",
 };
 

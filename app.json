@@ -9,14 +9,12 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#E10720"
+      "backgroundColor": "#FFFBEE"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "elki.onisepapp"
@@ -25,7 +23,7 @@
       "package": "elki.onisepapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#E10720"
+        "backgroundColor": "#FFFBEE"
       },
       "versionCode": 2
     },
