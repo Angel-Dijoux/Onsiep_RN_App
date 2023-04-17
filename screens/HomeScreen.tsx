@@ -13,7 +13,7 @@ import React, {
   useRef,
   useMemo,
 } from "react";
-import { View, Text, StyleSheet, BackHandler } from "react-native";
+import { View, StyleSheet, BackHandler } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import DisplayMessages from "./../src/components/ui/Notification/display_messages";
@@ -25,6 +25,7 @@ import SearchBar from "../src/components/ui/search";
 import ResultPage from "../src/components/ui/search_data";
 import { AuthContext } from "../src/context/AuthContext";
 import { OnisepContext } from "../src/context/OnisepContext";
+import { Box, Text } from "../shared/ui/primitives";
 
 const HomeScreen = ({ navigation }) => {
   const {
@@ -255,7 +256,7 @@ const HomeScreen = ({ navigation }) => {
           }}
         >
           <Text
-            style={{ fontWeight: "700", fontSize: 20, fontFamily: "Satoshi" }}
+            style={{ fontWeight: "200", fontSize: 20, fontFamily: "Satoshi" }}
           >
             Hi{userToken ? `, ${userInfo.username}` : " "}
           </Text>

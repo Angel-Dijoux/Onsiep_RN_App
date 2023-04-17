@@ -10,7 +10,7 @@ import { zIndices } from "./zIndices";
 
 export type Theme = typeof theme;
 
-type NamedSyles<T> = {
+type NamedStyles<T> = {
   [P in keyof T]: ViewStyle | TextStyle | ImageStyle;
 };
 
@@ -25,9 +25,10 @@ export const theme = createTheme({
 
 export const useAppTheme = () => useTheme<Theme>();
 
-export const appStyle =
-  <T extends NamedSyles<T>>(styles: (appTheme: Theme) => T) =>
+export const makeAppStyles =
+  <T extends NamedStyles<T>>(styles: (appTheme: Theme) => T) =>
   () => {
     const restyleTheme = useAppTheme();
+
     return styles(restyleTheme);
   };

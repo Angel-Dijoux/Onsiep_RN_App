@@ -1,3 +1,12 @@
+const GREY = {
+  GREY_DARK: "#020000",
+  GREY_90: "#29282b",
+  GREY_65: "#4d4d54",
+  GREY_40: "#72727d",
+  GREY_20: "#9797a6",
+  GREY_10: "#bbbdcf",
+};
+
 const PRIMARY = {
   PRIMARY_DARK: "#c52e25",
   PRIMARY_100: "#ce4c43",
@@ -23,15 +32,6 @@ const THIRD = {
   THIRD_10: "#e9f1f4",
 };
 
-const GREY = {
-  GREY_DARK: "#020000",
-  GREY_90: "#29282b",
-  GREY_65: "#4d4d54",
-  GREY_40: "#72727d",
-  GREY_20: "#9797a6",
-  GREY_10: "#bbbdcf",
-};
-
 const SEMANTIC = {
   SUCCESS: "##6dff66",
   SUCCESS_50: "#d0ffcc",
@@ -55,10 +55,10 @@ const TRANSPARENT = {
 };
 
 const colors = {
+  ...GREY,
   ...PRIMARY,
   ...SECONDARY,
   ...THIRD,
-  ...GREY,
   ...SEMANTIC,
   ...GLOBALS,
   ...TRANSPARENT,

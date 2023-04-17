@@ -6,6 +6,14 @@ import AppNav from "./navigation/AppNav";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
 import { OnisepProvider } from "./src/context/OnisepContext";
+import { ThemeProvider } from "@shopify/restyle";
+import { theme } from "./shared/ui/primitives/theme/theme";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -29,14 +37,26 @@ const App = () => {
   }
 
   return (
-    <OnisepProvider>
-      <AuthProvider>
-        <FavorisProvider>
-          <AppNav />
-        </FavorisProvider>
-      </AuthProvider>
-    </OnisepProvider>
+    <GestureHandlerRootView style={styles.wrapper}>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <OnisepProvider>
+          <AuthProvider>
+            <FavorisProvider>
+              <ThemeProvider theme={theme}>
+                <AppNav />
+              </ThemeProvider>
+            </FavorisProvider>
+          </AuthProvider>
+        </OnisepProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+  },
+});
 
 export { App };
