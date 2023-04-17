@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 
 import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
-import RegisterScreen from "../screens/RegisterScreen";
+import { RegisterScreen } from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 
 const Stack = createStackNavigator();

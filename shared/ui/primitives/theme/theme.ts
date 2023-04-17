@@ -1,10 +1,10 @@
 import { createTheme, useTheme } from "@shopify/restyle";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
+import { borderRadii } from "./borderRadii";
 import { breakpoints } from "./breakpoints";
 import { colors } from "./colors";
 import { textVariants } from "./fonts";
-import { radius } from "./radius";
 import { spacing } from "./spacing";
 import { zIndices } from "./zIndices";
 
@@ -17,7 +17,7 @@ type NamedStyles<T> = {
 export const theme = createTheme({
   colors,
   spacing,
-  radius,
+  borderRadii,
   textVariants,
   breakpoints,
   zIndices,

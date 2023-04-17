@@ -30,11 +30,10 @@ const LoginScreen = ({ navigation }) => {
         source={require("../src/icons/onilogo.png")}
         resizeMode="cover"
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
           width: "100%",
           height: "85%",
+          position: "relative",
+          marginBottom: "40%",
         }}
       ></ImageBackground>
       <View

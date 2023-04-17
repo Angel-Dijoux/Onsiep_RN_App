@@ -1,7 +1,11 @@
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback } from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { BackHandler, Pressable } from "react-native";
+
 import { Box } from "../primitives";
+import { colors } from "../primitives/theme/colors";
+import { spacing } from "../primitives/theme/spacing";
 
 type ReturnButtonType = {
   goBack?: boolean;
@@ -11,7 +15,7 @@ type ReturnButtonType = {
 
 export const ReturnButton = ({
   goBack = true,
-  colorScheme = "light",
+  colorScheme = "dark",
   onPress,
 }: ReturnButtonType) => {
   useFocusEffect(
@@ -33,7 +37,20 @@ export const ReturnButton = ({
 
   return (
     <Pressable onPress={onPress}>
-      <Box></Box>
+      <Box
+        justifyContent="center"
+        alignItems="center"
+        padding="global_5"
+        borderWidth={1}
+        borderColor="GREY_DARK"
+        borderRadius="global_12"
+      >
+        <Ionicons
+          name="arrow-back"
+          size={spacing.global_24}
+          color={colorScheme === "light" ? colors.GREY_DARK : colors.WHITE}
+        />
+      </Box>
     </Pressable>
   );
 };

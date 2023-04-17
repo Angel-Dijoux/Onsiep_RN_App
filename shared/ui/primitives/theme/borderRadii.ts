@@ -1,4 +1,4 @@
-const radius = {
+const borderRadii = {
   global_4: 4,
   global_8: 8,
   global_12: 12,
@@ -7,6 +7,6 @@ const radius = {
   round: 1000,
 };
 
-export type Radius = keyof typeof radius;
+export type BorderRadii = keyof typeof borderRadii;
 
-export { radius };
+export { borderRadii };
