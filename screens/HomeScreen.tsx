@@ -254,7 +254,9 @@ const HomeScreen = ({ navigation }) => {
             marginTop: "5%",
           }}
         >
-          <Text style={{ fontWeight: "900", fontSize: 20 }}>
+          <Text
+            style={{ fontWeight: "700", fontSize: 20, fontFamily: "Satoshi" }}
+          >
             Hi{userToken ? `, ${userInfo.username}` : " "}
           </Text>
           <FilterButton

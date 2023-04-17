@@ -1,4 +1,9 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
+// Learn more https://docs.expo.io/guides/customizing-metro]
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { getDefaultConfig } = require("expo/metro-config");
 
-module.exports = getDefaultConfig(__dirname);
+const config = getDefaultConfig(__dirname);
+
+config.resolver.assetExts.push("otf", "ttf");
+
+module.exports = config;
