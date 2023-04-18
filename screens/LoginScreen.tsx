@@ -5,45 +5,36 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import SearchBar from "../src/components/ui/search";
 import { AuthContext } from "../src/context/AuthContext";
 
-const RegisterScreen = ({ navigation }) => {
-  const { register } = useContext(AuthContext);
-
-  const [username, setusername] = useState<string>("");
-  const [email, setemail] = useState<string>("");
-  const [password, setpassword] = useState<string>("");
+const LoginScreen = ({ navigation }) => {
+  const { login } = useContext(AuthContext);
+  const [email, setemail] = useState(null);
+  const [password, setpassword] = useState(null);
 
   return (
-    <ScreenWithImage title="S'enregistrer">
+    <ScreenWithImage title="Se connecter">
       <SearchBar
         icon={require("../src/icons/email.png")}
         name="Email"
         func={(text) => setemail(text)}
         type="email-address"
-        mb={15}
-      />
-      <SearchBar
-        icon={require("../src/icons/username.png")}
-        name="Pseudo"
-        func={(text) => setusername(text)}
-        mb={15}
+        mb={30}
       />
       <SearchBar
         icon={require("../src/icons/password.png")}
         name="Mot de passe"
         func={(text) => setpassword(text)}
         subfunc={() => {
-          register(email, password, username);
+          login(email, password);
         }}
         password
         mb={2}
       />
-
       <BtnTextConn
-        firstText="Tu as un compte ?"
-        secondText="Connecte toi ici !"
-        onPress={() => navigation.navigate("Login")}
+        firstText="Pas enregistrer ?"
+        secondText="Enregistre toi ici !"
+        onPress={() => navigation.navigate("register")}
       />
     </ScreenWithImage>
   );
 };
-export { RegisterScreen };
+export { LoginScreen };

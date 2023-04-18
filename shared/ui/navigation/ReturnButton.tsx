@@ -41,9 +41,9 @@ export const ReturnButton = ({
         justifyContent="center"
         alignItems="center"
         padding="global_5"
-        borderWidth={1}
         borderColor="GREY_DARK"
-        borderRadius="global_12"
+        borderWidth={1.5}
+        borderRadius="global_4"
       >
         <Ionicons
           name="arrow-back"

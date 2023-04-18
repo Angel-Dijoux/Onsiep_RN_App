@@ -27,7 +27,7 @@ const lineHeight = {
 
 const titleVariant = {
   fontFamily: fontFamily.satoshi,
-  fontWeight: "400" as const,
+  fontWeight: "700" as const,
   color: "WHITE",
 };
 
