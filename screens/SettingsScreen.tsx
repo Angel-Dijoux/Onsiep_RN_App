@@ -17,6 +17,8 @@ import ProfilEdit from "../src/components/ui/button";
 import Header from "../src/components/ui/header";
 import SearchBar from "../src/components/ui/search";
 import { AuthContext } from "../src/context/AuthContext";
+import { Screen } from "../shared/ui/navigation/Screen";
+import { Box } from "../shared/ui/primitives";
 
 const SettingsScreem = ({ navigation }) => {
   const {
@@ -218,15 +220,13 @@ const SettingsScreem = ({ navigation }) => {
         visible={visiblemodal}
         onRequestClose={() => setVisibleModal(!visiblemodal)}
       >
-        <View
-          style={{
-            backgroundColor: "rgba(52, 52, 52, 0.5)",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "100%",
-          }}
+        <Box
+          backgroundColor="TRANSPARENT_60"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          width="100%"
+          height="100%"
         >
           <View
             style={{
@@ -286,7 +286,7 @@ const SettingsScreem = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
+        </Box>
       </Modal>
     );
     return modal;
@@ -402,33 +402,13 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <DisplayMessages />
-      <ScrollView style={{ flex: 1 }}>
-        <Header name="Paramètres" nav={() => navigation.navigate("Home")} />
-        <View
-          style={{
-            paddingLeft: 10,
-            paddingRight: 10,
-            paddingBottom: 10,
-            flexDirection: "column",
-            justifyContent: "space-between",
-          }}
-        >
-          <View>{is_log()}</View>
-          <View>{log_out()}</View>
-        </View>
-      </ScrollView>
-    </View>
+    <Screen title="Paramètres">
+      <Box flexDirection="column" justifyContent="space-between">
+        <View>{is_log()}</View>
+        <View>{log_out()}</View>
+      </Box>
+    </Screen>
   );
 };
 
 export default SettingsScreem;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#F7F7F7",
-  },
-});

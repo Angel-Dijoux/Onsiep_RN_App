@@ -14,6 +14,7 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
+import DisplayMessages from "./src/components/ui/Notification/display_messages";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -43,6 +44,7 @@ const App = () => {
           <AuthProvider>
             <FavorisProvider>
               <ThemeProvider theme={theme}>
+                <DisplayMessages />
                 <AppNav />
               </ThemeProvider>
             </FavorisProvider>
