@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, ActivityIndicator } from "react-native";
 
-import NoResult from "./no_result";
+import { NoResult } from "./no_result";
 import PopularsForm from "./populars_form";
 import { OnisepContext } from "../../context/OnisepContext";
 import GetContentAPI from "../api/get_content_api";

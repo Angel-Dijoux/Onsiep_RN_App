@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 
-import FavScreen from "../screens/FavScreen";
+import { FavScreen } from "../screens/FavScreen";
 import HomeScreen from "../screens/HomeScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 

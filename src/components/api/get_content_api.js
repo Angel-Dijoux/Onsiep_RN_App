@@ -16,10 +16,6 @@ const GetContentAPI = (props) => {
   const { userToken, messages, setMessages, favoris } = useContext(AuthContext);
   const { PostFavoris, DeleteFavoris, GetFavoris } = useContext(FavorisContext);
 
-  const header = () => {
-    return props.header;
-  };
-
   const GetIfIsInFav = (id) => {
     if (userToken) {
       if (favoris.size > 0) {
@@ -49,8 +45,8 @@ const GetContentAPI = (props) => {
         data={props.data}
         extraData={props.data}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item.url_et_id_onisep}
-        renderItem={({ item, index }) => (
+        keyExtractor={(item) => item.url_et_id_onisep}
+        renderItem={({ item }) => (
           <View
             style={{
               justifyContent: "center",
@@ -164,29 +160,5 @@ const styles = StyleSheet.create({
   starFormation: {
     fontSize: 18,
     fontWeight: "bold",
-  },
-  text: {
-    marginLeft: 8,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: "2.5%",
-    backgroundColor: "#FFD40D",
-    width: "100%",
-    borderRadius: 25,
-    marginTop: 7,
-    marginBottom: 7,
-  },
-  inputIcon: {
-    width: 20,
-    height: 20,
-    padding: 14,
-    marginLeft: 8,
-    alignSelf: "center",
-  },
-  input: {
-    marginLeft: 10,
-    width: "100%",
   },
 });
