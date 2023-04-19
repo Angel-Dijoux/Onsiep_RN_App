@@ -3,7 +3,7 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
-import { BASE_URL } from "../default.config";
+import { BASE_URL } from "../config";
 
 export const AuthContext = createContext();
 
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
   const [messages, setMessages] = useState([]);
 
   const register = (email, password, username) => {
-    data = {
+    const data = {
       username: username,
       name: "null",
       email: email,
@@ -74,7 +74,8 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo.user));
       })
       .catch((e) => {
-        const message = "Identifiants erronés.";
+        console.log(e);
+        const message = "Identifiants erronés.,";
         setMessages([...messages, message]);
       });
     setLoading(false);

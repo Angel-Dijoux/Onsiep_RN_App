@@ -7,6 +7,9 @@ import GetContentAPI from "../src/components/api/get_content_api";
 import NoResult from "../src/components/ui/no_result";
 import { AuthContext } from "../src/context/AuthContext";
 import { FavorisContext } from "../src/context/FavorisContext";
+import { Screen } from "../shared/ui/navigation/Screen";
+import { Loading } from "../shared/ui/Loading";
+import { Box } from "../shared/ui/primitives";
 
 const FavScreen = ({ navigation }) => {
   const { favisloading } = useContext(FavorisContext);
@@ -27,68 +30,27 @@ const FavScreen = ({ navigation }) => {
     };
   }, []);
 
-  const netInfo = useNetInfo();
-  const Favoris = () => {
-    if (favisloading || favoris == null) {
-      return (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <ActivityIndicator size="small" color="#000000" />
-        </View>
-      );
-    } else {
-      return (
-        <View>
-          {favoris.size > 0 ? (
-            <GetContentAPI
-              data={favoris.results}
-              icon={require("../src/icons/trah.png")}
-              width="100%"
-              marginTop="3%"
-              marginBottom="5%"
-              header={
-                <Header
-                  name="Favoris"
-                  nav={() => navigation.navigate("Home")}
-                />
-              }
-            />
-          ) : (
-            <>
-              <Header name="Favoris" nav={() => navigation.navigate("Home")} />
-              <View
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: "80%",
-                  marginTop: "20%",
-                }}
-              >
-                <NoResult
-                  icon={require("../src/icons/noresult.png")}
-                  text="Aucun favoris"
-                />
-              </View>
-            </>
-          )}
-        </View>
-      );
-    }
-  };
+  if (favisloading) return <Loading />;
   return (
-    <View style={styles.container}>
-      <View>{Favoris()}</View>
-    </View>
+    <Screen title="Favoris" isScrollable goBack>
+      <Box>
+        {favoris.size < 0 ? (
+          <GetContentAPI
+            data={favoris.results}
+            icon={require("../src/icons/trah.png")}
+            width="100%"
+          />
+        ) : (
+          <Box alignItems="center" justifyContent="center" height="100%">
+            <NoResult
+              icon={require("../src/icons/noresult.png")}
+              text="Aucun favoris"
+            />
+          </Box>
+        )}
+      </Box>
+    </Screen>
   );
 };
 
 export default FavScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    backgroundColor: "#F7F7F7",
-  },
-});

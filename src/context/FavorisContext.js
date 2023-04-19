@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { createContext, useState, useContext } from "react";
 
 import { AuthContext } from "./AuthContext";
-import { BASE_URL } from "../default.config";
+import { BASE_URL } from "../config";
 
 export const FavorisContext = createContext();
 

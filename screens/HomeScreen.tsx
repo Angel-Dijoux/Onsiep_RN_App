@@ -282,7 +282,7 @@ const HomeScreen = ({ navigation }) => {
           name="Chercher une formation"
           search={search}
           icon={require("../src/icons/search.png")}
-          loading={!isloading}
+          loading={isloading}
           func={(text: string) => searchFilter(text)}
           funcTouchableOpacity={() => {
             if (search != "") {

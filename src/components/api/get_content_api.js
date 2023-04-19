@@ -140,7 +140,6 @@ const GetContentAPI = (props) => {
         )}
         estimatedItemSize={200}
         initialNumToRender={18}
-        ListHeaderComponent={header()}
       />
     </View>
   );
