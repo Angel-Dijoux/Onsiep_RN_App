@@ -20,7 +20,7 @@ export const Header = ({
   const navigation = useNavigation();
 
   return (
-    <Box flexDirection="row" alignItems="center" px="global_20" pt="global_15">
+    <Box flexDirection="row" alignItems="center" px="global_20" pt="global_24">
       <ReturnButton
         onPress={onGoBack || navigation.goBack}
         goBack={goBack}

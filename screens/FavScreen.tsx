@@ -4,7 +4,7 @@ import { BackHandler } from "react-native";
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box } from "../shared/ui/primitives";
-import GetContentAPI from "../src/components/api/get_content_api";
+import { ListFormation } from "../src/components/Formation/ListFormation";
 import { NoResult } from "../src/components/ui/no_result";
 import { AuthContext } from "../src/context/AuthContext";
 import { FavorisContext } from "../src/context/FavorisContext";
@@ -33,11 +33,7 @@ const FavScreen = ({ navigation }) => {
     <Screen title="Favoris" isScrollable goBack edges={["top"]}>
       <Box py="global_24">
         {favoris.size > 0 ? (
-          <GetContentAPI
-            data={favoris.results}
-            icon={require("../src/icons/trah.png")}
-            width="100%"
-          />
+          <ListFormation data={favoris.results} isFavScreen />
         ) : (
           <NoResult
             icon={require("../src/icons/noresult.png")}

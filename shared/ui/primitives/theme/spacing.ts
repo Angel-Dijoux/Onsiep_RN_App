@@ -1,5 +1,6 @@
 const spacing = {
   zero: 0,
+  global_2: 2,
   global_5: 5,
   global_10: 10,
   global_15: 15,
