@@ -14,6 +14,7 @@ type ScreenWithImageProps = {
 
 const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
   const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+  const diff = SCREEN_HEIGHT - SCREEN_HEIGHT / 2.2;
   return (
     <SafeAreaView
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
@@ -31,7 +32,7 @@ const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
       ></ImageBackground>
       <Box
         width="100%"
-        height={SCREEN_HEIGHT / 1.55}
+        height={diff}
         position="absolute"
         backgroundColor="SECONDARY_40"
         borderTopLeftRadius="global_16"
