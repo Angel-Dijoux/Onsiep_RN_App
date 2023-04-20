@@ -1,8 +1,8 @@
 import { FlashList } from "@shopify/flash-list";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Formation } from "../../../utils/onisep.type";
-import { FavorisContext } from "../../context/FavorisContext";
+import { useFavoris } from "../../hooks/favoris/useFavoris";
 import { CardFormation } from "../ui/CardFormation";
 
 type ListFormationType = {
@@ -11,20 +11,25 @@ type ListFormationType = {
 };
 
 const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
-  const [formations, setFormations] = useState<Formation[]>(data);
-  const { PostFavoris, DeleteFavoris, GetFavoris } = useContext(FavorisContext);
+  const [formations, setFormations] = useState<Formation[]>([]);
+
+  const { handleDeleteFavoris } = useFavoris();
+
+  useEffect(() => {
+    setFormations(data);
+  }, [data]);
 
   const handleOnClick = (id: number) => {
     if (isFavScreen) {
-      DeleteFavoris(id);
       setFormations(formations.filter((formations) => formations.id !== id));
+      handleDeleteFavoris(id);
     }
   };
 
   return (
     <FlashList
       data={formations}
-      extraData={data}
+      extraData={formations}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item.url_et_id_onisep}
       renderItem={({ item }) => (

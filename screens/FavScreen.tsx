@@ -6,12 +6,14 @@ import { Screen } from "../shared/ui/navigation/Screen";
 import { Box } from "../shared/ui/primitives";
 import { ListFormation } from "../src/components/Formation/ListFormation";
 import { NoResult } from "../src/components/ui/no_result";
-import { AuthContext } from "../src/context/AuthContext";
 import { FavorisContext } from "../src/context/FavorisContext";
+import { useFavoris } from "../src/hooks/favoris/useFavoris";
 
 const FavScreen = ({ navigation }) => {
   const { favisloading, DeleteFavoris } = useContext(FavorisContext);
-  const { favoris } = useContext(AuthContext);
+  // const { favoris } = useContext(AuthContext);
+
+  const { isLoading, favoris } = useFavoris();
 
   const handleBackButtonClick = (): boolean => {
     navigation.navigate("Home");
@@ -28,7 +30,7 @@ const FavScreen = ({ navigation }) => {
     };
   }, []);
 
-  if (favisloading) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <Screen title="Favoris" isScrollable goBack edges={["top"]}>
       <Box py="global_24">

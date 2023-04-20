@@ -97,6 +97,7 @@ export const AuthProvider = ({ children }) => {
           return res.json();
         })
         .then((data) => {
+          console.log(data);
           resolve(data.access);
         })
         .catch((e) => {
