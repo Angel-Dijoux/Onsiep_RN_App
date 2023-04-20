@@ -40,7 +40,7 @@ export const ReturnButton = ({
       <Box
         justifyContent="center"
         alignItems="center"
-        padding="global_2"
+        padding="global_5"
         borderColor="GREY_DARK"
         borderWidth={1}
         borderRadius="round"

@@ -1,20 +1,21 @@
+import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-
-import AppNav from "./navigation/AppNav";
-import { AuthProvider } from "./src/context/AuthContext";
-import { FavorisProvider } from "./src/context/FavorisContext";
-import { OnisepProvider } from "./src/context/OnisepContext";
-import { ThemeProvider } from "@shopify/restyle";
-import { theme } from "./shared/ui/primitives/theme/theme";
+import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
+
+import AppNav from "./navigation/AppNav";
+import { QueryClientProvider, queryClient } from "./react-query.config";
+import { theme } from "./shared/ui/primitives/theme/theme";
 import DisplayMessages from "./src/components/ui/Notification/display_messages";
+import { AuthProvider } from "./src/context/AuthContext";
+import { FavorisProvider } from "./src/context/FavorisContext";
+import { OnisepProvider } from "./src/context/OnisepContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -40,16 +41,18 @@ const App = () => {
   return (
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <OnisepProvider>
-          <AuthProvider>
-            <FavorisProvider>
-              <ThemeProvider theme={theme}>
-                <DisplayMessages />
-                <AppNav />
-              </ThemeProvider>
-            </FavorisProvider>
-          </AuthProvider>
-        </OnisepProvider>
+        <QueryClientProvider client={queryClient}>
+          <OnisepProvider>
+            <AuthProvider>
+              <FavorisProvider>
+                <ThemeProvider theme={theme}>
+                  <DisplayMessages />
+                  <AppNav />
+                </ThemeProvider>
+              </FavorisProvider>
+            </AuthProvider>
+          </OnisepProvider>
+        </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

@@ -100,7 +100,6 @@ export const FavorisProvider = ({ children }) => {
       })
       .then(() => {
         console.info("is delete");
-        GetFavoris();
       })
       .catch((e) => {
         console.log("Error in Function DeleteFavoris : ", e);
