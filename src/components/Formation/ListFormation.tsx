@@ -1,7 +1,8 @@
 import { FlashList } from "@shopify/flash-list";
-import React from "react";
+import React, { useContext } from "react";
 
 import { Formation } from "../../../utils/onisep.type";
+import { FavorisContext } from "../../context/FavorisContext";
 import { CardFormation } from "../ui/CardFormation";
 
 type ListFormationType = {
@@ -10,7 +11,16 @@ type ListFormationType = {
 };
 
 const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
-  console.log(data);
+  const { PostFavoris, DeleteFavoris } = useContext(FavorisContext);
+
+  const handleOnClick = (item: Formation) => {
+    if (isFavScreen) {
+      DeleteFavoris(item.id);
+    } else {
+      PostFavoris(item);
+    }
+  };
+
   return (
     <FlashList
       data={data}
@@ -24,6 +34,7 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
           libelle={item.libelle_type_formation}
           desc={item.libelle_formation_principal}
           isFavcreen={isFavScreen}
+          onPress={() => handleOnClick}
         />
       )}
       estimatedItemSize={200}

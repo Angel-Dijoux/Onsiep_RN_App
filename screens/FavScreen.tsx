@@ -10,7 +10,7 @@ import { AuthContext } from "../src/context/AuthContext";
 import { FavorisContext } from "../src/context/FavorisContext";
 
 const FavScreen = ({ navigation }) => {
-  const { favisloading } = useContext(FavorisContext);
+  const { favisloading, DeleteFavoris } = useContext(FavorisContext);
   const { favoris } = useContext(AuthContext);
 
   const handleBackButtonClick = (): boolean => {
