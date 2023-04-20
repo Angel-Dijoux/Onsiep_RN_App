@@ -1,9 +1,9 @@
+import { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import { BASE_URL } from "../../config";
 import { AuthContext } from "../../context/AuthContext";
-import { useContext, useEffect } from "react";
-import { useRefreshToken } from "./useRefreshToken";
+import { useRefreshToken } from "../../hooks/useRefreshToken";
 
 const API_URL = BASE_URL;
 
@@ -23,8 +23,6 @@ const useFavoris = () => {
       const response = await fetch(`${API_URL}/favoris/`, {
         method: "GET",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -35,7 +33,8 @@ const useFavoris = () => {
     },
     {
       // Désactiver la requête tant que le token est rafraîchi
-      enabled: !isRefreshing,
+      enabled: token !== undefined,
+      retry: 2,
     }
   );
 

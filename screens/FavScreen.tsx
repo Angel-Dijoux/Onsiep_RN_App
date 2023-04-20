@@ -34,7 +34,7 @@ const FavScreen = ({ navigation }) => {
   return (
     <Screen title="Favoris" isScrollable goBack edges={["top"]}>
       <Box py="global_24">
-        {favoris.size > 0 ? (
+        {favoris ? (
           <ListFormation data={favoris.results} isFavScreen />
         ) : (
           <NoResult

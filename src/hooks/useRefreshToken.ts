@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BASE_URL } from "../../config";
+import { BASE_URL } from "../config";
 
 type RefreshTokenResponse = {
   access: string;
@@ -36,6 +36,7 @@ const useRefreshToken = (
 
     refreshToken();
   }, [token]);
+
   return { accessToken, isLoading };
 };
 
