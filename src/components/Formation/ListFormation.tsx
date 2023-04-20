@@ -1,6 +1,7 @@
 import { FlashList } from "@shopify/flash-list";
 import React, { useEffect, useState } from "react";
 
+import { deviceHeight } from "../../../utils/deviceInfo";
 import { Formation } from "../../../utils/onisep.type";
 import { useFavoris } from "../../hooks/favoris/useFavoris";
 import { CardFormation } from "../ui/CardFormation";
@@ -32,6 +33,8 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
       extraData={formations}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item.url_et_id_onisep}
+      estimatedItemSize={deviceHeight}
+      decelerationRate="fast"
       renderItem={({ item }) => (
         <CardFormation
           type={item.sigle_type_formation}
@@ -42,7 +45,6 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
           onPress={() => handleOnClick(item.id)}
         />
       )}
-      estimatedItemSize={200}
     />
   );
 };

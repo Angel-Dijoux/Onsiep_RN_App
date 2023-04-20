@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { BackHandler } from "react-native";
+import { BackHandler, Dimensions } from "react-native";
 
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
