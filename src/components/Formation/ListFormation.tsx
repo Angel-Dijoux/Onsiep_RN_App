@@ -9,9 +9,14 @@ import { CardFormation } from "../ui/CardFormation";
 type ListFormationType = {
   data: Formation[];
   isFavScreen: boolean;
+  onPressCard: () => void;
 };
 
-const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
+const ListFormation = ({
+  data,
+  isFavScreen,
+  onPressCard,
+}: ListFormationType) => {
   const [formations, setFormations] = useState<Formation[]>([]);
 
   const { handleDeleteFavoris } = useFavoris();
@@ -43,6 +48,7 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
           desc={item.libelle_formation_principal}
           isFavcreen={isFavScreen}
           onPress={() => handleOnClick(item.id)}
+          onPressCard={onPressCard}
         />
       )}
     />

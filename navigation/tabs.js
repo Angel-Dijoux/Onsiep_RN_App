@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 
 import { FavScreen } from "../screens/FavScreen";
+import { Formation } from "../screens/Formation";
 import HomeScreen from "../screens/HomeScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 
@@ -47,6 +48,11 @@ const Tabs = () => {
       <Stack.Screen
         name="Settings"
         component={SettingsScreem}
+        options={horizontalAnimation}
+      />
+      <Stack.Screen
+        name="Formation"
+        component={Formation}
         options={horizontalAnimation}
       />
     </Stack.Navigator>
