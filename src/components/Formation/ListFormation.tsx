@@ -9,13 +9,13 @@ import { CardFormation } from "../ui/CardFormation";
 type ListFormationType = {
   data: Formation[];
   isFavScreen: boolean;
-  onPressCard: () => void;
+  navigation: any;
 };
 
 const ListFormation = ({
   data,
   isFavScreen,
-  onPressCard,
+  navigation,
 }: ListFormationType) => {
   const [formations, setFormations] = useState<Formation[]>([]);
 
@@ -35,7 +35,6 @@ const ListFormation = ({
   return (
     <FlashList
       data={formations}
-      extraData={formations}
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item.url_et_id_onisep}
       estimatedItemSize={deviceHeight}
@@ -48,7 +47,7 @@ const ListFormation = ({
           desc={item.libelle_formation_principal}
           isFavcreen={isFavScreen}
           onPress={() => handleOnClick(item.id)}
-          onPressCard={onPressCard}
+          onPressCard={() => navigation.navigate("Formation", { id: item.id })}
         />
       )}
     />

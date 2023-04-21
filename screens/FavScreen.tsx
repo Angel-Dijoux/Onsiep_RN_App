@@ -28,13 +28,13 @@ const FavScreen = ({ navigation }) => {
 
   if (isLoading) return <Loading />;
   return (
-    <Screen title="Favoris" isScrollable goBack edges={["top"]}>
+    <Screen title="Favoris" isScrollable goBack>
       <Box py="global_24">
         {favoris ? (
           <ListFormation
             data={favoris.results}
             isFavScreen
-            onPressCard={() => navigation.navigate("Formation")}
+            navigation={navigation}
           />
         ) : (
           <NoResult
