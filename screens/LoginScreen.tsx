@@ -5,10 +5,25 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import SearchBar from "../src/components/ui/search";
 import { AuthContext } from "../src/context/AuthContext";
 
+import { useConnexion } from "../src/hooks/user/useConnexion";
+import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
+
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext);
-  const [email, setemail] = useState(null);
-  const [password, setpassword] = useState(null);
+  // const { login } = useContext(AuthContext);
+  const [email, setemail] = useState<string>("");
+  const [password, setpassword] = useState<string>("");
+
+  const { login } = useConnexion();
+
+  const handleEnterInput = async () => {
+    try {
+      const formData = { email: email, password: password };
+      const response = await login({ formData });
+      console.log(response);
+    } catch (error: unknown) {
+      console.log(error);
+    }
+  };
 
   return (
     <ScreenWithImage title="Se connecter">
@@ -23,9 +38,7 @@ const LoginScreen = ({ navigation }) => {
         icon={require("../src/icons/password.png")}
         name="Mot de passe"
         func={(text) => setpassword(text)}
-        subfunc={() => {
-          login(email, password);
-        }}
+        subfunc={handleEnterInput}
         password
         mb={2}
       />
