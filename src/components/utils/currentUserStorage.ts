@@ -1,5 +1,6 @@
-import { CurrentUserType } from "../../../shared/auth/currentUser.types";
 import * as SecureStore from "expo-secure-store";
+
+import { CurrentUserType } from "../../../shared/auth/currentUser.types";
 
 export const setCurrentUserStorage = async ({
   id,
