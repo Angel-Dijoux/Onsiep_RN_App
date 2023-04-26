@@ -8,9 +8,10 @@ import { Loading } from "../shared/ui/Loading";
 import { FlashList } from "@shopify/flash-list";
 import { fontFamily } from "../shared/ui/primitives/theme/fonts";
 
-const Formation = ({ route }: { route: { params: { id: number } } }) => {
+const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;
-  const { data, isLoading } = useGetFormation("FOR.5811");
+  const forId = id.substring(id.length - 9);
+  const { data, isLoading } = useGetFormation(forId);
 
   if (isLoading) return <Loading />;
   return (

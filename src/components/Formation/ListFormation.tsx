@@ -47,7 +47,9 @@ const ListFormation = ({
           desc={item.libelle_formation_principal}
           isFavcreen={isFavScreen}
           onPress={() => handleOnClick(item.id)}
-          onPressCard={() => navigation.navigate("Formation", { id: item.id })}
+          onPressCard={() =>
+            navigation.navigate("Formation", { id: item.url_et_id_onisep })
+          }
         />
       )}
     />
