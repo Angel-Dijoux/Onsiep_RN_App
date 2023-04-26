@@ -4,6 +4,7 @@ import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import SearchBar from "../src/components/ui/search";
 import { useConnexion } from "../src/hooks/user/useConnexion";
+import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setemail] = useState<string>("");
@@ -16,6 +17,13 @@ const LoginScreen = ({ navigation }) => {
       const formData = { email: email, password: password };
       const response = await login({ formData });
       console.log(response);
+      setCurrentUserStorage({
+        id: 1,
+        username: response.user.usename,
+        accessToken: response.user.access,
+        refreshToken: response.user.refresh,
+      });
+      navigation.navigate("Home");
     } catch (error: unknown) {
       console.log(error);
     }

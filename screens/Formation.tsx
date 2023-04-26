@@ -6,6 +6,10 @@ import { Screen } from "../shared/ui/navigation/Screen";
 import { Box, Text } from "../shared/ui/primitives";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 
+import { NoResult } from "../src/components/ui/no_result";
+import { Metier, SousDomaineWeb } from "../shared/formation/formation.type";
+import { deviceHeight } from "../utils/deviceInfo";
+
 const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;
   const forId = id.substring(id.length - 9);
@@ -13,7 +17,13 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
 
   if (isLoading) return <Loading />;
   return (
-    <Screen title={data?.type_Formation.type_formation_sigle}>
+    <Screen
+      title={data?.type_Formation.type_formation_sigle}
+      shouldSkipMargins
+      isScrollable
+      goBack
+      edges={["top"]}
+    >
       <Box pt="global_20">
         <Text variant="h3" color="GREY_DARK" my="global_10">
           Métiers
@@ -23,7 +33,8 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }: { item: any }) => {
+          estimatedItemSize={deviceHeight}
+          renderItem={({ item }: { item: Metier }) => {
             return (
               <Box
                 bg="GREY_90"
@@ -37,7 +48,7 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
                   fontFamily="satoshi"
                   fontSize={17}
                 >
-                  {item.libelle}
+                  {item.libelle}, {item.id}
                 </Text>
               </Box>
             );
@@ -52,7 +63,8 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
         keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }: { item: any }) => {
+        estimatedItemSize={deviceHeight}
+        renderItem={({ item }: { item: SousDomaineWeb }) => {
           return (
             <Box
               bg="GREY_90"
@@ -76,27 +88,30 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
         Poursuites d'études
       </Text>
       <Text color="GREY_40" mb="global_10">
-        {data?.poursuites_etudes.poursuite_etudes.type_Poursuite}
+        {data?.poursuites_etudes?.poursuite_etudes.type_Poursuite}
       </Text>
       <FlashList
         data={
-          data?.poursuites_etudes.poursuite_etudes.formation_poursuite_Etudes
+          data?.poursuites_etudes?.poursuite_etudes.formation_poursuite_Etudes
         }
         numColumns={2}
         keyExtractor={(item) => item}
         showsVerticalScrollIndicator={false}
-        renderItem={({ item }: { item: any }) => {
+        ListEmptyComponent={() => {
+          return <NoResult text="Oh il n'y a pas de données..." />;
+        }}
+        estimatedItemSize={deviceHeight}
+        renderItem={({ item }: { item: string }) => {
           return (
             <Box
               bg="GREY_90"
               borderRadius="global_8"
-              padding="global_10"
-              mx="global_5"
               my="global_5"
+              mr="global_20"
+              padding="global_10"
               height={130}
-              width="90%"
+              width="100%"
               justifyContent="center"
-              alignItems="flex-start"
             >
               <Text
                 color="SECONDARY_BASE"

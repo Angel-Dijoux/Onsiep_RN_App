@@ -37,10 +37,7 @@ const FavScreen = ({ navigation }) => {
             navigation={navigation}
           />
         ) : (
-          <NoResult
-            icon={require("../src/icons/noresult.png")}
-            text="Aucun favoris"
-          />
+          <NoResult text="Aucun favoris" />
         )}
       </Box>
     </Screen>
