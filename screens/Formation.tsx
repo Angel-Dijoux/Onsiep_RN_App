@@ -1,12 +1,10 @@
+import { FlashList } from "@shopify/flash-list";
 import React from "react";
 
+import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box, Text } from "../shared/ui/primitives";
-
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
-import { Loading } from "../shared/ui/Loading";
-import { FlashList } from "@shopify/flash-list";
-import { fontFamily } from "../shared/ui/primitives/theme/fonts";
 
 const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;
@@ -15,13 +13,13 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
 
   if (isLoading) return <Loading />;
   return (
-    <Screen title={data.type_Formation.type_formation_sigle}>
+    <Screen title={data?.type_Formation.type_formation_sigle}>
       <Box pt="global_20">
         <Text variant="h3" color="GREY_DARK" my="global_10">
           Métiers
         </Text>
         <FlashList
-          data={data.metiers_formation.metier}
+          data={data?.metiers_formation.metier}
           keyExtractor={(item) => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -50,7 +48,7 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
         Sous-domaines
       </Text>
       <FlashList
-        data={data.sous_domaines_web.sous_domaine_web}
+        data={data?.sous_domaines_web.sous_domaine_web}
         keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -78,11 +76,11 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
         Poursuites d'études
       </Text>
       <Text color="GREY_40" mb="global_10">
-        {data.poursuites_etudes.poursuite_etudes.type_Poursuite}
+        {data?.poursuites_etudes.poursuite_etudes.type_Poursuite}
       </Text>
       <FlashList
         data={
-          data.poursuites_etudes.poursuite_etudes.formation_poursuite_Etudes
+          data?.poursuites_etudes.poursuite_etudes.formation_poursuite_Etudes
         }
         numColumns={2}
         keyExtractor={(item) => item}
@@ -113,7 +111,7 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
         }}
       />
       <Text color="GREY_40" fontFamily="manrope">
-        {data.sous_tutelle}
+        {data?.sous_tutelle}
       </Text>
     </Screen>
   );

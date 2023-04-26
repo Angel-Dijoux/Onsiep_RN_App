@@ -1,4 +1,6 @@
 import { useQuery } from "react-query";
+
+import { FormationType } from "../../../shared/formation/formation.type";
 import { BASE_URL } from "../../config";
 
 const useGetFormation = (id: string) => {
@@ -10,7 +12,10 @@ const useGetFormation = (id: string) => {
     return response.json();
   };
 
-  const { isLoading, data } = useQuery(["formation", id], () => fetchById(id));
+  const { isLoading, data } = useQuery<FormationType, Error>(
+    ["formation", id],
+    () => fetchById(id)
+  );
   return { data, isLoading };
 };
 
