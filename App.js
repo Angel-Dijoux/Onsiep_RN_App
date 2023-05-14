@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
@@ -16,10 +16,18 @@ import DisplayMessages from "./src/components/ui/Notification/display_messages";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
 import { OnisepProvider } from "./src/context/OnisepContext";
+import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
+
+import {
+  CurrentUserContext,
+  defaultCurrentUser,
+} from "./src/hooks/user/useCurrentUser";
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
+  const [currentUser, setCurrentUser] = useState(defaultCurrentUser);
+
   const [fontsLoaded] = useFonts({
     Satoshi: require("./assets/fonts/Satoshi.ttf"),
     Manrope: require("./assets/fonts/Manrope.ttf"),
@@ -34,6 +42,25 @@ const App = () => {
     dimissSplashScreen();
   }, [fontsLoaded]);
 
+  const currentUserValue = useMemo(
+    () => ({
+      ...currentUser,
+      setCurrentUser,
+    }),
+    [currentUser]
+  );
+
+  useEffect(() => {
+    const setupData = async () => {
+      const userData = await getCurrentUserStorage();
+      if (userData) {
+        setCurrentUser(userData);
+        console.log(userData.accessToken);
+      }
+    };
+    setupData();
+  }, []);
+
   if (!fontsLoaded) {
     return null;
   }
@@ -47,7 +74,9 @@ const App = () => {
               <FavorisProvider>
                 <ThemeProvider theme={theme}>
                   <DisplayMessages />
-                  <AppNav />
+                  <CurrentUserContext.Provider value={currentUserValue}>
+                    <AppNav />
+                  </CurrentUserContext.Provider>
                 </ThemeProvider>
               </FavorisProvider>
             </AuthProvider>

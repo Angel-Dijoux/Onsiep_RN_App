@@ -9,10 +9,10 @@ export const setCurrentUserStorage = async ({
   refreshToken,
 }: CurrentUserType & { refreshToken: string }) => {
   try {
-    await SecureStore.setItemAsync("user_id", id.toString());
-    await SecureStore.setItemAsync("username", username);
-    await SecureStore.setItemAsync("accessToken", accessToken);
-    await SecureStore.setItemAsync("refreshToken", refreshToken);
+    await SecureStore.setItemAsync("user_id", String(id));
+    await SecureStore.setItemAsync("username", String(username));
+    await SecureStore.setItemAsync("accessToken", String(accessToken));
+    await SecureStore.setItemAsync("refreshToken", String(refreshToken));
   } catch (error: unknown) {
     console.log("Error in setCurrentUserStorage ", error);
   }

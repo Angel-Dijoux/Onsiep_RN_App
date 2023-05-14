@@ -16,12 +16,12 @@ const LoginScreen = ({ navigation }) => {
     try {
       const formData = { email: email, password: password };
       const response = await login({ formData });
-      console.log(response);
+      console.log(response.user.refresh);
       setCurrentUserStorage({
         id: 1,
-        username: response.user.usename,
-        accessToken: response.user.access,
-        refreshToken: response.user.refresh,
+        username: String(response.user.usename),
+        accessToken: String(response.user.access),
+        refreshToken: String(response.user.refresh),
       });
       navigation.navigate("Home");
     } catch (error: unknown) {
