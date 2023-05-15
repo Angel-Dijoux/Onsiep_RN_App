@@ -55,7 +55,7 @@ const App = () => {
       const userData = await getCurrentUserStorage();
       if (userData) {
         setCurrentUser(userData);
-        console.log(userData.accessToken);
+        console.log(userData);
       }
     };
     setupData();
@@ -69,18 +69,18 @@ const App = () => {
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <QueryClientProvider client={queryClient}>
-          <OnisepProvider>
-            <AuthProvider>
-              <FavorisProvider>
-                <ThemeProvider theme={theme}>
-                  <DisplayMessages />
-                  <CurrentUserContext.Provider value={currentUserValue}>
+          <CurrentUserContext.Provider value={currentUserValue}>
+            <OnisepProvider>
+              <AuthProvider>
+                <FavorisProvider>
+                  <ThemeProvider theme={theme}>
+                    <DisplayMessages />
                     <AppNav />
-                  </CurrentUserContext.Provider>
-                </ThemeProvider>
-              </FavorisProvider>
-            </AuthProvider>
-          </OnisepProvider>
+                  </ThemeProvider>
+                </FavorisProvider>
+              </AuthProvider>
+            </OnisepProvider>
+          </CurrentUserContext.Provider>
         </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

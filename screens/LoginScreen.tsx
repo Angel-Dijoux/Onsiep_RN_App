@@ -17,10 +17,9 @@ const LoginScreen = ({ navigation }) => {
     try {
       const formData = { email: email, password: password };
       const response = await login({ formData });
-      console.log(response.user.refresh);
       setCurrentUserStorage({
-        id: 1,
-        username: String(response.user.usename),
+        id: response.user.id,
+        username: String(response.user.username),
         accessToken: String(response.user.access),
         refreshToken: String(response.user.refresh),
       });

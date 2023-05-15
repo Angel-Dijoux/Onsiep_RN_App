@@ -31,11 +31,7 @@ const FavScreen = ({ navigation }) => {
     <Screen title="Favoris" isScrollable goBack>
       <Box py="global_24">
         {favoris ? (
-          <ListFormation
-            data={favoris.results}
-            isFavScreen
-            navigation={navigation}
-          />
+          <ListFormation data={favoris.results} isFavScreen />
         ) : (
           <NoResult text="Aucun favoris" />
         )}

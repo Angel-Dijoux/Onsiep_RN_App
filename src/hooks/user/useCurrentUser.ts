@@ -10,6 +10,7 @@ export const defaultCurrentUser: CurrentUserType = {
   id: 0,
   username: "",
   accessToken: "",
+  refreshToken: "",
 };
 
 export const CurrentUserContext = createContext<CurrentUserContextType>({

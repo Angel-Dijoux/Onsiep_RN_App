@@ -24,11 +24,13 @@ export const getCurrentUserStorage = async () => {
     if (accessToken) {
       const userId = await SecureStore.getItemAsync("user_id");
       const username = await SecureStore.getItemAsync("username");
+      const refreshToken = await SecureStore.getItemAsync("refreshToken");
 
       return {
         userId: Number(userId) || 0,
         username: username || "",
         accessToken,
+        refreshToken,
       };
     }
   } catch (error: unknown) {

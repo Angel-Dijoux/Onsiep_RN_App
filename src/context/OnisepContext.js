@@ -21,7 +21,7 @@ export const OnisepProvider = ({ children }) => {
     console.log(TOKEN_API);
     axios
       .get(
-        "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?size=  ",
+        " https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?size=25",
         {
           headers: {
             "Application-ID": ONSIEP_APP_ID, // app ID in ONISEP
@@ -30,9 +30,9 @@ export const OnisepProvider = ({ children }) => {
         }
       )
       .then((res) => {
-        console.log(res.data);
         let data = res.data;
         setData(data);
+        console.log(data);
         setLoading(false);
       })
       .catch((e) => {
