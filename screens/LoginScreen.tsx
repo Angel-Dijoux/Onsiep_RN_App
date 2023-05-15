@@ -1,10 +1,11 @@
+import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 
 import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
-import SearchBar from "../src/components/ui/search";
-import { useConnexion } from "../src/hooks/user/useConnexion";
+import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
+import { useConnexion } from "../src/hooks/user/useConnexion";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setemail] = useState<string>("");
@@ -31,21 +32,27 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <ScreenWithImage title="Se connecter">
-      <SearchBar
-        icon={require("../src/icons/email.png")}
-        name="Email"
-        func={(text) => setemail(text)}
+      <InputField
+        title="Email"
+        value={email}
         type="email-address"
-        mb={30}
-      />
-      <SearchBar
-        icon={require("../src/icons/password.png")}
-        name="Mot de passe"
-        func={(text) => setpassword(text)}
-        subfunc={handleEnterInput}
+        onChange={(text) => {
+          setemail(text);
+        }}
+      >
+        <AntDesign name="mail" size={24} color="black" />
+      </InputField>
+      <InputField
+        title="Mot de passe"
         password
-        mb={2}
-      />
+        value={password}
+        onChange={(text) => {
+          setpassword(text);
+        }}
+        onSubmitEditing={handleEnterInput}
+      >
+        <AntDesign name="key" size={24} color="black" />
+      </InputField>
       <BtnTextConn
         firstText="Pas enregistrer ?"
         secondText="Enregistre toi ici !"

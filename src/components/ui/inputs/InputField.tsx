@@ -4,6 +4,7 @@ import { StyleSheet, TextInput, type KeyboardTypeOptions } from "react-native";
 import { Box, Text } from "../../../../shared/ui/primitives";
 import { colors } from "../../../../shared/ui/primitives/theme/colors";
 import { textVariants } from "../../../../shared/ui/primitives/theme/fonts";
+import { spacing } from "../../../../shared/ui/primitives/theme/spacing";
 
 interface InputFieldProps {
   type?: KeyboardTypeOptions;
@@ -13,6 +14,7 @@ interface InputFieldProps {
   editable?: boolean;
   password?: boolean;
   onSubmitEditing?: () => void;
+  onChange?: (text: string) => void;
 }
 
 const InputField = ({
@@ -23,10 +25,19 @@ const InputField = ({
   editable,
   password,
   onSubmitEditing,
+  onChange,
 }: InputFieldProps) => {
   return (
-    <Box>
-      <Text fontSize={15} ml="global_10">
+    <Box mt="global_10">
+      <Text
+        fontFamily="satoshi"
+        fontSize={15}
+        fontWeight="700"
+        color="GREY_DARK"
+        ml="global_10"
+        mb="global_5"
+        mt="global_5"
+      >
         {title}
       </Text>
       <Box
@@ -35,8 +46,6 @@ const InputField = ({
         padding="global_15"
         bg="SECONDARY_DARK"
         borderRadius="global_16"
-        mt="global_5"
-        mb="global_5"
       >
         {children}
         <TextInput
@@ -47,6 +56,7 @@ const InputField = ({
           secureTextEntry={password}
           placeholder={title}
           placeholderTextColor={colors.GREY_DARK}
+          onChangeText={onChange}
           onSubmitEditing={onSubmitEditing}
         />
       </Box>
@@ -57,7 +67,8 @@ const InputField = ({
 const styles = StyleSheet.create({
   input: {
     ...textVariants.regular,
-    color: colors.WHITE,
+    color: colors.GREY_DARK,
+    marginLeft: spacing.global_15,
   },
 });
 
