@@ -33,7 +33,7 @@ export interface FormationType {
 }
 
 export interface MetiersFormation {
-  metier: Metier[];
+  metier: Metier[] | Metier;
 }
 
 export interface Metier {

@@ -400,9 +400,7 @@ const SettingsScreem = ({ navigation }) => {
 
   return (
     <Screen title="Paramètres" isScrollable edges={["top"]}>
-      <Box flex={1}>
-        <NoCurrentUser />
-      </Box>
+      <NoCurrentUser />
     </Screen>
   );
 };

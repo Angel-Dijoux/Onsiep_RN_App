@@ -7,13 +7,27 @@ import { Box, Text } from "../shared/ui/primitives";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 
 import { NoResult } from "../src/components/ui/no_result";
-import { Metier, SousDomaineWeb } from "../shared/formation/formation.type";
 import { deviceHeight } from "../utils/deviceInfo";
+import { VerticalList } from "../shared/list/VerticalList";
+import HTML from "react-native-render-html";
+import { colors } from "../shared/ui/primitives/theme/colors";
+import { StyleSheet } from "react-native";
+import { textVariants } from "../shared/ui/primitives/theme/fonts";
 
 const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;
   const forId = id.substring(id.length - 9);
-  const { data, isLoading } = useGetFormation(forId);
+  const { data, isLoading } = useGetFormation("FOR.5337");
+
+  const styles = StyleSheet.create({
+    heading: {
+      ...textVariants.h3,
+      color: colors.THIRD_DARK,
+    },
+    listItem: {
+      marginBottom: 5,
+    },
+  });
 
   if (isLoading) return <Loading />;
   return (
@@ -24,66 +38,36 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
       goBack
       edges={["top"]}
     >
-      <Box pt="global_20">
-        <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
-          Métiers
-        </Text>
-        <FlashList
-          data={data?.metiers_formation.metier}
-          keyExtractor={(item) => item.id}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          estimatedItemSize={deviceHeight}
-          renderItem={({ item }: { item: Metier }) => {
-            return (
-              <Box
-                bg="GREY_90"
-                borderRadius="global_8"
-                padding="global_15"
-                mx="global_2"
-              >
-                <Text
-                  color="SECONDARY_BASE"
-                  fontWeight="700"
-                  fontFamily="satoshi"
-                  fontSize={17}
-                >
-                  {item.libelle}, {item.id}
-                </Text>
-              </Box>
-            );
-          }}
-        />
-      </Box>
+      {data?.metiers_formation.metier &&
+        (Array.isArray(data.metiers_formation.metier) ? (
+          <Box pt="global_20">
+            <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
+              Métiers
+            </Text>
+            <VerticalList data={data.metiers_formation.metier} />
+          </Box>
+        ) : (
+          <Box
+            bg="GREY_90"
+            borderRadius="global_8"
+            padding="global_15"
+            mx="global_2"
+          >
+            <Text
+              color="SECONDARY_BASE"
+              fontWeight="700"
+              fontFamily="satoshi"
+              fontSize={14}
+            >
+              {data.metiers_formation.metier.libelle}
+            </Text>
+          </Box>
+        ))}
+
       <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
         Sous-domaines
       </Text>
-      <FlashList
-        data={data?.sous_domaines_web.sous_domaine_web}
-        keyExtractor={(item) => item.id}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        estimatedItemSize={deviceHeight}
-        renderItem={({ item }: { item: SousDomaineWeb }) => {
-          return (
-            <Box
-              bg="GREY_90"
-              borderRadius="global_8"
-              padding="global_15"
-              mx="global_2"
-            >
-              <Text
-                color="SECONDARY_BASE"
-                fontWeight="700"
-                fontFamily="satoshi"
-                fontSize={17}
-              >
-                {item.libelle}
-              </Text>
-            </Box>
-          );
-        }}
-      />
+      <VerticalList data={data?.sous_domaines_web.sous_domaine_web} />
       <Text variant="h3" color="GREY_DARK" mt="global_10" ml="global_20">
         Poursuites d'études
       </Text>
@@ -116,7 +100,7 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
                 <Text
                   color="SECONDARY_BASE"
                   fontWeight="700"
-                  fontSize={17}
+                  fontSize={14}
                   fontFamily="satoshi"
                 >
                   {item}
@@ -126,6 +110,13 @@ const Formation = ({ route }: { route: { params: { id: string } } }) => {
           }}
         />
       </Box>
+      <HTML
+        source={{ html: data?.attendus ?? "" }}
+        tagsStyles={{
+          h5: styles.heading,
+          li: styles.listItem,
+        }}
+      />
       <Text color="GREY_40" fontFamily="manrope" ml="global_20">
         {data?.sous_tutelle}
       </Text>
