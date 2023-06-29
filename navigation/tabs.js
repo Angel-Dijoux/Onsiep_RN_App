@@ -6,6 +6,7 @@ import { FavScreen } from "../screens/FavScreen";
 import { Formation } from "../screens/Formation";
 import HomeScreen from "../screens/HomeScreen";
 import SettingsScreem from "../screens/SettingsScreen";
+import { Home } from "../screens/Home";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ const Tabs = () => {
     >
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={horizontalAnimation}
       />
       <Stack.Screen

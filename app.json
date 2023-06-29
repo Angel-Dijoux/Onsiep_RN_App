@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Onisep",
-    "slug": "Onisep",
+    "slug": "onisep",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -14,7 +14,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "elki.onisepapp"
@@ -32,8 +34,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "37fe1860-544e-432c-956d-10907e5a7790"
+        "projectId": "a52b8960-febd-4130-aadf-fab2ddc132ca"
       }
-    }
+    },
+    "owner": "onisep"
   }
 }
