@@ -6,6 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { LoginScreen } from "../screens/LoginScreen";
 import { RegisterScreen } from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
+import { Home } from "../screens/Home";
 
 const Stack = createStackNavigator();
 
@@ -35,7 +36,7 @@ const AuthTabs = () => {
     >
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={horizontalAnimation}
       />
       <Stack.Screen
