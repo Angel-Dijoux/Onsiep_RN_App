@@ -3,24 +3,20 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
   Modal,
-  ScrollView,
   BackHandler,
 } from "react-native";
 
 /* local */
-import DisplayMessages from "../src/components/ui/Notification/display_messages";
-import ProfilEdit from "../src/components/ui/button";
-import Header from "../src/components/ui/header";
-import SearchBar from "../src/components/ui/search";
-import { AuthContext } from "../src/context/AuthContext";
+import { NoCurrentUser } from "./Settings/NoCurrentUser";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box } from "../shared/ui/primitives";
+import ProfilEdit from "../src/components/ui/button";
+import SearchBar from "../src/components/ui/search";
+import { AuthContext } from "../src/context/AuthContext";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
-import { NoCurrentUser } from "./Settings/NoCurrentUser";
 
 const SettingsScreem = ({ navigation }) => {
   const { logout, DeleteUser, EditUser, userInfo, userTokenRefresh } =

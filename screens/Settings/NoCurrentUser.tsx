@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Text } from "../../shared/ui/primitives";
+
+import { Box } from "../../shared/ui/primitives";
 import { NoResult } from "../../src/components/ui/no_result";
 
 const NoCurrentUser = () => {

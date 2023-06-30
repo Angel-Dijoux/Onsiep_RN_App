@@ -2,8 +2,8 @@ import { FlashList } from "@shopify/flash-list";
 import React from "react";
 
 import { deviceHeight } from "../../utils/deviceInfo";
-import { Box, Text } from "../ui/primitives";
 import { type Metier, type SousDomaineWeb } from "../formation/formation.type";
+import { Box, Text } from "../ui/primitives";
 
 type ItemType = Metier | SousDomaineWeb;
 

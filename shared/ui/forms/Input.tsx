@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleProp, TextInput, TextInputProps, TextStyle } from "react-native";
+
 import { Text } from "../primitives";
 import { fontFamily } from "../primitives/theme/fonts";
 

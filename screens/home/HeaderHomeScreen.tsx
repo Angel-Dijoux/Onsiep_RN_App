@@ -1,7 +1,8 @@
-import { Image } from "react-native";
 import React from "react";
-import { Box } from "../../shared/ui/primitives";
+import { Image } from "react-native";
+
 import { Input } from "../../shared/ui/forms/Input";
+import { Box } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
 

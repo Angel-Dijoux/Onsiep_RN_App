@@ -1,6 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback } from "react";
-import { Ionicons } from "@expo/vector-icons";
 import { BackHandler, Pressable } from "react-native";
 
 import { Box } from "../primitives";

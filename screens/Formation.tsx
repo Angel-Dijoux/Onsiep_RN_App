@@ -1,18 +1,19 @@
 import { FlashList } from "@shopify/flash-list";
 import React from "react";
+import { StyleSheet } from "react-native";
+import HTML from "react-native-render-html";
 
+import { VerticalList } from "../shared/list/VerticalList";
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box, Text } from "../shared/ui/primitives";
-import { useGetFormation } from "../src/hooks/formation/useGetFormation";
-
-import { NoResult } from "../src/components/ui/no_result";
-import { deviceHeight } from "../utils/deviceInfo";
-import { VerticalList } from "../shared/list/VerticalList";
-import HTML from "react-native-render-html";
 import { colors } from "../shared/ui/primitives/theme/colors";
-import { StyleSheet } from "react-native";
 import { textVariants } from "../shared/ui/primitives/theme/fonts";
+import { NoResult } from "../src/components/ui/no_result";
+import { useGetFormation } from "../src/hooks/formation/useGetFormation";
+import { deviceHeight } from "../utils/deviceInfo";
+
+
 
 const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;

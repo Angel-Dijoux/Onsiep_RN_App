@@ -4,9 +4,8 @@ import { StyleSheet } from "react-native";
 
 import { FavScreen } from "../screens/FavScreen";
 import { Formation } from "../screens/Formation";
-import HomeScreen from "../screens/HomeScreen";
-import SettingsScreem from "../screens/SettingsScreen";
 import { Home } from "../screens/Home";
+import SettingsScreem from "../screens/SettingsScreen";
 
 const Tab = createBottomTabNavigator();
 

@@ -1,13 +1,14 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { Box, Text } from "../../shared/ui/primitives";
-import { Label } from "../../shared/ui/Label";
-import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
-import { Loading } from "../../shared/ui/Loading";
+import { easeGradient } from "react-native-easing-gradient";
+
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { Label } from "../../shared/ui/Label";
+import { Loading } from "../../shared/ui/Loading";
+import { Box, Text } from "../../shared/ui/primitives";
+import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
 
-import { LinearGradient } from "expo-linear-gradient";
-import { easeGradient } from "react-native-easing-gradient";
 
 interface CardFormationDetailsProps {
   title: string;

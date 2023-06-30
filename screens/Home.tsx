@@ -1,11 +1,12 @@
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
-import { Box } from "../shared/ui/primitives";
-import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
+
 import { CardFormationDetails } from "./home/CardFormationDetails";
 import { HeaderHomeScreen } from "./home/HeaderHomeScreen";
-import { FlashList, ListRenderItem } from "@shopify/flash-list";
-import { Loading } from "../shared/ui/Loading";
 import { type Result } from "../shared/formation/onisepFormation.type";
+import { Loading } from "../shared/ui/Loading";
+import { Box } from "../shared/ui/primitives";
+import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
 import { deviceHeight } from "../utils/deviceInfo";
 
 export const Home = () => {
@@ -38,6 +39,9 @@ export const Home = () => {
         renderItem={renderItem}
         estimatedItemSize={deviceHeight}
         decelerationRate="fast"
+        pagingEnabled
+        horizontal
+        showsHorizontalScrollIndicator={false}
       />
     </Box>
   );

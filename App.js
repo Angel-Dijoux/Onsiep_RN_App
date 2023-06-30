@@ -13,11 +13,10 @@ import AppNav from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
 import { theme } from "./shared/ui/primitives/theme/theme";
 import DisplayMessages from "./src/components/ui/Notification/display_messages";
+import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
 import { OnisepProvider } from "./src/context/OnisepContext";
-import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
-
 import {
   CurrentUserContext,
   defaultCurrentUser,

@@ -17,13 +17,13 @@ import { View, StyleSheet, BackHandler } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 
 import DisplayMessages from "./../src/components/ui/Notification/display_messages";
+import { Text } from "../shared/ui/primitives";
 import FilterActive from "../src/components/ui/filter_active";
 import FilterButton from "../src/components/ui/filter_button";
 import NbResults from "../src/components/ui/nb_results";
 import SearchBar from "../src/components/ui/search";
 import ResultPage from "../src/components/ui/search_data";
 import { OnisepContext } from "../src/context/OnisepContext";
-import { Box, Text } from "../shared/ui/primitives";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const HomeScreen = ({ navigation }) => {
