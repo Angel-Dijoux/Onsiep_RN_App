@@ -33,10 +33,4 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginRight: 5,
   },
-  image: {
-    width: 20,
-    height: 20,
-    alignSelf: "center",
-    tintColor: "#F7F7F7",
-  },
 });

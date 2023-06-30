@@ -12,7 +12,6 @@ const useGetFormation = (id: string) => {
     return response.json();
   };
 
-
   const { isLoading, data } = useQuery<FormationType, Error>(
     ["formation", id],
     () => fetchById(id)

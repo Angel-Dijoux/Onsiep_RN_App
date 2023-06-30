@@ -5,9 +5,9 @@ import Message from "./notif";
 import { AuthContext } from "../../../context/AuthContext";
 
 const genrateRandomNumber = (min: number, max: number) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  const mini = Math.ceil(min);
+  const maxi = Math.floor(max);
+  return Math.floor(Math.random() * (maxi - mini + 1)) + mini;
 };
 
 const DisplayMessages = () => {

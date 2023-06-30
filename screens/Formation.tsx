@@ -13,8 +13,6 @@ import { NoResult } from "../src/components/ui/no_result";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../utils/deviceInfo";
 
-
-
 const Formation = ({ route }: { route: { params: { id: string } } }) => {
   const { id } = route.params;
   const forId = id.substring(id.length - 9);

@@ -3,12 +3,12 @@ import React from "react";
 
 import { CardFormationDetails } from "./home/CardFormationDetails";
 import { HeaderHomeScreen } from "./home/HeaderHomeScreen";
+import { getFORId } from "./home/utils/stringUtils";
 import { type Result } from "../shared/formation/onisepFormation.type";
 import { Loading } from "../shared/ui/Loading";
 import { Box } from "../shared/ui/primitives";
 import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
 import { deviceHeight } from "../utils/deviceInfo";
-import { getFORId } from "./home/utils/stringUtils";
 
 export const Home = () => {
   const { data, isLoading } = useGetOnisepFormations(25);
