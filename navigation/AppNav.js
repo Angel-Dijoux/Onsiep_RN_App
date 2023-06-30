@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React, { useContext } from "react";
 import { View, ActivityIndicator } from "react-native";
 
-import AuthTabs from "./AuthTabs";
+import { AuthTabs } from "./AuthTabs";
 import Tabs from "./tabs";
 import { AuthContext } from "../src/context/AuthContext";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";

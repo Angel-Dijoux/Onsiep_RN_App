@@ -1,13 +1,16 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet } from "react-native";
+import { Image, View } from "react-native";
 
-import { Formation } from "../screens/Formation";
 import { Home } from "../screens/Home";
 import { LoginScreen } from "../screens/LoginScreen";
 import { RegisterScreen } from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { colors } from "../shared/ui/primitives/theme/colors";
+import { Box } from "../shared/ui/primitives";
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const AuthTabs = () => {
   const horizontalAnimation = {
@@ -27,50 +30,50 @@ const AuthTabs = () => {
     },
   };
 
-  const StackAuth = (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="register"
-        component={RegisterScreen}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={SettingsScreem}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Formation"
-        component={Formation}
-        options={horizontalAnimation}
-      />
-    </Stack.Navigator>
-  );
+  // const StackAuth = (
+  //   <Stack.Navigator
+  //     screenOptions={{
+  //       headerShown: false,
+  //     }}
+  //   >
+  //     <Stack.Screen
+  //       name="Home"
+  //       component={Home}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Login"
+  //       component={LoginScreen}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="register"
+  //       component={RegisterScreen}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Settings"
+  //       component={SettingsScreem}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Formation"
+  //       component={Formation}
+  //       options={horizontalAnimation}
+  //     />
+  //   </Stack.Navigator>
+  // );
 
-  return StackAuth;
+  // return StackAuth;
 
   // For debug
-  /*  return (
+  return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "#F2F4FB",
+          position: "relative",
+          backgroundColor: colors.WHITE,
           height: 50,
         },
         headerShown: false,
@@ -81,13 +84,7 @@ const AuthTabs = () => {
         component={LoginScreen}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-                top: focused ? 0 : 3,
-              }}
-            >
+            <Box alignItems="center" justifyContent="center">
               <Image
                 source={require("../src/icons/star.png")}
                 resizeMode="contain"
@@ -98,22 +95,17 @@ const AuthTabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Login
-              </Text>
-            </View>
+            </Box>
           ),
         }}
       />
       <Tab.Screen name="register" component={RegisterScreen} />
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
+            <Box
               style={{
                 alignItems: "center",
                 justifyContent: "center",
@@ -130,12 +122,7 @@ const AuthTabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Accueil
-              </Text>
-            </View>
+            </Box>
           ),
         }}
       />
@@ -144,7 +131,7 @@ const AuthTabs = () => {
         component={SettingsScreem}
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
+            <Box
               style={{
                 alignItems: "center",
                 justifyContent: "center",
@@ -161,30 +148,12 @@ const AuthTabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Paramètres
-              </Text>
-            </View>
+            </Box>
           ),
         }}
       />
     </Tab.Navigator>
-  ); */
+  );
 };
 
-const styles = StyleSheet.create({
-  shadow: {
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      heigh: 10,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 5.5,
-    elevation: 5,
-  },
-});
-
-export default AuthTabs;
+export { AuthTabs };

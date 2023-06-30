@@ -8,7 +8,12 @@ import { spacing } from "../../shared/ui/primitives/theme/spacing";
 
 export const HeaderHomeScreen = () => {
   return (
-    <Box flexDirection="row" justifyContent="space-between" alignItems="center">
+    <Box
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+      py="global_15"
+    >
       <Image
         source={{
           uri: "https://sm.ign.com/ign_br/screenshot/default/naruto-uzumaki-qabz_3vhp.png",

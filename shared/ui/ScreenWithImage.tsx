@@ -27,7 +27,7 @@ const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
           width: "100%",
           height: "70%",
           position: "relative",
-          marginBottom: SCREEN_HEIGHT / 3,
+          marginBottom: SCREEN_HEIGHT / 3.5,
         }}
       ></ImageBackground>
       <Box

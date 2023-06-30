@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 
 import { FavScreen } from "../screens/FavScreen";
 import { Formation } from "../screens/Formation";
 import { Home } from "../screens/Home";
 import SettingsScreem from "../screens/SettingsScreen";
+import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,42 +30,42 @@ const Tabs = () => {
     },
   };
 
-  const StackTab = (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Fav"
-        component={FavScreen}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={SettingsScreem}
-        options={horizontalAnimation}
-      />
-      <Stack.Screen
-        name="Formation"
-        component={Formation}
-        options={horizontalAnimation}
-      />
-    </Stack.Navigator>
-  );
-  return StackTab;
-  /* return (
+  // const StackTab = (
+  //   <Stack.Navigator
+  //     screenOptions={{
+  //       headerShown: false,
+  //     }}
+  //   >
+  //     <Stack.Screen
+  //       name="Home"
+  //       component={Home}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Fav"
+  //       component={FavScreen}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Settings"
+  //       component={SettingsScreem}
+  //       options={horizontalAnimation}
+  //     />
+  //     <Stack.Screen
+  //       name="Formation"
+  //       component={Formation}
+  //       options={horizontalAnimation}
+  //     />
+  //   </Stack.Navigator>
+  // );
+  // return StackTab;
+  return (
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "#F2F4FB",
+          position: "relative",
+          backgroundColor: colors.WHITE,
           height: 50,
         },
         headerShown: false,
@@ -92,18 +93,13 @@ const Tabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Favoris
-              </Text>
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={{
           tabBarIcon: ({ focused }) => (
             <View
@@ -123,11 +119,6 @@ const Tabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Accueil
-              </Text>
             </View>
           ),
         }}
@@ -154,17 +145,12 @@ const Tabs = () => {
                   tintColor: focused ? "#C52E25" : "#030402",
                 }}
               />
-              <Text
-                style={{ color: focused ? "#C52E25" : "#030402", fontSize: 10 }}
-              >
-                Paramètres
-              </Text>
             </View>
           ),
         }}
       />
     </Tab.Navigator>
-  ); */
+  );
 };
 
 const styles = StyleSheet.create({
