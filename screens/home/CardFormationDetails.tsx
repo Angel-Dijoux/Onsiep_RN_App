@@ -1,6 +1,4 @@
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { easeGradient } from "react-native-easing-gradient";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { Label } from "../../shared/ui/Label";
@@ -9,13 +7,11 @@ import { Box, Text } from "../../shared/ui/primitives";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
 
-
 interface CardFormationDetailsProps {
   title: string;
   duree: string;
   level: string;
   tutelle: string;
-  displayDetails?: boolean;
   forId: string;
 }
 
@@ -24,7 +20,6 @@ export const CardFormationDetails = ({
   duree,
   level,
   tutelle,
-  displayDetails,
   forId,
 }: CardFormationDetailsProps) => {
   const { isLoading, data } = useGetFormation(forId);
@@ -42,18 +37,6 @@ export const CardFormationDetails = ({
   } else if (Array.isArray(poursuiteEtudes)) {
     etudesList = poursuiteEtudes.slice(0, 4);
   }
-
-  const { colors, locations } = easeGradient({
-    colorStops: {
-      0: {
-        color: "transparent",
-      },
-      1: {
-        color: "rgba(0,0,0,0.6)",
-      },
-    },
-    extraColorStopsPerTransition: 16,
-  });
 
   if (isLoading) return <Loading />;
   return (
@@ -73,7 +56,7 @@ export const CardFormationDetails = ({
       <Label text={tutelle} bg="WHITE" />
       {data && (
         <>
-          {formattedAttendus && (
+          {formattedAttendus.length > 0 && (
             <>
               <Text
                 variant="xlarge"
@@ -83,28 +66,26 @@ export const CardFormationDetails = ({
               >
                 Attendus ParcourSup
               </Text>
-              <LinearGradient colors={colors} locations={locations}>
-                <Box maxHeight={deviceHeight * 0.18} overflow="hidden">
-                  {formattedAttendus.map((item, index) => {
-                    return (
-                      <>
-                        <Text
-                          variant="large"
-                          fontWeight="600"
-                          my="global_5"
-                          color="BLACK"
-                          key={index}
-                        >
-                          {item.type}
-                        </Text>
-                        {item.attendus.map((attendu, index) => (
-                          <Text key={index}>{attendu}</Text>
-                        ))}
-                      </>
-                    );
-                  })}
-                </Box>
-              </LinearGradient>
+              <Box maxHeight={deviceHeight * 0.18} overflow="hidden">
+                {formattedAttendus.map((item, index) => {
+                  return (
+                    <React.Fragment key={index}>
+                      <Text
+                        variant="large"
+                        fontWeight="600"
+                        my="global_5"
+                        color="BLACK"
+                        textDecorationLine="underline"
+                      >
+                        {item.type}
+                      </Text>
+                      {item.attendus.map((attendu, index) => (
+                        <Text key={index}>{attendu}</Text>
+                      ))}
+                    </React.Fragment>
+                  );
+                })}
+              </Box>
             </>
           )}
 

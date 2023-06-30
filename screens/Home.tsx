@@ -8,23 +8,21 @@ import { Loading } from "../shared/ui/Loading";
 import { Box } from "../shared/ui/primitives";
 import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
 import { deviceHeight } from "../utils/deviceInfo";
+import { getFORId } from "./home/utils/stringUtils";
 
 export const Home = () => {
-  const { data, isLoading } = useGetOnisepFormations(5);
+  const { data, isLoading } = useGetOnisepFormations(25);
 
   const renderItem: ListRenderItem<Result> = ({ item, index, extraData }) => {
-    const FORId = item.url_et_id_onisep.substring(
-      item.url_et_id_onisep.length - 9
-    );
+    const FORId = `FOR.${getFORId(item.url_et_id_onisep)}`;
 
     return (
       <CardFormationDetails
-        title={item.libelle_type_formation || "Formation"}
+        title={item.libelle_formation_principal || "Formation"}
         duree={item.duree}
         level={item.niveau_de_sortie_indicatif}
         tutelle={item.tutelle}
         forId={FORId}
-        displayDetails
       />
     );
   };
@@ -35,13 +33,13 @@ export const Home = () => {
       <HeaderHomeScreen />
       <FlashList
         data={data?.results}
-        keyExtractor={(_, index: number) => index.toString()}
+        keyExtractor={(_, index: number) =>
+          index.toString() + _.url_et_id_onisep
+        }
         renderItem={renderItem}
         estimatedItemSize={deviceHeight}
         decelerationRate="fast"
-        pagingEnabled
-        horizontal
-        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </Box>
   );
