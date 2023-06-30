@@ -1,38 +1,44 @@
-import { View } from "react-native";
 import React from "react";
-import { Box, Text } from "../shared/ui/primitives";
+import { Box } from "../shared/ui/primitives";
+import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
+import { CardFormationDetails } from "./home/CardFormationDetails";
+import { HeaderHomeScreen } from "./home/HeaderHomeScreen";
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
+import { Loading } from "../shared/ui/Loading";
+import { type Result } from "../shared/formation/onisepFormation.type";
+import { deviceHeight } from "../utils/deviceInfo";
 
 export const Home = () => {
+  const { data, isLoading } = useGetOnisepFormations(5);
+
+  const renderItem: ListRenderItem<Result> = ({ item, index, extraData }) => {
+    const FORId = item.url_et_id_onisep.substring(
+      item.url_et_id_onisep.length - 9
+    );
+
+    return (
+      <CardFormationDetails
+        title={item.libelle_type_formation || "Formation"}
+        duree={item.duree}
+        level={item.niveau_de_sortie_indicatif}
+        tutelle={item.tutelle}
+        forId={FORId}
+        displayDetails
+      />
+    );
+  };
+
+  if (isLoading) return <Loading />;
   return (
     <Box flex={1} bg="WHITE" p="global_24">
-      <Box
-        flexDirection="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Box
-          bg="ERROR"
-          alignItems="center"
-          justifyContent="center"
-          borderRadius="round"
-          pr="global_10"
-        >
-          <Text>w</Text>
-        </Box>
-        <Box bg="PRIMARY_DARK" borderRadius="global_16">
-          <Text>Formation...</Text>
-        </Box>
-      </Box>
-      <Box
-        bg="SECONDARY_DARK"
-        mt="global_15"
-        p="global_15"
-        borderRadius="global_8"
-      >
-        <Text variant="h3" color="BLACK">
-          BTS Prothésiste dentaire
-        </Text>
-      </Box>
+      <HeaderHomeScreen />
+      <FlashList
+        data={data?.results}
+        keyExtractor={(_, index: number) => index.toString()}
+        renderItem={renderItem}
+        estimatedItemSize={deviceHeight}
+        decelerationRate="fast"
+      />
     </Box>
   );
 };

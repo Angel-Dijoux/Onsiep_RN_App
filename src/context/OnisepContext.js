@@ -32,7 +32,6 @@ export const OnisepProvider = ({ children }) => {
       .then((res) => {
         let data = res.data;
         setData(data);
-        console.log(data);
         setLoading(false);
       })
       .catch((e) => {

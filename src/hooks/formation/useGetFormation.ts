@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-import { FormationType } from "../../../shared/formation/formation.type";
+import { type FormationType } from "../../../shared/formation/formation.type";
 import { BASE_URL } from "../../config";
 
 const useGetFormation = (id: string) => {
