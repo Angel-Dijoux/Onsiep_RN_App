@@ -1,23 +1,19 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
-import { Image, ImageSourcePropType } from "react-native";
 
 import { Box, Text } from "../../../shared/ui/primitives";
+import { colors } from "../../../shared/ui/primitives/theme/colors";
+import { spacing } from "../../../shared/ui/primitives/theme/spacing";
 
-const NoResult = ({
-  icon,
-  text,
-}: {
-  icon: ImageSourcePropType;
-  text: string;
-}) => {
+const NoResult = ({ text }: { text: string }) => {
   return (
     <Box flex={1} justifyContent="center" alignItems="center">
-      <Image
-        source={icon}
-        resizeMode="contain"
-        style={{ width: 85, height: 85 }}
+      <MaterialCommunityIcons
+        name="space-invaders"
+        size={spacing.global_40}
+        color={colors.GREY_90}
       />
-      <Text color="BLACK" variant="xlarge">
+      <Text color="BLACK" fontFamily="manrope" variant="xlarge">
         {text}
       </Text>
     </Box>

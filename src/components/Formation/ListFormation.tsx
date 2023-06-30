@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { FlashList } from "@shopify/flash-list";
 import React, { useEffect, useState } from "react";
 
@@ -9,14 +10,10 @@ import { CardFormation } from "../ui/CardFormation";
 type ListFormationType = {
   data: Formation[];
   isFavScreen: boolean;
-  navigation: any;
 };
 
-const ListFormation = ({
-  data,
-  isFavScreen,
-  navigation,
-}: ListFormationType) => {
+const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
+  const navigation = useNavigation();
   const [formations, setFormations] = useState<Formation[]>([]);
 
   const { handleDeleteFavoris } = useFavoris();
@@ -47,7 +44,9 @@ const ListFormation = ({
           desc={item.libelle_formation_principal}
           isFavcreen={isFavScreen}
           onPress={() => handleOnClick(item.id)}
-          onPressCard={() => navigation.navigate("Formation", { id: item.id })}
+          onPressCard={() => {
+            navigation.navigate("Formation", { id: item.url_et_id_onisep });
+          }}
         />
       )}
     />

@@ -1,17 +1,16 @@
-import { useContext } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
 import { BASE_URL } from "../../config";
-import { AuthContext } from "../../context/AuthContext";
 import { useRefreshToken } from "../../hooks/useRefreshToken";
+import { useCurrentUser } from "../user/useCurrentUser";
 
 const API_URL = BASE_URL;
 
 const useFavoris = () => {
-  const { userTokenRefresh } = useContext(AuthContext);
+  const { refreshToken } = useCurrentUser();
   const queryClient = useQueryClient();
   const { accessToken: token, isLoading: isRefreshing } =
-    useRefreshToken(userTokenRefresh);
+    useRefreshToken(refreshToken);
 
   const {
     isLoading,

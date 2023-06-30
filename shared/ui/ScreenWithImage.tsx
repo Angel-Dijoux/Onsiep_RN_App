@@ -1,11 +1,11 @@
 import React, { ReactNode } from "react";
 import { Dimensions, ImageBackground } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Screen } from "./navigation/Screen";
 import { Box } from "./primitives";
 import DisplayMessages from "../../src/components/ui/Notification/display_messages";
-import { ScrollView } from "react-native-gesture-handler";
 
 type ScreenWithImageProps = {
   children: ReactNode;

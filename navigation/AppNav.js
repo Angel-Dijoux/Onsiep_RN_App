@@ -5,9 +5,11 @@ import { View, ActivityIndicator } from "react-native";
 import AuthTabs from "./AuthTabs";
 import Tabs from "./tabs";
 import { AuthContext } from "../src/context/AuthContext";
+import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const AppNav = () => {
   const { isloading, userToken } = useContext(AuthContext);
+  const { accessToken } = useCurrentUser();
 
   if (isloading) {
     return (
@@ -19,7 +21,7 @@ const AppNav = () => {
 
   return (
     <NavigationContainer>
-      {userToken !== null ? <Tabs /> : <AuthTabs />}
+      {accessToken ? <Tabs /> : <AuthTabs />}
     </NavigationContainer>
   );
 };

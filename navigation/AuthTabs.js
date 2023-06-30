@@ -2,7 +2,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet } from "react-native";
 
 import { Formation } from "../screens/Formation";
-import HomeScreen from "../screens/HomeScreen";
+import { Home } from "../screens/Home";
 import { LoginScreen } from "../screens/LoginScreen";
 import { RegisterScreen } from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
@@ -35,7 +35,7 @@ const AuthTabs = () => {
     >
       <Stack.Screen
         name="Home"
-        component={HomeScreen}
+        component={Home}
         options={horizontalAnimation}
       />
       <Stack.Screen

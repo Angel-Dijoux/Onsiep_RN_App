@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 import {
-  NativeSafeAreaViewProps,
+  type NativeSafeAreaViewProps,
   SafeAreaView,
 } from "react-native-safe-area-context";
 

@@ -4,10 +4,10 @@ import { View, ActivityIndicator } from "react-native";
 import { NoResult } from "./no_result";
 import PopularsForm from "./populars_form";
 import { OnisepContext } from "../../context/OnisepContext";
-import GetContentAPI from "../api/get_content_api";
+import { ListFormation } from "../Formation/ListFormation";
 
 // return populars formation or home page
-const ResultPage = () => {
+const ResultPage = (nav) => {
   const { returnGoodData, isloading, search, searchFilter, setFilterType } =
     useContext(OnisepContext);
 
@@ -64,16 +64,7 @@ const ResultPage = () => {
         </View>
       );
     } else {
-      return (
-        <GetContentAPI
-          data={returnGoodData()}
-          icon={require("../../icons/star.png")}
-          post
-          width="90%"
-          marginTop="4%"
-          marginBottom="2%"
-        />
-      );
+      return <ListFormation data={returnGoodData()} navigation={nav} />;
     }
   }
 };

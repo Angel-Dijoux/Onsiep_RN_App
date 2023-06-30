@@ -1,10 +1,9 @@
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { Pressable } from "react-native";
 
 import { Box, Text } from "../../../shared/ui/primitives";
 import { colors } from "../../../shared/ui/primitives/theme/colors";
-
-import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { spacing } from "../../../shared/ui/primitives/theme/spacing";
 
 type CardFormationType = {

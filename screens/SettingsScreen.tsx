@@ -3,32 +3,25 @@ import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
-  StyleSheet,
   Image,
   TouchableOpacity,
   Modal,
-  ScrollView,
   BackHandler,
 } from "react-native";
 
 /* local */
-import DisplayMessages from "../src/components/ui/Notification/display_messages";
-import ProfilEdit from "../src/components/ui/button";
-import Header from "../src/components/ui/header";
-import SearchBar from "../src/components/ui/search";
-import { AuthContext } from "../src/context/AuthContext";
+import { NoCurrentUser } from "./Settings/NoCurrentUser";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box } from "../shared/ui/primitives";
+import ProfilEdit from "../src/components/ui/button";
+import SearchBar from "../src/components/ui/search";
+import { AuthContext } from "../src/context/AuthContext";
+import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const SettingsScreem = ({ navigation }) => {
-  const {
-    logout,
-    DeleteUser,
-    EditUser,
-    userInfo,
-    userTokenRefresh,
-    userToken,
-  } = useContext(AuthContext);
+  const { logout, DeleteUser, EditUser, userInfo, userTokenRefresh } =
+    useContext(AuthContext);
+  const { accessToken } = useCurrentUser();
 
   const [isedit, setEdit] = useState(false);
   const [visiblemodal, setVisibleModal] = useState(false);
@@ -128,7 +121,7 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   const is_log = () => {
-    if (userToken) {
+    if (accessToken) {
       return (
         <View
           style={{
@@ -190,7 +183,7 @@ const SettingsScreem = ({ navigation }) => {
                     marginBottom: isedit ? 10 : 0,
                   }}
                 >
-                  {userInfo.username}
+                  "ss"
                 </Text>
                 <Text
                   style={{
@@ -293,7 +286,7 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   const log_out = () => {
-    if (userToken) {
+    if (!accessToken) {
       return (
         <View
           style={{
@@ -402,11 +395,8 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   return (
-    <Screen title="Paramètres">
-      <Box flexDirection="column" justifyContent="space-between">
-        <View>{is_log()}</View>
-        <View>{log_out()}</View>
-      </Box>
+    <Screen title="Paramètres" isScrollable edges={["top"]}>
+      <NoCurrentUser />
     </Screen>
   );
 };
