@@ -2,9 +2,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { HomeTabIcon, screenOptions } from "./AuthTabs";
+import { FormationsNavigation } from "./formations/FormationsNavigation";
 import { FavScreen } from "../screens/FavScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
-import { FormationsNavigation } from "./formations/FormationsNavigation";
 
 const Tab = createBottomTabNavigator();
 

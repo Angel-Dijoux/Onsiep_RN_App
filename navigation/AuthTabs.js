@@ -2,8 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { AccountNavigation } from "./account/AccountNavigation";
-import { colors } from "../shared/ui/primitives/theme/colors";
 import { FormationsNavigation } from "./formations/FormationsNavigation";
+import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
 

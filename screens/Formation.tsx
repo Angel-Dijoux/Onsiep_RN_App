@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import HTML from "react-native-render-html";
 
+import { FormationScreenRouteProps } from "../navigation/formations/FormationTabStackNavigation.types";
 import { VerticalList } from "../shared/list/VerticalList";
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
@@ -12,7 +13,6 @@ import { textVariants } from "../shared/ui/primitives/theme/fonts";
 import { NoResult } from "../src/components/ui/no_result";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../utils/deviceInfo";
-import { FormationScreenRouteProps } from "../navigation/formations/FormationTabStackNavigation.types";
 
 const Formation: React.FC<FormationScreenRouteProps> = ({ navigation }) => {
   const { id } = navigation.params;

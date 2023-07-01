@@ -3,16 +3,16 @@ import React from "react";
 import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { Result } from "../../shared/formation/onisepFormation.type";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
 import { Box, Text } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
+import { useFavoris } from "../../src/hooks/favoris/useFavoris";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { useFavoris } from "../../src/hooks/favoris/useFavoris";
-import { Result } from "../../shared/formation/onisepFormation.type";
 
 interface CardFormationDetailsProps {
   item: Result;

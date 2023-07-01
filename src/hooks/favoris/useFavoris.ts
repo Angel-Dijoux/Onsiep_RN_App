@@ -1,9 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
 
+import { Result } from "../../../shared/formation/onisepFormation.type";
 import { BASE_URL } from "../../config";
 import { useRefreshToken } from "../../hooks/useRefreshToken";
 import { useCurrentUser } from "../user/useCurrentUser";
-import { Result } from "../../../shared/formation/onisepFormation.type";
 
 const API_URL = BASE_URL;
 
@@ -59,25 +59,26 @@ const useFavoris = () => {
     }
   );
 
-  const addFormation = useMutation(async (formation: Result) => {
-    if (!isRefreshing) {
-      const response = await fetch(`${API_URL}/favoris`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(formation)
-      });
-      if (!response.ok) {
-        throw new Error("Error on add in favorite")
+  const addFormation = useMutation(
+    async (formation: Result) => {
+      if (!isRefreshing) {
+        const response = await fetch(`${API_URL}/favoris`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formation),
+        });
+        if (!response.ok) {
+          throw new Error("Error on add in favorite");
+        }
       }
-    }
-  },
+    },
     {
       onSuccess: () => {
-        console.log("SUCCESS")
+        console.log("SUCCESS");
         queryClient.invalidateQueries("favoris");
       },
     }
@@ -88,8 +89,8 @@ const useFavoris = () => {
   };
 
   const handleAddFavoris = async (formation: Result) => {
-    await addFormation.mutateAsync(formation)
-  }
+    await addFormation.mutateAsync(formation);
+  };
 
   return { isLoading, error, favoris, handleDeleteFavoris, handleAddFavoris };
 };

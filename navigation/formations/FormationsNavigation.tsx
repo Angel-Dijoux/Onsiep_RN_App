@@ -1,8 +1,9 @@
-import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "../../screens/Home";
-import { Formation } from "../../screens/Formation";
+import React from "react";
+
 import { FormationTabStackNavigationParamsList } from "./FormationTabStackNavigation.types";
+import { Formation } from "../../screens/Formation";
+import { Home } from "../../screens/Home";
 import { SearchScreen } from "../../screens/search/SearchScreen";
 
 export const FormationsNavigation = () => {
