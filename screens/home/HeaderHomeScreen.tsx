@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Image } from "react-native";
 
 import { Input } from "../../shared/ui/forms/Input";
 import { Box } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 
 export const HeaderHomeScreen = () => {
+  const [query, setQuery] = useState<string>("");
+  const navigation =
+    useNavigation<
+      StackNavigationProp<FormationTabStackNavigationParamsList, "HomeScreen">
+    >();
+
+  const handleSearchQuery = () => {
+    navigation.navigate("SearchScreen", { query });
+  };
+
+  const handleInputChange = useCallback((text: string) => {
+    setQuery(text);
+  }, []);
+
   return (
     <Box
       flexDirection="row"
@@ -29,7 +46,11 @@ export const HeaderHomeScreen = () => {
         borderRadius="global_16"
         px="global_15"
       >
-        <Input placeholder="Rechercher un formation..." />
+        <Input
+          placeholder="Rechercher un formation..."
+          onChangeText={(text: string) => handleInputChange(text)}
+          onSubmitEditing={handleSearchQuery}
+        />
       </Box>
     </Box>
   );

@@ -33,7 +33,7 @@ const SettingsScreem = ({ navigation }) => {
   const [oldpassword, setOldPassword] = useState(null);
 
   const handleBackButtonClick = () => {
-    navigation.navigate("Home");
+    navigation.navigate("HomeScreen");
     return true;
   };
 

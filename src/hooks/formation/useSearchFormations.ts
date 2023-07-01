@@ -25,5 +25,5 @@ export const useSearchFormations = (query: string) => {
     () => fetchSearchedFormationFromOnisep(query)
   );
 
-  return getSearchedFormations;
+  return { getSearchedFormations }
 };
