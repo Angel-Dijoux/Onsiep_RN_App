@@ -6,6 +6,11 @@ import { Loading } from "../../shared/ui/Loading";
 import { Box, Text } from "../../shared/ui/primitives";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
+import { AntDesign } from "@expo/vector-icons";
+import { colors } from "../../shared/ui/primitives/theme/colors";
+import { Pressable } from "react-native";
+import { spacing } from "../../shared/ui/primitives/theme/spacing";
+import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 
 interface CardFormationDetailsProps {
   title: string;
@@ -113,6 +118,24 @@ export const CardFormationDetails = ({
           )}
         </>
       )}
+      <Pressable
+        style={{
+          width: "100%",
+          alignItems: "center",
+          marginTop: spacing.global_10,
+        }}
+      >
+        <AntDesign
+          name="staro"
+          size={24}
+          color={colors.WHITE}
+          style={{
+            backgroundColor: colors.PRIMARY_DARK,
+            borderRadius: borderRadii.round,
+            padding: spacing.global_8,
+          }}
+        />
+      </Pressable>
     </Box>
   );
 };

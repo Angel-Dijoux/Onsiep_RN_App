@@ -13,7 +13,7 @@ import { deviceHeight } from "../utils/deviceInfo";
 export const Home = () => {
   const { data, isLoading } = useGetOnisepFormations(25);
 
-  const renderItem: ListRenderItem<Result> = ({ item, index, extraData }) => {
+  const renderItem: ListRenderItem<Result> = ({ item }) => {
     const FORId = `FOR.${getFORId(item.url_et_id_onisep)}`;
 
     return (

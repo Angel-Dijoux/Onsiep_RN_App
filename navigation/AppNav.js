@@ -1,23 +1,28 @@
-import { NavigationContainer } from "@react-navigation/native";
-import React, { useContext } from "react";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
+import React from "react";
 
 import { AuthTabs } from "./AuthTabs";
 import { Tabs } from "./tabs";
 import { Loading } from "../shared/ui/Loading";
-import { AuthContext } from "../src/context/AuthContext";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
+import { colors } from "../shared/ui/primitives/theme/colors";
 
 const AppNav = () => {
-  const { isloading } = useContext(AuthContext);
   const { accessToken } = useCurrentUser();
 
-  if (isloading) return <Loading />;
-
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={navigationTheme} fallback={<Loading />}>
       {accessToken ? <Tabs /> : <AuthTabs />}
     </NavigationContainer>
   );
+};
+
+const navigationTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: colors.WHITE,
+  },
 };
 
 export { AppNav };

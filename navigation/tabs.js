@@ -1,17 +1,17 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import {
-  HomeTabIcon,
-  LoginTabIcon,
-  SettingsTabIcon,
-  screenOptions,
-} from "./AuthTabs";
+import { HomeTabIcon, SettingsTabIcon, screenOptions } from "./AuthTabs";
 import { FavScreen } from "../screens/FavScreen";
 import { Home } from "../screens/Home";
 import SettingsScreem from "../screens/SettingsScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
+import { AntDesign } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
+
+export const FavTabIcon = ({ color }) => (
+  <AntDesign name="staro" size={24} color={color} />
+);
 
 const Tabs = () => {
   return (
@@ -20,7 +20,7 @@ const Tabs = () => {
         ...screenOptions,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: colors.WHITE,
+          backgroundColor: colors.GREY_DARK,
           height: 50,
           borderTopColor: "transparent",
         },
@@ -30,7 +30,7 @@ const Tabs = () => {
         name="Fav"
         component={FavScreen}
         options={{
-          tabBarIcon: LoginTabIcon,
+          tabBarIcon: FavTabIcon,
         }}
       />
       <Tab.Screen
@@ -40,13 +40,13 @@ const Tabs = () => {
           tabBarIcon: HomeTabIcon,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={SettingsScreem}
         options={{
           tabBarIcon: SettingsTabIcon,
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

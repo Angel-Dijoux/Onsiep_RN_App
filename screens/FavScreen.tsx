@@ -28,7 +28,12 @@ const FavScreen = ({ navigation }) => {
 
   if (isLoading) return <Loading />;
   return (
-    <Screen title="Favoris" isScrollable goBack>
+    <Screen
+      title="Favoris"
+      isScrollable
+      goBack
+      onGoBack={handleBackButtonClick}
+    >
       <Box py="global_24">
         {favoris ? (
           <ListFormation data={favoris.results} isFavScreen />

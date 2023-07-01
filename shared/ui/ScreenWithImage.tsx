@@ -8,10 +8,12 @@ import { Screen } from "./navigation/Screen";
 import { Box } from "./primitives";
 import { colors } from "./primitives/theme/colors";
 import DisplayMessages from "../../src/components/ui/Notification/display_messages";
+import { borderRadii } from "./primitives/theme/borderRadii";
 
 type ScreenWithImageProps = {
   children: ReactNode;
   title: string;
+  canGoBack?: boolean;
 };
 
 const GRADIENT_START = {
@@ -19,7 +21,11 @@ const GRADIENT_START = {
   y: -0.6,
 };
 
-const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
+const ScreenWithImage = ({
+  children,
+  title,
+  canGoBack,
+}: ScreenWithImageProps) => {
   const { height: SCREEN_HEIGHT } = Dimensions.get("window");
   const diff = SCREEN_HEIGHT - SCREEN_HEIGHT / 2.2;
   return (
@@ -51,11 +57,16 @@ const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
           width: "100%",
           height: diff,
           position: "absolute",
-          borderTopLeftRadius: 16,
-          borderTopRightRadius: 16,
+          borderTopLeftRadius: borderRadii.global_16,
+          borderTopRightRadius: borderRadii.global_16,
         }}
       >
-        <Screen title={title} goBack isScrollable={false} edges={["top"]}>
+        <Screen
+          title={title}
+          goBack={canGoBack}
+          isScrollable={false}
+          edges={["top"]}
+        >
           <Box mt="global_24">
             <ScrollView showsVerticalScrollIndicator={false}>
               {children}

@@ -27,7 +27,7 @@ export const RegiserTabIcon = ({ color }) => (
 export const screenOptions = {
   headerShown: false,
   tabBarShowLabel: false,
-  tabBarActiveTintColor: colors.WHITE,
+  tabBarActiveTintColor: colors.PRIMARY_DARK,
   tabBarHideOnKeyboard: true,
 };
 
@@ -58,13 +58,13 @@ const AuthTabs = () => {
           tabBarIcon: HomeTabIcon,
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Settings"
         component={SettingsScreem}
         options={{
           tabBarIcon: SettingsTabIcon,
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };

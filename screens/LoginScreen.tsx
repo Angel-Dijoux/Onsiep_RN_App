@@ -23,6 +23,7 @@ const LoginScreen = ({ navigation }) => {
         accessToken: String(response.user.access),
         refreshToken: String(response.user.refresh),
       });
+      console.log(response);
       navigation.navigate("Home");
     } catch (error: unknown) {
       console.log(error);
@@ -30,7 +31,7 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <ScreenWithImage title="Se connecter">
+    <ScreenWithImage title="Se connecter" canGoBack={false}>
       <InputField
         title="Email"
         value={email}

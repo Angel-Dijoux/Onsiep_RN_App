@@ -21,6 +21,7 @@ import {
   CurrentUserContext,
   defaultCurrentUser,
 } from "./src/hooks/user/useCurrentUser";
+import { colors } from "./shared/ui/primitives/theme/colors";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -88,6 +89,7 @@ const App = () => {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    backgroundColor: colors.WHITE,
   },
 });
 

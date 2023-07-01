@@ -45,7 +45,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <ScreenWithImage title="S'enregistrer">
+    <ScreenWithImage title="S'enregistrer" canGoBack>
       <InputField
         title="Email"
         value={email}
