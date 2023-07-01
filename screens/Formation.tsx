@@ -3,6 +3,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import HTML from "react-native-render-html";
 
+import { getFORId } from "./home/utils/stringUtils";
 import { FormationScreenRouteProps } from "../navigation/formations/FormationTabStackNavigation.types";
 import { VerticalList } from "../shared/list/VerticalList";
 import { Loading } from "../shared/ui/Loading";
@@ -16,8 +17,8 @@ import { deviceHeight } from "../utils/deviceInfo";
 
 const Formation: React.FC<FormationScreenRouteProps> = ({ navigation }) => {
   const { id } = navigation.params;
-  const forId = id.substring(id.length - 9);
-  const { data, isLoading } = useGetFormation("FOR.5337");
+  const forId = `FOR.${getFORId(id)}`;
+  const { data, isLoading } = useGetFormation(forId);
 
   const styles = StyleSheet.create({
     heading: {

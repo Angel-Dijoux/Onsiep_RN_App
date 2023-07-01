@@ -3,7 +3,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useState } from "react";
 import { Image } from "react-native";
 
-import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
+import { type FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Input } from "../../shared/ui/forms/Input";
 import { Box } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";

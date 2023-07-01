@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { BackHandler } from "react-native";
+import React from "react";
 
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
@@ -8,32 +7,12 @@ import { ListFormation } from "../src/components/Formation/ListFormation";
 import { NoResult } from "../src/components/ui/no_result";
 import { useFavoris } from "../src/hooks/favoris/useFavoris";
 
-const FavScreen = ({ navigation }) => {
+const FavScreen = () => {
   const { isLoading, favoris } = useFavoris();
-
-  const handleBackButtonClick = (): boolean => {
-    navigation.navigate("Home");
-    return true;
-  };
-
-  useEffect(() => {
-    BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
-    return () => {
-      BackHandler.removeEventListener(
-        "hardwareBackPress",
-        handleBackButtonClick
-      );
-    };
-  }, []);
 
   if (isLoading) return <Loading />;
   return (
-    <Screen
-      title="Favoris"
-      isScrollable
-      goBack
-      onGoBack={handleBackButtonClick}
-    >
+    <Screen title="Favoris" isScrollable goBack={false}>
       <Box py="global_24">
         {favoris ? (
           <ListFormation data={favoris.results} isFavScreen />
