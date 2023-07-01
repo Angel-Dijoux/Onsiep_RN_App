@@ -18,6 +18,7 @@ export const Home = () => {
 
     return (
       <CardFormationDetails
+        item={item}
         title={item.libelle_formation_principal || "Formation"}
         duree={item.duree}
         level={item.niveau_de_sortie_indicatif}

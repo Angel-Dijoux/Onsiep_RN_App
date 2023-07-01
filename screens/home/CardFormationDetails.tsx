@@ -11,8 +11,11 @@ import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
+import { useFavoris } from "../../src/hooks/favoris/useFavoris";
+import { Result } from "../../shared/formation/onisepFormation.type";
 
 interface CardFormationDetailsProps {
+  item: Result;
   title: string;
   duree: string;
   level: string;
@@ -21,6 +24,7 @@ interface CardFormationDetailsProps {
 }
 
 export const CardFormationDetails = ({
+  item,
   title,
   duree,
   level,
@@ -28,7 +32,7 @@ export const CardFormationDetails = ({
   forId,
 }: CardFormationDetailsProps) => {
   const { isLoading, data } = useGetFormation(forId);
-  if (!isLoading) console.log(forId, data?.identifiant);
+  const { handleAddFavoris } = useFavoris();
 
   let formattedAttendus: formattedHtml = [];
   if (data?.attendus) {
@@ -130,6 +134,7 @@ export const CardFormationDetails = ({
       )}
 
       <Pressable
+        onPress={() => handleAddFavoris(item)}
         style={{
           width: "100%",
           alignItems: "center",
