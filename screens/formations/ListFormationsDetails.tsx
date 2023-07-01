@@ -1,9 +1,10 @@
-import React from "react";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
+import React from "react";
+
 import { Result } from "../../shared/formation/onisepFormation.type";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { getFORId } from "../home/utils/stringUtils";
 import { CardFormationDetails } from "../home/CardFormationDetails";
+import { getFORId } from "../home/utils/stringUtils";
 
 export const renderItemDetailCardFormations: ListRenderItem<Result> = ({
   item,

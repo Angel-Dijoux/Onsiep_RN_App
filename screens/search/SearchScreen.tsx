@@ -1,12 +1,11 @@
 import React from "react";
 
-import { SearchScreenRouteProps } from "../../navigation/formations/FormationTabStackNavigation.types";
-import { useSearchFormations } from "../../src/hooks/formation/useSearchFormations";
+import { type SearchScreenRouteProps } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Loading } from "../../shared/ui/Loading";
 import { Box } from "../../shared/ui/primitives";
-import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
-
+import { useSearchFormations } from "../../src/hooks/formation/useSearchFormations";
 import { ListFormationsDetails } from "../formations/ListFormationsDetails";
+import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
