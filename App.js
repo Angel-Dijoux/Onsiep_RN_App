@@ -17,7 +17,6 @@ import DisplayMessages from "./src/components/ui/Notification/display_messages";
 import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
-import { OnisepProvider } from "./src/context/OnisepContext";
 import {
   CurrentUserContext,
   defaultCurrentUser,
@@ -69,16 +68,14 @@ const App = () => {
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <QueryClientProvider client={queryClient}>
           <CurrentUserContext.Provider value={currentUserValue}>
-            <OnisepProvider>
-              <AuthProvider>
-                <FavorisProvider>
-                  <ThemeProvider theme={theme}>
-                    <DisplayMessages />
-                    <AppNav />
-                  </ThemeProvider>
-                </FavorisProvider>
-              </AuthProvider>
-            </OnisepProvider>
+            <AuthProvider>
+              <FavorisProvider>
+                <ThemeProvider theme={theme}>
+                  <DisplayMessages />
+                  <AppNav />
+                </ThemeProvider>
+              </FavorisProvider>
+            </AuthProvider>
           </CurrentUserContext.Provider>
         </QueryClientProvider>
       </SafeAreaProvider>
