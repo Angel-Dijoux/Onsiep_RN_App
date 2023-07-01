@@ -4,7 +4,7 @@ import { type OnisepFormations } from "../../../shared/formation/onisepFormation
 import GET_TOKEN from "../../components/api/get_token";
 import { ONSIEP_APP_ID } from "../../config";
 
-const ONISEP_API_URL =
+export const ONISEP_API_URL =
   "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?";
 
 const useGetOnisepFormations = (offset: number) => {

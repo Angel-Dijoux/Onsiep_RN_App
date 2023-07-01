@@ -12,9 +12,10 @@ import { textVariants } from "../shared/ui/primitives/theme/fonts";
 import { NoResult } from "../src/components/ui/no_result";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../utils/deviceInfo";
+import { FormationScreenRouteProps } from "../navigation/formations/FormationTabStackNavigation.types";
 
-const Formation = ({ route }: { route: { params: { id: string } } }) => {
-  const { id } = route.params;
+const Formation: React.FC<FormationScreenRouteProps> = ({ navigation }) => {
+  const { id } = navigation.params;
   const forId = id.substring(id.length - 9);
   const { data, isLoading } = useGetFormation("FOR.5337");
 

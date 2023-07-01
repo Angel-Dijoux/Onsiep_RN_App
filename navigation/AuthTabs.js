@@ -2,8 +2,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { AccountNavigation } from "./account/AccountNavigation";
-import { Home } from "../screens/Home";
 import { colors } from "../shared/ui/primitives/theme/colors";
+import { FormationsNavigation } from "./formations/FormationsNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -52,7 +52,7 @@ const AuthTabs = () => {
       />
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={FormationsNavigation}
         options={{
           tabBarIcon: HomeTabIcon,
         }}
