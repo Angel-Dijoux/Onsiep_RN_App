@@ -1,6 +1,11 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { HomeTabIcon, LoginTabIcon, SettingsTabIcon } from "./AuthTabs";
+import {
+  HomeTabIcon,
+  LoginTabIcon,
+  SettingsTabIcon,
+  screenOptions,
+} from "./AuthTabs";
 import { FavScreen } from "../screens/FavScreen";
 import { Home } from "../screens/Home";
 import SettingsScreem from "../screens/SettingsScreen";
@@ -12,13 +17,13 @@ const Tabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        ...screenOptions,
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "relative",
           backgroundColor: colors.WHITE,
           height: 50,
+          borderTopColor: "transparent",
         },
-        headerShown: false,
       }}
     >
       <Tab.Screen

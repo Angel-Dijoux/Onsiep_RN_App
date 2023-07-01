@@ -79,7 +79,7 @@ const RegisterScreen = ({ navigation }) => {
       <BtnTextConn
         firstText="Tu as un compte ?"
         secondText="Connecte toi ici !"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("login")}
       />
     </ScreenWithImage>
   );

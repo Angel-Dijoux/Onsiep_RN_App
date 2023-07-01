@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { ReactNode } from "react";
 import { Dimensions, ImageBackground } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -5,11 +6,17 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Screen } from "./navigation/Screen";
 import { Box } from "./primitives";
+import { colors } from "./primitives/theme/colors";
 import DisplayMessages from "../../src/components/ui/Notification/display_messages";
 
 type ScreenWithImageProps = {
   children: ReactNode;
   title: string;
+};
+
+const GRADIENT_START = {
+  x: -1,
+  y: -0.6,
 };
 
 const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
@@ -29,14 +36,24 @@ const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
           position: "relative",
           marginBottom: SCREEN_HEIGHT / 3.5,
         }}
-      ></ImageBackground>
-      <Box
-        width="100%"
-        height={diff}
-        position="absolute"
-        backgroundColor="SECONDARY_40"
-        borderTopLeftRadius="global_16"
-        borderTopRightRadius="global_16"
+      />
+
+      <LinearGradient
+        colors={[
+          colors.SECONDARY_BASE,
+          colors.SECONDARY_DARK,
+          colors.SECONDARY_50,
+          colors.SECONDARY_40,
+          colors.WHITE,
+        ]}
+        start={GRADIENT_START}
+        style={{
+          width: "100%",
+          height: diff,
+          position: "absolute",
+          borderTopLeftRadius: 16,
+          borderTopRightRadius: 16,
+        }}
       >
         <Screen title={title} goBack isScrollable={false} edges={["top"]}>
           <Box mt="global_24">
@@ -45,7 +62,7 @@ const ScreenWithImage = ({ children, title }: ScreenWithImageProps) => {
             </ScrollView>
           </Box>
         </Screen>
-      </Box>
+      </LinearGradient>
     </SafeAreaView>
   );
 };

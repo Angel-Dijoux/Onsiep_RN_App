@@ -14,7 +14,9 @@ const SafeView = ({ children, edges }: SafeViewProps) => (
 );
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: {
+    flex: 1,
+  },
 });
 
 export { SafeView };

@@ -45,7 +45,7 @@ const SEMANTIC = {
 
 const GLOBALS = {
   BLACK: "#000",
-  WHITE: "#FFF",
+  WHITE: "#FFFBEE",
 };
 
 const TRANSPARENT = {

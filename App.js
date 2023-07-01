@@ -9,7 +9,7 @@ import {
   initialWindowMetrics,
 } from "react-native-safe-area-context";
 
-import AppNav from "./navigation/AppNav";
+import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
 import { theme } from "./shared/ui/primitives/theme/theme";
 import DisplayMessages from "./src/components/ui/Notification/display_messages";
@@ -54,7 +54,6 @@ const App = () => {
       const userData = await getCurrentUserStorage();
       if (userData) {
         setCurrentUser(userData);
-        console.log(userData);
       }
     };
     setupData();

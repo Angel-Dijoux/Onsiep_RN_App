@@ -3,9 +3,11 @@
     "name": "Onisep",
     "slug": "onisep",
     "version": "1.0.0",
+    "jsEngine": "hermes",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#FFFBEE",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -14,9 +16,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "elki.onisepapp"
@@ -37,6 +37,6 @@
         "projectId": "a52b8960-febd-4130-aadf-fab2ddc132ca"
       }
     },
-    "owner": "onisep"
+    "owner": "Angel-Dijoux"
   }
 }

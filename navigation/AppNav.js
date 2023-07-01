@@ -20,4 +20,4 @@ const AppNav = () => {
   );
 };
 
-export default AppNav;
+export { AppNav };

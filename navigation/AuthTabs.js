@@ -1,47 +1,56 @@
+import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { TabIconBar } from "./TabIconBar";
+import { AccountNavigation } from "./account/AccountNavigation";
 import { Home } from "../screens/Home";
-import { LoginScreen } from "../screens/LoginScreen";
-import { RegisterScreen } from "../screens/RegisterScreen";
 import SettingsScreem from "../screens/SettingsScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
 
-export const LoginTabIcon = ({ focused }) => (
-  <TabIconBar focused={focused} icon="../src/icons/star.png" />
+export const LoginTabIcon = ({ color }) => (
+  <Ionicons name="log-in-outline" size={24} color={color} />
 );
 
-export const HomeTabIcon = ({ focused }) => (
-  <TabIconBar focused={focused} icon="../src/icons/home.png" />
+export const HomeTabIcon = ({ color }) => (
+  <Ionicons name="ios-home-outline" size={24} color={color} />
 );
 
-export const SettingsTabIcon = ({ focused }) => (
-  <TabIconBar focused={focused} icon="../src/icons/home.png" />
+export const SettingsTabIcon = ({ color }) => (
+  <Ionicons name="settings-outline" size={24} color={color} />
 );
+
+export const RegiserTabIcon = ({ color }) => (
+  <Ionicons name="person-add-outline" size={24} color={color} />
+);
+
+export const screenOptions = {
+  headerShown: false,
+  tabBarShowLabel: false,
+  tabBarActiveTintColor: colors.WHITE,
+  tabBarHideOnKeyboard: true,
+};
 
 const AuthTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        ...screenOptions,
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "relative",
-          backgroundColor: colors.WHITE,
+          backgroundColor: colors.GREY_DARK,
           height: 50,
+          borderTopColor: "transparent",
         },
-        headerShown: false,
       }}
     >
       <Tab.Screen
         name="Login"
-        component={LoginScreen}
+        component={AccountNavigation}
         options={{
           tabBarIcon: LoginTabIcon,
         }}
       />
-      <Tab.Screen name="register" component={RegisterScreen} />
       <Tab.Screen
         name="Home"
         component={Home}
