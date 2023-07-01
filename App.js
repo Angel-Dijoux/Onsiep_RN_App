@@ -11,6 +11,7 @@ import {
 
 import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
+import { colors } from "./shared/ui/primitives/theme/colors";
 import { theme } from "./shared/ui/primitives/theme/theme";
 import DisplayMessages from "./src/components/ui/Notification/display_messages";
 import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
@@ -21,7 +22,6 @@ import {
   CurrentUserContext,
   defaultCurrentUser,
 } from "./src/hooks/user/useCurrentUser";
-import { colors } from "./shared/ui/primitives/theme/colors";
 
 SplashScreen.preventAutoHideAsync();
 

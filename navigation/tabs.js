@@ -1,11 +1,10 @@
+import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { HomeTabIcon, SettingsTabIcon, screenOptions } from "./AuthTabs";
+import { HomeTabIcon, screenOptions } from "./AuthTabs";
 import { FavScreen } from "../screens/FavScreen";
 import { Home } from "../screens/Home";
-import SettingsScreem from "../screens/SettingsScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
-import { AntDesign } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 

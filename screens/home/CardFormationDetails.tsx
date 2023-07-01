@@ -1,16 +1,16 @@
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
+import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
 import { Box, Text } from "../../shared/ui/primitives";
+import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
+import { colors } from "../../shared/ui/primitives/theme/colors";
+import { spacing } from "../../shared/ui/primitives/theme/spacing";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { AntDesign } from "@expo/vector-icons";
-import { colors } from "../../shared/ui/primitives/theme/colors";
-import { Pressable } from "react-native";
-import { spacing } from "../../shared/ui/primitives/theme/spacing";
-import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 
 interface CardFormationDetailsProps {
   title: string;
@@ -28,6 +28,7 @@ export const CardFormationDetails = ({
   forId,
 }: CardFormationDetailsProps) => {
   const { isLoading, data } = useGetFormation(forId);
+  if (!isLoading) console.log(forId, data?.identifiant);
 
   let formattedAttendus: formattedHtml = [];
   if (data?.attendus) {
@@ -59,7 +60,7 @@ export const CardFormationDetails = ({
         <Label text={level} bg="WHITE" />
       </Box>
       <Label text={tutelle} bg="WHITE" />
-      {data && (
+      {data?.identifiant && (
         <>
           {formattedAttendus.length > 0 && (
             <>
@@ -116,13 +117,23 @@ export const CardFormationDetails = ({
               </Box>
             </Box>
           )}
+          <Box
+            bg="PRIMARY_DARK"
+            p="global_10"
+            borderRadius="round"
+            alignItems="center"
+            mt="global_10"
+          >
+            <Text variant="large">En savoir plus</Text>
+          </Box>
         </>
       )}
+
       <Pressable
         style={{
           width: "100%",
           alignItems: "center",
-          marginTop: spacing.global_10,
+          marginTop: spacing.global_20,
         }}
       >
         <AntDesign

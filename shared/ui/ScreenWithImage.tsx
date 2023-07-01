@@ -6,9 +6,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Screen } from "./navigation/Screen";
 import { Box } from "./primitives";
+import { borderRadii } from "./primitives/theme/borderRadii";
 import { colors } from "./primitives/theme/colors";
 import DisplayMessages from "../../src/components/ui/Notification/display_messages";
-import { borderRadii } from "./primitives/theme/borderRadii";
 
 type ScreenWithImageProps = {
   children: ReactNode;

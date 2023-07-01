@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { AccountNavigation } from "./account/AccountNavigation";
 import { Home } from "../screens/Home";
-import SettingsScreem from "../screens/SettingsScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
