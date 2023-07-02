@@ -40,7 +40,9 @@ const useFavoris = () => {
     },
     {
       onSuccess: () => {
+        console.log("SUCCESS DELETE ")
         queryClient.invalidateQueries("favoris");
+        queryClient.invalidateQueries("get_formation_is_fav");
       },
     }
   );

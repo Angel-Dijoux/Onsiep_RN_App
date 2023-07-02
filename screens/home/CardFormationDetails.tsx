@@ -37,20 +37,18 @@ export const CardFormationDetails = ({
   const matchingItem = listOfFavFormations?.find(
     (fav) => fav.url === item.url_et_id_onisep
   );
-
-  const [isFav, setIsFav] = useState<boolean>(false);
+  const isFav = matchingItem?.url === item.url_et_id_onisep;
 
   const { isLoading, data } = useGetFormation(forId);
 
   const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
 
   const handleFavoris = (item: Result): void => {
-    if (matchingItem?.id) {
+    if (isFav && matchingItem?.id) {
       handleDeleteFavoris(matchingItem?.id);
-      setIsFav(false);
+    } else {
+      handleAddFavoris(item);
     }
-    handleAddFavoris(item);
-    setIsFav(true);
   };
 
   let formattedAttendus: formattedHtml = [];
