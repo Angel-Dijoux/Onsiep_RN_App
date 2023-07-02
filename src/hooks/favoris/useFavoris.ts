@@ -78,7 +78,6 @@ const useFavoris = () => {
     },
     {
       onSuccess: () => {
-        console.log("SUCCESS");
         queryClient.invalidateQueries("favoris");
       },
     }

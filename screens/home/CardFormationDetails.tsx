@@ -11,6 +11,7 @@ import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
 import { useFavoris } from "../../src/hooks/favoris/useFavoris";
+import { useGetIfIsFav } from "../../src/hooks/favoris/useGetIfIsFav";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
 
@@ -32,7 +33,16 @@ export const CardFormationDetails = ({
   forId,
 }: CardFormationDetailsProps) => {
   const { isLoading, data } = useGetFormation(forId);
-  const { handleAddFavoris } = useFavoris();
+  const { getIsFav } = useGetIfIsFav(item.url_et_id_onisep);
+  const { data: isFavData, isLoading: isFavLoading } = getIsFav;
+  const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
+
+  const handleFavoris = (item: Result): void => {
+    if (isFavData?.is_fav && isFavData.favori_id) {
+      handleDeleteFavoris(isFavData.favori_id);
+    }
+    handleAddFavoris(item);
+  };
 
   let formattedAttendus: formattedHtml = [];
   if (data?.attendus) {
@@ -48,7 +58,7 @@ export const CardFormationDetails = ({
     etudesList = poursuiteEtudes.slice(0, 4);
   }
 
-  if (isLoading) return <Loading />;
+  if (isLoading || isFavLoading) return <Loading />;
   return (
     <Box
       bg="SECONDARY_DARK"
@@ -134,7 +144,7 @@ export const CardFormationDetails = ({
       )}
 
       <Pressable
-        onPress={() => handleAddFavoris(item)}
+        onPress={() => handleFavoris(item)}
         style={{
           width: "100%",
           alignItems: "center",
@@ -142,7 +152,7 @@ export const CardFormationDetails = ({
         }}
       >
         <AntDesign
-          name="staro"
+          name={isFavData?.is_fav ? "star" : "staro"}
           size={24}
           color={colors.WHITE}
           style={{
