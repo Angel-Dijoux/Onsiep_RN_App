@@ -1,3 +1,8 @@
+export interface UserFavoris {
+  results: Formation[];
+  size?: number;
+}
+
 export interface Formation {
   code_nsf: string;
   code_rncp: string;

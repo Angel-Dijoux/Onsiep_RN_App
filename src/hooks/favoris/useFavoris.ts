@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "react-query";
 
 import { Result } from "../../../shared/formation/onisepFormation.type";
 import { fetchWithToken } from "../../../utils/fetchWithToken";
+import { UserFavoris } from "../../../utils/onisep.type";
 import { BASE_URL } from "../../config";
 import { useAuthenticatedQuery } from "../useAuthenticatedQuery";
 import { useCurrentUser } from "../user/useCurrentUser";
@@ -24,7 +25,7 @@ const useFavoris = () => {
     isLoading,
     error,
     data: favoris,
-  } = useAuthenticatedQuery("favoris", fetchFavoris, { retry: 2 });
+  } = useAuthenticatedQuery<UserFavoris>("favoris", fetchFavoris, { retry: 2 });
 
   const deleteFormation = useMutation(
     async (id: number) => {
@@ -40,7 +41,6 @@ const useFavoris = () => {
     },
     {
       onSuccess: () => {
-        console.log("SUCCESS DELETE ")
         queryClient.invalidateQueries("favoris");
         queryClient.invalidateQueries("get_formation_is_fav");
       },

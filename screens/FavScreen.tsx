@@ -4,7 +4,6 @@ import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Box } from "../shared/ui/primitives";
 import { ListFormation } from "../src/components/Formation/ListFormation";
-import { NoResult } from "../src/components/ui/no_result";
 import { useFavoris } from "../src/hooks/favoris/useFavoris";
 
 const FavScreen = () => {
@@ -14,11 +13,7 @@ const FavScreen = () => {
   return (
     <Screen title="Favoris" isScrollable goBack={false}>
       <Box py="global_24">
-        {favoris ? (
-          <ListFormation data={favoris.results} isFavScreen />
-        ) : (
-          <NoResult text="Aucun favoris" />
-        )}
+        <ListFormation data={favoris?.results} isFavScreen />
       </Box>
     </Screen>
   );
