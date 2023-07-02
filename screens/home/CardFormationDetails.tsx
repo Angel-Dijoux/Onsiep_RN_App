@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
@@ -11,12 +11,13 @@ import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
 import { useFavoris } from "../../src/hooks/favoris/useFavoris";
-import { useGetIfIsFav } from "../../src/hooks/favoris/useGetIfIsFav";
+import { GetIsFavProps } from "../../src/hooks/favoris/useGetIfIsFav";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
 
 interface CardFormationDetailsProps {
   item: Result;
+  listOfFavFormations?: GetIsFavProps["favori_ids"];
   title: string;
   duree: string;
   level: string;
@@ -26,28 +27,26 @@ interface CardFormationDetailsProps {
 
 export const CardFormationDetails = ({
   item,
+  listOfFavFormations,
   title,
   duree,
   level,
   tutelle,
   forId,
 }: CardFormationDetailsProps) => {
+  const matchingItem = listOfFavFormations?.find(
+    (fav) => fav.url === item.url_et_id_onisep
+  );
+
   const [isFav, setIsFav] = useState<boolean>(false);
 
   const { isLoading, data } = useGetFormation(forId);
-  const { getIsFav } = useGetIfIsFav(item.url_et_id_onisep);
-  const { data: isFavData, isLoading: isFavLoading } = getIsFav;
+
   const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
 
-  useEffect(() => {
-    if (isFavData?.is_fav) {
-      setIsFav(isFavData.is_fav);
-    }
-  }, [isFavData]);
-
   const handleFavoris = (item: Result): void => {
-    if (isFavData?.is_fav && isFavData.favori_id) {
-      handleDeleteFavoris(isFavData.favori_id);
+    if (matchingItem?.id) {
+      handleDeleteFavoris(matchingItem?.id);
       setIsFav(false);
     }
     handleAddFavoris(item);
@@ -68,7 +67,7 @@ export const CardFormationDetails = ({
     etudesList = poursuiteEtudes.slice(0, 4);
   }
 
-  if (isLoading || isFavLoading) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <Box
       bg="SECONDARY_DARK"

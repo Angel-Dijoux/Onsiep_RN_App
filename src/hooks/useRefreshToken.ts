@@ -1,44 +1,36 @@
-import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 
+import { getCurrentUserStorage } from "../components/utils/currentUserStorage";
 import { BASE_URL } from "../config";
 
 type RefreshTokenResponse = {
   access: string;
 };
 
-const useRefreshToken = (
-  token: string
-): { accessToken?: string; isLoading: boolean } => {
-  const [accessToken, setAccessToken] = useState<string>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+const useRefreshToken = () => {
+  const fetchRefreshToken = async () => {
+    const currentUserInfo = await getCurrentUserStorage();
+    const refreshToken = currentUserInfo?.refreshToken;
+    const API_LINK = `${BASE_URL}/auth/token/refresh`;
 
-  useEffect(() => {
-    const refreshToken = async () => {
-      setIsLoading(true);
+    const response = await fetch(API_LINK, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error in fetchRefreshToken");
+    }
+    return response.json();
+  };
 
-      try {
-        const API_LINK = `${BASE_URL}/auth/token/refresh`;
+  const { data, isLoading } = useQuery<RefreshTokenResponse, Error>(
+    ["refresh_token"],
+    fetchRefreshToken
+  );
 
-        const response = await fetch(API_LINK, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data: RefreshTokenResponse = await response.json();
-        setAccessToken(data.access);
-      } catch (e) {
-        console.log("Error in useRefreshToken hook: ", e);
-      }
-
-      setIsLoading(false);
-    };
-
-    refreshToken();
-  }, [token]);
-
-  return { accessToken, isLoading };
+  return { data, isLoading };
 };
 
 export { useRefreshToken };
