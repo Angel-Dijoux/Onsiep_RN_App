@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
@@ -32,16 +32,26 @@ export const CardFormationDetails = ({
   tutelle,
   forId,
 }: CardFormationDetailsProps) => {
+  const [isFav, setIsFav] = useState<boolean>(false);
+
   const { isLoading, data } = useGetFormation(forId);
   const { getIsFav } = useGetIfIsFav(item.url_et_id_onisep);
   const { data: isFavData, isLoading: isFavLoading } = getIsFav;
   const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
 
+  useEffect(() => {
+    if (isFavData?.is_fav) {
+      setIsFav(isFavData.is_fav);
+    }
+  }, [isFavData]);
+
   const handleFavoris = (item: Result): void => {
     if (isFavData?.is_fav && isFavData.favori_id) {
       handleDeleteFavoris(isFavData.favori_id);
+      setIsFav(false);
     }
     handleAddFavoris(item);
+    setIsFav(true);
   };
 
   let formattedAttendus: formattedHtml = [];
@@ -152,7 +162,7 @@ export const CardFormationDetails = ({
         }}
       >
         <AntDesign
-          name={isFavData?.is_fav ? "star" : "staro"}
+          name={isFav ? "star" : "staro"}
           size={24}
           color={colors.WHITE}
           style={{
