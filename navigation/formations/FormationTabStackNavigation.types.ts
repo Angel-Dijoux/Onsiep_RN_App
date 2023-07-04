@@ -11,7 +11,7 @@ export type FormationTabStackNavigationParamsList = {
 };
 
 export type FormationScreenRouteProps = {
-  navigation: RouteProp<
+  route: RouteProp<
     FormationTabStackNavigationParamsList,
     "FormationScreen"
   >;

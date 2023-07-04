@@ -9,6 +9,7 @@ import { Formation } from "../../../utils/onisep.type";
 import { useFavoris } from "../../hooks/favoris/useFavoris";
 import { CardFormation } from "../ui/CardFormation";
 import { NoResult } from "../ui/no_result";
+import { getFORId } from "../../../screens/home/utils/stringUtils";
 
 type ListFormationType = {
   data?: Formation[];
@@ -42,7 +43,9 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
       isFavcreen={isFavScreen}
       onPress={() => handleOnClick(item.id)}
       onPressCard={() => {
-        navigation.navigate("FormationScreen", { id: item.url_et_id_onisep });
+        navigation.navigate("FormationScreen", {
+          id: `FOR.${getFORId(item.url_et_id_onisep)}`,
+        });
       }}
     />
   );
