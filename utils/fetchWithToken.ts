@@ -1,5 +1,5 @@
 import { getCurrentUserStorage } from "../src/components/utils/currentUserStorage";
-import { BASE_URL } from "../src/config";
+import { Config } from "../src/config";
 
 export const fetchWithToken = async (
   url: string,
@@ -15,6 +15,6 @@ export const fetchWithToken = async (
     };
   }
 
-  const response = await fetch(`${BASE_URL}${url}`, options);
+  const response = await fetch(`${Config.baseUrl}${url}`, options);
   return response;
 };

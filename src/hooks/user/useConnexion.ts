@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 
-import { BASE_URL } from "../../config";
+import { Config } from "../../config";
 
 const useConnexion = () => {
   const login = useMutation(
     async ({ formData }: { formData: { email: string; password: string } }) => {
-      const response = await fetch(`${BASE_URL}/auth/login`, {
+      const response = await fetch(`${Config.baseUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,7 +32,7 @@ const useConnexion = () => {
         username: string;
       };
     }) => {
-      const response = await fetch(`${BASE_URL}/auth/register`, {
+      const response = await fetch(`${Config.baseUrl}/auth/register`, {
         method: "POST",
         headers: {
           Accept: "application/json",

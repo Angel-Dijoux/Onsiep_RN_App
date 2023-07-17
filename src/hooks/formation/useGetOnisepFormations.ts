@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 
 import { type OnisepFormations } from "../../../shared/formation/onisepFormation.type";
 import GET_TOKEN from "../../components/api/get_token";
-import { ONSIEP_APP_ID } from "../../config";
+import { Config } from "../../config";
 
 export const ONISEP_API_URL =
   "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?";
@@ -12,7 +12,7 @@ const useGetOnisepFormations = (offset: number) => {
     const TOKEN_API = await GET_TOKEN();
     const response = await fetch(`${ONISEP_API_URL}size=${size}`, {
       headers: {
-        "Application-ID": ONSIEP_APP_ID,
+        "Application-ID": Config.onisepAppId,
         Authorization: "Bearer " + TOKEN_API,
       },
     });
