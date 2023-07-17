@@ -6,7 +6,7 @@ const GET_TOKEN = () => {
     // formData for post request
     const formData = new FormData();
     formData.append("email", Config.onisepId); // my email
-    formData.append("password", Config.onisepId); // my password
+    formData.append("password", Config.onisepPs); // my password
     // request
     fetch(API_TOKEN, {
       method: "POST",
