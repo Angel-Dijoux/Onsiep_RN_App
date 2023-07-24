@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { type FormationType } from "../../../shared/formation/formation.type";
 import { Config } from "../../config";
 
-
 const useGetFormation = (id: string) => {
   const fetchById = async (id: string) => {
     const response = await fetch(`${Config.baseUrl}/formations/${id}`);
