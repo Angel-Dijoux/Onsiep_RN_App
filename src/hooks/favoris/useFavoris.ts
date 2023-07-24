@@ -3,11 +3,10 @@ import { useMutation, useQueryClient } from "react-query";
 import { Result } from "../../../shared/formation/onisepFormation.type";
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { UserFavoris } from "../../../utils/onisep.type";
-import { BASE_URL } from "../../config";
+import { Config } from "../../config";
 import { useAuthenticatedQuery } from "../useAuthenticatedQuery";
 import { useCurrentUser } from "../user/useCurrentUser";
 
-const API_URL = BASE_URL;
 
 const useFavoris = () => {
   const { accessToken } = useCurrentUser();
@@ -29,7 +28,7 @@ const useFavoris = () => {
 
   const deleteFormation = useMutation(
     async (id: number) => {
-      const response = await fetch(`${API_URL}/favoris/${id}`, {
+      const response = await fetch(`${Config.baseUrl}/favoris/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -49,7 +48,7 @@ const useFavoris = () => {
 
   const addFormation = useMutation(
     async (formation: Result) => {
-      const response = await fetch(`${API_URL}/favoris`, {
+      const response = await fetch(`${Config.baseUrl}/favoris`, {
         method: "POST",
         headers: {
           Accept: "application/json",

@@ -3,7 +3,9 @@ import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
-import { BASE_URL } from "../config";
+import { Config } from "../config";
+
+const BASE_URL = Config.baseUrl;
 
 export const AuthContext = createContext();
 

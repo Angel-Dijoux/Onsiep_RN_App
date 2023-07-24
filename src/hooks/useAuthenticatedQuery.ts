@@ -9,7 +9,7 @@ import {
   getCurrentUserStorage,
   setCurrentUserStorage,
 } from "../components/utils/currentUserStorage";
-import { BASE_URL } from "../config";
+import { Config } from "../config";
 
 type QueryFn<TData> = QueryFunction<TData, any>;
 
@@ -20,7 +20,7 @@ export type AuthenticatedQueryResult<TData> = UseQueryResult<TData> & {
 const fetchRefreshToken = async () => {
   const currentUserInfo = await getCurrentUserStorage();
   const refreshToken = currentUserInfo?.refreshToken;
-  const API_LINK = `${BASE_URL}/auth/token/refresh`;
+  const API_LINK = `${Config.baseUrl}/auth/token/refresh`;
 
   const response = await fetch(API_LINK, {
     method: "GET",

@@ -3,14 +3,14 @@ import { useQuery } from "react-query";
 import { ONISEP_API_URL } from "./useGetOnisepFormations";
 import { OnisepFormations } from "../../../shared/formation/onisepFormation.type";
 import GET_TOKEN from "../../components/api/get_token";
-import { ONSIEP_APP_ID } from "../../config";
+import { Config } from "../../config";
 
 export const useSearchFormations = (query: string) => {
   const fetchSearchedFormationFromOnisep = async (q: string) => {
     const TOKEN_API = await GET_TOKEN();
     const response = await fetch(`${ONISEP_API_URL}q=${q}&size=20`, {
       headers: {
-        "Application-ID": ONSIEP_APP_ID,
+        "Application-ID": Config.onisepAppId,
         Authorization: "Bearer " + TOKEN_API,
       },
     });
