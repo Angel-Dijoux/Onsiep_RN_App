@@ -1,15 +1,12 @@
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 
 import { Result } from "../../../shared/formation/onisepFormation.type";
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { UserFavoris } from "../../../utils/onisep.type";
-import { Config } from "../../config";
+import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
 import { useAuthenticatedQuery } from "../useAuthenticatedQuery";
-import { useCurrentUser } from "../user/useCurrentUser";
-
 
 const useFavoris = () => {
-  const { accessToken } = useCurrentUser();
   const queryClient = useQueryClient();
 
   const fetchFavoris = async () => {
@@ -26,13 +23,10 @@ const useFavoris = () => {
     data: favoris,
   } = useAuthenticatedQuery<UserFavoris>("favoris", fetchFavoris, { retry: 2 });
 
-  const deleteFormation = useMutation(
+  const deleteFormation = useAuthenticatedMutation(
     async (id: number) => {
-      const response = await fetch(`${Config.baseUrl}/favoris/${id}`, {
+      const response = await fetchWithToken(`/favoris/${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -46,14 +40,13 @@ const useFavoris = () => {
     }
   );
 
-  const addFormation = useMutation(
+  const addFormation = useAuthenticatedMutation(
     async (formation: Result) => {
-      const response = await fetch(`${Config.baseUrl}/favoris`, {
+      const response = await fetchWithToken("/favoris", {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(formation),
       });

@@ -11,10 +11,7 @@ export type FormationTabStackNavigationParamsList = {
 };
 
 export type FormationScreenRouteProps = {
-  route: RouteProp<
-    FormationTabStackNavigationParamsList,
-    "FormationScreen"
-  >;
+  route: RouteProp<FormationTabStackNavigationParamsList, "FormationScreen">;
 };
 
 export type SearchScreenRouteProps = {

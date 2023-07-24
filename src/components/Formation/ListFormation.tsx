@@ -4,12 +4,12 @@ import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React, { useEffect, useState } from "react";
 
 import { type FormationTabStackNavigationParamsList } from "../../../navigation/formations/FormationTabStackNavigation.types";
+import { getFORId } from "../../../screens/home/utils/stringUtils";
 import { deviceHeight } from "../../../utils/deviceInfo";
 import { Formation } from "../../../utils/onisep.type";
 import { useFavoris } from "../../hooks/favoris/useFavoris";
 import { CardFormation } from "../ui/CardFormation";
 import { NoResult } from "../ui/no_result";
-import { getFORId } from "../../../screens/home/utils/stringUtils";
 
 type ListFormationType = {
   data?: Formation[];
