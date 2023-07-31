@@ -16,7 +16,7 @@ import { deviceHeight } from "../utils/deviceInfo";
 
 const Formation: React.FC<FormationScreenRouteProps> = ({ route }) => {
   const { id } = route.params;
-  const { data, isLoading } = useGetFormation("FOR.1234");
+  const { data, isLoading } = useGetFormation("FOR.1231");
 
   const styles = StyleSheet.create({
     heading: {
