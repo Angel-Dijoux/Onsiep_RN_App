@@ -1,8 +1,11 @@
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Result } from "../../shared/formation/onisepFormation.type";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
@@ -14,9 +17,6 @@ import { useFavoris } from "../../src/hooks/favoris/useFavoris";
 import { GetIsFavProps } from "../../src/hooks/favoris/useGetIfIsFav";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 
 interface CardFormationDetailsProps {
   item: Result;

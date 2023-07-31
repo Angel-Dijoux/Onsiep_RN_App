@@ -3,7 +3,6 @@ import React from "react";
 
 import { deviceHeight } from "../../utils/deviceInfo";
 import { type Metier, type SousDomaineWeb } from "../formation/formation.type";
-import { Box, Text } from "../ui/primitives";
 import { Libelle } from "../ui/Libelle";
 
 type ItemType = Metier | SousDomaineWeb;

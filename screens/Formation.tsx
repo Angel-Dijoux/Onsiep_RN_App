@@ -12,8 +12,8 @@ import { Screen } from "../shared/ui/navigation/Screen";
 import { Text } from "../shared/ui/primitives";
 import { colors } from "../shared/ui/primitives/theme/colors";
 import { textVariants } from "../shared/ui/primitives/theme/fonts";
-import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 import { spacing } from "../shared/ui/primitives/theme/spacing";
+import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 
 const Formation: React.FC<FormationScreenRouteProps> = () => {
   const route = useRoute<FormationScreenRouteProps["route"]>();

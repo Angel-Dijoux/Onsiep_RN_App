@@ -2,9 +2,9 @@ import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
 
 import { PoursuitesEtudes } from "../../shared/formation/formation.type";
+import { Libelle } from "../../shared/ui/Libelle";
 import { Box, Text } from "../../shared/ui/primitives";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { Libelle } from "../../shared/ui/Libelle";
 
 const renderItem: ListRenderItem<string> = ({ item }) => (
   <Box
