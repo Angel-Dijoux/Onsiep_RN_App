@@ -5,37 +5,38 @@ import { VerticalList } from "../../shared/list/VerticalList";
 import { Box, Text } from "../../shared/ui/primitives";
 
 const VerticalListMetiers = ({
-  data,
+  metiers,
 }: {
-  data?: FormationType["metiers_formation"];
+  metiers?: FormationType["metiers_formation"]["metier"];
 }) => {
+  if (!metiers) return null;
+
   return (
     <>
       <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
         Métiers
       </Text>
-      {data?.metier &&
-        (Array.isArray(data.metier) ? (
-          <Box pt="global_20">
-            <VerticalList data={data.metier} />
-          </Box>
-        ) : (
-          <Box
-            bg="GREY_90"
-            borderRadius="global_8"
-            padding="global_15"
-            mx="global_2"
+      {Array.isArray(metiers) ? (
+        <Box pt="global_20">
+          <VerticalList data={metiers} />
+        </Box>
+      ) : (
+        <Box
+          bg="GREY_90"
+          borderRadius="global_8"
+          padding="global_15"
+          mx="global_2"
+        >
+          <Text
+            color="SECONDARY_BASE"
+            fontWeight="700"
+            fontFamily="satoshi"
+            fontSize={14}
           >
-            <Text
-              color="SECONDARY_BASE"
-              fontWeight="700"
-              fontFamily="satoshi"
-              fontSize={14}
-            >
-              {data.metier.libelle}
-            </Text>
-          </Box>
-        ))}
+            {metiers.libelle}
+          </Text>
+        </Box>
+      )}
     </>
   );
 };

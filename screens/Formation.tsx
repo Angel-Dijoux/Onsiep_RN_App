@@ -26,7 +26,7 @@ const Formation: React.FC<FormationScreenRouteProps> = ({ route }) => {
       goBack
       edges={["top"]}
     >
-      <VerticalListMetiers data={data?.metiers_formation} />
+      <VerticalListMetiers metiers={data?.metiers_formation.metier} />
       <VerticalListSubDomain
         subDomainWeb={data?.sous_domaines_web.sous_domaine_web}
       />
