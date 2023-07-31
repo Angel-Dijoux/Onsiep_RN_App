@@ -1,7 +1,8 @@
 import React from "react";
-import { Text } from "../../shared/ui/primitives";
-import { VerticalList } from "../../shared/list/VerticalList";
+
 import { FormationType } from "../../shared/formation/formation.type";
+import { VerticalList } from "../../shared/list/VerticalList";
+import { Text } from "../../shared/ui/primitives";
 
 const VerticalListSubDomain = ({
   subDomainWeb,

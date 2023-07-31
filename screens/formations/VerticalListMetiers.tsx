@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Text } from "../../shared/ui/primitives";
+
 import { FormationType } from "../../shared/formation/formation.type";
 import { VerticalList } from "../../shared/list/VerticalList";
+import { Box, Text } from "../../shared/ui/primitives";
 
 const VerticalListMetiers = ({
   data,

@@ -1,21 +1,17 @@
-import { FlashList } from "@shopify/flash-list";
 import React from "react";
 import { StyleSheet } from "react-native";
 import HTML from "react-native-render-html";
 
+import { VerticalListMetiers } from "./formations/VerticalListMetiers";
+import { VerticalListStudyPursuits } from "./formations/VerticalListStudyPursuits";
+import { VerticalListSubDomain } from "./formations/VerticalListSubDomain";
 import { FormationScreenRouteProps } from "../navigation/formations/FormationTabStackNavigation.types";
-import { VerticalList } from "../shared/list/VerticalList";
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
-import { Box, Text } from "../shared/ui/primitives";
+import { Text } from "../shared/ui/primitives";
 import { colors } from "../shared/ui/primitives/theme/colors";
 import { textVariants } from "../shared/ui/primitives/theme/fonts";
-import { NoResult } from "../src/components/ui/no_result";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
-import { deviceHeight } from "../utils/deviceInfo";
-import { VerticalListMetiers } from "./formations/VerticalListMetiers";
-import { VerticalListSubDomain } from "./formations/VerticalListSubDomain";
-import { VerticalListStudyPursuits } from "./formations/VerticalListStudyPursuits";
 
 const Formation: React.FC<FormationScreenRouteProps> = ({ route }) => {
   const { id } = route.params;

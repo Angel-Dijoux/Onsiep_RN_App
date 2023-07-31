@@ -1,7 +1,8 @@
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
+
 import { PoursuitesEtudes } from "../../shared/formation/formation.type";
 import { Box, Text } from "../../shared/ui/primitives";
-import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import { deviceHeight } from "../../utils/deviceInfo";
 
 const renderItem: ListRenderItem<string> = ({ item }) => (
