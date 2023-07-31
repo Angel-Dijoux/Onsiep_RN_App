@@ -8,7 +8,7 @@ export const Label = ({
   bg,
   color,
 }: {
-  text: string;
+  text?: string;
   bg: Colors;
   color?: Colors;
 }) => {

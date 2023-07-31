@@ -1,8 +1,11 @@
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Result } from "../../shared/formation/onisepFormation.type";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
@@ -34,6 +37,9 @@ export const CardFormationDetails = ({
   tutelle,
   forId,
 }: CardFormationDetailsProps) => {
+  const navigation =
+    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
+
   const matchingItem = listOfFavFormations?.find(
     (fav) => fav.url === item.url_et_id_onisep
   );
@@ -138,15 +144,23 @@ export const CardFormationDetails = ({
               </Box>
             </Box>
           )}
-          <Box
-            bg="PRIMARY_DARK"
-            p="global_10"
-            borderRadius="round"
-            alignItems="center"
-            mt="global_10"
+          <Pressable
+            onPress={() => {
+              navigation.navigate("FormationScreen", {
+                id: forId,
+              });
+            }}
           >
-            <Text variant="large">En savoir plus</Text>
-          </Box>
+            <Box
+              bg="PRIMARY_DARK"
+              p="global_10"
+              borderRadius="round"
+              alignItems="center"
+              mt="global_10"
+            >
+              <Text variant="large">En savoir plus</Text>
+            </Box>
+          </Pressable>
         </>
       )}
 

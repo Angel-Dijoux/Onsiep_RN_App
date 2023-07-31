@@ -1,11 +1,15 @@
-import { FlashList } from "@shopify/flash-list";
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
 
 import { deviceHeight } from "../../utils/deviceInfo";
 import { type Metier, type SousDomaineWeb } from "../formation/formation.type";
-import { Box, Text } from "../ui/primitives";
+import { Libelle } from "../ui/Libelle";
 
 type ItemType = Metier | SousDomaineWeb;
+
+const renderItem: ListRenderItem<ItemType> = ({ item }) => (
+  <Libelle text={item.libelle} />
+);
 
 const VerticalList = ({ data }: { data?: ItemType[] }) => {
   return (
@@ -15,25 +19,7 @@ const VerticalList = ({ data }: { data?: ItemType[] }) => {
       horizontal
       showsHorizontalScrollIndicator={false}
       estimatedItemSize={deviceHeight}
-      renderItem={({ item }: { item: ItemType }) => {
-        return (
-          <Box
-            bg="GREY_90"
-            borderRadius="global_8"
-            padding="global_15"
-            mx="global_2"
-          >
-            <Text
-              color="SECONDARY_BASE"
-              fontWeight="700"
-              fontFamily="satoshi"
-              fontSize={14}
-            >
-              {item.libelle}
-            </Text>
-          </Box>
-        );
-      }}
+      renderItem={renderItem}
     />
   );
 };
