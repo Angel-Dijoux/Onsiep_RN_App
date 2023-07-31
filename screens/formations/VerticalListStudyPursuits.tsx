@@ -4,6 +4,7 @@ import React from "react";
 import { PoursuitesEtudes } from "../../shared/formation/formation.type";
 import { Box, Text } from "../../shared/ui/primitives";
 import { deviceHeight } from "../../utils/deviceInfo";
+import { Libelle } from "../../shared/ui/Libelle";
 
 const renderItem: ListRenderItem<string> = ({ item }) => (
   <Box
@@ -31,19 +32,39 @@ const VerticalListStudyPursuits = ({
 }: {
   studyPursuits?: PoursuitesEtudes["poursuite_etudes"];
 }) => {
-  if (studyPursuits?.formation_poursuite_Etudes.length == 0) return null;
+  if (
+    studyPursuits?.formation_poursuite_Etudes.length == 0 ||
+    studyPursuits?.formation_poursuite_Etudes == undefined
+  )
+    return null;
+
+  if (Array.isArray(studyPursuits?.formation_poursuite_Etudes)) {
+    return (
+      <>
+        <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
+          {studyPursuits?.type_Poursuite ?? "Poursuite d'études"}
+        </Text>
+        <Box mx="global_20">
+          <FlashList
+            data={studyPursuits?.formation_poursuite_Etudes}
+            numColumns={2}
+            keyExtractor={(item) => item.toString()}
+            showsVerticalScrollIndicator={false}
+            estimatedItemSize={deviceHeight}
+            renderItem={renderItem}
+          />
+        </Box>
+      </>
+    );
+  }
 
   return (
-    <Box mx="global_20">
-      <FlashList
-        data={studyPursuits?.formation_poursuite_Etudes}
-        numColumns={2}
-        keyExtractor={(item) => item.toString()}
-        showsVerticalScrollIndicator={false}
-        estimatedItemSize={deviceHeight}
-        renderItem={renderItem}
-      />
-    </Box>
+    <>
+      <Text variant="h3" color="GREY_DARK" my="global_10" ml="global_20">
+        {studyPursuits?.type_Poursuite ?? "Poursuite d'études"}
+      </Text>
+      <Libelle text={String(studyPursuits?.formation_poursuite_Etudes)} />
+    </>
   );
 };
 

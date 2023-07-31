@@ -13,6 +13,7 @@ import { Text } from "../shared/ui/primitives";
 import { colors } from "../shared/ui/primitives/theme/colors";
 import { textVariants } from "../shared/ui/primitives/theme/fonts";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
+import { spacing } from "../shared/ui/primitives/theme/spacing";
 
 const Formation: React.FC<FormationScreenRouteProps> = () => {
   const route = useRoute<FormationScreenRouteProps["route"]>();
@@ -22,7 +23,7 @@ const Formation: React.FC<FormationScreenRouteProps> = () => {
   if (isLoading) return <Loading />;
   return (
     <Screen
-      title={data?.type_Formation.type_formation_sigle}
+      title={data?.type_Formation.type_formation_libelle}
       shouldSkipMargins
       isScrollable
       goBack
@@ -42,7 +43,7 @@ const Formation: React.FC<FormationScreenRouteProps> = () => {
           li: styles.listItem,
         }}
       />
-      <Text color="GREY_40" fontFamily="manrope" ml="global_20">
+      <Text color="GREY_40" fontFamily="manrope" mx="global_20" mt="global_15">
         {data?.sous_tutelle}
       </Text>
     </Screen>
@@ -52,10 +53,14 @@ const Formation: React.FC<FormationScreenRouteProps> = () => {
 const styles = StyleSheet.create({
   heading: {
     ...textVariants.h3,
-    color: colors.THIRD_DARK,
+    marginLeft: spacing.global_10,
+    marginRight: spacing.global_10,
+    color: colors.BLACK,
   },
   listItem: {
-    marginBottom: 5,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "flex-start",
   },
 });
 
