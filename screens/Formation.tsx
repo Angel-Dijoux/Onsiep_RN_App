@@ -1,3 +1,4 @@
+import { useRoute } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet } from "react-native";
 import HTML from "react-native-render-html";
@@ -13,9 +14,10 @@ import { colors } from "../shared/ui/primitives/theme/colors";
 import { textVariants } from "../shared/ui/primitives/theme/fonts";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 
-const Formation: React.FC<FormationScreenRouteProps> = ({ route }) => {
+const Formation: React.FC<FormationScreenRouteProps> = () => {
+  const route = useRoute<FormationScreenRouteProps["route"]>();
   const { id } = route.params;
-  const { data, isLoading } = useGetFormation("FOR.1234");
+  const { data, isLoading } = useGetFormation(id);
 
   if (isLoading) return <Loading />;
   return (
