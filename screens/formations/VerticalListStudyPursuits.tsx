@@ -17,7 +17,7 @@ const renderItem: ListRenderItem<string> = ({ item }) => (
     justifyContent="center"
   >
     <Text
-      color="SECONDARY_BASE"
+      color="PRIMARY_100"
       fontWeight="700"
       fontSize={14}
       fontFamily="satoshi"

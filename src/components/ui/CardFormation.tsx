@@ -33,7 +33,7 @@ const CardFormation = ({
       <Box
         flexDirection="column"
         alignItems="flex-start"
-        backgroundColor="SECONDARY_DARK"
+        backgroundColor="PRIMARY_80"
         padding="global_15"
         borderRadius="global_8"
         my="global_5"
@@ -47,7 +47,7 @@ const CardFormation = ({
           <Text
             fontSize={16}
             fontWeight="bold"
-            color="GREY_90"
+            color="PRIMARY"
             fontFamily="satoshi"
           >
             {transformText(type) || "Non Renseigné"}
@@ -57,13 +57,13 @@ const CardFormation = ({
               <Ionicons
                 name="ios-remove-circle-outline"
                 size={spacing.global_24}
-                color={colors.GREY_90}
+                color={colors.PRIMARY_50}
               />
             ) : (
               <AntDesign
                 name="staro"
                 size={spacing.global_24}
-                color={colors.GREY_90}
+                color={colors.PRIMARY_50}
               />
             )}
           </Pressable>
@@ -74,15 +74,15 @@ const CardFormation = ({
           fontStyle="italic"
           fontSize={14}
           fontFamily="manrope"
-          color="PRIMARY_80"
+          color="PRIMARY"
         >
           {duree}
         </Text>
-        <Text color="GREY_DARK" mb="global_10" fontSize={16}>
+        <Text color="PRIMARY" mb="global_10" fontSize={16}>
           {transformText(libelle)}
         </Text>
         <Text
-          color="GREY_DARK"
+          color="PRIMARY"
           mb="global_10"
           fontWeight="700"
           fontSize={15}

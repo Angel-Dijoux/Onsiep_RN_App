@@ -9,22 +9,24 @@ export const Label = ({
   color,
 }: {
   text?: string;
-  bg: Colors;
+  bg?: Colors;
   color?: Colors;
 }) => {
   return (
     <Box
-      bg={bg}
+      bg="PRIMARY_6"
       justifyContent="center"
       px="global_10"
       py="global_2"
       mr="global_5"
       my="global_5"
-      minHeight={24}
-      borderRadius="global_16"
+      minHeight={41}
+      borderRadius="global_8"
+      borderWidth={1}
+      borderColor="PRIMARY_50"
     >
       <Text
-        color={color ?? "BLACK"}
+        color="PRIMARY_50"
         variant="small"
         numberOfLines={1}
         ellipsizeMode="tail"

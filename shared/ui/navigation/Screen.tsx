@@ -23,7 +23,7 @@ const Screen = ({
   title,
   goBack,
   shouldSkipMargins = false,
-  colorScheme = "light",
+  colorScheme = "dark",
   isScrollable = true,
   onGoBack,
 }: ScreenProps) => {

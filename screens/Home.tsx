@@ -11,7 +11,7 @@ export const Home = () => {
 
   if (isLoading) return <Loading />;
   return (
-    <Box flex={1} bg="WHITE" px="global_24">
+    <Box flex={1} px="global_24">
       <HeaderHomeScreen />
       <ListFormationsDetails data={data?.results} />
     </Box>

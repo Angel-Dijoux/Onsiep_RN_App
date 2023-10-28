@@ -73,17 +73,12 @@ export const CardFormationDetails = ({
 
   if (isLoading) return <Loading />;
   return (
-    <Box
-      bg="SECONDARY_DARK"
-      mt="global_15"
-      p="global_15"
-      borderRadius="global_8"
-    >
-      <Text variant="h3" color="BLACK">
+    <Box bg="PRIMARY_80" mt="global_15" p="global_15" borderRadius="global_8">
+      <Text variant="h3" color="PRIMARY">
         {title}
       </Text>
       <Box flexDirection="row">
-        <Label text={duree} bg="WHITE" />
+        <Label text={duree} />
         <Label text={level} bg="WHITE" />
       </Box>
       <Label text={tutelle} bg="WHITE" />
@@ -94,7 +89,7 @@ export const CardFormationDetails = ({
               <Text
                 variant="xlarge"
                 fontWeight="700"
-                color="BLACK"
+                color="PRIMARY"
                 my="global_10"
               >
                 Attendus ParcourSup
@@ -107,7 +102,7 @@ export const CardFormationDetails = ({
                         variant="large"
                         fontWeight="600"
                         my="global_5"
-                        color="BLACK"
+                        color="PRIMARY"
                         textDecorationLine="underline"
                       >
                         {item.type}
@@ -127,7 +122,7 @@ export const CardFormationDetails = ({
               <Text
                 variant="xlarge"
                 fontWeight="700"
-                color="BLACK"
+                color="PRIMARY"
                 my="global_10"
               >
                 {data?.poursuites_etudes.poursuite_etudes.type_Poursuite}
@@ -137,7 +132,7 @@ export const CardFormationDetails = ({
                   <Label
                     key={etude}
                     text={etude}
-                    bg="THIRD_DARK"
+                    bg="PRIMARY_DARK"
                     color="WHITE"
                   />
                 ))}
@@ -158,7 +153,9 @@ export const CardFormationDetails = ({
               alignItems="center"
               mt="global_10"
             >
-              <Text variant="large">En savoir plus</Text>
+              <Text color="PRIMARY" variant="large">
+                En savoir plus
+              </Text>
             </Box>
           </Pressable>
         </>
@@ -175,9 +172,9 @@ export const CardFormationDetails = ({
         <AntDesign
           name={isFav ? "star" : "staro"}
           size={24}
-          color={colors.WHITE}
+          color={colors.PRIMARY_DARK}
           style={{
-            backgroundColor: colors.PRIMARY_DARK,
+            backgroundColor: colors.PRIMARY_50,
             borderRadius: borderRadii.round,
             padding: spacing.global_8,
           }}

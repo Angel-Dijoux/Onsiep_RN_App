@@ -21,7 +21,7 @@ const navigationTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: colors.WHITE,
+    background: colors.PRIMARY_DARK,
   },
 };
 

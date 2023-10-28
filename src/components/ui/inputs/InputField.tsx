@@ -44,7 +44,7 @@ const InputField = ({
         flexDirection="row"
         alignItems="center"
         padding="global_15"
-        bg="SECONDARY_DARK"
+        bg="PRIMARY_DARK"
         borderRadius="global_16"
       >
         {children}

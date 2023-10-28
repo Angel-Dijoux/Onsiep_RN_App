@@ -46,9 +46,9 @@ const ScreenWithImage = ({
 
       <LinearGradient
         colors={[
-          colors.SECONDARY_BASE,
-          colors.SECONDARY_DARK,
-          colors.SECONDARY_50,
+          colors.PRIMARY_100,
+          colors.PRIMARY_DARK,
+          colors.PRIMARY_80,
           colors.SECONDARY_40,
           colors.WHITE,
         ]}

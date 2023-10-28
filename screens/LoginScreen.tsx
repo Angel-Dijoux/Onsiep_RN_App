@@ -24,7 +24,7 @@ const LoginScreen = ({ navigation }) => {
         refreshToken: String(response.user.refresh),
       });
       console.log(response);
-      navigation.navigate("HomeScreen");
+      navigation.navigate("Home");
     } catch (error: unknown) {
       console.log(error);
     }

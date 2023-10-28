@@ -3,6 +3,7 @@ import { StyleProp, TextInput, TextInputProps, TextStyle } from "react-native";
 
 import { Text } from "../primitives";
 import { fontFamily } from "../primitives/theme/fonts";
+import { colors } from "../primitives/theme/colors";
 
 type InputProps = TextInputProps & {
   label?: string;
@@ -16,8 +17,7 @@ function Input({ label, style = {}, ...rest }: InputProps) {
         <Text
           variant="small"
           fontFamily={fontFamily.satoshi}
-          color="BLACK"
-          opacity={0.5}
+          color="PRIMARY"
           pb="global_16"
         >
           {label}
@@ -26,13 +26,12 @@ function Input({ label, style = {}, ...rest }: InputProps) {
 
       <TextInput
         {...rest}
-        placeholderTextColor={PLACEHOLDER_COLOR}
-        style={[style]}
+        cursorColor={colors.PRIMARY_50}
+        placeholderTextColor={colors.PRIMARY}
+        style={[{ color: colors.PRIMARY }, style]}
       />
     </>
   );
 }
-
-const PLACEHOLDER_COLOR = "rgba(0, 0, 0, 0.3)";
 
 export { Input };

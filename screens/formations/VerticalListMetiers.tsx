@@ -28,7 +28,7 @@ const VerticalListMetiers = ({
           mx="global_2"
         >
           <Text
-            color="SECONDARY_BASE"
+            color="PRIMARY_100"
             fontWeight="700"
             fontFamily="satoshi"
             fontSize={14}

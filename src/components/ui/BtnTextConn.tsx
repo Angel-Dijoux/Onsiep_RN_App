@@ -18,7 +18,7 @@ const BtnTextConn = ({
         {firstText}{" "}
       </Text>
       <TouchableOpacity onPress={onPress}>
-        <Text color="THIRD_DARK" fontWeight="700">
+        <Text color="PRIMARY_DARK" fontWeight="700">
           {secondText}
         </Text>
       </TouchableOpacity>

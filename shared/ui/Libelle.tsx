@@ -6,7 +6,7 @@ const Libelle = ({ text }: { text: string }) => {
   return (
     <Box bg="GREY_90" borderRadius="global_8" padding="global_15" mx="global_2">
       <Text
-        color="SECONDARY_BASE"
+        color="PRIMARY_100"
         fontWeight="700"
         fontFamily="satoshi"
         fontSize={14}
