@@ -1,43 +1,32 @@
 const GREY = {
+  GREY: "#7b7b7b",
   GREY_DARK: "#1b1c1f",
-  GREY_90: "#1B180F",
-  GREY_65: "#4c4e56",
-  GREY_40: "#66687a",
-  GREY_20: "#9797a6",
-  GREY_10: "#9799b8",
+  GREY_SAND: "#7c7b74",
+  GREY_SEND_DARK: "#2a2a28"
 };
+
 
 const PRIMARY = {
-  PRIMARY_DARK: "#14120B", // 1
-  PRIMARY_100: "#1B180F", // 2
-  PRIMARY_80: "#2D2305", // 3
-  PRIMARY_6: "#FFAA001E",
-  PRIMARY_8: "#836A21",
-  PRIMARY_50: "#FFE629", // 9
-  PRIMARY_40: "#ed9898",
-  PRIMARY_10: "#f0bcb6",
-  PRIMARY: "#FEF6BAF6" // last
-};
+  PRIMARY_1: '#14120b',
+  PRIMARY_2: '#1b180f',
+  PRIMARY_3: '#2d2305',
+  PRIMARY_4: '#362b00',
+  PRIMARY_5: '#433500',
+  PRIMARY_6: '#524202',
+  PRIMARY_7: '#665417',
+  PRIMARY_8: '#836a21',
+  PRIMARY_9: '#ffe629',
+  PRIMARY_10: '#ffff57',
+  PRIMARY_11: '#f5e147',
+  PRIMARY_12: '#f6eeb4',
+}
 
-const SECONDARY = {
-  SECONDARY_40: "#fff1b6",
-  SECONDARY_10: "#fffbee",
-};
-
-const THIRD = {
-  THIRD_40: "#b3d4dc",
-  THIRD_10: "#e9f1f4",
-};
 
 const SEMANTIC = {
-  SUCCESS: "#6dff66",
-  SUCCESS_50: "#d0ffcc",
-  ERROR: "#e48a7d",
-  ERROR_50: "#f9d8d3",
-  WARNING: "#ffe792",
-  WARNING_50: "#fff7dd",
-  INFO: "#a8c9d3",
-  INFO_50: "#e9f1f4",
+  SUCCESS: "#d0ffcc",
+  ERROR: "#f9d8d3",
+  WARNING: "#fff7dd",
+  INFO: "#e9f1f4",
 };
 
 const GLOBALS = {
@@ -54,8 +43,6 @@ const TRANSPARENT = {
 export const colors = {
   ...GREY,
   ...PRIMARY,
-  ...SECONDARY,
-  ...THIRD,
   ...SEMANTIC,
   ...GLOBALS,
   ...TRANSPARENT,

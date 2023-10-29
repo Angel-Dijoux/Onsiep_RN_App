@@ -22,13 +22,13 @@ const VerticalListMetiers = ({
         </Box>
       ) : (
         <Box
-          bg="GREY_90"
+          bg="GREY_SEND_DARK"
           borderRadius="global_8"
           padding="global_15"
           mx="global_2"
         >
           <Text
-            color="PRIMARY_100"
+            color="PRIMARY_2"
             fontWeight="700"
             fontFamily="satoshi"
             fontSize={14}

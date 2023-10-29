@@ -43,7 +43,12 @@ const Formation: React.FC<FormationScreenRouteProps> = () => {
           li: styles.listItem,
         }}
       />
-      <Text color="GREY_40" fontFamily="manrope" mx="global_20" mt="global_15">
+      <Text
+        color="GREY_SAND"
+        fontFamily="manrope"
+        mx="global_20"
+        mt="global_15"
+      >
         {data?.sous_tutelle}
       </Text>
     </Screen>

@@ -19,7 +19,7 @@ const Tabs = () => {
         ...screenOptions,
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: colors.PRIMARY_100,
+          backgroundColor: colors.PRIMARY_2,
           height: 50,
           borderTopColor: "transparent",
         },

@@ -39,7 +39,7 @@ export const HeaderHomeScreen = () => {
         borderRadius={borderRadii.round}
       />
       <Box
-        bg="PRIMARY_80"
+        bg="PRIMARY_3"
         justifyContent="center"
         height={41}
         width="85%"

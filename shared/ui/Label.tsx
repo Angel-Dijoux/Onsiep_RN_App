@@ -23,10 +23,10 @@ export const Label = ({
       minHeight={41}
       borderRadius="global_8"
       borderWidth={1}
-      borderColor="PRIMARY_50"
+      borderColor="PRIMARY_9"
     >
       <Text
-        color="PRIMARY_50"
+        color="PRIMARY_9"
         variant="small"
         numberOfLines={1}
         ellipsizeMode="tail"

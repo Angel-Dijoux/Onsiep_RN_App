@@ -8,7 +8,7 @@ import { deviceHeight } from "../../utils/deviceInfo";
 
 const renderItem: ListRenderItem<string> = ({ item }) => (
   <Box
-    bg="GREY_90"
+    bg="GREY_SEND_DARK"
     borderRadius="global_8"
     my="global_5"
     padding="global_10"
@@ -16,12 +16,7 @@ const renderItem: ListRenderItem<string> = ({ item }) => (
     width="95%"
     justifyContent="center"
   >
-    <Text
-      color="PRIMARY_100"
-      fontWeight="700"
-      fontSize={14}
-      fontFamily="satoshi"
-    >
+    <Text color="PRIMARY_2" fontWeight="700" fontSize={14} fontFamily="satoshi">
       {item}
     </Text>
   </Box>

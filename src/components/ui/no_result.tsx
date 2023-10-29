@@ -11,7 +11,7 @@ const NoResult = ({ text }: { text: string }) => {
       <MaterialCommunityIcons
         name="space-invaders"
         size={spacing.global_40}
-        color={colors.GREY_90}
+        color={colors.GREY_SEND_DARK}
       />
       <Text color="BLACK" fontFamily="manrope" variant="xlarge">
         {text}

@@ -26,7 +26,7 @@ export const RegiserTabIcon = ({ color }) => (
 export const screenOptions = {
   headerShown: false,
   tabBarShowLabel: false,
-  tabBarActiveTintColor: colors.PRIMARY_DARK,
+  tabBarActiveTintColor: colors.PRIMARY_1,
   tabBarHideOnKeyboard: true,
 };
 

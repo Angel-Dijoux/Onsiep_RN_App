@@ -9,12 +9,15 @@ import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
-  const { getSearchedFormations } = useSearchFormations(query);
-  const { data, isLoading } = getSearchedFormations;
+  const { getSearchedFormations, isLoading, formations } =
+    useSearchFormations(query);
+  const { data, isLoading: loading } = getSearchedFormations;
 
-  if (isLoading) return <Loading />;
+  if (!isLoading) console.log(formations);
+
+  if (loading) return <Loading />;
   return (
-    <Box flex={1} bg="WHITE" px="global_24">
+    <Box flex={1} px="global_24">
       <HeaderHomeScreen />
       <ListFormationsDetails data={data?.results} />
     </Box>
