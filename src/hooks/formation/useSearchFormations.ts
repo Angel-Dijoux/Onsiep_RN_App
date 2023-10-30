@@ -1,11 +1,12 @@
 
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
+
 import { type Formations } from "../../../shared/formation/fomationv2.type";
 import { fetchWithoutToken } from "../../../utils/fetchWithToken";
 
-
+const LIMIT = 10;
 export const useSearchFormations = (query: string) => {
-  const fetchSearchResult = async () => {
+  const fetchSearchResult = async ({ pageParam }: { pageParam?: number }) => {
     const response = await fetchWithoutToken("/formations/search", {
       method: "POST",
       headers: {
@@ -13,8 +14,9 @@ export const useSearchFormations = (query: string) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "limit": 10,
-        "query": query
+        "limit": LIMIT,
+        "query": query,
+        "offset": pageParam ?? 0
       })
     })
     if (!response.ok) {
@@ -23,12 +25,21 @@ export const useSearchFormations = (query: string) => {
     return response.json();
   }
 
-  const {
-    isLoading,
-    error,
-    data,
-    refetch
-  } = useQuery<Formations>("searchFormations", fetchSearchResult, { retry: 2 })
+  const getNextPageParams = (lastPage: Formations) => {
+    const total = lastPage.total;
+    if (lastPage.formations.length < total) {
+      return lastPage.formations.length;
+    }
+    return undefined;
+  }
 
-  return { isLoading, data, refetch };
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+    isLoading
+  } = useInfiniteQuery<Formations>("searchFormations", fetchSearchResult, { retry: 2, getNextPageParam: getNextPageParams })
+
+  return { isLoading, data, refetch, fetchNextPage, hasNextPage };
 };

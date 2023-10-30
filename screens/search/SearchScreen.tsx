@@ -9,7 +9,14 @@ import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
-  const { isLoading, data, refetch } = useSearchFormations(query);
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+    useSearchFormations(query);
+
+  const handleEndReached = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
   useEffect(() => {
     refetch();
@@ -19,7 +26,10 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   return (
     <Box flex={1} px="global_24">
       <HeaderHomeScreen />
-      <ListFormationsDetails data={data?.formations} />
+      <ListFormationsDetails
+        data={data?.pages.flatMap((page) => page.formations)}
+        handleEndReached={handleEndReached}
+      />
     </Box>
   );
 };

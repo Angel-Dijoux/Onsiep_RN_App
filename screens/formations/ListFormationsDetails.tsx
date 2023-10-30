@@ -23,7 +23,13 @@ export const renderItemDetailCardFormations: ListRenderItem<Formation> = ({
   );
 };
 
-export const ListFormationsDetails = ({ data }: { data?: Formation[] }) => {
+export const ListFormationsDetails = ({
+  data,
+  handleEndReached,
+}: {
+  data?: Formation[];
+  handleEndReached: () => void;
+}) => {
   return (
     <FlashList
       data={data}
@@ -32,6 +38,8 @@ export const ListFormationsDetails = ({ data }: { data?: Formation[] }) => {
       estimatedItemSize={deviceHeight}
       decelerationRate="fast"
       showsVerticalScrollIndicator={false}
+      onEndReached={handleEndReached}
+      onEndReachedThreshold={0.1}
     />
   );
 };
