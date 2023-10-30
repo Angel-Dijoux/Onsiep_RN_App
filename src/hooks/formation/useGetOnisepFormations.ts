@@ -1,32 +1,46 @@
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 
-import { type OnisepFormations } from "../../../shared/formation/onisepFormation.type";
-import GET_TOKEN from "../../components/api/get_token";
-import { Config } from "../../config";
+import { Formations } from "../../../shared/formation/fomationv2.type";
+import { fetchWithoutToken } from "../../../utils/fetchWithToken";
 
-export const ONISEP_API_URL =
-  "https://api.opendata.onisep.fr/api/1.0/dataset/5fa591127f501/search?";
 
-const useGetOnisepFormations = (offset: number) => {
-  const fetchFormationFromOnisep = async (size: number) => {
-    const TOKEN_API = await GET_TOKEN();
-    const response = await fetch(`${ONISEP_API_URL}size=${size}`, {
+const LIMIT = 10;
+const useGetOnisepFormations = () => {
+  const fetchSearchResult = async ({ pageParam }: { pageParam?: number }) => {
+    const response = await fetchWithoutToken("/formations/", {
+      method: "POST",
       headers: {
-        "Application-ID": Config.onisepAppId,
-        Authorization: "Bearer " + TOKEN_API,
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-    });
+      body: JSON.stringify({
+        "limit": LIMIT,
+        "offset": pageParam ?? 0
+      })
+    })
     if (!response.ok) {
-      throw new Error("Failed to fetch data from onisep");
+      throw new Error("Error on search formations");
     }
     return response.json();
-  };
+  }
 
-  const { isLoading, data } = useQuery<OnisepFormations, Error>(
-    ["onisep_formations", offset],
-    () => fetchFormationFromOnisep(offset)
-  );
-  return { data, isLoading };
+  const getNextPageParams = (lastPage: Formations) => {
+    const total = lastPage.total;
+    if (lastPage.formations.length < total) {
+      return lastPage.formations.length;
+    }
+    return undefined;
+  }
+
+  const {
+    data,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+    isLoading
+  } = useInfiniteQuery<Formations>("mainFormations", fetchSearchResult, { retry: 2, getNextPageParam: getNextPageParams })
+
+  return { isLoading, data, refetch, fetchNextPage, hasNextPage };
 };
 
 export { useGetOnisepFormations };
