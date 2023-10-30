@@ -28,6 +28,11 @@ interface CardFormationDetailsProps {
   forId: string;
 }
 
+function capitalizeFirstLetter(inputString: string): string {
+  if (inputString.length === 0) return inputString;
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+}
+
 export const CardFormationDetails = ({
   item,
   title,
@@ -73,13 +78,13 @@ export const CardFormationDetails = ({
   return (
     <Box bg="PRIMARY_3" mt="global_15" p="global_15" borderRadius="global_8">
       <Text variant="h3" color="PRIMARY_12">
-        {title}
+        {capitalizeFirstLetter(title)}
       </Text>
-      <Box flexDirection="row">
+      <Box flexDirection="row" mt="global_5">
         <Label text={duree} />
-        <Label text={level} bg="WHITE" />
+        <Label text={level} />
       </Box>
-      <Label text={tutelle} bg="WHITE" />
+      <Label text={tutelle} />
       {data?.identifiant && (
         <>
           {formattedAttendus.length > 0 && (

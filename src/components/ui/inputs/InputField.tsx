@@ -30,13 +30,12 @@ const InputField = ({
   return (
     <Box mt="global_10">
       <Text
-        fontFamily="satoshi"
-        fontSize={15}
-        fontWeight="700"
+        variant="large"
+        fontWeight="800"
         color="PRIMARY_2"
-        ml="global_10"
-        mb="global_5"
-        mt="global_5"
+        ml="global_5"
+        my="global_5"
+        p="global_2"
       >
         {title}
       </Text>
@@ -44,8 +43,8 @@ const InputField = ({
         flexDirection="row"
         alignItems="center"
         padding="global_15"
-        bg="PRIMARY_1"
-        borderRadius="global_16"
+        bg="BLACK"
+        borderRadius="global_8"
       >
         {children}
         <TextInput

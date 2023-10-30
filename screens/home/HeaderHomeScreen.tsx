@@ -33,7 +33,7 @@ export const HeaderHomeScreen = () => {
     >
       <Image
         source={{
-          uri: "https://sm.ign.com/ign_br/screenshot/default/naruto-uzumaki-qabz_3vhp.png",
+          uri: "https://cdn.pixabay.com/photo/2017/03/05/21/55/emoticon-2120024_960_720.png",
         }}
         style={{ height: 40, width: 40, paddingRight: spacing.global_10 }}
         borderRadius={borderRadii.round}

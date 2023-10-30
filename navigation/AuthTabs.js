@@ -7,20 +7,36 @@ import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
 
-export const LoginTabIcon = ({ color }) => (
-  <Ionicons name="log-in-outline" size={24} color={color} />
+export const LoginTabIcon = ({ focused }) => (
+  <Ionicons
+    name="log-in-outline"
+    size={24}
+    color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
+  />
 );
 
-export const HomeTabIcon = ({ color }) => (
-  <Ionicons name="ios-home-outline" size={24} color={color} />
+export const HomeTabIcon = ({ focused }) => (
+  <Ionicons
+    name="ios-home-outline"
+    size={24}
+    color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
+  />
 );
 
-export const SettingsTabIcon = ({ color }) => (
-  <Ionicons name="settings-outline" size={24} color={color} />
+export const SettingsTabIcon = ({ focused }) => (
+  <Ionicons
+    name="settings-outline"
+    size={24}
+    color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
+  />
 );
 
-export const RegiserTabIcon = ({ color }) => (
-  <Ionicons name="person-add-outline" size={24} color={color} />
+export const RegiserTabIcon = ({ focused }) => (
+  <Ionicons
+    name="person-add-outline"
+    size={24}
+    color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
+  />
 );
 
 export const screenOptions = {
@@ -30,17 +46,19 @@ export const screenOptions = {
   tabBarHideOnKeyboard: true,
 };
 
+export const tabBarStyle = {
+  backgroundColor: colors.BLACK,
+  height: 50,
+  borderTopColor: colors.PRIMARY_12,
+};
+
 const AuthTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         ...screenOptions,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: colors.GREY_DARK,
-          height: 50,
-          borderTopColor: "transparent",
-        },
+        tabBarStyle,
       }}
     >
       <Tab.Screen
