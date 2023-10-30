@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { type SearchScreenRouteProps } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Loading } from "../../shared/ui/Loading";
@@ -9,17 +9,17 @@ import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
-  const { getSearchedFormations, isLoading, formations } =
-    useSearchFormations(query);
-  const { data, isLoading: loading } = getSearchedFormations;
+  const { isLoading, data, refetch } = useSearchFormations(query);
 
-  if (!isLoading) console.log(formations);
+  useEffect(() => {
+    refetch();
+  }, [query, refetch]);
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
   return (
     <Box flex={1} px="global_24">
       <HeaderHomeScreen />
-      <ListFormationsDetails data={data?.results} />
+      <ListFormationsDetails data={data?.formations} />
     </Box>
   );
 };

@@ -17,8 +17,8 @@ type ScreenWithImageProps = {
 };
 
 const GRADIENT_START = {
-  x: -1,
-  y: -0.6,
+  x: 0,
+  y: 0,
 };
 
 const ScreenWithImage = ({
@@ -45,14 +45,8 @@ const ScreenWithImage = ({
       />
 
       <LinearGradient
-        colors={[
-          colors.PRIMARY_2,
-          colors.PRIMARY_1,
-          colors.PRIMARY_3,
-          colors.PRIMARY_12,
-          colors.WHITE,
-        ]}
-        start={GRADIENT_START}
+        colors={[colors.PRIMARY_11, colors.PRIMARY_12]}
+        start={GRADIENT_START} // Adjust these values as needed
         style={{
           width: "100%",
           height: diff,
@@ -64,6 +58,7 @@ const ScreenWithImage = ({
         <Screen
           title={title}
           goBack={canGoBack}
+          colorScheme="light"
           isScrollable={false}
           edges={["top"]}
         >

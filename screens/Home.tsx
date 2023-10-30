@@ -13,7 +13,7 @@ export const Home = () => {
   return (
     <Box flex={1} px="global_24">
       <HeaderHomeScreen />
-      <ListFormationsDetails data={data?.results} />
+      {/* <ListFormationsDetails data={data?.results} /> */}
     </Box>
   );
 };

@@ -19,6 +19,8 @@ export type AuthenticatedQueryResult<TData> = UseQueryResult<TData> & {
 
 export const fetchRefreshToken = async () => {
   const currentUserInfo = await getCurrentUserStorage();
+  if (!currentUserInfo) return;
+
   const refreshToken = currentUserInfo?.refreshToken;
   const API_LINK = `${Config.baseUrl}/auth/token/refresh`;
 

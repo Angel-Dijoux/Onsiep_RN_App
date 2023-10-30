@@ -33,7 +33,7 @@ const InputField = ({
         fontFamily="satoshi"
         fontSize={15}
         fontWeight="700"
-        color="GREY_DARK"
+        color="PRIMARY_2"
         ml="global_10"
         mb="global_5"
         mt="global_5"
@@ -55,7 +55,7 @@ const InputField = ({
           editable={editable}
           secureTextEntry={password}
           placeholder={title}
-          placeholderTextColor={colors.GREY_DARK}
+          placeholderTextColor={colors.PRIMARY_12}
           onChangeText={onChange}
           onSubmitEditing={onSubmitEditing}
         />
@@ -67,7 +67,7 @@ const InputField = ({
 const styles = StyleSheet.create({
   input: {
     ...textVariants.regular,
-    color: colors.GREY_DARK,
+    color: colors.PRIMARY_12,
     marginLeft: spacing.global_15,
   },
 });

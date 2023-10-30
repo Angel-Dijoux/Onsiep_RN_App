@@ -4,23 +4,23 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
-import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
-import { Result } from "../../shared/formation/onisepFormation.type";
+import { Formation } from "../../shared/formation/fomationv2.type";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
 import { Box, Text } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
-import { useFavoris } from "../../src/hooks/favoris/useFavoris";
-import { GetIsFavProps } from "../../src/hooks/favoris/useGetIfIsFav";
+import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
+import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 import { deviceHeight } from "../../utils/deviceInfo";
+import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
 
 interface CardFormationDetailsProps {
-  item: Result;
-  listOfFavFormations?: GetIsFavProps["favori_ids"];
+  item: Formation;
   title: string;
   duree: string;
   level: string;
@@ -30,7 +30,6 @@ interface CardFormationDetailsProps {
 
 export const CardFormationDetails = ({
   item,
-  listOfFavFormations,
   title,
   duree,
   level,
@@ -40,21 +39,20 @@ export const CardFormationDetails = ({
   const navigation =
     useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
 
-  const matchingItem = listOfFavFormations?.find(
-    (fav) => fav.url === item.url_et_id_onisep
-  );
-  const isFav = matchingItem?.url === item.url_et_id_onisep;
+  const secondNavigation =
+    useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
+
+  const { accessToken } = useCurrentUser();
 
   const { isLoading, data } = useGetFormation(forId);
 
-  const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
+  const { handleAddFavoris } = useAddFavoris();
 
-  const handleFavoris = (item: Result): void => {
-    if (isFav && matchingItem?.id) {
-      handleDeleteFavoris(matchingItem?.id);
-    } else {
+  const handleFavoris = (item: Formation): void => {
+    if (accessToken) {
       handleAddFavoris(item);
     }
+    secondNavigation.navigate("LoginScreen");
   };
 
   let formattedAttendus: formattedHtml = [];
@@ -170,7 +168,7 @@ export const CardFormationDetails = ({
         }}
       >
         <AntDesign
-          name={isFav ? "star" : "staro"}
+          name="staro"
           size={24}
           color={colors.PRIMARY_1}
           style={{

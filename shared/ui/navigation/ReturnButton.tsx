@@ -20,7 +20,7 @@ export const ReturnButton = ({
 }: ReturnButtonType) => {
   useFocusEffect(
     useCallback(() => {
-      const preventBackpressBubbleUp = () => (goBack ? false : true);
+      const preventBackpressBubbleUp = () => goBack;
 
       const subscription = BackHandler.addEventListener(
         "hardwareBackPress",
@@ -40,15 +40,15 @@ export const ReturnButton = ({
       <Box
         justifyContent="center"
         alignItems="center"
-        padding="global_5"
+        padding="global_8"
         borderColor="GREY_DARK"
-        borderWidth={1}
+        borderWidth={2}
         borderRadius="round"
       >
         <Ionicons
           name="arrow-back"
-          size={spacing.global_24}
-          color={colorScheme === "light" ? colors.GREY_DARK : colors.WHITE}
+          size={spacing.global_20}
+          color={colorScheme === "light" ? colors.PRIMARY_1 : colors.PRIMARY_12}
         />
       </Box>
     </Pressable>

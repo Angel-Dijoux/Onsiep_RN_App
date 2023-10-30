@@ -386,7 +386,7 @@ const SettingsScreem = ({ navigation }) => {
           <View style={{ alignItems: "flex-start", marginTop: 15 }}>
             <ProfilEdit
               text="Se connecter"
-              func={() => navigation.navigate("Login")}
+              func={() => navigation.navigate("LoginScreen")}
             />
           </View>
         </View>
