@@ -2,13 +2,13 @@ import React from "react";
 import { StyleSheet, type ViewStyle } from "react-native";
 import { BaseToast, BaseToastProps } from "react-native-toast-message";
 
+import { Box, Text } from "../../../../shared/ui/primitives";
 import { colors } from "../../../../shared/ui/primitives/theme/colors";
 import {
   fontFamily,
   textVariants,
 } from "../../../../shared/ui/primitives/theme/fonts";
 import { spacing } from "../../../../shared/ui/primitives/theme/spacing";
-import { Box, Text } from "../../../../shared/ui/primitives";
 
 function createStyledToastComponent(
   BaseComponent: React.ComponentType<BaseToastProps>,

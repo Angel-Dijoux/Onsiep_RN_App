@@ -18,8 +18,12 @@ export const useAddFavoris = () => {
         },
         body: JSON.stringify(formation),
       });
-      if (response.status == 409 || response.status == 308 || response.status == 500) {
-        throw new Error("This formation is already in favoris")
+      if (
+        response.status == 409 ||
+        response.status == 308 ||
+        response.status == 500
+      ) {
+        throw new Error("This formation is already in favoris");
       }
       if (!response.ok) {
         throw new Error("Error on add in favorite");
@@ -43,9 +47,9 @@ export const useAddFavoris = () => {
     await addFormation.mutateAsync(formation);
     Toaster.show({
       props: {
-        text: "Formation enregistée."
-      }
-    })
+        text: "Formation enregistée.",
+      },
+    });
   };
 
   return { handleAddFavoris };

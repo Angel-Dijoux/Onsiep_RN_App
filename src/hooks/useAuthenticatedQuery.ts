@@ -31,7 +31,7 @@ export const fetchRefreshToken = async () => {
     },
   });
   if (!response.ok) {
-    console.warn("Error in refresh token query ", response.ok)
+    console.warn("Error in refresh token query ", response.ok);
     throw new Error("Error in fetchRefreshToken");
   }
 
