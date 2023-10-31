@@ -6,20 +6,20 @@ import React, { useEffect, useState } from "react";
 import { type FormationTabStackNavigationParamsList } from "../../../navigation/formations/FormationTabStackNavigation.types";
 import { getFORId } from "../../../screens/home/utils/stringUtils";
 import { deviceHeight } from "../../../utils/deviceInfo";
-import { Formation } from "../../../utils/onisep.type";
+import { OldFormation } from "../../../utils/onisep.type";
 import { useFavoris } from "../../hooks/favoris/useFavoris";
 import { CardFormation } from "../ui/CardFormation";
 import { NoResult } from "../ui/no_result";
 
 type ListFormationType = {
-  data?: Formation[];
+  data?: OldFormation[];
   isFavScreen: boolean;
 };
 
 const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
   const navigation =
     useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
-  const [formations, setFormations] = useState<Formation[] | undefined>([]);
+  const [formations, setFormations] = useState<OldFormation[] | undefined>([]);
 
   const { handleDeleteFavoris } = useFavoris();
 
@@ -34,7 +34,7 @@ const ListFormation = ({ data, isFavScreen }: ListFormationType) => {
     }
   };
 
-  const renderItem: ListRenderItem<Formation> = ({ item }) => (
+  const renderItem: ListRenderItem<OldFormation> = ({ item }) => (
     <CardFormation
       type={item.sigle_type_formation}
       duree={item.duree}

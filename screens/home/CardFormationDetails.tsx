@@ -56,8 +56,9 @@ export const CardFormationDetails = ({
   const handleFavoris = (item: Formation): void => {
     if (accessToken) {
       handleAddFavoris(item);
+    } else {
+      secondNavigation.navigate("LoginScreen");
     }
-    secondNavigation.navigate("LoginScreen");
   };
 
   let formattedAttendus: formattedHtml = [];
@@ -76,7 +77,7 @@ export const CardFormationDetails = ({
 
   if (isLoading) return <Loading />;
   return (
-    <Box bg="PRIMARY_3" mt="global_15" p="global_15" borderRadius="global_8">
+    <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
       <Text variant="h3" color="PRIMARY_12">
         {capitalizeFirstLetter(title)}
       </Text>

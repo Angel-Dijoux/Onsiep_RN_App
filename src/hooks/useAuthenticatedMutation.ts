@@ -27,21 +27,21 @@ export const useAuthenticatedMutation = <TData, TVariables>(
     mutationOptions
   );
 
-  const refresh = () => {
-    mutationResult.reset();
-  };
 
   const { isError, error } = mutationResult;
 
-  if (isError && error) {
-    fetchRefreshToken()
-      .then(() => {
-        refresh();
-      })
-      .catch((error) => {
+
+  const refresh = async () => {
+    if (isError && error) {
+      try {
+        await fetchRefreshToken();
+        mutationResult.mutate;
+      } catch (error) {
         console.error("Error while refreshing the token:", error);
-      });
-  }
+      }
+    }
+  };
+
 
   return { ...mutationResult, refresh };
 };

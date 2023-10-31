@@ -30,16 +30,17 @@ export const fetchRefreshToken = async () => {
       Authorization: `Bearer ${refreshToken}`,
     },
   });
-  if (response.ok) {
-    const data = await response.json();
-    setCurrentUserStorage({
-      id: Number(currentUserInfo?.userId),
-      username: String(currentUserInfo?.username),
-      accessToken: data.access,
-      refreshToken: String(refreshToken),
-    });
+  if (!response.ok) {
+    throw new Error("Error in fetchRefreshToken");
   }
-  throw new Error("Error in fetchRefreshToken");
+  const data = await response.json();
+  setCurrentUserStorage({
+    id: Number(currentUserInfo?.userId),
+    username: String(currentUserInfo?.username),
+    accessToken: data.access,
+    refreshToken: String(refreshToken),
+  });
+  return response.json();
 };
 
 export const useAuthenticatedQuery = <TData>(
