@@ -14,7 +14,7 @@ type HeaderProps = {
 export const Header = ({
   goBack = true,
   title,
-  colorScheme = "light",
+  colorScheme = "dark",
   onGoBack,
 }: HeaderProps) => {
   const navigation = useNavigation();
@@ -31,7 +31,7 @@ export const Header = ({
         <Box flexWrap="nowrap" pr="global_24">
           <Text
             variant="h3"
-            color={colorScheme === "light" ? "GREY_DARK" : "WHITE"}
+            color={colorScheme === "light" ? "PRIMARY_1" : "PRIMARY_12"}
             pl={goBack ? "global_15" : "zero"}
             numberOfLines={2}
           >

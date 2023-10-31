@@ -1,15 +1,19 @@
 import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { HomeTabIcon, screenOptions } from "./AuthTabs";
+import { HomeTabIcon, screenOptions, tabBarStyle } from "./AuthTabs";
 import { FormationsNavigation } from "./formations/FormationsNavigation";
 import { FavScreen } from "../screens/FavScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
 
 const Tab = createBottomTabNavigator();
 
-export const FavTabIcon = ({ color }) => (
-  <AntDesign name="staro" size={24} color={color} />
+export const FavTabIcon = ({ focused }) => (
+  <AntDesign
+    name="staro"
+    size={24}
+    color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
+  />
 );
 
 const Tabs = () => {
@@ -18,11 +22,7 @@ const Tabs = () => {
       screenOptions={{
         ...screenOptions,
         tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: colors.PRIMARY_2,
-          height: 50,
-          borderTopColor: "transparent",
-        },
+        tabBarStyle,
       }}
     >
       <Tab.Screen

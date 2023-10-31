@@ -30,13 +30,12 @@ const InputField = ({
   return (
     <Box mt="global_10">
       <Text
-        fontFamily="satoshi"
-        fontSize={15}
-        fontWeight="700"
-        color="GREY_DARK"
-        ml="global_10"
-        mb="global_5"
-        mt="global_5"
+        variant="large"
+        fontWeight="800"
+        color="PRIMARY_2"
+        ml="global_5"
+        my="global_5"
+        p="global_2"
       >
         {title}
       </Text>
@@ -44,8 +43,8 @@ const InputField = ({
         flexDirection="row"
         alignItems="center"
         padding="global_15"
-        bg="PRIMARY_1"
-        borderRadius="global_16"
+        bg="BLACK"
+        borderRadius="global_8"
       >
         {children}
         <TextInput
@@ -55,7 +54,7 @@ const InputField = ({
           editable={editable}
           secureTextEntry={password}
           placeholder={title}
-          placeholderTextColor={colors.GREY_DARK}
+          placeholderTextColor={colors.PRIMARY_12}
           onChangeText={onChange}
           onSubmitEditing={onSubmitEditing}
         />
@@ -67,7 +66,7 @@ const InputField = ({
 const styles = StyleSheet.create({
   input: {
     ...textVariants.regular,
-    color: colors.GREY_DARK,
+    color: colors.PRIMARY_12,
     marginLeft: spacing.global_15,
   },
 });

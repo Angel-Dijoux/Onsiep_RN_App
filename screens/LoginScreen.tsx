@@ -6,6 +6,7 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
+import { colors } from "../shared/ui/primitives/theme/colors";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setemail] = useState<string>("");
@@ -40,7 +41,7 @@ const LoginScreen = ({ navigation }) => {
           setemail(text);
         }}
       >
-        <AntDesign name="mail" size={24} color="black" />
+        <AntDesign name="mail" size={24} color={colors.PRIMARY_12} />
       </InputField>
       <InputField
         title="Mot de passe"
@@ -51,12 +52,12 @@ const LoginScreen = ({ navigation }) => {
         }}
         onSubmitEditing={handleEnterInput}
       >
-        <AntDesign name="key" size={24} color="black" />
+        <AntDesign name="key" size={24} color={colors.PRIMARY_12} />
       </InputField>
       <BtnTextConn
         firstText="Pas enregistrer ?"
         secondText="Enregistre toi ici !"
-        onPress={() => navigation.navigate("register")}
+        onPress={() => navigation.navigate("RegisterScreen")}
       />
     </ScreenWithImage>
   );

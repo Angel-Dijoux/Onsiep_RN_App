@@ -4,23 +4,23 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
-import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
-import { Result } from "../../shared/formation/onisepFormation.type";
+import { Formation } from "../../shared/formation/fomationv2.type";
 import { Label } from "../../shared/ui/Label";
 import { Loading } from "../../shared/ui/Loading";
 import { Box, Text } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
-import { useFavoris } from "../../src/hooks/favoris/useFavoris";
-import { GetIsFavProps } from "../../src/hooks/favoris/useGetIfIsFav";
+import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
+import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 import { deviceHeight } from "../../utils/deviceInfo";
+import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
+import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
 
 interface CardFormationDetailsProps {
-  item: Result;
-  listOfFavFormations?: GetIsFavProps["favori_ids"];
+  item: Formation;
   title: string;
   duree: string;
   level: string;
@@ -28,9 +28,13 @@ interface CardFormationDetailsProps {
   forId: string;
 }
 
+function capitalizeFirstLetter(inputString: string): string {
+  if (inputString.length === 0) return inputString;
+  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
+}
+
 export const CardFormationDetails = ({
   item,
-  listOfFavFormations,
   title,
   duree,
   level,
@@ -40,20 +44,20 @@ export const CardFormationDetails = ({
   const navigation =
     useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
 
-  const matchingItem = listOfFavFormations?.find(
-    (fav) => fav.url === item.url_et_id_onisep
-  );
-  const isFav = matchingItem?.url === item.url_et_id_onisep;
+  const secondNavigation =
+    useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
+
+  const { accessToken } = useCurrentUser();
 
   const { isLoading, data } = useGetFormation(forId);
 
-  const { handleAddFavoris, handleDeleteFavoris } = useFavoris();
+  const { handleAddFavoris } = useAddFavoris();
 
-  const handleFavoris = (item: Result): void => {
-    if (isFav && matchingItem?.id) {
-      handleDeleteFavoris(matchingItem?.id);
-    } else {
+  const handleFavoris = (item: Formation): void => {
+    if (accessToken) {
       handleAddFavoris(item);
+    } else {
+      secondNavigation.navigate("LoginScreen");
     }
   };
 
@@ -73,15 +77,15 @@ export const CardFormationDetails = ({
 
   if (isLoading) return <Loading />;
   return (
-    <Box bg="PRIMARY_3" mt="global_15" p="global_15" borderRadius="global_8">
+    <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
       <Text variant="h3" color="PRIMARY_12">
-        {title}
+        {capitalizeFirstLetter(title)}
       </Text>
-      <Box flexDirection="row">
+      <Box flexDirection="row" mt="global_5">
         <Label text={duree} />
-        <Label text={level} bg="WHITE" />
+        <Label text={level} />
       </Box>
-      <Label text={tutelle} bg="WHITE" />
+      <Label text={tutelle} />
       {data?.identifiant && (
         <>
           {formattedAttendus.length > 0 && (
@@ -170,7 +174,7 @@ export const CardFormationDetails = ({
         }}
       >
         <AntDesign
-          name={isFav ? "star" : "staro"}
+          name="staro"
           size={24}
           color={colors.PRIMARY_1}
           style={{

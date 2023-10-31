@@ -1,9 +1,11 @@
+import { type Formation } from "../shared/formation/fomationv2.type";
+
 export interface UserFavoris {
   results: Formation[];
   size?: number;
 }
 
-export interface Formation {
+export interface OldFormation {
   code_nsf: string;
   code_rncp: string;
   duree: string;

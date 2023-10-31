@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 
-import { getCurrentUserStorage } from "../components/utils/currentUserStorage";
+import { getCurrentUserStorage, setCurrentUserStorage } from "../components/utils/currentUserStorage";
 import { Config } from "../config";
 
 type RefreshTokenResponse = {
@@ -10,6 +10,8 @@ type RefreshTokenResponse = {
 const useRefreshToken = () => {
   const fetchRefreshToken = async () => {
     const currentUserInfo = await getCurrentUserStorage();
+    if (!currentUserInfo) return;
+
     const refreshToken = currentUserInfo?.refreshToken;
     const API_LINK = `${Config.baseUrl}/auth/token/refresh`;
 
@@ -22,11 +24,18 @@ const useRefreshToken = () => {
     if (!response.ok) {
       throw new Error("Error in fetchRefreshToken");
     }
+    const data = await response.json();
+    setCurrentUserStorage({
+      id: Number(currentUserInfo?.userId),
+      username: String(currentUserInfo?.username),
+      accessToken: data.access,
+      refreshToken: String(refreshToken),
+    });
     return response.json();
   };
 
   const { data, isLoading } = useQuery<RefreshTokenResponse, Error>(
-    ["refresh_token"],
+    ["refreshToken"],
     fetchRefreshToken
   );
 

@@ -1,48 +1,45 @@
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
 
-import { Result } from "../../shared/formation/onisepFormation.type";
-import { Loading } from "../../shared/ui/Loading";
-import { useGetIfIsFav } from "../../src/hooks/favoris/useGetIfIsFav";
+import { Formation } from "../../shared/formation/fomationv2.type";
 import { deviceHeight } from "../../utils/deviceInfo";
 import { CardFormationDetails } from "../home/CardFormationDetails";
 import { getFORId } from "../home/utils/stringUtils";
 
-export const renderItemDetailCardFormations: ListRenderItem<Result> = ({
+export const renderItemDetailCardFormations: ListRenderItem<Formation> = ({
   item,
-  extraData,
 }) => {
-  const FORId = `FOR.${getFORId(item.url_et_id_onisep)}`;
-  const listOfFavFormations = extraData.listOfFavFormations;
+  const FORId = `FOR.${getFORId(item.url)}`;
 
   return (
     <CardFormationDetails
       item={item}
-      listOfFavFormations={listOfFavFormations}
-      title={item.libelle_formation_principal || "Formation"}
+      title={item.libelle || "Formation"}
       duree={item.duree}
-      level={item.niveau_de_sortie_indicatif}
+      level={item.niveau_de_sortie}
       tutelle={item.tutelle}
       forId={FORId}
     />
   );
 };
 
-export const ListFormationsDetails = ({ data }: { data?: Result[] }) => {
-  const { getIsFav } = useGetIfIsFav();
-  const { data: isFavData, isLoading } = getIsFav;
-  const listOfFavFormations = isFavData?.favori_ids;
-
-  if (isLoading) return <Loading />;
+export const ListFormationsDetails = ({
+  data,
+  handleEndReached,
+}: {
+  data?: Formation[];
+  handleEndReached: () => void;
+}) => {
   return (
     <FlashList
       data={data}
-      extraData={{ listOfFavFormations }}
-      keyExtractor={(_, index: number) => index.toString() + _.url_et_id_onisep}
+      keyExtractor={(_, index: number) => index.toString() + _.url}
       renderItem={renderItemDetailCardFormations}
       estimatedItemSize={deviceHeight}
       decelerationRate="fast"
       showsVerticalScrollIndicator={false}
+      onEndReached={handleEndReached}
+      onEndReachedThreshold={0.1}
     />
   );
 };

@@ -7,13 +7,23 @@ import { Box } from "../shared/ui/primitives";
 import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
 
 export const Home = () => {
-  const { data, isLoading } = useGetOnisepFormations(25);
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+    useGetOnisepFormations();
+
+  const handleEndReached = () => {
+    if (hasNextPage) {
+      fetchNextPage();
+    }
+  };
 
   if (isLoading) return <Loading />;
   return (
     <Box flex={1} px="global_24">
       <HeaderHomeScreen />
-      <ListFormationsDetails data={data?.results} />
+      <ListFormationsDetails
+        data={data?.pages.flatMap((page) => page.formations)}
+        handleEndReached={handleEndReached}
+      />
     </Box>
   );
 };

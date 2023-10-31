@@ -6,6 +6,7 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
+import { colors } from "../shared/ui/primitives/theme/colors";
 
 const RegisterScreen = ({ navigation }) => {
   const { register, login } = useConnexion();
@@ -54,7 +55,7 @@ const RegisterScreen = ({ navigation }) => {
           setemail(text);
         }}
       >
-        <AntDesign name="mail" size={24} color="black" />
+        <AntDesign name="mail" size={24} color={colors.PRIMARY_12} />
       </InputField>
       <InputField
         title="Pseudo"
@@ -63,7 +64,7 @@ const RegisterScreen = ({ navigation }) => {
           setusername(text);
         }}
       >
-        <AntDesign name="user" size={24} color="black" />
+        <AntDesign name="user" size={24} color={colors.PRIMARY_12} />
       </InputField>
       <InputField
         title="Mot de passe"
@@ -74,12 +75,12 @@ const RegisterScreen = ({ navigation }) => {
         }}
         onSubmitEditing={handleEnterInput}
       >
-        <AntDesign name="key" size={24} color="black" />
+        <AntDesign name="key" size={24} color={colors.PRIMARY_12} />
       </InputField>
       <BtnTextConn
         firstText="Tu as un compte ?"
         secondText="Connecte toi ici !"
-        onPress={() => navigation.navigate("login")}
+        onPress={() => navigation.navigate("LoginScreen")}
       />
     </ScreenWithImage>
   );
