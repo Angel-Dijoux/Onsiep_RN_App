@@ -1,6 +1,9 @@
 import { useQuery } from "react-query";
 
-import { getCurrentUserStorage, setCurrentUserStorage } from "../components/utils/currentUserStorage";
+import {
+  getCurrentUserStorage,
+  setCurrentUserStorage,
+} from "../components/utils/currentUserStorage";
 import { Config } from "../config";
 
 type RefreshTokenResponse = {

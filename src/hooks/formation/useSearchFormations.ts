@@ -1,4 +1,3 @@
-
 import { useInfiniteQuery } from "react-query";
 
 import { type Formations } from "../../../shared/formation/fomationv2.type";
@@ -14,16 +13,16 @@ export const useSearchFormations = (query: string) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "limit": LIMIT,
-        "query": query,
-        "offset": pageParam ?? 0
-      })
-    })
+        limit: LIMIT,
+        query: query,
+        offset: pageParam ?? 0,
+      }),
+    });
     if (!response.ok) {
       throw new Error("Error on search formations");
     }
     return response.json();
-  }
+  };
 
   const getNextPageParams = (lastPage: Formations) => {
     const total = lastPage.total;
@@ -31,15 +30,13 @@ export const useSearchFormations = (query: string) => {
       return lastPage.formations.length;
     }
     return undefined;
-  }
+  };
 
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    refetch,
-    isLoading
-  } = useInfiniteQuery<Formations>("searchFormations", fetchSearchResult, { retry: 2, getNextPageParam: getNextPageParams })
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+    useInfiniteQuery<Formations>("searchFormations", fetchSearchResult, {
+      retry: 2,
+      getNextPageParam: getNextPageParams,
+    });
 
   return { isLoading, data, refetch, fetchNextPage, hasNextPage };
 };

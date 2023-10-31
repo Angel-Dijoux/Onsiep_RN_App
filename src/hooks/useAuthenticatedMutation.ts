@@ -27,9 +27,7 @@ export const useAuthenticatedMutation = <TData, TVariables>(
     mutationOptions
   );
 
-
   const { isError, error } = mutationResult;
-
 
   const refresh = async () => {
     if (isError && error) {
@@ -41,7 +39,6 @@ export const useAuthenticatedMutation = <TData, TVariables>(
       }
     }
   };
-
 
   return { ...mutationResult, refresh };
 };

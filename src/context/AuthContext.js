@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
@@ -11,8 +10,6 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [favoris, setfavoris] = useState([]);
-
-  const netInfo = useNetInfo();
 
   const [isloading, setLoading] = useState(false);
   const [userToken, setUserToken] = useState(null);
@@ -39,14 +36,11 @@ export const AuthProvider = ({ children }) => {
         return res.json();
       })
       .then((data) => {
-        if (data.error) {
-        } else {
-          const message = "Votre compte a été créé.";
-          setUserInfo([...message, message]);
-          setTimeout(() => {
-            login(data.user.email, password);
-          }, 700);
-        }
+        const message = "Votre compte a été créé.";
+        setUserInfo([...message, message]);
+        setTimeout(() => {
+          login(data.user.email, password);
+        }, 700);
       })
       .catch((e) => {
         console.log("Error in register Function", e);
@@ -214,7 +208,6 @@ export const AuthProvider = ({ children }) => {
         userToken,
         userTokenRefresh,
         userInfo,
-
         setfavoris,
         favoris,
       }}

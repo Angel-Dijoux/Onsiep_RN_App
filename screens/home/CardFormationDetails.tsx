@@ -4,6 +4,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
+import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
 import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Formation } from "../../shared/formation/fomationv2.type";
@@ -17,7 +18,6 @@ import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
 import { useGetFormation } from "../../src/hooks/formation/useGetFormation";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 import { deviceHeight } from "../../utils/deviceInfo";
-import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 
 interface CardFormationDetailsProps {
   item: Formation;

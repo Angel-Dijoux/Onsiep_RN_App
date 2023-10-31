@@ -8,8 +8,8 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
-
 import Toast from "react-native-toast-message";
+
 import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
 import { colors } from "./shared/ui/primitives/theme/colors";

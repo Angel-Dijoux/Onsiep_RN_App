@@ -1,3 +1,4 @@
+import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useState, useRef, useEffect } from "react";
@@ -8,7 +9,6 @@ import { Input } from "../../shared/ui/forms/Input";
 import { Box } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
 import { colors } from "../../shared/ui/primitives/theme/colors";
-import { Entypo } from "@expo/vector-icons";
 import { spacing } from "../../shared/ui/primitives/theme/spacing";
 
 export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {

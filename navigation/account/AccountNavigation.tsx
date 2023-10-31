@@ -1,9 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 
+import { AccountTabStackNavigationParamsList } from "./AccountTabStackNavigation.types";
 import { LoginScreen } from "../../screens/LoginScreen";
 import { RegisterScreen } from "../../screens/RegisterScreen";
-import { AccountTabStackNavigationParamsList } from "./AccountTabStackNavigation.types";
 
 export const AccountNavigation = () => {
   const Stack = createStackNavigator<AccountTabStackNavigationParamsList>();

@@ -101,18 +101,15 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   const verif_data_edit = () => {
-    if (username !== null && `${username}`.length < 3) {
-    } else {
-      const data = {
-        username: username || "",
-        name: "",
-        pdp_url: "",
-        email: email || "",
-        password: password || "",
-        old_password: oldpassword || "",
-      };
-      EditUser(data);
-    }
+    const data = {
+      username: username || "",
+      name: "",
+      pdp_url: "",
+      email: email || "",
+      password: password || "",
+      old_password: oldpassword || "",
+    };
+    EditUser(data);
   };
 
   const is_log = () => {
