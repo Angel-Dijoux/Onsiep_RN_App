@@ -18,6 +18,9 @@ export const useAddFavoris = () => {
         },
         body: JSON.stringify(formation),
       });
+      if (response.status == 409 || response.status == 308 || response.status == 500) {
+        throw new Error("This formation is already in favoris")
+      }
       if (!response.ok) {
         throw new Error("Error on add in favorite");
       }
@@ -26,6 +29,13 @@ export const useAddFavoris = () => {
       onSuccess: () => {
         queryClient.invalidateQueries("favoris");
         queryClient.invalidateQueries("get_formation_is_fav");
+      },
+      onError(error) {
+        Toaster.show({
+          type: "error",
+          text1: "Something wrong... 😔",
+          text2: String(error),
+        });
       },
     }
   );

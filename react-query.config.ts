@@ -13,9 +13,6 @@ const queryClient = new QueryClient({
       refetchIntervalInBackground: false,
       suspense: false,
     },
-    mutations: {
-      retry: 2
-    }
   },
 });
 

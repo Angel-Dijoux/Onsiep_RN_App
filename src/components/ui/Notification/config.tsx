@@ -19,9 +19,9 @@ function createStyledToastComponent(
       {...props}
       contentContainerStyle={styles.container}
       style={[styles.wrapper, style]}
-      text1Style={styles.text}
+      text1Style={styles.text1}
       text2NumberOfLines={2}
-      text2Style={styles.text}
+      text2Style={styles.text2}
     />
   );
 
@@ -52,7 +52,13 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.global_16,
     backgroundColor: colors.PRIMARY_3,
   },
-  text: {
+  text1: {
+    ...textVariants.large,
+    fontWeight: "700",
+    fontFamily: fontFamily.satoshi,
+    color: colors.PRIMARY_12,
+  },
+  text2: {
     ...textVariants.small,
     fontFamily: fontFamily.manrope,
     color: colors.PRIMARY_12,

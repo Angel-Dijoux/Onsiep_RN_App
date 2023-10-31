@@ -10,7 +10,7 @@ class CustomToaster {
   ) {
     RNToast.show({
       type: "basicToast",
-      visibilityTime: 4000,
+      visibilityTime: 5000,
       topOffset: 30,
       ...showParams,
     });
