@@ -2,6 +2,7 @@ import { useQueryClient } from "react-query";
 import { Formation } from "../../../shared/formation/fomationv2.type";
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
+import Toast from 'react-native-toast-message';
 
 export const useAddFavoris = () => {
     const queryClient = useQueryClient();
@@ -29,6 +30,11 @@ export const useAddFavoris = () => {
     );
     const handleAddFavoris = async (formation: Formation) => {
         await addFormation.mutateAsync(formation);
+        Toast.show({
+            type: "success",
+            text1: "Favoris",
+            text2: "Formation enregistrée dans les favoris.",
+        });
     };
 
     return { handleAddFavoris }

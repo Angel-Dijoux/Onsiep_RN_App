@@ -7,7 +7,7 @@ import { Box } from "../shared/ui/primitives";
 import { useGetOnisepFormations } from "../src/hooks/formation/useGetOnisepFormations";
 
 export const Home = () => {
-  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isLoading } =
     useGetOnisepFormations();
 
   const handleEndReached = () => {

@@ -2,7 +2,6 @@ import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
 
 import { Formation } from "../../shared/formation/fomationv2.type";
-import { deviceHeight } from "../../utils/deviceInfo";
 import { CardFormationDetails } from "../home/CardFormationDetails";
 import { getFORId } from "../home/utils/stringUtils";
 
@@ -35,7 +34,7 @@ export const ListFormationsDetails = ({
       data={data}
       keyExtractor={(_, index: number) => index.toString() + _.url}
       renderItem={renderItemDetailCardFormations}
-      estimatedItemSize={deviceHeight}
+      estimatedItemSize={ESTIMATED_ITEM_HEIGHT}
       decelerationRate="fast"
       showsVerticalScrollIndicator={false}
       onEndReached={handleEndReached}
@@ -43,3 +42,5 @@ export const ListFormationsDetails = ({
     />
   );
 };
+
+const ESTIMATED_ITEM_HEIGHT = 250;
