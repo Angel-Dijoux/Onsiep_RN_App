@@ -2,11 +2,11 @@ import { AntDesign } from "@expo/vector-icons";
 import React, { useState } from "react";
 
 import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
+import { colors } from "../shared/ui/primitives/theme/colors";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
-import { colors } from "../shared/ui/primitives/theme/colors";
 
 const RegisterScreen = ({ navigation }) => {
   const { register, login } = useConnexion();

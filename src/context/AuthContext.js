@@ -1,5 +1,4 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNetInfo } from "@react-native-community/netinfo";
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
 
@@ -12,14 +11,10 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [favoris, setfavoris] = useState([]);
 
-  const netInfo = useNetInfo();
-
   const [isloading, setLoading] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [userTokenRefresh, setUserTokenRefresh] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
-
-  const [messages, setMessages] = useState([]);
 
   const register = (email, password, username) => {
     const data = {
@@ -41,16 +36,11 @@ export const AuthProvider = ({ children }) => {
         return res.json();
       })
       .then((data) => {
-        if (data.error) {
-          const message = `${data.error}.`;
-          setMessages([...messages, message]);
-        } else {
-          const message = "Votre compte a été créé.";
-          setUserInfo([...message, message]);
-          setTimeout(() => {
-            login(data.user.email, password);
-          }, 700);
-        }
+        const message = "Votre compte a été créé.";
+        setUserInfo([...message, message]);
+        setTimeout(() => {
+          login(data.user.email, password);
+        }, 700);
       })
       .catch((e) => {
         console.log("Error in register Function", e);
@@ -74,11 +64,6 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userToken", userInfo.user.access);
         AsyncStorage.setItem("refreshToken", userInfo.user.refresh);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo.user));
-      })
-      .catch((e) => {
-        console.log(e);
-        const message = "Identifiants erronés.,";
-        setMessages([...messages, message]);
       });
     setLoading(false);
   };
@@ -223,9 +208,6 @@ export const AuthProvider = ({ children }) => {
         userToken,
         userTokenRefresh,
         userInfo,
-        messages,
-        setMessages,
-
         setfavoris,
         favoris,
       }}

@@ -25,7 +25,6 @@ const SettingsScreem = ({ navigation }) => {
 
   const [isedit, setEdit] = useState(false);
   const [visiblemodal, setVisibleModal] = useState(false);
-  const [messages, setMessages] = useState([]);
 
   const [email, setemail] = useState(null);
   const [username, setUsername] = useState(null);
@@ -102,22 +101,15 @@ const SettingsScreem = ({ navigation }) => {
   };
 
   const verif_data_edit = () => {
-    if (username !== null && `${username}`.length < 3) {
-      const message = "Le pseudo est trop court.";
-      setMessages([...messages, message]);
-    } else {
-      const data = {
-        username: username || "",
-        name: "",
-        pdp_url: "",
-        email: email || "",
-        password: password || "",
-        old_password: oldpassword || "",
-      };
-      EditUser(data);
-      const message = "Le profil a bien été modifier.";
-      setMessages([...messages, message]);
-    }
+    const data = {
+      username: username || "",
+      name: "",
+      pdp_url: "",
+      email: email || "",
+      password: password || "",
+      old_password: oldpassword || "",
+    };
+    EditUser(data);
   };
 
   const is_log = () => {

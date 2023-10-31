@@ -8,7 +8,6 @@ import { Screen } from "./navigation/Screen";
 import { Box } from "./primitives";
 import { borderRadii } from "./primitives/theme/borderRadii";
 import { colors } from "./primitives/theme/colors";
-import DisplayMessages from "../../src/components/ui/Notification/display_messages";
 
 type ScreenWithImageProps = {
   children: ReactNode;
@@ -32,7 +31,6 @@ const ScreenWithImage = ({
     <SafeAreaView
       style={{ flex: 1, flexDirection: "column", justifyContent: "flex-end" }}
     >
-      <DisplayMessages />
       <ImageBackground
         source={require("../../src/icons/onilogo.png")}
         resizeMode="cover"

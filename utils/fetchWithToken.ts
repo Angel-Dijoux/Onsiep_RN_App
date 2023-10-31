@@ -25,4 +25,4 @@ export const fetchWithoutToken = async (
 ): Promise<Response> => {
   const response = await fetch(`${Config.baseUrl}${url}`, options);
   return response;
-}
+};

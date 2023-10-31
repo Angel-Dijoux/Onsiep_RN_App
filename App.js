@@ -8,12 +8,13 @@ import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
+import Toast from "react-native-toast-message";
 
 import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
 import { colors } from "./shared/ui/primitives/theme/colors";
 import { theme } from "./shared/ui/primitives/theme/theme";
-import DisplayMessages from "./src/components/ui/Notification/display_messages";
+import { toasterConfig } from "./src/components/ui/Notification/config";
 import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
@@ -71,8 +72,8 @@ const App = () => {
             <AuthProvider>
               <FavorisProvider>
                 <ThemeProvider theme={theme}>
-                  <DisplayMessages />
                   <AppNav />
+                  <Toast config={toasterConfig} />
                 </ThemeProvider>
               </FavorisProvider>
             </AuthProvider>
