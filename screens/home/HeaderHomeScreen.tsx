@@ -104,8 +104,7 @@ const styles = StyleSheet.create({
   },
   clearSearch: {
     padding: spacing.global_2,
-    borderColor: colors.PRIMARY_6,
-    borderWidth: 1,
+    backgroundColor: colors.PRIMARY_6,
     borderRadius: borderRadii.round,
   },
 });

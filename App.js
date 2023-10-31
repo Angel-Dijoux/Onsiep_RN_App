@@ -14,6 +14,7 @@ import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
 import { colors } from "./shared/ui/primitives/theme/colors";
 import { theme } from "./shared/ui/primitives/theme/theme";
+import { toasterConfig } from "./src/components/ui/Notification/config";
 import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
 import { AuthProvider } from "./src/context/AuthContext";
 import { FavorisProvider } from "./src/context/FavorisContext";
@@ -72,7 +73,7 @@ const App = () => {
               <FavorisProvider>
                 <ThemeProvider theme={theme}>
                   <AppNav />
-                  <Toast />
+                  <Toast config={toasterConfig} />
                 </ThemeProvider>
               </FavorisProvider>
             </AuthProvider>

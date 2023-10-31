@@ -31,16 +31,23 @@ export const fetchRefreshToken = async () => {
     },
   });
   if (!response.ok) {
+    console.warn("Error in refresh token query ", response.ok)
     throw new Error("Error in fetchRefreshToken");
   }
-  const data = await response.json();
-  setCurrentUserStorage({
-    id: Number(currentUserInfo?.userId),
-    username: String(currentUserInfo?.username),
-    accessToken: data.access,
-    refreshToken: String(refreshToken),
-  });
-  return response.json();
+
+  try {
+    const data = await response.json();
+    setCurrentUserStorage({
+      id: Number(currentUserInfo?.userId),
+      username: String(currentUserInfo?.username),
+      accessToken: data.access,
+      refreshToken: String(refreshToken),
+    });
+    return data;
+  } catch (error) {
+    console.error("Error parsing JSON response: ", error);
+    throw error;
+  }
 };
 
 export const useAuthenticatedQuery = <TData>(
