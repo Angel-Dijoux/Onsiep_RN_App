@@ -13,7 +13,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { FavorisContext } from "../../context/FavorisContext";
 
 const GetContentAPI = (props) => {
-  const { userToken, messages, setMessages, favoris } = useContext(AuthContext);
+  const { userToken, favoris } = useContext(AuthContext);
   const { PostFavoris, DeleteFavoris, GetFavoris } = useContext(FavorisContext);
 
   const GetIfIsInFav = (id) => {
@@ -91,9 +91,6 @@ const GetContentAPI = (props) => {
                         GetFavoris();
                         // https://stackoverflow.com/questions/74771794/how-to-remove-data-from-flatlist-using-deleted-icon-in-react-native
                       }
-                    } else {
-                      const message = "Vous n'êtes pas connecter.";
-                      setMessages([...messages, message]);
                     }
                   }}
                 >

@@ -19,8 +19,6 @@ export const AuthProvider = ({ children }) => {
   const [userTokenRefresh, setUserTokenRefresh] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
-  const [messages, setMessages] = useState([]);
-
   const register = (email, password, username) => {
     const data = {
       username: username,
@@ -42,8 +40,6 @@ export const AuthProvider = ({ children }) => {
       })
       .then((data) => {
         if (data.error) {
-          const message = `${data.error}.`;
-          setMessages([...messages, message]);
         } else {
           const message = "Votre compte a été créé.";
           setUserInfo([...message, message]);
@@ -74,11 +70,6 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem("userToken", userInfo.user.access);
         AsyncStorage.setItem("refreshToken", userInfo.user.refresh);
         AsyncStorage.setItem("userInfo", JSON.stringify(userInfo.user));
-      })
-      .catch((e) => {
-        console.log(e);
-        const message = "Identifiants erronés.,";
-        setMessages([...messages, message]);
       });
     setLoading(false);
   };
@@ -223,8 +214,6 @@ export const AuthProvider = ({ children }) => {
         userToken,
         userTokenRefresh,
         userInfo,
-        messages,
-        setMessages,
 
         setfavoris,
         favoris,
