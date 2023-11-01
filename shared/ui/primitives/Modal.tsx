@@ -5,10 +5,10 @@ import {
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
 import { PropsWithChildren, forwardRef, type ReactNode } from "react";
-
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet, type ViewStyle } from "react-native";
 import { type SharedValue } from "react-native-gesture-handler/lib/typescript/handlers/gestures/reanimatedWrapper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { Box } from "./Box";
 import { colors } from "./theme/colors";
 
@@ -44,7 +44,14 @@ const ModalContainer = ({
 );
 
 const renderBackdropDefault = (props: BottomSheetBackdropProps) => (
-  <BottomSheetBackdrop opacity={0} {...props} />
+  <BottomSheetBackdrop
+    opacity={0}
+    pressBehavior="close"
+    enableTouchThrough
+    disappearsOnIndex={-1}
+    appearsOnIndex={1}
+    {...props}
+  />
 );
 
 const DEFAULT_SNAP_POINTS = ["65%"];

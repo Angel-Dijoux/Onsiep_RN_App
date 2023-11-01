@@ -2,7 +2,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { LayoutChangeEvent, Pressable } from "react-native";
+import { Pressable } from "react-native";
+
+import { capitalizeFirstLetter } from "$utils/typoFormat";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
@@ -26,11 +28,6 @@ interface CardFormationDetailsProps {
   level: string;
   tutelle: string;
   forId: string;
-}
-
-function capitalizeFirstLetter(inputString: string): string {
-  if (inputString.length === 0) return inputString;
-  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
 export const CardFormationDetails = ({
@@ -74,20 +71,9 @@ export const CardFormationDetails = ({
   } else if (Array.isArray(poursuiteEtudes)) {
     etudesList = poursuiteEtudes.slice(0, 4);
   }
-  const getItemSize = (event: LayoutChangeEvent) => {
-    const { width, height } = event.nativeEvent.layout;
-    console.log(`Item size: ${width}x${height} pixels`);
-  };
-
   if (isLoading) return <Loading />;
   return (
-    <Box
-      bg="PRIMARY_2"
-      mt="global_15"
-      p="global_15"
-      borderRadius="global_8"
-      onLayout={(event) => getItemSize(event)}
-    >
+    <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
       <Text variant="h3" color="PRIMARY_12">
         {capitalizeFirstLetter(title)}
       </Text>

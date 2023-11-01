@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import React, { useEffect, useRef, useState } from "react";
 import { LineChart } from "react-native-chart-kit";
 
+import { DetailsFormationRepartitionModal } from "./DetailsFormationRepartitionModal";
 import {
   FormationsRepartition,
   useGetFormationRepartition,
@@ -9,8 +11,6 @@ import { Loading } from "../../shared/ui/Loading";
 import { Box } from "../../shared/ui/primitives";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { deviceWidth } from "../../utils/deviceInfo";
-import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { DetailsFormationRepartitionModal } from "./DetailsFormationRepartitionModal";
 
 const GRAPH_HEIGHT = 300;
 const GRAPH_WIDTH = deviceWidth - 40;
@@ -47,12 +47,20 @@ export function FormationsRepartionGraph({
 }: {
   query?: string;
 }) {
+  const [selectionedFormation, setSelectionedFormation] =
+    useState<FormationsRepartition>();
+
   const detailsRepartitionModalRef = useRef<BottomSheetModal>(null);
   const { data, isLoading, refetch } = useGetFormationRepartition(query);
 
   useEffect(() => {
     refetch();
   }, [query]);
+
+  const handleOpenModal = ({ index }: { index: number }): void => {
+    setSelectionedFormation(data![index]);
+    detailsRepartitionModalRef.current?.present();
+  };
 
   if (isLoading) return <Loading />;
   return (
@@ -69,11 +77,13 @@ export function FormationsRepartionGraph({
         chartConfig={chartConfig}
         verticalLabelRotation={10}
         bezier
-        onDataPointClick={() => detailsRepartitionModalRef.current?.present()}
+        onDataPointClick={handleOpenModal}
         style={{ marginLeft: -40 }}
       />
       <DetailsFormationRepartitionModal
         detailsRepartitionModalRef={detailsRepartitionModalRef}
+        selectionedFormation={selectionedFormation}
+        formationRepartion={data}
       />
     </Box>
   );

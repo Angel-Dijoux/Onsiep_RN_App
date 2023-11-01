@@ -2,10 +2,10 @@ import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import React from "react";
 
 import { Formation } from "../../shared/formation/fomationv2.type";
-import { CardFormationDetails } from "../home/CardFormationDetails";
-import { getFORId } from "../home/utils/stringUtils";
 import { Box, Text } from "../../shared/ui/primitives";
 import { deviceWidth } from "../../utils/deviceInfo";
+import { CardFormationDetails } from "../home/CardFormationDetails";
+import { getFORId } from "../home/utils/stringUtils";
 import { FormationsRepartionGraph } from "../search/FormationsRepartionGraph";
 
 export const renderItemDetailCardFormations: ListRenderItem<Formation> = ({
@@ -34,17 +34,17 @@ const ListEmptyComponent = () => (
 export const ListFormationsDetails = ({
   data,
   handleEndReached,
-  nestedScrollEnabled,
+  query,
 }: {
   data?: Formation[];
   handleEndReached: () => void;
-  nestedScrollEnabled?: boolean;
+  query?: string;
 }) => {
   return (
     <FlashList
       data={data}
       keyExtractor={(_, index: number) => index.toString() + _.url}
-      ListHeaderComponent={FormationsRepartionGraph}
+      ListHeaderComponent={query ? FormationsRepartionGraph({ query }) : null}
       renderItem={renderItemDetailCardFormations}
       estimatedItemSize={ESTIMATED_ITEM_HEIGHT}
       ListEmptyComponent={ListEmptyComponent}

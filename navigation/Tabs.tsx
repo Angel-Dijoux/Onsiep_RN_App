@@ -3,15 +3,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { HomeTabIcon, screenOptions, tabBarStyle } from "./AuthTabs";
 import { FormationsNavigation } from "./formations/FormationsNavigation";
+import { TAB_BAR_ICON_SIZE, type TabBarIconProps } from "./icon.types";
+import { BottomTabNavigatorParamsList } from "./tabs.types";
 import { FavScreen } from "../screens/FavScreen";
 import { colors } from "../shared/ui/primitives/theme/colors";
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomTabNavigatorParamsList>();
 
-export const FavTabIcon = ({ focused }) => (
+export const FavTabIcon = ({ focused }: TabBarIconProps) => (
   <AntDesign
     name="staro"
-    size={24}
+    size={TAB_BAR_ICON_SIZE}
     color={focused ? colors.PRIMARY_11 : colors.PRIMARY_6}
   />
 );
@@ -26,14 +28,14 @@ const Tabs = () => {
       }}
     >
       <Tab.Screen
-        name="Fav"
+        name="FavScreen"
         component={FavScreen}
         options={{
           tabBarIcon: FavTabIcon,
         }}
       />
       <Tab.Screen
-        name="Home"
+        name="Formations"
         component={FormationsNavigation}
         options={{
           tabBarIcon: HomeTabIcon,

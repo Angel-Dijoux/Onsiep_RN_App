@@ -27,9 +27,9 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
     <Box flex={1} px="global_24">
       <HeaderHomeScreen prevQuery={query} />
       <ListFormationsDetails
+        query={query}
         data={data?.pages.flatMap((page) => page.formations)}
         handleEndReached={handleEndReached}
-        nestedScrollEnabled
       />
     </Box>
   );
