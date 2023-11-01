@@ -17,7 +17,7 @@ export const useGetFormationRepartition = (query: string) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                query: "ingenieur"
+                ...queryParams
             }),
         }
         );
@@ -27,7 +27,7 @@ export const useGetFormationRepartition = (query: string) => {
         return response.json();
     }
 
-    const { isLoading, data } = useQuery<FormationsRepartition[], Error>(
+    const { isLoading, data, refetch } = useQuery<FormationsRepartition[], Error>(
         ["formation"],
         () => getFormationsRepartitions({ queryParams: { query } })
     );
@@ -36,6 +36,6 @@ export const useGetFormationRepartition = (query: string) => {
     if (!isLoading) console.log(data);
     console.log('====================================');
 
-    return { isLoading, data }
+    return { isLoading, data, refetch }
 
 } 

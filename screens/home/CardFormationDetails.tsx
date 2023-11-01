@@ -2,7 +2,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
-import { Pressable } from "react-native";
+import { LayoutChangeEvent, Pressable } from "react-native";
 
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
@@ -74,10 +74,20 @@ export const CardFormationDetails = ({
   } else if (Array.isArray(poursuiteEtudes)) {
     etudesList = poursuiteEtudes.slice(0, 4);
   }
+  const getItemSize = (event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    console.log(`Item size: ${width}x${height} pixels`);
+  };
 
   if (isLoading) return <Loading />;
   return (
-    <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
+    <Box
+      bg="PRIMARY_2"
+      mt="global_15"
+      p="global_15"
+      borderRadius="global_8"
+      onLayout={(event) => getItemSize(event)}
+    >
       <Text variant="h3" color="PRIMARY_12">
         {capitalizeFirstLetter(title)}
       </Text>

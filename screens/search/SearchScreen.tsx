@@ -6,7 +6,6 @@ import { Box } from "../../shared/ui/primitives";
 import { useSearchFormations } from "../../src/hooks/formation/useSearchFormations";
 import { ListFormationsDetails } from "../formations/ListFormationsDetails";
 import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
-import { FormationsRepartionGraph } from "./FormationsRepartionGraph";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
@@ -21,17 +20,17 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
 
   useEffect(() => {
     refetch();
-  }, [query, refetch]);
+  }, [query]);
 
   if (isLoading) return <Loading />;
   return (
     <Box flex={1} px="global_24">
       <HeaderHomeScreen prevQuery={query} />
-      <FormationsRepartionGraph query={query} />
-      {/* <ListFormationsDetails
+      <ListFormationsDetails
         data={data?.pages.flatMap((page) => page.formations)}
         handleEndReached={handleEndReached}
-      /> */}
+        nestedScrollEnabled
+      />
     </Box>
   );
 };
