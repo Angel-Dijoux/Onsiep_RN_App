@@ -43,10 +43,8 @@ const makeGraphData = (data: FormationsRepartition[]) => {
 };
 
 export function FormationsRepartionGraph({
-  query = "ingenieur",
-}: {
-  query?: string;
-}) {
+  query,
+}: Readonly<{ query: string }>) {
   const [selectionedFormation, setSelectionedFormation] =
     useState<FormationsRepartition>();
 
@@ -55,7 +53,7 @@ export function FormationsRepartionGraph({
 
   useEffect(() => {
     refetch();
-  }, [query]);
+  }, [query, refetch]);
 
   const handleOpenModal = ({ index }: { index: number }): void => {
     setSelectionedFormation(data![index]);

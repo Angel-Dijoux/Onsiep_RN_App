@@ -8,6 +8,7 @@ export type FormationsRepartition = {
 };
 
 export const useGetFormationRepartition = (query: string) => {
+
   const getFormationsRepartitions = async ({
     queryParams,
   }: {
@@ -36,10 +37,6 @@ export const useGetFormationRepartition = (query: string) => {
     ["formation"],
     () => getFormationsRepartitions({ queryParams: { query } })
   );
-
-  console.log("====================================");
-  if (!isLoading) console.log(data);
-  console.log("====================================");
 
   return { isLoading, data, refetch };
 };
