@@ -6,10 +6,11 @@ import {
 } from "@gorhom/bottom-sheet";
 import { PropsWithChildren, forwardRef, type ReactNode } from "react";
 
-import { ViewStyle } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 import { type SharedValue } from "react-native-gesture-handler/lib/typescript/handlers/gestures/reanimatedWrapper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box } from "./Box";
+import { colors } from "./theme/colors";
 
 type ModalProps = {
   modalKey?: string;
@@ -86,6 +87,10 @@ const Modal = forwardRef<BottomSheetModal, PropsWithChildren<ModalProps>>(
         ref={ref}
         name={modalKey}
         snapPoints={snapPoints}
+        style={styles.modalShadow}
+        backgroundStyle={styles.modalStyle}
+        handleStyle={styles.handleStyle}
+        handleIndicatorStyle={styles.handleIndicatorStyle}
         backdropComponent={renderBackdrop}
         onDismiss={onDismiss}
         onChange={onChange}
@@ -95,6 +100,29 @@ const Modal = forwardRef<BottomSheetModal, PropsWithChildren<ModalProps>>(
     );
   }
 );
+
+const styles = StyleSheet.create({
+  modalShadow: {
+    shadowColor: colors.BLACK,
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+
+    elevation: 14,
+  },
+  modalStyle: {
+    backgroundColor: colors.GREY_DARK,
+  },
+  handleStyle: {
+    backgroundColor: colors.TRANSPARENT,
+  },
+  handleIndicatorStyle: {
+    backgroundColor: colors.PRIMARY_12,
+  },
+});
 
 Modal.displayName = "Modal";
 

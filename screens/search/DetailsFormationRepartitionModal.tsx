@@ -12,7 +12,7 @@ export function DetailsFormationRepartitionModal({
 }: DetailsRepartitionModalProsp) {
   return (
     <Modal ref={detailsRepartitionModalRef}>
-      <Box>
+      <Box bg="PRIMARY_1">
         <Text>Hello From modal</Text>
       </Box>
     </Modal>

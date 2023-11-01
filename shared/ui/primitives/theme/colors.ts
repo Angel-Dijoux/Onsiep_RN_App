@@ -1,6 +1,6 @@
 const GREY = {
   GREY: "#7b7b7b",
-  GREY_DARK: "#1b1c1f",
+  GREY_DARK: "#191918",
   GREY_SAND: "#7c7b74",
   GREY_SEND_DARK: "#2a2a28",
 };
@@ -33,6 +33,7 @@ const GLOBALS = {
 };
 
 const TRANSPARENT = {
+  TRANSPARENT: "transparent",
   TRANSPARENT_10: "rgba(255,255,255,0.10)",
   TRANSPARENT_60: "rgba(255,255,255,0.60)",
   TRANSPARENT_80: "rgba(255,255,255,0.80)",

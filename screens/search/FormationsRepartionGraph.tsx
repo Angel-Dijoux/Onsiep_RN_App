@@ -69,7 +69,7 @@ export function FormationsRepartionGraph({
         chartConfig={chartConfig}
         verticalLabelRotation={10}
         bezier
-        // onDataPointClick={(data) => console.log(data)}
+        onDataPointClick={() => detailsRepartitionModalRef.current?.present()}
         style={{ marginLeft: -40 }}
       />
       <DetailsFormationRepartitionModal
