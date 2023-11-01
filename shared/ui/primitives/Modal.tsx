@@ -97,3 +97,5 @@ const Modal = forwardRef<BottomSheetModal, PropsWithChildren<ModalProps>>(
 );
 
 Modal.displayName = "Modal";
+
+export { Modal };

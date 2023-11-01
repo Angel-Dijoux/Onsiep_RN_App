@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { LineChart } from "react-native-chart-kit";
 
 import {
@@ -9,6 +9,8 @@ import { Loading } from "../../shared/ui/Loading";
 import { Box } from "../../shared/ui/primitives";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { deviceWidth } from "../../utils/deviceInfo";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { DetailsFormationRepartitionModal } from "./DetailsFormationRepartitionModal";
 
 const GRAPH_HEIGHT = 300;
 const GRAPH_WIDTH = deviceWidth - 40;
@@ -45,6 +47,7 @@ export function FormationsRepartionGraph({
 }: {
   query?: string;
 }) {
+  const detailsRepartitionModalRef = useRef<BottomSheetModal>(null);
   const { data, isLoading, refetch } = useGetFormationRepartition(query);
 
   useEffect(() => {
@@ -52,7 +55,6 @@ export function FormationsRepartionGraph({
   }, [query]);
 
   if (isLoading) return <Loading />;
-
   return (
     <Box flex={1} justifyContent="center" alignItems="center">
       <LineChart
@@ -69,6 +71,9 @@ export function FormationsRepartionGraph({
         bezier
         // onDataPointClick={(data) => console.log(data)}
         style={{ marginLeft: -40 }}
+      />
+      <DetailsFormationRepartitionModal
+        detailsRepartitionModalRef={detailsRepartitionModalRef}
       />
     </Box>
   );
