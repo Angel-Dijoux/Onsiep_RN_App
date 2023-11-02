@@ -9,7 +9,7 @@ import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
-  const { data, fetchNextPage, hasNextPage, refetch, isLoading, isFetching } =
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
     useSearchFormations(query);
 
   const handleEndReached = () => {
@@ -18,7 +18,7 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
     }
   };
   useEffect(() => {
-    refetch();
+    if (query !== "") refetch();
   }, [query, refetch]);
 
   if (isLoading) return <Loading />;
