@@ -5,25 +5,12 @@ import { Formation } from "../../shared/formation/fomationv2.type";
 import { Box, Text } from "../../shared/ui/primitives";
 import { deviceWidth } from "../../utils/deviceInfo";
 import { CardFormationDetails } from "../home/CardFormationDetails";
-import { getFORId } from "../home/utils/stringUtils";
 import { FormationsRepartionGraph } from "../search/FormationsRepartionGraph";
 
+// TODO: use api for this, idea: get 'details' from flask directly.
 export const renderItemDetailCardFormations: ListRenderItem<Formation> = ({
   item,
-}) => {
-  const FORId = `FOR.${getFORId(item.url)}`;
-
-  return (
-    <CardFormationDetails
-      item={item}
-      title={item.libelle || "Formation"}
-      duree={item.duree}
-      level={item.niveau_de_sortie}
-      tutelle={item.tutelle}
-      forId={FORId}
-    />
-  );
-};
+}) => <CardFormationDetails item={item} />;
 
 const ListEmptyComponent = () => (
   <Box>
