@@ -8,7 +8,6 @@ export type FormationsRepartition = {
 };
 
 export const useGetFormationRepartition = (query: string) => {
-
   const getFormationsRepartitions = async ({
     queryParams,
   }: {

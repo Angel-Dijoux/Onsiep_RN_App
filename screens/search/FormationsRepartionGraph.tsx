@@ -56,7 +56,6 @@ export function FormationsRepartionGraph({
   }, [query, refetch]);
 
   const handleOpenModal = ({ index }: { index: number }): void => {
-    console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
     setSelectedFormation(data![index]);
     detailsRepartitionModalRef.current?.present();
   };
