@@ -12,7 +12,7 @@ module.exports = function (api) {
               rootPathPrefix: "$shared/",
             },
             {
-              rootPathSuffix: "./shared/ui",
+              rootPathSuffix: "./shared/ui/",
               rootPathPrefix: "$ui/",
             },
             {

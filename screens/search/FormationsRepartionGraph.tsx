@@ -45,7 +45,7 @@ const makeGraphData = (data: FormationsRepartition[]) => {
 export function FormationsRepartionGraph({
   query,
 }: Readonly<{ query: string }>) {
-  const [selectionedFormation, setSelectionedFormation] =
+  const [selectedFormation, setSelectedFormation] =
     useState<FormationsRepartition>();
 
   const detailsRepartitionModalRef = useRef<BottomSheetModal>(null);
@@ -56,7 +56,8 @@ export function FormationsRepartionGraph({
   }, [query, refetch]);
 
   const handleOpenModal = ({ index }: { index: number }): void => {
-    setSelectionedFormation(data![index]);
+    console.log("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss");
+    setSelectedFormation(data![index]);
     detailsRepartitionModalRef.current?.present();
   };
 
@@ -80,7 +81,7 @@ export function FormationsRepartionGraph({
       />
       <DetailsFormationRepartitionModal
         detailsRepartitionModalRef={detailsRepartitionModalRef}
-        selectionedFormation={selectionedFormation}
+        selectedFormation={selectedFormation}
         formationRepartion={data}
       />
     </Box>
