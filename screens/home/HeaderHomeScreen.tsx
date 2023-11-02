@@ -1,8 +1,8 @@
 import { Entypo } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React, { useCallback, useState, useRef, useEffect } from "react";
-import { Image, Pressable, StyleSheet, Animated } from "react-native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Animated, Image, Pressable, StyleSheet } from "react-native";
 
 import { type FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Input } from "../../shared/ui/forms/Input";
@@ -63,15 +63,11 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
           borderRadius={borderRadii.round}
         />
       </Pressable>
+
       <Box
-        bg="PRIMARY_3"
-        justifyContent="space-between"
-        alignItems="center"
-        flexDirection="row"
-        height={41}
-        width="85%"
-        borderRadius="global_8"
-        px="global_15"
+        borderWidth={1.5}
+        borderColor={query.length > 0 ? "PRIMARY_6" : "TRANSPARENT"}
+        style={[styles.inputContainer]}
       >
         <Input
           placeholder="Rechercher un formation..."
@@ -82,7 +78,7 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
         {query.length > 0 ? (
           <Animated.View
             style={{
-              opacity,
+              opacity: opacity,
             }}
           >
             <Pressable onPress={clearSearchBar} style={styles.clearSearch}>
@@ -94,11 +90,22 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
     </Box>
   );
 };
+const PROFILE_PICTURE_SIZE = 38;
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 41,
+    borderRadius: borderRadii.global_8,
+    backgroundColor: colors.PRIMARY_3,
+    paddingHorizontal: spacing.global_15,
+    alignItems: "center",
+    width: "85%",
+  },
   profilePicture: {
-    height: 38,
-    width: 38,
+    height: PROFILE_PICTURE_SIZE,
+    width: PROFILE_PICTURE_SIZE,
     borderColor: colors.PRIMARY_8,
     borderWidth: 1,
   },

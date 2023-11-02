@@ -36,7 +36,7 @@ const makeGraphData = (data: FormationsRepartition[]) => {
     datasets: [
       {
         data: values,
-        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       },
     ],
   };
@@ -52,7 +52,7 @@ export function FormationsRepartionGraph({
   const { data, isLoading, refetch } = useGetFormationRepartition(query);
 
   useEffect(() => {
-    refetch();
+    if (query !== "") refetch();
   }, [query, refetch]);
 
   const handleOpenModal = ({ index }: { index: number }): void => {
