@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 
 export type formattedHtml = Array<{ type: string; attendus: string[] }>;
 
-export function transformHTMLData(htmlData) {
+export function transformHTMLData(htmlData: string) {
   const $ = cheerio.load(htmlData);
   const competencies: formattedHtml = [];
   const typesOfInterest = [

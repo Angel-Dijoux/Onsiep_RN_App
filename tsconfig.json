@@ -1,27 +1,26 @@
 {
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "target": "es5",
-    "module": "esnext",
-    "jsx": "react",
-    "preserveSymlinks": false,
+    "module": "CommonJS",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
+    "baseUrl": ".",
+    "noErrorTruncation": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "allowJs": true,
+    "paths": {
+      "$shared/*": ["./shared/*"],
+      "$ui/*": ["./shared/ui/*"],
+      "$assets/*": ["./assets/*"],
+      "$screens/*": ["./screens/*"],
+      "$utils/*": ["./utils/*"],
+      "*": ["*", "*.ios.tsx", "*.android.tsx"]
+    }
   },
-  "include": [
-    "src"
-  ],
-  "extends": "expo/tsconfig.base"
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "dist"
+  ]
 }

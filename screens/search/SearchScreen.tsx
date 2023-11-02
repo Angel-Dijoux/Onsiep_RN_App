@@ -9,7 +9,7 @@ import { HeaderHomeScreen } from "../home/HeaderHomeScreen";
 
 export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
   const { query } = route.params;
-  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading, isFetching } =
     useSearchFormations(query);
 
   const handleEndReached = () => {
@@ -17,7 +17,6 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
       fetchNextPage();
     }
   };
-
   useEffect(() => {
     refetch();
   }, [query, refetch]);
@@ -27,6 +26,7 @@ export const SearchScreen: React.FC<SearchScreenRouteProps> = ({ route }) => {
     <Box flex={1} px="global_24">
       <HeaderHomeScreen prevQuery={query} />
       <ListFormationsDetails
+        query={query}
         data={data?.pages.flatMap((page) => page.formations)}
         handleEndReached={handleEndReached}
       />

@@ -32,11 +32,11 @@ export const useSearchFormations = (query: string) => {
     return undefined;
   };
 
-  const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
+  const { data, fetchNextPage, hasNextPage, refetch, isLoading, isFetching } =
     useInfiniteQuery<Formations>("searchFormations", fetchSearchResult, {
       retry: 2,
       getNextPageParam: getNextPageParams,
     });
 
-  return { isLoading, data, refetch, fetchNextPage, hasNextPage };
+  return { isLoading, isFetching, data, refetch, fetchNextPage, hasNextPage };
 };

@@ -4,6 +4,8 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React from "react";
 import { Pressable } from "react-native";
 
+import { capitalizeFirstLetter } from "$utils/typoFormat";
+
 import { formattedHtml, transformHTMLData } from "./utils/parseHtml";
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
 import { FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
@@ -26,11 +28,6 @@ interface CardFormationDetailsProps {
   level: string;
   tutelle: string;
   forId: string;
-}
-
-function capitalizeFirstLetter(inputString: string): string {
-  if (inputString.length === 0) return inputString;
-  return inputString.charAt(0).toUpperCase() + inputString.slice(1);
 }
 
 export const CardFormationDetails = ({
@@ -74,7 +71,6 @@ export const CardFormationDetails = ({
   } else if (Array.isArray(poursuiteEtudes)) {
     etudesList = poursuiteEtudes.slice(0, 4);
   }
-
   if (isLoading) return <Loading />;
   return (
     <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
