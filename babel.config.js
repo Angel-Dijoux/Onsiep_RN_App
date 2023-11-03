@@ -20,6 +20,10 @@ module.exports = function (api) {
               rootPathPrefix: "$assets/",
             },
             {
+              rootPathSuffix: "./screens/",
+              rootPathPrefix: "$screens/",
+            },
+            {
               rootPathSuffix: "./utils/",
               rootPathPrefix: "$utils/",
             },
