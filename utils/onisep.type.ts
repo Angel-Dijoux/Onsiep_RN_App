@@ -1,7 +1,7 @@
-import { type Formation } from "../shared/formation/fomationv2.type";
+import { type FormationListItem } from "../shared/formation/fomationv2.type";
 
 export interface UserFavoris {
-  results: Formation[];
+  results: FormationListItem[];
   size?: number;
 }
 

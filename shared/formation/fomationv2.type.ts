@@ -1,15 +1,23 @@
 export type Formation = {
-  code_nsf: string;
+  code_nsf: number;
+  created_at: null | string;
   domain: string;
-  libelle: string;
-  tutelle: string;
-  niveau_de_sortie: string;
-  type: string;
-  url: string;
   duree: string;
+  id: null | number;
+  libelle: string;
+  niveau_de_sortie: string;
+  tutelle: string;
+  type: string;
+  updated_at: null | string;
+  url: string;
+};
+
+export type FormationListItem = {
+  formation: Formation;
+  is_favorite: boolean;
 };
 
 export type Formations = {
-  formations: Formation[];
+  formations: FormationListItem[];
   total: number;
 };
