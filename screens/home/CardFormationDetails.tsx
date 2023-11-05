@@ -14,6 +14,7 @@ import { Box, Text } from "../../shared/ui/primitives";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
+import { useRemoveFavori } from "../../src/hooks/favoris/useRemoveFavori";
 
 export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
   const navigation =
@@ -22,12 +23,18 @@ export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
   const { accessToken } = useCurrentUser();
 
   const { handleAddFavoris } = useAddFavoris();
+  const { handleRemoveFavori } = useRemoveFavori();
 
   const handleFavoris = (item: FormationListItem): void => {
-    if (accessToken) {
-      if (!item.is_favorite) handleAddFavoris(item.formation);
-    } else {
+    if (!accessToken) {
       navigation.navigate("LoginScreen");
+      return;
+    }
+
+    if (!item.is_favorite) {
+      handleAddFavoris(item.formation);
+    } else {
+      handleRemoveFavori(item.formation.id as number);
     }
   };
 

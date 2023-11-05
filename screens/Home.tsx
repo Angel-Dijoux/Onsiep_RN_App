@@ -10,6 +10,9 @@ export const Home = () => {
   const { data, fetchNextPage, hasNextPage, isLoading } =
     useGetOnisepFormations();
 
+  if (!isLoading)
+    console.log(data?.pages.flatMap((page) => page.formations[0]));
+
   const handleEndReached = () => {
     if (hasNextPage) {
       fetchNextPage();
