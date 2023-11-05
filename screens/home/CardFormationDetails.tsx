@@ -13,8 +13,8 @@ import { Label } from "../../shared/ui/Label";
 import { Box, Text } from "../../shared/ui/primitives";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
-import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 import { useRemoveFavori } from "../../src/hooks/favoris/useRemoveFavori";
+import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 
 export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
   const navigation =
