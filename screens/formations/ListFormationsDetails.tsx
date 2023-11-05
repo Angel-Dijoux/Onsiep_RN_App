@@ -3,16 +3,16 @@ import React, { Suspense } from "react";
 
 import { CardFormationDetailsSkeleton } from "$screens/home/CardFormationDetailsSkeleton";
 
-import { Formation } from "../../shared/formation/fomationv2.type";
+import { FormationListItem } from "../../shared/formation/fomationv2.type";
 import { Box, Text } from "../../shared/ui/primitives";
 import { deviceWidth } from "../../utils/deviceInfo";
 import { CardFormationDetails } from "../home/CardFormationDetails";
 import { FormationsRepartionGraph } from "../search/FormationsRepartionGraph";
 
 // TODO: use api for this, idea: get 'details' from flask directly.
-export const renderItemDetailCardFormations: ListRenderItem<Formation> = ({
-  item,
-}) => (
+export const renderItemDetailCardFormations: ListRenderItem<
+  FormationListItem
+> = ({ item }) => (
   <Suspense fallback={<CardFormationDetailsSkeleton />}>
     <CardFormationDetails item={item} />
   </Suspense>
@@ -29,13 +29,13 @@ export const ListFormationsDetails = ({
   handleEndReached,
   query,
 }: {
-  data?: Formation[];
+  data?: FormationListItem[];
   handleEndReached: () => void;
   query?: string;
 }) => (
   <FlashList
     data={data}
-    keyExtractor={(_, index: number) => index.toString() + _.url}
+    keyExtractor={(_, index: number) => index.toString() + _.formation.url}
     ListHeaderComponent={
       query && data?.length !== 0 ? FormationsRepartionGraph({ query }) : null
     }

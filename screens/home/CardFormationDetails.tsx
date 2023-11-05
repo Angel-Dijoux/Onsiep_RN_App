@@ -8,26 +8,33 @@ import { makeAppStyles } from "$shared/ui/primitives/theme/theme";
 import { capitalizeFirstLetter } from "$utils/typoFormat";
 
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
-import { Formation } from "../../shared/formation/fomationv2.type";
+import { FormationListItem } from "../../shared/formation/fomationv2.type";
 import { Label } from "../../shared/ui/Label";
 import { Box, Text } from "../../shared/ui/primitives";
 import { colors } from "../../shared/ui/primitives/theme/colors";
 import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
+import { useRemoveFavori } from "../../src/hooks/favoris/useRemoveFavori";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 
-export const CardFormationDetails = ({ item }: { item: Formation }) => {
+export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
   const navigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
   const { accessToken } = useCurrentUser();
 
   const { handleAddFavoris } = useAddFavoris();
+  const { handleRemoveFavori } = useRemoveFavori();
 
-  const handleFavoris = (item: Formation): void => {
-    if (accessToken) {
-      handleAddFavoris(item);
-    } else {
+  const handleFavoris = (item: FormationListItem): void => {
+    if (!accessToken) {
       navigation.navigate("LoginScreen");
+      return;
+    }
+
+    if (!item.is_favorite) {
+      handleAddFavoris(item.formation);
+    } else {
+      handleRemoveFavori(item.formation.id as number);
     }
   };
 
@@ -36,20 +43,20 @@ export const CardFormationDetails = ({ item }: { item: Formation }) => {
   return (
     <Box bg="PRIMARY_2" mt="global_15" p="global_15" borderRadius="global_8">
       <Text variant="h3" color="PRIMARY_12">
-        {capitalizeFirstLetter(item.libelle || "Formation")}
+        {capitalizeFirstLetter(item.formation.libelle || "Formation")}
       </Text>
       <Box flexDirection="row" mt="global_5">
-        <Label text={item.duree} />
-        <Label text={item.niveau_de_sortie} />
+        <Label text={item.formation.duree} />
+        <Label text={item.formation.niveau_de_sortie} />
       </Box>
-      <Label text={item.tutelle} />
+      <Label text={item.formation.tutelle} />
 
       <Pressable
         onPress={() => handleFavoris(item)}
         style={styles.iconContainer}
       >
         <AntDesign
-          name="staro"
+          name={item.is_favorite ? "star" : "staro"}
           size={24}
           color={colors.PRIMARY_1}
           style={styles.iconStyle}
