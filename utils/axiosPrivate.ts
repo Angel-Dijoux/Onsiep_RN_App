@@ -27,8 +27,8 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      return refreshToken().then((accessToken) => {
-        originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+      return refreshToken().then((data) => {
+        originalRequest.headers["Authorization"] = `Bearer ${data?.access}`;
         return axiosInstance(originalRequest);
       });
     }

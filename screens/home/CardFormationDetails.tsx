@@ -1,7 +1,7 @@
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import React from "react";
+import React, { useState } from "react";
 import { Pressable } from "react-native";
 
 import { makeAppStyles } from "$shared/ui/primitives/theme/theme";
@@ -17,6 +17,8 @@ import { useRemoveFavori } from "../../src/hooks/favoris/useRemoveFavori";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 
 export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
+  const [isFavorite, setIsFavorite] = useState<boolean>(item.is_favorite);
+
   const navigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
@@ -31,11 +33,12 @@ export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
       return;
     }
 
-    if (!item.is_favorite) {
-      handleAddFavoris(item.formation);
-    } else {
+    if (isFavorite) {
       handleRemoveFavori(item.formation.id as number);
+    } else {
+      handleAddFavoris(item.formation);
     }
+    setIsFavorite((prev) => !prev);
   };
 
   const styles = useStyles();
@@ -56,7 +59,7 @@ export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
         style={styles.iconContainer}
       >
         <AntDesign
-          name={item.is_favorite ? "star" : "staro"}
+          name={isFavorite ? "star" : "staro"}
           size={24}
           color={colors.PRIMARY_1}
           style={styles.iconStyle}

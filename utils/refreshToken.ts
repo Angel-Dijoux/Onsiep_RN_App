@@ -4,14 +4,20 @@ import {
   setCurrentUserStorage,
 } from "../src/components/utils/currentUserStorage";
 
-export const refreshToken = async () => {
+type RefreshToken = {
+  access: string;
+};
+
+export const refreshToken = async (): Promise<RefreshToken | undefined> => {
   const currentUserInfo = await getCurrentUserStorage();
   if (!currentUserInfo) return;
 
   const refreshToken = currentUserInfo?.refreshToken;
   try {
-    const response = await axiosPublic.post("/auth/token/refresh", {
-      refreshToken,
+    const response = await axiosPublic.get("/auth/token/refresh", {
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
     });
 
     const data = response.data;
@@ -24,7 +30,7 @@ export const refreshToken = async () => {
 
     return data;
   } catch (error) {
-    console.log("Error in new refresh token : ", error);
+    console.error("Error in new refresh token : ", error);
   }
 };
 

@@ -1,28 +1,37 @@
+import { AxiosInstance } from "axios";
 import { useInfiniteQuery } from "react-query";
 
+import { axiosPrivate } from "$utils/axiosPrivate";
+import { axiosPublic } from "$utils/axiosPublic";
+
 import { Formations } from "../../../shared/formation/fomationv2.type";
-import { fetchWithoutToken } from "../../../utils/fetchWithToken";
+import { getCurrentUserStorage } from "../../../src/components/utils/currentUserStorage";
 
 const LIMIT = 10;
-const useGetOnisepFormations = () => {
-  const fetchSearchResult = async ({ pageParam }: { pageParam?: number }) => {
-    const response = await fetchWithoutToken("/formations/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        limit: LIMIT,
-        offset: pageParam ?? 0,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error("Error on search formations");
-    }
-    return response.json();
-  };
 
+const getFormations = async (
+  { pageParam }: { pageParam?: number },
+  axiosInstance: AxiosInstance
+): Promise<Formations> => {
+  const response = await axiosInstance.post("/formations/", {
+    limit: LIMIT,
+    offset: pageParam || 0,
+  });
+  return response.data;
+};
+
+const FORMATIONS = async ({
+  pageParam,
+}: {
+  pageParam?: number;
+}): Promise<Formations> => {
+  const currentUser = await getCurrentUserStorage();
+  const isAuth = currentUser?.userId;
+
+  return getFormations({ pageParam }, isAuth ? axiosPrivate : axiosPublic);
+};
+
+const useGetOnisepFormations = () => {
   const getNextPageParams = (lastPage: Formations) => {
     const total = lastPage.total;
     if (lastPage.formations.length < total) {
@@ -32,7 +41,7 @@ const useGetOnisepFormations = () => {
   };
 
   const { data, fetchNextPage, hasNextPage, refetch, isLoading } =
-    useInfiniteQuery<Formations>("mainFormations", fetchSearchResult, {
+    useInfiniteQuery<Formations>("mainFormations", FORMATIONS, {
       retry: 2,
       getNextPageParam: getNextPageParams,
     });
