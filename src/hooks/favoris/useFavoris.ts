@@ -1,5 +1,7 @@
 import { useQueryClient } from "react-query";
 
+import { axiosPrivate } from "$utils/axiosPrivate";
+
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { UserFavoris } from "../../../utils/onisep.type";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
@@ -9,11 +11,8 @@ const useFavoris = () => {
   const queryClient = useQueryClient();
 
   const fetchFavoris = async () => {
-    const response = await fetchWithToken("/favoris", { method: "GET" });
-    if (!response.ok) {
-      throw new Error("Error in fetchFavoris");
-    }
-    return response.json();
+    const response = await axiosPrivate.get("/favoris");
+    return response.data;
   };
 
   const {
