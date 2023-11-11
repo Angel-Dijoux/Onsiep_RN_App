@@ -1,27 +1,39 @@
+import { AxiosInstance } from "axios";
 import { useInfiniteQuery } from "react-query";
 
+import { axiosPrivate } from "$utils/axiosPrivate";
+import { axiosPublic } from "$utils/axiosPublic";
+
 import { type Formations } from "../../../shared/formation/fomationv2.type";
-import { fetchWithoutToken } from "../../../utils/fetchWithToken";
+import { getCurrentUserStorage } from "../../../src/components/utils/currentUserStorage";
 
 const LIMIT = 10;
+
+const getFormations = async (
+  { pageParam, query }: { pageParam?: number; query: string },
+  axiosInstance: AxiosInstance
+): Promise<Formations> => {
+  const response = await axiosInstance.post("/formations/search", {
+    limit: LIMIT,
+    query: query,
+    offset: pageParam || 0,
+  });
+  return response.data;
+};
+
 export const useSearchFormations = (query: string) => {
-  const fetchSearchResult = async ({ pageParam }: { pageParam?: number }) => {
-    const response = await fetchWithoutToken("/formations/search", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        limit: LIMIT,
-        query: query,
-        offset: pageParam ?? 0,
-      }),
-    });
-    if (!response.ok) {
-      throw new Error("Error on search formations");
-    }
-    return response.json();
+  const FORMATIONS = async ({
+    pageParam,
+  }: {
+    pageParam?: number;
+  }): Promise<Formations> => {
+    const currentUser = await getCurrentUserStorage();
+    const isAuth = currentUser?.userId;
+
+    return getFormations(
+      { pageParam, query },
+      isAuth ? axiosPrivate : axiosPublic
+    );
   };
 
   const getNextPageParams = (lastPage: Formations) => {
@@ -33,7 +45,7 @@ export const useSearchFormations = (query: string) => {
   };
 
   const { data, fetchNextPage, hasNextPage, refetch, isLoading, isFetching } =
-    useInfiniteQuery<Formations>("searchFormations", fetchSearchResult, {
+    useInfiniteQuery<Formations>("searchFormations", FORMATIONS, {
       retry: 2,
       getNextPageParam: getNextPageParams,
     });

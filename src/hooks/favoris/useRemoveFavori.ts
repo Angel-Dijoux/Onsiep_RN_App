@@ -1,6 +1,7 @@
 import { fetchWithToken } from "$utils/fetchWithToken";
 
 import { queryClient } from "../../../react-query.config";
+import { Toaster } from "../../components/ui/Notification/Toaster";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
 
 export const useRemoveFavori = () => {
@@ -22,9 +23,12 @@ export const useRemoveFavori = () => {
   );
 
   const handleRemoveFavori = async (id: number) => {
-    console.log("NOP HERE");
-
     await removeFavori.mutateAsync(id);
+    Toaster.show({
+      props: {
+        text: "Formation supprimée.",
+      },
+    });
   };
 
   return { handleRemoveFavori };
