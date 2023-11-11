@@ -1,8 +1,8 @@
 import axios from "axios";
-import { getCurrentUserStorage } from "src/components/utils/currentUserStorage";
-import { Config } from "src/config";
 
-import { memoizedRefreshToken } from "./refreshToken";
+import { refreshToken } from "./refreshToken";
+import { getCurrentUserStorage } from "../src/components/utils/currentUserStorage";
+import { Config } from "../src/config";
 
 const axiosInstance = axios.create();
 
@@ -14,7 +14,6 @@ axiosInstance.interceptors.request.use(
     if (currentUser?.accessToken) {
       config.headers["Authorization"] = `Bearer ${currentUser?.accessToken}`;
     }
-
     return config;
   },
   (error) => Promise.reject(error)
@@ -28,7 +27,7 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
-      return memoizedRefreshToken().then((accessToken) => {
+      return refreshToken().then((accessToken) => {
         originalRequest.headers["Authorization"] = `Bearer ${accessToken}`;
         return axiosInstance(originalRequest);
       });

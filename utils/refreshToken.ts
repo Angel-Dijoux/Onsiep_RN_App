@@ -1,12 +1,10 @@
-import mem from "mem";
+import { axiosPublic } from "./axiosPublic";
 import {
   getCurrentUserStorage,
   setCurrentUserStorage,
-} from "src/components/utils/currentUserStorage";
+} from "../src/components/utils/currentUserStorage";
 
-import { axiosPublic } from "./axiosPublic";
-
-const refreshToken = async () => {
+export const refreshToken = async () => {
   const currentUserInfo = await getCurrentUserStorage();
   if (!currentUserInfo) return;
 
@@ -32,6 +30,6 @@ const refreshToken = async () => {
 
 const maxAge = 10000;
 
-export const memoizedRefreshToken = mem(refreshToken, {
-  maxAge,
-});
+// export const memoizedRefreshToken = mem(refreshToken, {
+//   maxAge,
+// });

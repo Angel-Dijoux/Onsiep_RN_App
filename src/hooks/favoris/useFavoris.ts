@@ -1,25 +1,24 @@
-import { useQueryClient } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 import { axiosPrivate } from "$utils/axiosPrivate";
 
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { UserFavoris } from "../../../utils/onisep.type";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
-import { useAuthenticatedQuery } from "../useAuthenticatedQuery";
+
+const FAVORIS = async (): Promise<UserFavoris> => {
+  const response = await axiosPrivate.get("/favoris");
+  return response.data;
+};
 
 const useFavoris = () => {
   const queryClient = useQueryClient();
-
-  const fetchFavoris = async () => {
-    const response = await axiosPrivate.get("/favoris");
-    return response.data;
-  };
 
   const {
     isLoading,
     error,
     data: favoris,
-  } = useAuthenticatedQuery<UserFavoris>("favoris", fetchFavoris, { retry: 2 });
+  } = useQuery<UserFavoris>("favoris", FAVORIS, { retry: 2 });
 
   const deleteFormation = useAuthenticatedMutation(
     async (id: number) => {
