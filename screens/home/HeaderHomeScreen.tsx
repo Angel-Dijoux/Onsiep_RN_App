@@ -1,8 +1,11 @@
 import { Entypo } from "@expo/vector-icons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, Image, Pressable, StyleSheet } from "react-native";
+
+import { SettingsModal } from "$screens/Settings/SettingsModal";
 
 import { type FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Input } from "../../shared/ui/forms/Input";
@@ -13,11 +16,14 @@ import { spacing } from "../../shared/ui/primitives/theme/spacing";
 
 export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
   const [query, setQuery] = useState<string>(prevQuery ?? "");
+  const settingsModalRef = useRef<BottomSheetModal>(null);
 
   const navigation =
     useNavigation<
       StackNavigationProp<FormationTabStackNavigationParamsList, "HomeScreen">
     >();
+
+  const handleOpenModal = () => settingsModalRef.current?.present();
 
   const handleSearchQuery = () => {
     navigation.navigate("SearchScreen", { query });
@@ -54,7 +60,7 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
       alignItems="center"
       py="global_15"
     >
-      <Pressable onPress={clearSearchBar}>
+      <Pressable onPress={clearSearchBar} onLongPress={handleOpenModal}>
         <Image
           source={{
             uri: "https://cdn.pixabay.com/photo/2017/03/05/21/55/emoticon-2120024_960_720.png",
@@ -87,6 +93,7 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
           </Animated.View>
         ) : null}
       </Box>
+      <SettingsModal settingsModalRef={settingsModalRef} />
     </Box>
   );
 };
