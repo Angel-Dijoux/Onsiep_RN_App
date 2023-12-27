@@ -7,10 +7,19 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
+import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setemail] = useState<string>("");
   const [password, setpassword] = useState<string>("");
+
+  const navigation =
+    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
+  const registerNavigation =
+    useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
   const { login } = useConnexion();
 
@@ -25,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
         refreshToken: String(response.user.refresh),
       });
       console.log(response);
-      navigation.navigate("Home");
+      navigation.navigate("HomeScreen");
     } catch (error: unknown) {
       console.log(error);
     }
@@ -57,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
       <BtnTextConn
         firstText="Pas enregistrer ?"
         secondText="Enregistre toi ici !"
-        onPress={() => navigation.navigate("RegisterScreen")}
+        onPress={() => registerNavigation.navigate("RegisterScreen")}
       />
     </ScreenWithImage>
   );
