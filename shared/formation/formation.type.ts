@@ -8,7 +8,6 @@ export interface FormationType {
   descriptif_format_court: string;
   descriptif_poursuite_etudes?: string;
   duree_formation: string;
-  element_enseignement: any;
   identifiant: string;
   libelle_complet: string;
   libelle_generique?: string;

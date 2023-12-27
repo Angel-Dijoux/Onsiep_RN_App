@@ -34,7 +34,7 @@ export const refreshToken = async (): Promise<RefreshToken | undefined> => {
   }
 };
 
-const maxAge = 10000;
+// const maxAge = 10000;
 
 // export const memoizedRefreshToken = mem(refreshToken, {
 //   maxAge,
