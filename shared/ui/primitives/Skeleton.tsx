@@ -24,7 +24,7 @@ export function Skeleton({
         duration: 1200,
       })
     ).start();
-  }, [skeletonWidth]);
+  }, [skeletonWidth, translateX]);
 
   return (
     <Box overflow="hidden" width={skeletonWidth} {...props}>

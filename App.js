@@ -16,8 +16,6 @@ import { colors } from "./shared/ui/primitives/theme/colors";
 import { theme } from "./shared/ui/primitives/theme/theme";
 import { toasterConfig } from "./src/components/ui/Notification/config";
 import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
-import { AuthProvider } from "./src/context/AuthContext";
-import { FavorisProvider } from "./src/context/FavorisContext";
 import {
   CurrentUserContext,
   defaultCurrentUser,
@@ -69,14 +67,10 @@ const App = () => {
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <QueryClientProvider client={queryClient}>
           <CurrentUserContext.Provider value={currentUserValue}>
-            <AuthProvider>
-              <FavorisProvider>
-                <ThemeProvider theme={theme}>
-                  <AppNav />
-                  <Toast config={toasterConfig} />
-                </ThemeProvider>
-              </FavorisProvider>
-            </AuthProvider>
+            <ThemeProvider theme={theme}>
+              <AppNav />
+              <Toast config={toasterConfig} />
+            </ThemeProvider>
           </CurrentUserContext.Provider>
         </QueryClientProvider>
       </SafeAreaProvider>

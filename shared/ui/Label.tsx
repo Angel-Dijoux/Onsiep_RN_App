@@ -1,17 +1,8 @@
 import React from "react";
 
 import { Box, Text } from "./primitives";
-import { Colors } from "./primitives/theme/colors";
 
-export const Label = ({
-  text,
-  bg,
-  color,
-}: {
-  text?: string;
-  bg?: Colors;
-  color?: Colors;
-}) => {
+export const Label = ({ text }: { text?: string }) => {
   return (
     <Box
       bg="PRIMARY_4"
