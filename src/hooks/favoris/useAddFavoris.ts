@@ -4,29 +4,16 @@ import { Formation } from "../../../shared/formation/fomationv2.type";
 import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { Toaster } from "../../components/ui/Notification/Toaster";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
+import { axiosPrivate } from '$utils/axiosPrivate';
 
 export const useAddFavoris = () => {
   const queryClient = useQueryClient();
 
   const addFormation = useAuthenticatedMutation(
     async (formation: Formation) => {
-      const response = await fetchWithToken("/favoris", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formation),
-      });
-      if (
-        response.status == 409 ||
-        response.status == 308 ||
-        response.status == 500
-      ) {
+      const response = await axiosPrivate.post("/favoris/", formation);
+      if (response.status !== 201) {
         throw new Error("This formation is already in favoris");
-      }
-      if (!response.ok) {
-        throw new Error("Error on add in favorite");
       }
     },
     {

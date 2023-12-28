@@ -1,14 +1,14 @@
 export type Formation = {
   code_nsf: number;
-  created_at: null | string;
+  created_at?: Date;
   domain: string;
   duree: string;
-  id: null | number;
+  id?: string;
   libelle: string;
   niveau_de_sortie: string;
   tutelle: string;
   type: string;
-  updated_at: null | string;
+  updated_at?: Date;
   url: string;
 };
 
