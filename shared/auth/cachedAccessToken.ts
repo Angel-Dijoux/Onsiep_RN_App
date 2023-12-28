@@ -1,9 +1,9 @@
 let cachedAccessToken: string | null = null;
 
 export const setCachedAccessToken = (accessToken: string) => {
-    cachedAccessToken = accessToken;
+  cachedAccessToken = accessToken;
 };
 
 export const getCachedAccessToken = () => {
-    return cachedAccessToken;
+  return cachedAccessToken;
 };

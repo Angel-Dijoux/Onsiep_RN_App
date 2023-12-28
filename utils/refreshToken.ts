@@ -10,7 +10,7 @@ type RefreshToken = {
 };
 
 export const refreshToken = async (): Promise<RefreshToken | undefined> => {
-  const currentUserStored = await getCurrentUserStorage()
+  const currentUserStored = await getCurrentUserStorage();
   if (!currentUserStored) return;
 
   const currentRefreshToken = currentUserStored.refreshToken;
@@ -28,7 +28,7 @@ export const refreshToken = async (): Promise<RefreshToken | undefined> => {
     id: currentUserStored?.userId,
     username: currentUserStored?.username,
     accessToken: data.access,
-    refreshToken: currentRefreshToken as string
+    refreshToken: currentRefreshToken as string,
   });
 
   return data;

@@ -1,4 +1,8 @@
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
+import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import React, { useState } from "react";
 
 import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
@@ -7,10 +11,6 @@ import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
-import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 
 const LoginScreen = () => {
   const [email, setemail] = useState<string>("");

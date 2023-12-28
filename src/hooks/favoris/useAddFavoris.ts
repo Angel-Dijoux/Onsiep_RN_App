@@ -1,10 +1,10 @@
 import { useQueryClient } from "react-query";
 
+import { axiosPrivate } from "$utils/axiosPrivate";
+
 import { Formation } from "../../../shared/formation/fomationv2.type";
-import { fetchWithToken } from "../../../utils/fetchWithToken";
 import { Toaster } from "../../components/ui/Notification/Toaster";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
-import { axiosPrivate } from '$utils/axiosPrivate';
 
 export const useAddFavoris = () => {
   const queryClient = useQueryClient();

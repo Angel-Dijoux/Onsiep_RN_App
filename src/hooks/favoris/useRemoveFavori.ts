@@ -6,7 +6,7 @@ import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
 
 export const useRemoveFavori = () => {
   const removeFavori = useAuthenticatedMutation(
-    async (id: number) => {
+    async (id: string) => {
       const response = await fetchWithToken(`/favoris/${id}`, {
         method: "DELETE",
       });
@@ -22,7 +22,7 @@ export const useRemoveFavori = () => {
     }
   );
 
-  const handleRemoveFavori = async (id: number) => {
+  const handleRemoveFavori = async (id: string) => {
     await removeFavori.mutateAsync(id);
     Toaster.show({
       props: {

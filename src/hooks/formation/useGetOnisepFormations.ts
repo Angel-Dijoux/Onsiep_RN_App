@@ -46,7 +46,7 @@ const useGetOnisepFormations = () => {
       getNextPageParam: getNextPageParams,
     });
 
-  console.log(data?.pages[0].formations[0])
+  console.log(data?.pages[0].formations[0]);
 
   return { isLoading, data, refetch, fetchNextPage, hasNextPage };
 };
