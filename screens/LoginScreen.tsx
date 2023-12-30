@@ -1,20 +1,27 @@
-import { AntDesign } from "@expo/vector-icons";
-import React, { useState } from "react";
-
-import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
-import { colors } from "../shared/ui/primitives/theme/colors";
-import { BtnTextConn } from "../src/components/ui/BtnTextConn";
-import { InputField } from "../src/components/ui/inputs/InputField";
-import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
-import { useConnexion } from "../src/hooks/user/useConnexion";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
 import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
+import React, { useState } from "react";
+import { StyleProp, TextStyle } from "react-native";
+
+import { Input } from "$shared/ui/forms/Input";
+import { Screen } from "$shared/ui/navigation/Screen";
+import { Box } from "$shared/ui/primitives";
+
+import { makeAppStyles } from "$shared/ui/theme/theme";
+import { colors } from "../shared/ui/theme/colors";
+import { BtnTextConn } from "../src/components/ui/BtnTextConn";
+import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
+import { useConnexion } from "../src/hooks/user/useConnexion";
+
+import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const LoginScreen = () => {
-  const [email, setemail] = useState<string>("");
-  const [password, setpassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const { setCurrentUser } = useCurrentUser();
 
   const navigation =
     useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
@@ -23,16 +30,26 @@ const LoginScreen = () => {
 
   const { login } = useConnexion();
 
+  const styles = useStyles();
+
+  const activeBorder = (isWrited: boolean): StyleProp<TextStyle> => {
+    return {
+      borderColor: isWrited ? colors.PRIMARY_6 : colors.TRANSPARENT,
+    };
+  };
+
   const handleEnterInput = async () => {
     try {
       const formData = { email: email, password: password };
       const response = await login({ formData });
-      setCurrentUserStorage({
+      const registeredUser = {
+        accessToken: response.user.access,
+        refreshToken: response.user.refresh,
         id: response.user.id,
-        username: String(response.user.username),
-        accessToken: String(response.user.access),
-        refreshToken: String(response.user.refresh),
-      });
+        username: response.user.username,
+      };
+      setCurrentUser(registeredUser);
+      setCurrentUserStorage(registeredUser);
       console.log(response);
       navigation.navigate("HomeScreen");
     } catch (error: unknown) {
@@ -41,34 +58,47 @@ const LoginScreen = () => {
   };
 
   return (
-    <ScreenWithImage title="Se connecter" canGoBack={false}>
-      <InputField
-        title="Email"
-        value={email}
-        type="email-address"
-        onChange={(text) => {
-          setemail(text);
-        }}
-      >
-        <AntDesign name="mail" size={24} color={colors.PRIMARY_12} />
-      </InputField>
-      <InputField
-        title="Mot de passe"
-        password
-        value={password}
-        onChange={(text) => {
-          setpassword(text);
-        }}
-        onSubmitEditing={handleEnterInput}
-      >
-        <AntDesign name="key" size={24} color={colors.PRIMARY_12} />
-      </InputField>
+    <Screen title="Se connecter" goBack={false}>
+      <Box py="global_15">
+        <Input
+          label="Email"
+          placeholder="onisep_api@gmail.com"
+          style={[styles.inputContainer, activeBorder(email.length > 0)]}
+          value={email}
+          onChangeText={(text) => {
+            setEmail(text);
+          }}
+        />
+      </Box>
+      <Box py="global_15">
+        <Input
+          label="Mot de passe"
+          placeholder="***********"
+          style={[styles.inputContainer, activeBorder(password.length > 0)]}
+          value={password}
+          onChangeText={(text) => {
+            setPassword(text);
+          }}
+          onSubmitEditing={handleEnterInput}
+        />
+      </Box>
       <BtnTextConn
         firstText="Pas enregistrer ?"
         secondText="Enregistre toi ici !"
         onPress={() => registerNavigation.navigate("RegisterScreen")}
       />
-    </ScreenWithImage>
+    </Screen>
   );
 };
+
+const useStyles = makeAppStyles(({ colors, spacing, borderRadii }) => ({
+  inputContainer: {
+    height: 48,
+    borderWidth: 1.5,
+    borderRadius: borderRadii.global_8,
+    backgroundColor: colors.PRIMARY_3,
+    paddingHorizontal: spacing.global_15,
+  },
+}));
+
 export { LoginScreen };

@@ -5,7 +5,7 @@ import { Pressable } from "react-native";
 
 import { Box, Text } from "$shared/ui/primitives";
 import { Modal } from "$shared/ui/primitives/Modal";
-import { colors } from "$shared/ui/primitives/theme/colors";
+import { colors } from "$shared/ui/theme/colors";
 
 import { useDeleteAccount } from "./useDeleteAccount";
 

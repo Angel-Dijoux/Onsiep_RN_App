@@ -18,7 +18,7 @@ export const setCurrentUserStorage = async ({
   }
 };
 
-export const getCurrentUserStorage = async () => {
+export const getCurrentUserStorage = async (): Promise<CurrentUserType> => {
   try {
     const accessToken = await SecureStore.getItemAsync("accessToken");
     if (accessToken) {
@@ -27,15 +27,22 @@ export const getCurrentUserStorage = async () => {
       const refreshToken = await SecureStore.getItemAsync("refreshToken");
 
       return {
-        userId: Number(userId) || 0,
+        id: Number(userId) || 0,
         username: username || "",
         accessToken,
-        refreshToken,
+        refreshToken: refreshToken || "",
       };
     }
   } catch (error: unknown) {
     console.log("Error in getCurrentUserStorage ", error);
   }
+
+  return {
+    id: 0,
+    username: "",
+    accessToken: "",
+    refreshToken: "",
+  };
 };
 
 export const deleteCurrentUserStorage = async () => {

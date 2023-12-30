@@ -1,19 +1,31 @@
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
+import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import React, { useState } from "react";
 
-import { ScreenWithImage } from "../shared/ui/ScreenWithImage";
-import { colors } from "../shared/ui/primitives/theme/colors";
+import { Screen } from "$shared/ui/navigation/Screen";
+
+import { colors } from "../shared/ui/theme/colors";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { InputField } from "../src/components/ui/inputs/InputField";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
+import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = () => {
   const { register, login } = useConnexion();
+  const { setCurrentUser } = useCurrentUser();
 
   const [username, setusername] = useState<string>("");
   const [email, setemail] = useState<string>("");
   const [password, setpassword] = useState<string>("");
+
+  const navigation =
+    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
+  const registerNavigation =
+    useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
   const handleEnterInput = async () => {
     try {
@@ -32,12 +44,14 @@ const RegisterScreen = ({ navigation }) => {
           },
         });
         console.log(response.user.refresh);
-        setCurrentUserStorage({
-          id: 1,
-          username: String(response.user.usename),
-          accessToken: String(response.user.access),
-          refreshToken: String(response.user.refresh),
-        });
+        const registeredUser = {
+          accessToken: response.user.access,
+          refreshToken: response.user.refresh,
+          id: response.user.id,
+          username: response.user.username,
+        };
+        setCurrentUser(registeredUser);
+        setCurrentUserStorage(registeredUser);
         navigation.navigate("HomeScreen");
       }
     } catch (error: unknown) {
@@ -46,7 +60,7 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <ScreenWithImage title="S'enregistrer" canGoBack>
+    <Screen title="S'enregistrer" goBack>
       <InputField
         title="Email"
         value={email}
@@ -80,9 +94,9 @@ const RegisterScreen = ({ navigation }) => {
       <BtnTextConn
         firstText="Tu as un compte ?"
         secondText="Connecte toi ici !"
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => registerNavigation.navigate("LoginScreen")}
       />
-    </ScreenWithImage>
+    </Screen>
   );
 };
 export { RegisterScreen };

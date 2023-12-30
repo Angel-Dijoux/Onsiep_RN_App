@@ -2,9 +2,9 @@ import React, { type ReactNode } from "react";
 import { StyleSheet, TextInput, type KeyboardTypeOptions } from "react-native";
 
 import { Box, Text } from "../../../../shared/ui/primitives";
-import { colors } from "../../../../shared/ui/primitives/theme/colors";
-import { textVariants } from "../../../../shared/ui/primitives/theme/fonts";
-import { spacing } from "../../../../shared/ui/primitives/theme/spacing";
+import { colors } from "../../../../shared/ui/theme/colors";
+import { textVariants } from "../../../../shared/ui/theme/fonts";
+import { spacing } from "../../../../shared/ui/theme/spacing";
 
 interface InputFieldProps {
   type?: KeyboardTypeOptions;

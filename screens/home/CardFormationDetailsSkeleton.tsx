@@ -1,6 +1,6 @@
 import { Box } from "$shared/ui/primitives";
 import { Skeleton } from "$shared/ui/primitives/Skeleton";
-import { colors } from "$shared/ui/primitives/theme/colors";
+import { colors } from "$shared/ui/theme/colors";
 import { deviceWidth } from "$utils/deviceInfo";
 
 const WIDTH = deviceWidth * 0.8;

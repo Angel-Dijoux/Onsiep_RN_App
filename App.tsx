@@ -1,37 +1,33 @@
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
+import { enableFreeze } from "react-native-screens";
 import Toast from "react-native-toast-message";
 
 import { AppNav } from "./navigation/AppNav";
 import { QueryClientProvider, queryClient } from "./react-query.config";
-import { colors } from "./shared/ui/primitives/theme/colors";
-import { theme } from "./shared/ui/primitives/theme/theme";
+import { colors } from "./shared/ui/theme/colors";
+import { theme } from "./shared/ui/theme/theme";
 import { toasterConfig } from "./src/components/ui/Notification/config";
-import { getCurrentUserStorage } from "./src/components/utils/currentUserStorage";
-import {
-  CurrentUserContext,
-  defaultCurrentUser,
-} from "./src/hooks/user/useCurrentUser";
 
-SplashScreen.preventAutoHideAsync();
+enableFreeze(true);
 
 const App = () => {
-  const [currentUser, setCurrentUser] = useState(defaultCurrentUser);
-
   const [fontsLoaded] = useFonts({
     Satoshi: require("./assets/fonts/Satoshi.ttf"),
     Manrope: require("./assets/fonts/Manrope.ttf"),
   });
   useEffect(() => {
     const dimissSplashScreen = async () => {
+      await SplashScreen.preventAutoHideAsync();
+
       if (fontsLoaded) {
         await SplashScreen.hideAsync();
       }
@@ -39,24 +35,6 @@ const App = () => {
 
     dimissSplashScreen();
   }, [fontsLoaded]);
-
-  const currentUserValue = useMemo(
-    () => ({
-      ...currentUser,
-      setCurrentUser,
-    }),
-    [currentUser]
-  );
-
-  useEffect(() => {
-    const setupData = async () => {
-      const userData = await getCurrentUserStorage();
-      if (userData) {
-        setCurrentUser(userData);
-      }
-    };
-    setupData();
-  }, []);
 
   if (!fontsLoaded) {
     return null;
@@ -66,12 +44,10 @@ const App = () => {
     <GestureHandlerRootView style={styles.wrapper}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <QueryClientProvider client={queryClient}>
-          <CurrentUserContext.Provider value={currentUserValue}>
-            <ThemeProvider theme={theme}>
-              <AppNav />
-              <Toast config={toasterConfig} />
-            </ThemeProvider>
-          </CurrentUserContext.Provider>
+          <ThemeProvider theme={theme}>
+            <AppNav />
+            <Toast config={toasterConfig} />
+          </ThemeProvider>
         </QueryClientProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

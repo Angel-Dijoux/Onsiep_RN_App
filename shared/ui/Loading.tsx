@@ -2,7 +2,7 @@ import React from "react";
 import { ActivityIndicator } from "react-native";
 
 import { Box } from "./primitives";
-import { colors } from "./primitives/theme/colors";
+import { colors } from "./theme/colors";
 
 const Loading = () => {
   return (

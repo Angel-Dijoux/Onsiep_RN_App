@@ -4,8 +4,8 @@ import React, { useCallback } from "react";
 import { BackHandler, Pressable } from "react-native";
 
 import { Box } from "../primitives";
-import { colors } from "../primitives/theme/colors";
-import { spacing } from "../primitives/theme/spacing";
+import { colors } from "../theme/colors";
+import { spacing } from "../theme/spacing";
 
 type ReturnButtonType = {
   goBack?: boolean;

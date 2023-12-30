@@ -6,7 +6,7 @@ import { FormationsNavigation } from "./formations/FormationsNavigation";
 import { TAB_BAR_ICON_SIZE, type TabBarIconProps } from "./icon.types";
 import { BottomTabNavigatorParamsList } from "./tabs.types";
 import { FavScreen } from "../screens/FavScreen";
-import { colors } from "../shared/ui/primitives/theme/colors";
+import { colors } from "../shared/ui/theme/colors";
 
 const Tab = createBottomTabNavigator<BottomTabNavigatorParamsList>();
 
