@@ -19,7 +19,7 @@ function Input({ label, style = {}, ...rest }: InputProps) {
       {label?.length && (
         <Text
           variant="regular"
-          fontFamily={fontFamily.satoshi}
+          fontFamily={fontFamily.satoshiRegular}
           color="PRIMARY_12"
           pb="global_10"
         >

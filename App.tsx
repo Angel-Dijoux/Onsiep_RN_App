@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@shopify/restyle";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { StyleSheet } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
@@ -17,31 +17,28 @@ import { colors } from "./shared/ui/theme/colors";
 import { theme } from "./shared/ui/theme/theme";
 import { toasterConfig } from "./src/components/ui/Notification/config";
 
+SplashScreen.preventAutoHideAsync();
 enableFreeze(true);
 
 const App = () => {
-  const [fontsLoaded] = useFonts({
-    Satoshi: require("./assets/fonts/Satoshi.ttf"),
-    Manrope: require("./assets/fonts/Manrope.ttf"),
+  const [fontsLoaded, fontError] = useFonts({
+    SatoshiRegular: require("./assets/fonts/satoshi/Satoshi-Regular.otf"),
+    SatoshiBold: require("./assets/fonts/satoshi/Satoshi-Bold.otf"),
+    ManropeRegular: require("./assets/fonts/manrope/Manrope-Regular.ttf"),
   });
-  useEffect(() => {
-    const dimissSplashScreen = async () => {
-      await SplashScreen.preventAutoHideAsync();
 
-      if (fontsLoaded) {
-        await SplashScreen.hideAsync();
-      }
-    };
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
 
-    dimissSplashScreen();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
+  if (!fontsLoaded && !fontError) {
     return null;
   }
 
   return (
-    <GestureHandlerRootView style={styles.wrapper}>
+    <GestureHandlerRootView style={styles.wrapper} onLayout={onLayoutRootView}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>

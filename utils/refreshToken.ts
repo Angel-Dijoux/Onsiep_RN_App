@@ -22,7 +22,7 @@ export const refreshToken = async (): Promise<RefreshToken | undefined> => {
 
     const data = response.data;
     setCurrentUserStorage({
-      id: currentUserInfo?.userId,
+      id: currentUserInfo.id,
       username: currentUserInfo?.username,
       accessToken: data.access,
       refreshToken: refreshToken as string,

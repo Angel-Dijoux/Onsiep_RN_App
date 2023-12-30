@@ -29,7 +29,7 @@ const useRefreshToken = () => {
     }
     const data = await response.json();
     setCurrentUserStorage({
-      id: Number(currentUserInfo?.userId),
+      id: Number(currentUserInfo.id),
       username: String(currentUserInfo?.username),
       accessToken: data.access,
       refreshToken: String(refreshToken),

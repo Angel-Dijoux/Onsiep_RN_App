@@ -32,7 +32,7 @@ function createStyledToastComponent(
 function BasicToast({ props }: { props: { text: string } }) {
   return (
     <Box width="90%" bg="GREY_SEND_DARK" borderRadius="global_8" p="global_16">
-      <Text variant="small" fontFamily={fontFamily.manrope}>
+      <Text variant="small" fontFamily={fontFamily.manropeRegular}>
         {props.text}
       </Text>
     </Box>
@@ -51,13 +51,12 @@ const styles = StyleSheet.create({
   },
   text1: {
     ...textVariants.large,
-    fontWeight: "700",
-    fontFamily: fontFamily.satoshi,
+    fontFamily: fontFamily.satoshiBold,
     color: colors.PRIMARY_12,
   },
   text2: {
     ...textVariants.small,
-    fontFamily: fontFamily.manrope,
+    fontFamily: fontFamily.manropeRegular,
     color: colors.PRIMARY_12,
   },
   success: {

@@ -5,16 +5,16 @@ import { FormationTabStackNavigationParamsList } from "navigation/formations/For
 import React, { useState } from "react";
 import { StyleProp, TextStyle } from "react-native";
 
+import { Button } from "$shared/ui/button/Button";
 import { Input } from "$shared/ui/forms/Input";
 import { Screen } from "$shared/ui/navigation/Screen";
-import { Box } from "$shared/ui/primitives";
-
+import { Box, Text } from "$shared/ui/primitives";
 import { makeAppStyles } from "$shared/ui/theme/theme";
+
 import { colors } from "../shared/ui/theme/colors";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
 import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
-
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const LoginScreen = () => {
@@ -38,6 +38,8 @@ const LoginScreen = () => {
     };
   };
 
+  const shouldDisableButton = email.length > 0 && password.length > 0;
+
   const handleEnterInput = async () => {
     try {
       const formData = { email: email, password: password };
@@ -58,22 +60,26 @@ const LoginScreen = () => {
   };
 
   return (
-    <Screen title="Se connecter" goBack={false}>
-      <Box py="global_15">
+    <Screen goBack={false}>
+      <Box
+        mt="global_32"
+        mx="global_15"
+        gap="global_15"
+        justifyContent="center"
+      >
+        <Box my="global_8" alignItems="center">
+          <Text variant="h2">Onisep Data</Text>
+        </Box>
         <Input
-          label="Email"
-          placeholder="onisep_api@gmail.com"
+          placeholder="Email"
           style={[styles.inputContainer, activeBorder(email.length > 0)]}
           value={email}
           onChangeText={(text) => {
             setEmail(text);
           }}
         />
-      </Box>
-      <Box py="global_15">
         <Input
-          label="Mot de passe"
-          placeholder="***********"
+          placeholder="Mot de passe"
           style={[styles.inputContainer, activeBorder(password.length > 0)]}
           value={password}
           onChangeText={(text) => {
@@ -81,23 +87,30 @@ const LoginScreen = () => {
           }}
           onSubmitEditing={handleEnterInput}
         />
+        <Button
+          onPress={handleEnterInput}
+          variant={shouldDisableButton ? "primary" : "primaryDisabled"}
+          isDisabled={!shouldDisableButton}
+        >
+          Se connecter
+        </Button>
+        <BtnTextConn
+          firstText="Pas enregistrer ?"
+          secondText="Enregistre toi ici !"
+          onPress={() => registerNavigation.navigate("RegisterScreen")}
+        />
       </Box>
-      <BtnTextConn
-        firstText="Pas enregistrer ?"
-        secondText="Enregistre toi ici !"
-        onPress={() => registerNavigation.navigate("RegisterScreen")}
-      />
     </Screen>
   );
 };
 
 const useStyles = makeAppStyles(({ colors, spacing, borderRadii }) => ({
   inputContainer: {
-    height: 48,
     borderWidth: 1.5,
     borderRadius: borderRadii.global_8,
     backgroundColor: colors.PRIMARY_3,
     paddingHorizontal: spacing.global_15,
+    paddingVertical: spacing.global_10,
   },
 }));
 

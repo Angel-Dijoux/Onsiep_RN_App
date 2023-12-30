@@ -1,24 +1,28 @@
+import { BorderRadii } from "../theme/borderRadii";
 import { Colors } from "../theme/colors";
 
 type Variant = keyof typeof buttonVariants;
 
-const buttonVariants = {
+const buttonVariants: Record<
+  string,
+  { backgroundColor: Colors; borderRadius: BorderRadii }
+> = {
   primary: {
-    backgroundColor: "WHITE",
-    borderRadius: "global_5",
+    backgroundColor: "PRIMARY_11",
+    borderRadius: "global_8",
   },
   primaryDisabled: {
-    backgroundColor: "GREY_SAND",
-    borderRadius: "global_5",
+    backgroundColor: "PRIMARY_5",
+    borderRadius: "global_8",
   },
 };
 
 const buttonTextStyle: Record<Variant, { color: Colors }> = {
   primary: {
-    color: "WHITE",
+    color: "BLACK",
   },
   primaryDisabled: {
-    color: "GREY_SAND",
+    color: "WHITE",
   },
 };
 

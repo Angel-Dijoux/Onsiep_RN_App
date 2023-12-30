@@ -28,9 +28,8 @@ export const useAppTheme = () => useTheme<Theme>();
 
 export const makeAppStyles =
   <T extends NamedStyles<T>>(styles: (appTheme: Theme) => T) =>
-    () => {
-      const restyleTheme = useAppTheme();
+  () => {
+    const restyleTheme = useAppTheme();
 
-      return styles(restyleTheme);
-    };
-
+    return styles(restyleTheme);
+  };
