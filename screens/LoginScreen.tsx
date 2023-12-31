@@ -23,7 +23,6 @@ export const activeBorder = (isWrited: boolean): StyleProp<TextStyle> => {
   };
 };
 
-
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");

@@ -12,7 +12,6 @@ import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
 
 import { CurrentUserType } from "$shared/auth/currentUser.types";
 
-
 import { AuthTabs } from "./AuthTabs";
 import { Tabs } from "./Tabs";
 import { RootStackParamsList } from "./rootStack.types";
@@ -23,7 +22,6 @@ import {
   CurrentUserContext,
   defaultCurrentUser,
 } from "../src/hooks/user/useCurrentUser";
-
 
 const AppNav = () => {
   const [currentUser, setCurrentUser] =
