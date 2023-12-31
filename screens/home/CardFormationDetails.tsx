@@ -34,7 +34,7 @@ export const CardFormationDetails = ({ item }: { item: FormationListItem }) => {
     }
 
     if (isFavorite) {
-      handleRemoveFavori(item.formation.id as number);
+      handleRemoveFavori(item.formation.id as string);
     } else {
       handleAddFavoris(item.formation);
     }

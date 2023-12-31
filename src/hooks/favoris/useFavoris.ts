@@ -7,7 +7,7 @@ import { UserFavoris } from "../../../utils/onisep.type";
 import { useAuthenticatedMutation } from "../useAuthenticatedMutation";
 
 const FAVORIS = async (): Promise<UserFavoris> => {
-  const response = await axiosPrivate.get("/favoris");
+  const response = await axiosPrivate.get("/favoris/");
   return response.data;
 };
 
