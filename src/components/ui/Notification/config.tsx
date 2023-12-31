@@ -3,12 +3,9 @@ import { StyleSheet, type ViewStyle } from "react-native";
 import { BaseToast, BaseToastProps } from "react-native-toast-message";
 
 import { Box, Text } from "../../../../shared/ui/primitives";
-import { colors } from "../../../../shared/ui/primitives/theme/colors";
-import {
-  fontFamily,
-  textVariants,
-} from "../../../../shared/ui/primitives/theme/fonts";
-import { spacing } from "../../../../shared/ui/primitives/theme/spacing";
+import { colors } from "../../../../shared/ui/theme/colors";
+import { fontFamily, textVariants } from "../../../../shared/ui/theme/fonts";
+import { spacing } from "../../../../shared/ui/theme/spacing";
 
 function createStyledToastComponent(
   BaseComponent: React.ComponentType<BaseToastProps>,
@@ -35,7 +32,7 @@ function createStyledToastComponent(
 function BasicToast({ props }: { props: { text: string } }) {
   return (
     <Box width="90%" bg="GREY_SEND_DARK" borderRadius="global_8" p="global_16">
-      <Text variant="small" fontFamily={fontFamily.manrope}>
+      <Text variant="small" fontFamily={fontFamily.manropeRegular}>
         {props.text}
       </Text>
     </Box>
@@ -54,13 +51,12 @@ const styles = StyleSheet.create({
   },
   text1: {
     ...textVariants.large,
-    fontWeight: "700",
-    fontFamily: fontFamily.satoshi,
+    fontFamily: fontFamily.satoshiBold,
     color: colors.PRIMARY_12,
   },
   text2: {
     ...textVariants.small,
-    fontFamily: fontFamily.manrope,
+    fontFamily: fontFamily.manropeRegular,
     color: colors.PRIMARY_12,
   },
   success: {

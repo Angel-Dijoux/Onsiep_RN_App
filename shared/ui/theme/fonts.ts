@@ -1,6 +1,7 @@
 export const fontFamily = {
-  satoshi: "Satoshi",
-  manrope: "Manrope",
+  satoshiRegular: "SatoshiRegular",
+  satoshiBold: "SatoshiBold",
+  manropeRegular: "ManropeRegular",
 };
 
 const fontSizes = {
@@ -26,13 +27,12 @@ const lineHeight = {
 };
 
 const titleVariant = {
-  fontFamily: fontFamily.satoshi,
-  fontWeight: "700" as const,
+  fontFamily: fontFamily.satoshiBold,
   color: "WHITE",
 };
 
 const baseVariant = {
-  fontFamily: fontFamily.manrope,
+  fontFamily: fontFamily.manropeRegular,
   fontWeight: "400" as const,
   color: "WHITE",
 };

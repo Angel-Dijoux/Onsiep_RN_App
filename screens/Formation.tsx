@@ -10,9 +10,9 @@ import { FormationScreenRouteProps } from "../navigation/formations/FormationTab
 import { Loading } from "../shared/ui/Loading";
 import { Screen } from "../shared/ui/navigation/Screen";
 import { Text } from "../shared/ui/primitives";
-import { colors } from "../shared/ui/primitives/theme/colors";
-import { textVariants } from "../shared/ui/primitives/theme/fonts";
-import { spacing } from "../shared/ui/primitives/theme/spacing";
+import { colors } from "../shared/ui/theme/colors";
+import { textVariants } from "../shared/ui/theme/fonts";
+import { spacing } from "../shared/ui/theme/spacing";
 import { useGetFormation } from "../src/hooks/formation/useGetFormation";
 
 const Formation: React.FC<FormationScreenRouteProps> = () => {

@@ -6,14 +6,14 @@ import { axiosPrivate } from "$utils/axiosPrivate";
 import { deleteCurrentUserStorage } from "../../src/components/utils/currentUserStorage";
 
 const DELETE_USER = async () => {
-  await axiosPrivate.delete("/me/remove");
+  await axiosPrivate.delete("/auth/me/remove");
 };
 
 export const useDeleteAccount = () => {
-  const deleteUser = useMutation(async () => DELETE_USER, {
+  const deleteUser = useMutation(DELETE_USER, {
     onSuccess: async () => {
       await deleteCurrentUserStorage();
-      RNRestart.Restart();
+      RNRestart.restart();
     },
   });
 

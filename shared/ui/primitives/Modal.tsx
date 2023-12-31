@@ -10,7 +10,7 @@ import { type SharedValue } from "react-native-gesture-handler/lib/typescript/ha
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Box } from "./Box";
-import { colors } from "./theme/colors";
+import { colors } from "../theme/colors";
 
 type ModalProps = {
   modalKey?: string;

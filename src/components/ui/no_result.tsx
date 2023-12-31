@@ -2,8 +2,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
 
 import { Box, Text } from "../../../shared/ui/primitives";
-import { colors } from "../../../shared/ui/primitives/theme/colors";
-import { spacing } from "../../../shared/ui/primitives/theme/spacing";
+import { colors } from "../../../shared/ui/theme/colors";
+import { spacing } from "../../../shared/ui/theme/spacing";
 
 const NoResult = ({ text }: { text: string }) => {
   return (

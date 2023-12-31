@@ -2,11 +2,11 @@ import { createTheme, useTheme } from "@shopify/restyle";
 import { ImageStyle, TextStyle, ViewStyle } from "react-native";
 
 import { borderRadii } from "./borderRadii";
-import { breakpoints } from "./breakpoints";
 import { colors } from "./colors";
 import { textVariants } from "./fonts";
 import { spacing } from "./spacing";
 import { zIndices } from "./zIndices";
+import { buttonVariants } from "../button/buttonVariants";
 
 export type Theme = typeof theme;
 
@@ -19,7 +19,8 @@ export const theme = createTheme({
   spacing,
   borderRadii,
   textVariants,
-  breakpoints,
+  breakpoint: {},
+  buttonVariants,
   zIndices,
 });
 

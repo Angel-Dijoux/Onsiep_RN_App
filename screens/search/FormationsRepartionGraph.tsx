@@ -9,7 +9,7 @@ import {
 } from "./useGetFormationRepartition";
 import { Loading } from "../../shared/ui/Loading";
 import { Box } from "../../shared/ui/primitives";
-import { colors } from "../../shared/ui/primitives/theme/colors";
+import { colors } from "../../shared/ui/theme/colors";
 import { deviceWidth } from "../../utils/deviceInfo";
 
 const GRAPH_HEIGHT = 300;

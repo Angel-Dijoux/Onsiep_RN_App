@@ -13,12 +13,12 @@ const BtnTextConn = ({
   secondText: string;
 }) => {
   return (
-    <Box flexDirection="row" justifyContent="flex-start" mt="global_5">
-      <Text ml="global_15" color="GREY_DARK">
+    <Box flexDirection="row" justifyContent="center" mt="global_5">
+      <Text ml="global_15" color="GREY_SAND">
         {firstText}{" "}
       </Text>
       <TouchableOpacity onPress={onPress}>
-        <Text color="PRIMARY_1" fontWeight="700">
+        <Text color="PRIMARY_12" fontWeight="700">
           {secondText}
         </Text>
       </TouchableOpacity>

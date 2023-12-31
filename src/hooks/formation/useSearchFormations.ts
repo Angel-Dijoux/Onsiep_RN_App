@@ -28,7 +28,7 @@ export const useSearchFormations = (query: string) => {
     pageParam?: number;
   }): Promise<Formations> => {
     const currentUser = await getCurrentUserStorage();
-    const isAuth = currentUser?.userId;
+    const isAuth = currentUser.id;
 
     return getFormations(
       { pageParam, query },

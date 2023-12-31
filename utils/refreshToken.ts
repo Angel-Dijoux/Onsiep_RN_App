@@ -25,10 +25,10 @@ export const refreshToken = async (): Promise<RefreshToken | undefined> => {
   setCachedAccessToken(data.access);
 
   setCurrentUserStorage({
-    id: currentUserStored?.userId,
-    username: currentUserStored?.username,
+    id: currentUserStored.id,
+    username: currentUserStored.username,
     accessToken: data.access,
-    refreshToken: currentRefreshToken as string,
+    refreshToken: currentRefreshToken,
   });
 
   return data;

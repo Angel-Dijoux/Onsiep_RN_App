@@ -11,7 +11,7 @@ import { AccountNavigation } from "./account/AccountNavigation";
 import { BottomAuthTabNavigatorParamsList } from "./authTabs.types";
 import { FormationsNavigation } from "./formations/FormationsNavigation";
 import { TAB_BAR_ICON_SIZE, TabBarIconProps } from "./icon.types";
-import { colors } from "../shared/ui/primitives/theme/colors";
+import { colors } from "../shared/ui/theme/colors";
 
 const Tab = createBottomTabNavigator<BottomAuthTabNavigatorParamsList>();
 

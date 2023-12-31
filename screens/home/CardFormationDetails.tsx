@@ -4,14 +4,14 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useState } from "react";
 import { Pressable } from "react-native";
 
-import { makeAppStyles } from "$shared/ui/primitives/theme/theme";
+import { makeAppStyles } from "$shared/ui/theme/theme";
 import { capitalizeFirstLetter } from "$utils/typoFormat";
 
 import { AccountTabStackNavigationParamsList } from "../../navigation/account/AccountTabStackNavigation.types";
 import { FormationListItem } from "../../shared/formation/fomationv2.type";
 import { Label } from "../../shared/ui/Label";
 import { Box, Text } from "../../shared/ui/primitives";
-import { colors } from "../../shared/ui/primitives/theme/colors";
+import { colors } from "../../shared/ui/theme/colors";
 import { useAddFavoris } from "../../src/hooks/favoris/useAddFavoris";
 import { useRemoveFavori } from "../../src/hooks/favoris/useRemoveFavori";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";

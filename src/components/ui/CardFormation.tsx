@@ -3,8 +3,8 @@ import React from "react";
 import { Pressable } from "react-native";
 
 import { Box, Text } from "../../../shared/ui/primitives";
-import { colors } from "../../../shared/ui/primitives/theme/colors";
-import { spacing } from "../../../shared/ui/primitives/theme/spacing";
+import { colors } from "../../../shared/ui/theme/colors";
+import { spacing } from "../../../shared/ui/theme/spacing";
 
 type CardFormationType = {
   type: string;

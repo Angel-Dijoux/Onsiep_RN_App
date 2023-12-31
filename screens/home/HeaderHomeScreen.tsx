@@ -10,9 +10,9 @@ import { SettingsModal } from "$screens/Settings/SettingsModal";
 import { type FormationTabStackNavigationParamsList } from "../../navigation/formations/FormationTabStackNavigation.types";
 import { Input } from "../../shared/ui/forms/Input";
 import { Box } from "../../shared/ui/primitives";
-import { borderRadii } from "../../shared/ui/primitives/theme/borderRadii";
-import { colors } from "../../shared/ui/primitives/theme/colors";
-import { spacing } from "../../shared/ui/primitives/theme/spacing";
+import { borderRadii } from "../../shared/ui/theme/borderRadii";
+import { colors } from "../../shared/ui/theme/colors";
+import { spacing } from "../../shared/ui/theme/spacing";
 
 export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
   const [query, setQuery] = useState<string>(prevQuery ?? "");
@@ -40,12 +40,14 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
     }).start();
   };
 
+  const shouldShowClearSearch = query.length > 0;
+
   const handleInputChange = useCallback((text: string) => {
     setQuery(text);
   }, []);
 
   useEffect(() => {
-    toggleCrossIcon(query.length > 0);
+    toggleCrossIcon(shouldShowClearSearch);
   }, [query]);
 
   const clearSearchBar = (): void => {
@@ -72,7 +74,7 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
 
       <Box
         borderWidth={1.5}
-        borderColor={query.length > 0 ? "PRIMARY_6" : "TRANSPARENT"}
+        borderColor={shouldShowClearSearch ? "PRIMARY_6" : "TRANSPARENT"}
         style={[styles.inputContainer]}
       >
         <Input
@@ -80,8 +82,9 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
           value={query}
           onChangeText={(text: string) => handleInputChange(text)}
           onSubmitEditing={handleSearchQuery}
+          style={{ width: shouldShowClearSearch ? "85%" : "100%" }}
         />
-        {query.length > 0 ? (
+        {shouldShowClearSearch ? (
           <Animated.View
             style={{
               opacity: opacity,
