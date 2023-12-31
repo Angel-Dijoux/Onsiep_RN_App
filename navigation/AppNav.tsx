@@ -4,18 +4,18 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from "@react-navigation/native";
-import React, { Suspense, useRef } from "react";
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from "@react-navigation/native-stack";
+import React, { Suspense, useRef } from "react";
 
 import { AuthTabs } from "./AuthTabs";
 import { Tabs } from "./Tabs";
+import { RootStackParamsList } from "./rootStack.types";
 import { Loading } from "../shared/ui/Loading";
 import { colors } from "../shared/ui/primitives/theme/colors";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
-import { RootStackParamsList } from "./rootStack.types";
 
 const AppNav = () => {
   const { accessToken } = useCurrentUser();

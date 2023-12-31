@@ -1,4 +1,5 @@
 import { axiosPublic } from "./axiosPublic";
+import { setCachedAccessToken } from "../shared/auth/cachedAccessToken";
 import {
   getCurrentUserStorage,
   setCurrentUserStorage,
@@ -9,33 +10,26 @@ type RefreshToken = {
 };
 
 export const refreshToken = async (): Promise<RefreshToken | undefined> => {
-  const currentUserInfo = await getCurrentUserStorage();
-  if (!currentUserInfo) return;
+  const currentUserStored = await getCurrentUserStorage();
+  if (!currentUserStored) return;
 
-  const refreshToken = currentUserInfo?.refreshToken;
-  try {
-    const response = await axiosPublic.get("/auth/token/refresh", {
-      headers: {
-        Authorization: `Bearer ${refreshToken}`,
-      },
-    });
+  const currentRefreshToken = currentUserStored.refreshToken;
 
-    const data = response.data;
-    setCurrentUserStorage({
-      id: currentUserInfo?.userId,
-      username: currentUserInfo?.username,
-      accessToken: data.access,
-      refreshToken: refreshToken as string,
-    });
+  const response = await axiosPublic.get("/auth/token/refresh", {
+    headers: {
+      Authorization: `Bearer ${currentRefreshToken}`,
+    },
+  });
 
-    return data;
-  } catch (error) {
-    console.error("Error in new refresh token : ", error);
-  }
+  const data: RefreshToken = response.data;
+  setCachedAccessToken(data.access);
+
+  setCurrentUserStorage({
+    id: currentUserStored?.userId,
+    username: currentUserStored?.username,
+    accessToken: data.access,
+    refreshToken: currentRefreshToken as string,
+  });
+
+  return data;
 };
-
-// const maxAge = 10000;
-
-// export const memoizedRefreshToken = mem(refreshToken, {
-//   maxAge,
-// });
