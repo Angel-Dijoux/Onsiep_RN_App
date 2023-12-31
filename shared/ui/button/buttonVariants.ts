@@ -14,7 +14,7 @@ const buttonVariants: Record<
   primaryDisabled: {
     backgroundColor: "PRIMARY_11",
     borderRadius: "global_8",
-    opacity: 0.4
+    opacity: 0.4,
   },
 };
 

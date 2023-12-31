@@ -17,6 +17,12 @@ import { setCurrentUserStorage } from "../src/components/utils/currentUserStorag
 import { useConnexion } from "../src/hooks/user/useConnexion";
 import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
+export const activeBorder = (isWrited: boolean): StyleProp<TextStyle> => {
+  return {
+    borderColor: isWrited ? colors.PRIMARY_6 : colors.TRANSPARENT,
+  };
+};
+
 const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -32,15 +38,12 @@ const LoginScreen = () => {
 
   const styles = useStyles();
 
-  const activeBorder = (isWrited: boolean): StyleProp<TextStyle> => {
-    return {
-      borderColor: isWrited ? colors.PRIMARY_6 : colors.TRANSPARENT,
-    };
-  };
-
   const shouldDisableButton = email.length > 0 && password.length > 0;
 
   const handleEnterInput = async () => {
+    if (!shouldDisableButton) {
+      return;
+    }
     try {
       const formData = { email: email, password: password };
       const response = await login({ formData });
@@ -62,7 +65,7 @@ const LoginScreen = () => {
   return (
     <Screen goBack={false}>
       <Box
-        mt="global_32"
+        mt="global_40"
         mx="global_15"
         gap="global_15"
         justifyContent="center"
@@ -85,6 +88,7 @@ const LoginScreen = () => {
           onChangeText={(text) => {
             setPassword(text);
           }}
+          secureTextEntry
           onSubmitEditing={handleEnterInput}
         />
         <Button
