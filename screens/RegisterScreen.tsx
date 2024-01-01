@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
-import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import React, { useState } from "react";
 
 import { Button } from "$shared/ui/button/Button";
@@ -12,13 +11,10 @@ import { makeAppStyles } from "$shared/ui/theme/theme";
 
 import { activeBorder } from "./LoginScreen";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
-import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { RegisteredUser, useConnexion } from "../src/hooks/user/useConnexion";
-import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 const RegisterScreen = () => {
-  const { register, login } = useConnexion();
-  const { setCurrentUser } = useCurrentUser();
+  const { register } = useConnexion();
 
   const [newUser, setNewUser] = useState<RegisteredUser>({
     email: "",
@@ -27,8 +23,6 @@ const RegisterScreen = () => {
     username: "",
   });
 
-  const navigation =
-    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
   const registerNavigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
@@ -42,29 +36,7 @@ const RegisterScreen = () => {
     if (!allPropertiesSet) {
       return;
     }
-    try {
-      const registerUser = await register(newUser);
-      if (registerUser) {
-        const response = await login({
-          formData: {
-            email: registerUser.user.email,
-            password: newUser.password,
-          },
-        });
-        console.log(response.user.refresh);
-        const registeredUser = {
-          accessToken: response.user.access,
-          refreshToken: response.user.refresh,
-          id: response.user.id,
-          username: response.user.username,
-        };
-        setCurrentUser(registeredUser);
-        setCurrentUserStorage(registeredUser);
-        navigation.navigate("HomeScreen");
-      }
-    } catch (error: unknown) {
-      console.log(error);
-    }
+    await register(newUser);
   };
 
   return (

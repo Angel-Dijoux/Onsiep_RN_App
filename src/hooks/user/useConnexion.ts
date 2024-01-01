@@ -1,7 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import { useMutation } from "react-query";
+import { setCurrentUserStorage } from "src/components/utils/currentUserStorage";
 
+import { CurrentUserType } from "$shared/auth/currentUser.types";
+import { axiosPublic } from "$utils/axiosPublic";
+
+import { useCurrentUser } from "./useCurrentUser";
 import { Toaster } from "../../components/ui/Notification/Toaster";
-import { Config } from "../../config";
 
 export type RegisteredUser = {
   email: string;
@@ -10,63 +17,93 @@ export type RegisteredUser = {
   username: string;
 };
 
-const useConnexion = () => {
-  const login = useMutation(
-    async ({ formData }: { formData: { email: string; password: string } }) => {
-      const response = await fetch(`${Config.baseUrl}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        Toaster.show({
-          type: "error",
-          props: {
-            text: data.message,
-          },
-        });
-        throw new Error(data.message);
-      }
-      return data;
-    }
-  );
+export type LoginPayloadProps = {
+  user: {
+    access: string;
+    email: string;
+    id: number;
+    refresh: string;
+    username: string;
+  };
+};
 
-  const register = useMutation(async (newUser: RegisteredUser) => {
-    if (newUser.password !== newUser.checkPassword) {
-      Toaster.show({
-        props: {
-          text: "Les mots de passe doivent être les mêmes",
-        },
-      });
-      return;
-    }
-    const response = await fetch(`${Config.baseUrl}/auth/register`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
+export type RegisterPayloadProps = {
+  user: {
+    access: string;
+    email: string;
+    id: number;
+    refresh: string;
+    username: string;
+  };
+};
+
+const LOGIN_USER = async (user: {
+  email: string;
+  password: string;
+}): Promise<LoginPayloadProps> => {
+  return await axiosPublic.post("/auth/login", user);
+};
+
+const REGISTER_USER = async (
+  newUser: RegisteredUser
+): Promise<RegisterPayloadProps | undefined> => {
+  if (newUser.password !== newUser.checkPassword) {
+    Toaster.show({
+      props: {
+        text: "Les mots de passe doivent être les mêmes",
       },
-      body: JSON.stringify({
-        email: newUser.email,
-        username: newUser.username,
-        password: newUser.password,
-      }),
     });
+    return;
+  }
+  return await axiosPublic.post("/auth/register", {
+    email: newUser.email,
+    username: newUser.username,
+    password: newUser.password,
+  });
+};
 
-    const data = await response.json();
-    if (!response.ok) {
+const setupSecureStorage = async (
+  user: LoginPayloadProps["user"],
+  setCurrentUser: React.Dispatch<React.SetStateAction<CurrentUserType>>
+) => {
+  const registeredUser = {
+    accessToken: user.access,
+    refreshToken: user.refresh,
+    id: user.id,
+    username: user.username,
+  };
+  setCurrentUser(registeredUser);
+  setCurrentUserStorage(registeredUser);
+};
+
+const useConnexion = () => {
+  const { setCurrentUser } = useCurrentUser();
+
+  const navigation =
+    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
+
+  const login = useMutation(LOGIN_USER, {
+    onSuccess: (data) => {
+      setupSecureStorage(data.user, setCurrentUser);
+      navigation.navigate("HomeScreen");
+    },
+    onError: (error) => {
       Toaster.show({
         type: "error",
         props: {
-          text: data.message,
+          text: error,
         },
       });
-      throw new Error(data.message, data);
-    }
-    return data;
+    },
+  });
+
+  const register = useMutation(REGISTER_USER, {
+    onSuccess: async (_, variables) => {
+      login.mutateAsync({
+        email: variables.email,
+        password: variables.password,
+      });
+    },
   });
 
   return {

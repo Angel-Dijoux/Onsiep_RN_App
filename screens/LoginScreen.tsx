@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
-import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import React, { useState } from "react";
 import { StyleProp, TextStyle } from "react-native";
 
@@ -13,9 +12,7 @@ import { makeAppStyles } from "$shared/ui/theme/theme";
 
 import { colors } from "../shared/ui/theme/colors";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
-import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { useConnexion } from "../src/hooks/user/useConnexion";
-import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
 
 export const activeBorder = (isWrited: boolean): StyleProp<TextStyle> => {
   return {
@@ -27,10 +24,6 @@ const LoginScreen = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const { setCurrentUser } = useCurrentUser();
-
-  const navigation =
-    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
   const registerNavigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
@@ -44,22 +37,7 @@ const LoginScreen = () => {
     if (!shouldDisableButton) {
       return;
     }
-    try {
-      const formData = { email: email, password: password };
-      const response = await login({ formData });
-      const registeredUser = {
-        accessToken: response.user.access,
-        refreshToken: response.user.refresh,
-        id: response.user.id,
-        username: response.user.username,
-      };
-      setCurrentUser(registeredUser);
-      setCurrentUserStorage(registeredUser);
-      console.log(response);
-      navigation.navigate("HomeScreen");
-    } catch (error: unknown) {
-      console.log(error);
-    }
+    await login({ email: email, password: password });
   };
 
   return (
