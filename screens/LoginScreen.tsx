@@ -49,7 +49,7 @@ const LoginScreen = () => {
         justifyContent="center"
       >
         <Box my="global_8" alignItems="center">
-          <Text variant="h2">Onisep Data</Text>
+          <Text variant="h2">Onisep Explorer</Text>
         </Box>
         <Input
           placeholder="Email"

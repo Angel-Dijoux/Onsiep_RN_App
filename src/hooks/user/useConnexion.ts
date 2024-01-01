@@ -2,13 +2,14 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import { useMutation } from "react-query";
-import { setCurrentUserStorage } from "src/components/utils/currentUserStorage";
+
 
 import { CurrentUserType } from "$shared/auth/currentUser.types";
 import { axiosPublic } from "$utils/axiosPublic";
 
 import { useCurrentUser } from "./useCurrentUser";
 import { Toaster } from "../../components/ui/Notification/Toaster";
+import { setCurrentUserStorage } from "../../components/utils/currentUserStorage";
 
 export type RegisteredUser = {
   email: string;
@@ -41,7 +42,8 @@ const LOGIN_USER = async (user: {
   email: string;
   password: string;
 }): Promise<LoginPayloadProps> => {
-  return await axiosPublic.post("/auth/login", user);
+  const response = await axiosPublic.post("/auth/login", user)
+  return response.data;
 };
 
 const REGISTER_USER = async (
@@ -55,11 +57,13 @@ const REGISTER_USER = async (
     });
     return;
   }
-  return await axiosPublic.post("/auth/register", {
+  const response = await axiosPublic.post("/auth/register", {
     email: newUser.email,
     username: newUser.username,
     password: newUser.password,
   });
+  return response.data;
+
 };
 
 const setupSecureStorage = async (
@@ -89,7 +93,6 @@ const useConnexion = () => {
     },
     onError: (error) => {
       Toaster.show({
-        type: "error",
         props: {
           text: error,
         },

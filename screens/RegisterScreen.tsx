@@ -43,7 +43,7 @@ const RegisterScreen = () => {
     <Screen goBack>
       <Box mx="global_15" gap="global_15" justifyContent="center">
         <Box my="global_8" alignItems="center">
-          <Text variant="h2">Onisep Data</Text>
+          <Text variant="h2">Onisep Explorer</Text>
         </Box>
         <Input
           placeholder="Email"
@@ -91,7 +91,7 @@ const RegisterScreen = () => {
           secureTextEntry
         />
         <Input
-          placeholder="Le même mot de passe"
+          placeholder="Confirmer le mot de passe"
           value={newUser.checkPassword}
           style={[
             styles.inputContainer,
