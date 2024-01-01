@@ -107,6 +107,13 @@ const useConnexion = () => {
         password: variables.password,
       });
     },
+    onError: (error) => {
+      Toaster.show({
+        props: {
+          text: error,
+        },
+      });
+    },
   });
 
   return {
