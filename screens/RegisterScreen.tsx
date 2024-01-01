@@ -36,7 +36,7 @@ const RegisterScreen = () => {
     if (!allPropertiesSet) {
       return;
     }
-    await register(newUser);
+    register(newUser);
   };
 
   return (

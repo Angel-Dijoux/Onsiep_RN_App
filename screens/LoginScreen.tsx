@@ -37,7 +37,7 @@ const LoginScreen = () => {
     if (!shouldDisableButton) {
       return;
     }
-    await login({ email: email, password: password });
+    login({ email: email, password: password });
   };
 
   return (
