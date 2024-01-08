@@ -1,10 +1,11 @@
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import * as WebBrowser from "expo-web-browser";
 import { AccountTabStackNavigationParamsList } from "navigation/account/AccountTabStackNavigation.types";
-import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import React, { useState } from "react";
 
 import { Button } from "$shared/ui/button/Button";
+import { CheckBox } from "$shared/ui/checkbox/CheckBox";
 import { Input } from "$shared/ui/forms/Input";
 import { Screen } from "$shared/ui/navigation/Screen";
 import { Box, Text } from "$shared/ui/primitives";
@@ -12,66 +13,59 @@ import { makeAppStyles } from "$shared/ui/theme/theme";
 
 import { activeBorder } from "./LoginScreen";
 import { BtnTextConn } from "../src/components/ui/BtnTextConn";
-import { setCurrentUserStorage } from "../src/components/utils/currentUserStorage";
 import { RegisteredUser, useConnexion } from "../src/hooks/user/useConnexion";
-import { useCurrentUser } from "../src/hooks/user/useCurrentUser";
+
+const CGUSText = ({ onPress }: { onPress: () => void }) => (
+  <Text mx="global_10">
+    J'accepte les{" "}
+    <Text
+      onPress={onPress}
+      textDecorationLine="underline"
+      textDecorationColor="PRIMARY_10"
+    >
+      CGUS
+    </Text>
+  </Text>
+);
 
 const RegisterScreen = () => {
-  const { register, login } = useConnexion();
-  const { setCurrentUser } = useCurrentUser();
+  const { register } = useConnexion();
 
   const [newUser, setNewUser] = useState<RegisteredUser>({
     email: "",
     password: "",
     checkPassword: "",
     username: "",
+    isPrivacyPolicyAccepted: false,
   });
 
-  const navigation =
-    useNavigation<StackNavigationProp<FormationTabStackNavigationParamsList>>();
   const registerNavigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
   const styles = useStyles();
 
   const allPropertiesSet = Object.values(newUser).every(
-    (prop) => prop !== undefined && prop !== ""
+    (prop) => prop !== undefined && prop !== "" && prop !== false
   );
 
   const handleEnterInput = async () => {
     if (!allPropertiesSet) {
       return;
     }
-    try {
-      const registerUser = await register(newUser);
-      if (registerUser) {
-        const response = await login({
-          formData: {
-            email: registerUser.user.email,
-            password: newUser.password,
-          },
-        });
-        console.log(response.user.refresh);
-        const registeredUser = {
-          accessToken: response.user.access,
-          refreshToken: response.user.refresh,
-          id: response.user.id,
-          username: response.user.username,
-        };
-        setCurrentUser(registeredUser);
-        setCurrentUserStorage(registeredUser);
-        navigation.navigate("HomeScreen");
-      }
-    } catch (error: unknown) {
-      console.log(error);
-    }
+    register(newUser);
+  };
+
+  const openPrivacyPolicy = async () => {
+    await WebBrowser.openBrowserAsync(
+      "https://api.nc-elki.v6.army/privacy_policy"
+    );
   };
 
   return (
     <Screen goBack>
       <Box mx="global_15" gap="global_15" justifyContent="center">
         <Box my="global_8" alignItems="center">
-          <Text variant="h2">Onisep Data</Text>
+          <Text variant="h2">Onisep Explorer</Text>
         </Box>
         <Input
           placeholder="Email"
@@ -119,7 +113,7 @@ const RegisterScreen = () => {
           secureTextEntry
         />
         <Input
-          placeholder="Le même mot de passe"
+          placeholder="Confirmer le mot de passe"
           value={newUser.checkPassword}
           style={[
             styles.inputContainer,
@@ -133,6 +127,15 @@ const RegisterScreen = () => {
           }}
           secureTextEntry
           onSubmitEditing={handleEnterInput}
+        />
+        <CheckBox
+          text={<CGUSText onPress={openPrivacyPolicy} />}
+          onPress={(isChecked: boolean) =>
+            setNewUser({
+              ...newUser,
+              isPrivacyPolicyAccepted: isChecked,
+            })
+          }
         />
         <Button
           onPress={handleEnterInput}
