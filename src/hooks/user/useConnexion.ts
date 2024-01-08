@@ -3,7 +3,6 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { FormationTabStackNavigationParamsList } from "navigation/formations/FormationTabStackNavigation.types";
 import { useMutation } from "react-query";
 
-
 import { CurrentUserType } from "$shared/auth/currentUser.types";
 import { axiosPublic } from "$utils/axiosPublic";
 
@@ -16,6 +15,7 @@ export type RegisteredUser = {
   password: string;
   checkPassword: string;
   username: string;
+  isPrivacyPolicyAccepted?: boolean;
 };
 
 export type LoginPayloadProps = {
@@ -42,7 +42,7 @@ const LOGIN_USER = async (user: {
   email: string;
   password: string;
 }): Promise<LoginPayloadProps> => {
-  const response = await axiosPublic.post("/auth/login", user)
+  const response = await axiosPublic.post("/auth/login", user);
   return response.data;
 };
 
@@ -63,7 +63,6 @@ const REGISTER_USER = async (
     password: newUser.password,
   });
   return response.data;
-
 };
 
 const setupSecureStorage = async (
