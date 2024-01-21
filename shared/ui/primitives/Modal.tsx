@@ -45,7 +45,7 @@ const ModalContainer = ({
 
 const renderBackdropDefault = (props: BottomSheetBackdropProps) => (
   <BottomSheetBackdrop
-    opacity={0}
+    opacity={1}
     pressBehavior="close"
     enableTouchThrough
     disappearsOnIndex={-1}

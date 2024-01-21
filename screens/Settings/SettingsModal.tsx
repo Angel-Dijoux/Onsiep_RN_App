@@ -8,6 +8,7 @@ import { Modal } from "$shared/ui/primitives/Modal";
 import { colors } from "$shared/ui/theme/colors";
 
 import { useDeleteAccount } from "./useDeleteAccount";
+import { useLogout } from "./useLogout";
 
 type SettingsModalProps = {
   settingsModalRef: RefObject<BottomSheetModalMethods>;
@@ -19,22 +20,40 @@ export function SettingsModal({
   settingsModalRef,
 }: Readonly<SettingsModalProps>) {
   const { handleDeleteUser } = useDeleteAccount();
+  const { handleLogout } = useLogout();
 
   return (
     <Modal ref={settingsModalRef} snapPoints={["20%"]} disableHorizontalPadding>
-      <Box alignItems="flex-start">
+      <Box alignItems="flex-start" gap="global_15">
         <Pressable style={{ width: "100%" }} onPress={handleDeleteUser}>
           <Box
             flexDirection="row"
             alignItems="center"
-            py="global_16"
-            borderTopColor="GREY_SEND_DARK"
-            borderTopWidth={1}
+            borderRadius="global_8"
+            py="global_10"
+            backgroundColor="GREY_SEND_DARK"
+            mx="global_15"
             pl="global_24"
           >
             <AntDesign name="warning" size={ICON_SIZE} color={colors.ERROR} />
             <Text variant="large" color="ERROR" px="global_20">
               Supprimer mon compte
+            </Text>
+          </Box>
+        </Pressable>
+        <Pressable style={{ width: "100%" }} onPress={handleLogout}>
+          <Box
+            flexDirection="row"
+            alignItems="center"
+            borderRadius="global_8"
+            py="global_10"
+            backgroundColor="GREY_SEND_DARK"
+            mx="global_15"
+            pl="global_24"
+          >
+            <AntDesign name="logout" size={ICON_SIZE} color={colors.ERROR} />
+            <Text variant="large" color="ERROR" px="global_20">
+              Se deconnecter
             </Text>
           </Box>
         </Pressable>
