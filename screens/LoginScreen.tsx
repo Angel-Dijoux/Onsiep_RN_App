@@ -27,7 +27,7 @@ const LoginScreen = () => {
   const registerNavigation =
     useNavigation<StackNavigationProp<AccountTabStackNavigationParamsList>>();
 
-  const { login } = useConnexion();
+  const { login, loginIsLoading } = useConnexion();
 
   const styles = useStyles();
 
@@ -71,6 +71,7 @@ const LoginScreen = () => {
         />
         <Button
           onPress={handleEnterInput}
+          isLoading={loginIsLoading}
           variant={shouldDisableButton ? "primary" : "primaryDisabled"}
           isDisabled={!shouldDisableButton}
         >

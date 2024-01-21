@@ -11,11 +11,13 @@ import { ButtonVariants, buttonTextStyle } from "./buttonVariants";
 import { BoxProps, Text } from "../primitives";
 import { Spacing } from "../theme/spacing";
 import { Theme } from "../theme/theme";
+import { Loading } from "../Loading";
 
 export type ButtonProps = {
   isDisabled?: boolean;
   variant?: ButtonVariants;
   size?: "regular";
+  isLoading?: boolean;
   onPress: () => void;
   children: string;
 };
@@ -36,6 +38,7 @@ function Button({
   isDisabled = false,
   variant = "primary",
   size = "regular",
+  isLoading,
   onPress,
   children,
 }: Readonly<ButtonProps>) {
@@ -70,7 +73,7 @@ function Button({
             textAlign="center"
             fontWeight="700"
           >
-            {children}
+            {isLoading ? <Loading /> : children}
           </Text>
         </Box>
       </PrimitiveButton>
