@@ -26,7 +26,7 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
     >();
 
   const handleOpenModal = () =>
-    !accessToken && settingsModalRef.current?.present();
+    accessToken && settingsModalRef.current?.present();
 
   const handleSearchQuery = () => {
     navigation.navigate("SearchScreen", { query });

@@ -23,7 +23,7 @@ export function SettingsModal({
   const { handleLogout } = useLogout();
 
   return (
-    <Modal ref={settingsModalRef} snapPoints={["20%"]} disableHorizontalPadding>
+    <Modal ref={settingsModalRef} snapPoints={["25%"]} disableHorizontalPadding>
       <Box alignItems="flex-start" gap="global_15">
         <Pressable style={{ width: "100%" }} onPress={handleDeleteUser}>
           <Box
