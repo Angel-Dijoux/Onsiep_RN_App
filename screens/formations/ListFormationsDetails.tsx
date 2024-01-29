@@ -1,5 +1,5 @@
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
-import React, { Suspense } from "react";
+import React, { Suspense, useRef } from "react";
 
 import { CardFormationDetailsSkeleton } from "$screens/home/CardFormationDetailsSkeleton";
 
@@ -8,6 +8,7 @@ import { Box, Text } from "../../shared/ui/primitives";
 import { deviceWidth } from "../../utils/deviceInfo";
 import { CardFormationDetails } from "../home/CardFormationDetails";
 import { FormationsRepartionGraph } from "../search/FormationsRepartionGraph";
+import { EmptyFormationModal, ModalRef } from "./EmptyFormationModal";
 
 // TODO: use api for this, idea: get 'details' from flask directly.
 export const renderItemDetailCardFormations: ListRenderItem<
@@ -18,11 +19,15 @@ export const renderItemDetailCardFormations: ListRenderItem<
   </Suspense>
 );
 
-const ListEmptyComponent = () => (
-  <Box>
-    <Text>EMPTY</Text>
-  </Box>
-);
+const ListEmptyComponent = () => {
+  const modalRef = useRef<ModalRef>(null);
+  return (
+    <Box flex={1} justifyContent="center" alignItems="center" height="100%">
+      <Text>Il n'y a pas de données...</Text>
+      <EmptyFormationModal ref={modalRef} />
+    </Box>
+  );
+};
 
 export const ListFormationsDetails = ({
   data,

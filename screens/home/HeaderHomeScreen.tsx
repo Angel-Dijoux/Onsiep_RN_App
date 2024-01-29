@@ -13,17 +13,20 @@ import { Box } from "../../shared/ui/primitives";
 import { borderRadii } from "../../shared/ui/theme/borderRadii";
 import { colors } from "../../shared/ui/theme/colors";
 import { spacing } from "../../shared/ui/theme/spacing";
+import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
 
 export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
   const [query, setQuery] = useState<string>(prevQuery ?? "");
   const settingsModalRef = useRef<BottomSheetModal>(null);
+  const { accessToken } = useCurrentUser();
 
   const navigation =
     useNavigation<
       StackNavigationProp<FormationTabStackNavigationParamsList, "HomeScreen">
     >();
 
-  const handleOpenModal = () => settingsModalRef.current?.present();
+  const handleOpenModal = () =>
+    accessToken && settingsModalRef.current?.present();
 
   const handleSearchQuery = () => {
     navigation.navigate("SearchScreen", { query });

@@ -1,19 +1,18 @@
-import RNRestart from "react-native-restart";
 import { useMutation } from "react-query";
 
 import { axiosPrivate } from "$utils/axiosPrivate";
 
-import { deleteCurrentUserStorage } from "../../src/components/utils/currentUserStorage";
+import { useLogout } from "./useLogout";
 
 const DELETE_USER = async () => {
   await axiosPrivate.delete("/auth/me/remove");
 };
 
 export const useDeleteAccount = () => {
+  const { handleLogout } = useLogout();
   const deleteUser = useMutation(DELETE_USER, {
     onSuccess: async () => {
-      await deleteCurrentUserStorage();
-      RNRestart.restart();
+      await handleLogout();
     },
   });
 

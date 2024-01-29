@@ -29,7 +29,7 @@ const CGUSText = ({ onPress }: { onPress: () => void }) => (
 );
 
 const RegisterScreen = () => {
-  const { register } = useConnexion();
+  const { register, registerIsLoading } = useConnexion();
 
   const [newUser, setNewUser] = useState<RegisteredUser>({
     email: "",
@@ -139,6 +139,7 @@ const RegisterScreen = () => {
         />
         <Button
           onPress={handleEnterInput}
+          isLoading={registerIsLoading}
           variant={allPropertiesSet ? "primary" : "primaryDisabled"}
           isDisabled={!allPropertiesSet}
         >

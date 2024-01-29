@@ -43,6 +43,7 @@ const LOGIN_USER = async (user: {
   password: string;
 }): Promise<LoginPayloadProps> => {
   const response = await axiosPublic.post("/auth/login", user);
+  console.log(response);
   return response.data;
 };
 
@@ -90,10 +91,10 @@ const useConnexion = () => {
       setupSecureStorage(data.user, setCurrentUser);
       navigation.navigate("HomeScreen");
     },
-    onError: (error) => {
+    onError: () => {
       Toaster.show({
         props: {
-          text: error,
+          text: "Check t'es identifiants !",
         },
       });
     },
@@ -106,10 +107,10 @@ const useConnexion = () => {
         password: variables.password,
       });
     },
-    onError: (error) => {
+    onError: () => {
       Toaster.show({
         props: {
-          text: error,
+          text: "Quelque chose s'est mal passé.",
         },
       });
     },
@@ -117,6 +118,8 @@ const useConnexion = () => {
 
   return {
     login: login.mutateAsync,
+    loginIsLoading: login.isLoading,
+    registerIsLoading: register.isLoading,
     register: register.mutateAsync,
   };
 };
