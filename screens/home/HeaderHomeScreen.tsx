@@ -3,7 +3,7 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Animated, Image, Pressable, StyleSheet } from "react-native";
+import { Animated, Pressable, StyleSheet } from "react-native";
 
 import { SettingsModal } from "$screens/Settings/SettingsModal";
 
@@ -14,6 +14,7 @@ import { borderRadii } from "../../shared/ui/theme/borderRadii";
 import { colors } from "../../shared/ui/theme/colors";
 import { spacing } from "../../shared/ui/theme/spacing";
 import { useCurrentUser } from "../../src/hooks/user/useCurrentUser";
+import { ProfilePicture } from "./ProfilePicture";
 
 export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
   const [query, setQuery] = useState<string>(prevQuery ?? "");
@@ -65,16 +66,10 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
       alignItems="center"
       py="global_15"
     >
-      <Pressable onPress={clearSearchBar} onLongPress={handleOpenModal}>
-        <Image
-          source={{
-            uri: "https://cdn.pixabay.com/photo/2017/03/05/21/55/emoticon-2120024_960_720.png",
-          }}
-          style={styles.profilePicture}
-          borderRadius={borderRadii.round}
-        />
-      </Pressable>
-
+      <ProfilePicture
+        onClearSearch={clearSearchBar}
+        onOpenModal={handleOpenModal}
+      />
       <Box
         borderWidth={1.5}
         borderColor={shouldShowClearSearch ? "PRIMARY_6" : "TRANSPARENT"}
@@ -103,7 +98,6 @@ export const HeaderHomeScreen = ({ prevQuery }: { prevQuery?: string }) => {
     </Box>
   );
 };
-const PROFILE_PICTURE_SIZE = 38;
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -115,12 +109,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.global_15,
     alignItems: "center",
     width: "85%",
-  },
-  profilePicture: {
-    height: PROFILE_PICTURE_SIZE,
-    width: PROFILE_PICTURE_SIZE,
-    borderColor: colors.PRIMARY_8,
-    borderWidth: 1,
   },
   clearSearch: {
     padding: spacing.global_2,
