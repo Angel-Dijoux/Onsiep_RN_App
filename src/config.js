@@ -11,7 +11,7 @@ switch (env) {
     Config.appName = "Onisep Explorer Preview";
     break;
   case "development":
-    Config.baseUrl = "https://api.nc-elki.v6.army/api/v1";
+    Config.baseUrl = "http://10.220.243.103:5005/api/v1";
     break;
   default:
     break;

@@ -1,8 +1,8 @@
 import { Loading } from "$shared/ui/Loading";
-import { borderRadii } from "$shared/ui/theme/borderRadii";
-import { makeAppStyles } from "$shared/ui/theme/theme";
+import { Box } from "$shared/ui/primitives";
 import React from "react";
-import { Image, Pressable } from "react-native";
+import { Pressable } from "react-native";
+import { SvgUri } from "react-native-svg";
 import { useGetUserInformation } from "./useGetUserInformation";
 
 type ProfilePictureProps = {
@@ -16,33 +16,22 @@ export function ProfilePicture({
 }: Readonly<ProfilePictureProps>) {
   const { isLoading, data } = useGetUserInformation();
 
-  const styles = useStyles();
-
-  const profile_pic = data?.profile_picture_url
-    ? data.profile_picture_url
-    : "https://cdn.pixabay.com/photo/2017/03/05/21/55/emoticon-2120024_960_720.png";
+  const profile_pic_uri = data?.profile_pic_url
+    ? data.profile_pic_url
+    : "https://api.dicebear.com/7.x/notionists-neutral/svg?seed='onisep'";
 
   if (isLoading) return <Loading />;
   return (
     <Pressable onPress={onClearSearch} onLongPress={onOpenModal}>
-      <Image
-        source={{
-          uri: profile_pic,
-        }}
-        style={styles.profilePicture}
-        borderRadius={borderRadii.round}
-      />
+      <Box overflow="hidden" borderRadius="round">
+        <SvgUri
+          height={PROFILE_PICTURE_SIZE}
+          width={PROFILE_PICTURE_SIZE}
+          uri={profile_pic_uri}
+        />
+      </Box>
     </Pressable>
   );
 }
 
 const PROFILE_PICTURE_SIZE = 38;
-
-const useStyles = makeAppStyles(({ colors }) => ({
-  profilePicture: {
-    height: PROFILE_PICTURE_SIZE,
-    width: PROFILE_PICTURE_SIZE,
-    borderColor: colors.PRIMARY_8,
-    borderWidth: 1,
-  },
-}));
